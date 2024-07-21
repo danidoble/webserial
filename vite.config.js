@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc'
 import daisyui from "daisyui"
 import {dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 const _dirname = typeof __dirname !== 'undefined'
     // eslint-disable-next-line no-undef
@@ -13,7 +14,7 @@ const _dirname = typeof __dirname !== 'undefined'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        react(), daisyui,
+        basicSsl(), react(), daisyui,
     ],
     build: {
         lib: {
