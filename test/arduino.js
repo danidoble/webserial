@@ -13,11 +13,20 @@ export class Arduino extends Core {
         this.__internal__.device.type = "arduino";
         this.__internal__.time.response_connection = 2e3;
         this.__internal__.time.response_general = 2e3;
+        this.#registerAvailableListenersLocker();
         this.#touch();
     }
 
     #touch() {
         Devices.addCustom('arduino', this);
+    }
+
+    #registerAvailableListenersLocker() {
+        /*const _ = [];
+        for (const event of _) {
+            this.serialRegisterAvailableListener(event)
+        }
+        */
     }
 
     serialMessage(original_code) {
@@ -92,7 +101,7 @@ export class Arduino extends Core {
         await this.appendToQueue(arr, 'ara');
     }
 
-    async doSomething(){
+    async doSomething() {
         await this.sayCredits();
         await this.sayAra();
         await this.sayHi();
