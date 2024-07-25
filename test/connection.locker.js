@@ -5,15 +5,15 @@ const locker = new Locker();
 locker.on('serial:message', data => {
     console.log(data);
 });
-locker.on('serial:disconnected', () => {
-    console.log('serial device was disconnected');
-});
-locker.on('dispensed', () => {
-    console.log('Cell opened');
-});
-locker.on('not-dispensed', () => {
-    console.log('Cell not opened');
-});
+// locker.on('serial:disconnected', () => {
+//     console.log('serial device was disconnected');
+// });
+// locker.on('dispensed', () => {
+//     console.log('Cell opened');
+// });
+// locker.on('not-dispensed', () => {
+//     console.log('Cell not opened');
+// });
 
 document.addEventListener('DOMContentLoaded', () => {
     tryConnect();

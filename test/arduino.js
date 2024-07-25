@@ -1,9 +1,9 @@
 "use strict";
 
-import {Core} from "./../lib/serial/core.js";
+import {Kernel} from "../lib/serial/kernel.js";
 import {Devices} from "./../lib/utils/devices.js";
 
-export class Arduino extends Core {
+export class Arduino extends Kernel {
     constructor({
                     filters = null,
                     config_port = null,
