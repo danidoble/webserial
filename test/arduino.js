@@ -81,7 +81,7 @@ export class Arduino extends Kernel {
     }
 
     // eslint-disable-next-line no-unused-vars
-    serialSetConnectionConstant(no_device = 1) {
+    serialSetConnectionConstant(listen_on_port = 1) {
         const arr = ['02'];
         return this.add0x(arr);
     }

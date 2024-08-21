@@ -1,5 +1,6 @@
 import './style.css';
 import {Jofemar} from './../lib/serial/jofemar.js';
+import {Emulator} from './../lib/utils/emulator.js';
 
 const jofemar = new Jofemar();
 jofemar.on('serial:message', data => {
@@ -30,3 +31,4 @@ function tryConnect() {
 }
 
 window.jofemar = jofemar;
+window.Emulator = Emulator;
