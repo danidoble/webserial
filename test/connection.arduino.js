@@ -1,26 +1,53 @@
 import './style.css';
 import {Arduino} from './arduino.js';
 
-const arduino = new Arduino();
-arduino.on('serial:message', data => {
+const machine = new Arduino();
+machine.on('serial:message', data => {
     console.log(data.detail);
 });
-arduino.on('serial:disconnected', () => {
-    console.log('serial device was disconnected');
+
+machine.on('serial:error', event => {
+    document.getElementById('log').innerText += event.detail.message + '\n\n';
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-    tryConnect();
+// eslint-disable-next-line no-unused-vars
+machine.on('serial:disconnected', event => {
+    document.getElementById('disconnected').classList.remove('hidden');
+    document.getElementById('connect').classList.remove('hidden');
+});
 
-    const connect = document.getElementById('testConnection');
-    connect.addEventListener('click', async () => {
-        await arduino.connect().catch(console.error);
-    });
+// eslint-disable-next-line no-unused-vars
+machine.on('serial:connected', event => {
+    document.getElementById('disconnected').classList.add('hidden');
+    document.getElementById('need-permission').classList.add('hidden');
+    document.getElementById('connect').classList.add('hidden');
+});
+
+// eslint-disable-next-line no-unused-vars
+machine.on('serial:need-permission', event => {
+    document.getElementById('disconnected').classList.remove('hidden');
+    document.getElementById('need-permission').classList.remove('hidden');
+    document.getElementById('connect').classList.remove('hidden');
+});
+
+// eslint-disable-next-line no-unused-vars
+machine.on('serial:soft-reload', event => {
+    // reset your variables
+});
+
+// eslint-disable-next-line no-unused-vars
+machine.on('serial:unsupported', event => {
+    document.getElementById('unsupported').classList.remove('hidden');
 });
 
 function tryConnect() {
-    arduino.connect().then(() => {
+    machine.connect().then(() => {
     }).catch(console.error);
 }
 
-window.arduino = arduino;
+document.addEventListener("DOMContentLoaded", () => {
+    tryConnect();
+    document.getElementById('connect').addEventListener('click', tryConnect);
+});
+
+window.machine = machine;

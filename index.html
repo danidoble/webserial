@@ -1,22 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test connection</title>
-<!--    <script type="module" src="test/connection.arduino.js"></script>-->
-<!--    <script type="module" src="test/connection.locker.js"></script>-->
-<!--    <script type="module" src="test/connection.boardroid.js"></script>-->
-    <script type="module" src="test/connection.jofemar.js"></script>
-
-<!--    <script src="dist/webserial.umd.cjs"></script>-->
-    <link rel="stylesheet" href="lib/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Example</title>
+<!--    <script src="test/connection.arduino.js" type="module"></script>-->
+<!--    <script src="test/connection.boardroid.js" type="module"></script>-->
+<!--    <script src="test/connection.locker.js" type="module"></script>-->
+    <script src="test/connection.jofemar.js" type="module"></script>
 </head>
-<body class="bg-gray-950 text-white w-full">
-<div class="mx-auto sm:w-11/12 p-4">
-    <button id="testConnection" class="p-4 bg-gray-800 rounded-lg">Test connection</button>
+<body class="bg-neutral-950 text-white p-4 w-full">
+
+<div class="webserial w-full max-w-xl mx-auto grid grid-cols-1 gap-y-4">
+    <div class="my-6"></div>
+    <button id="connect" class="hidden px-4 py-3 bg-gray-800 rounded-lg">Connect to serial</button>
+
+    <div id="need-permission" class="hidden p-4 bg-rose-900 rounded-lg">
+        Woooah! It seems that you need to give permission to access the serial port.
+        Please, click the button 'Connect to serial' to try again.
+    </div>
+
+    <div id="error" class="hidden p-4 bg-red-900 w-full absolute bottom-0 left-0">
+        <p class="text-lg">Error</p>
+        <p>
+        Some error occurred. Please, check the machine.
+        </p>
+    </div>
+
+    <div id="disconnected" class="hidden p-4 bg-neutral-900 w-full">
+        The machine is disconnected. Please, check the connection.
+    </div>
+
+    <div id="unsupported" class="hidden p-4 bg-orange-700 w-full absolute bottom-0 left-0">
+        This browser does not support the WebSerial API. Please, use a compatible browser.
+    </div>
+
+    <div id="log" class="bg-neutral-800 p-4 rounded-lg">
+        Log: <br>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
