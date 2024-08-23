@@ -125,6 +125,13 @@ function addView() {
         to continue now
     </div>
     
+    <div id="error" class="hidden p-4 bg-red-900 w-full absolute bottom-0 left-0">
+        <p class="text-lg">Error</p>
+        <p>
+        Some error occurred. Please, check the machine.
+        </p>
+    </div>
+    
     <div class="absolute top-0 right-0 p-4 bg-neutral-700/50 rounded-l-lg">
         The temperature is: <span id="temperature">0</span>
     </div>`;
