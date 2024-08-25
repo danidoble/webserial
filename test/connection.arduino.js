@@ -1,5 +1,5 @@
 import './style.css';
-import {Arduino} from './arduino.js';
+import {Arduino} from '../lib/serial/arduino.js';
 
 const machine = new Arduino();
 machine.on('serial:message', data => {
