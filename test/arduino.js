@@ -13,6 +13,7 @@ export class Arduino extends Kernel {
         this.__internal__.device.type = "arduino";
         this.__internal__.time.response_connection = 2e3;
         this.__internal__.time.response_general = 2e3;
+        this.__internal__.serial.delay_first_connection = 1_000;
         this.#registerAvailableListenersLocker();
         this.#touch();
     }
@@ -49,6 +50,8 @@ export class Arduino extends Kernel {
                 message.description = 'Connection established';
                 message.request = 'connect';
                 message.no_code = 100;
+
+                this.dispatch('serial:connected')
                 break;
             case 'created by danidoble':
                 message.name = 'thanks';
@@ -80,25 +83,41 @@ export class Arduino extends Kernel {
         this.dispatch('serial:message', message);
     }
 
+    parseStringToBytes(string = '') {
+        const encoder = new TextEncoder();
+        string += '\n'; // to finish the command
+        const encoded = encoder.encode(string);
+        return Array.from(encoded).map(byte => byte.toString(16));
+
+        // if (string.length === 0) throw new Error('Empty string');
+        // string += '\n\r'; // to finish the command
+        // return Array.from(string).map(char => char.charCodeAt(0).toString(16));
+    }
+
     // eslint-disable-next-line no-unused-vars
     serialSetConnectionConstant(listen_on_port = 1) {
-        const arr = ['02'];
-        return this.add0x(arr);
+        return this.add0x(this.parseStringToBytes('CONNECT'));
     }
 
     async sayCredits() {
-        const arr = ['03', '04'];
+        const arr = this.parseStringToBytes('CREDITS');
         await this.appendToQueue(arr, 'credits');
     }
 
     async sayHi() {
-        const arr = ['04', '05'];
+        const arr = this.parseStringToBytes('HI');
         await this.appendToQueue(arr, 'hi');
     }
 
     async sayAra() {
-        const arr = ['05', '06'];
+        const arr = this.parseStringToBytes('OTHER');
         await this.appendToQueue(arr, 'ara');
+    }
+
+    async sendCustomCode(string = '') {
+        if (typeof string !== 'string') throw new Error('Invalid string');
+        const arr = this.parseStringToBytes(string);
+        await this.appendToQueue(arr, 'custom');
     }
 
     async doSomething() {

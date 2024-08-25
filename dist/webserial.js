@@ -714,6 +714,7 @@ class ee extends bn {
         output_stream: null,
         keep_reading: !0,
         time_until_send_bytes: void 0,
+        delay_first_connection: 200,
         bytes_connection: null,
         filters: [],
         config_port: {
@@ -889,7 +890,7 @@ class ee extends bn {
         n.dispatch("serial:connected", s.detail), n.__internal__.serial.queue.length > 0 && n.dispatch("internal:queue", {});
       }, e.ondisconnect = async (s) => {
         await n.disconnect(s.detail ?? null);
-      }, this.__internal__.timeout.until_response = setTimeout(async () => {
+      }, await W(this.__internal__.serial.delay_first_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
         await n.timeout(n.__internal__.serial.bytes_connection, "connection:start");
       }, this.__internal__.time.response_connection), await i(this, w, ve).call(this, this.__internal__.serial.bytes_connection), this.dispatch("serial:sent", {
         action: "connect",
@@ -1166,7 +1167,7 @@ Q = function(t = [], e = null) {
 }, We = function() {
   const t = this;
   navigator.serial.addEventListener("connect", async () => {
-    console.log("ara?"), t.isDisconnected && await t.serialConnect().catch(() => {
+    t.isDisconnected && await t.serialConnect().catch(() => {
     });
   });
 }, Qe = async function() {
