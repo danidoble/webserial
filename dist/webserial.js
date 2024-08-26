@@ -1083,7 +1083,7 @@ class Y extends Pe {
       console.error("Invalid data to make an emulation");
       return;
     }
-    this.__internal__.serial.connected || (this.__internal__.serial.connected = !0, this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0)), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
+    this.__internal__.serial.connected || (this.__internal__.serial.connected = !0, this.dispatch("serial:connected"), D.instance.dispatch("change"), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0)), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
     const e = [];
     for (const n in t.code)
       e.push(t.code[n].toString().padStart(2, "0").toLowerCase());
@@ -1124,7 +1124,7 @@ w = new WeakSet(), qe = function(t) {
 // }
 Q = function(t = [], e = null) {
   if (t && t.length > 0) {
-    this.__internal__.serial.connected = !0, this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
+    this.__internal__.serial.connected || (this.dispatch("serial:connected"), D.instance.dispatch("change")), this.__internal__.serial.connected = !0, this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
     const n = [];
     for (const a in t)
       n.push(t[a].toString().padStart(2, "0").toLowerCase());
@@ -3243,7 +3243,7 @@ class Dn extends Y {
     }, n = t.map((c) => parseInt(c, 16)), a = String.fromCharCode(...n).replace(/[\n\r]+/g, "");
     switch (e.code = a, a) {
       case "connected":
-        e.name = "connected", e.description = "Connection established", e.request = "connect", e.no_code = 100, this.dispatch("serial:connected"), D.instance.dispatch("change");
+        e.name = "connected", e.description = "Connection established", e.request = "connect", e.no_code = 100;
         break;
       case "created by danidoble":
         e.name = "thanks", e.description = "thanks for using this software", e.request = "credits", e.no_code = 101;
@@ -3309,7 +3309,7 @@ const En = {
   wait: $,
   getSeconds: we,
   supportWebSerial: Ne
-}, Sn = "4.0.0";
+}, Sn = "3.0.0";
 export {
   Dn as Arduino,
   Tn as Boardroid,
