@@ -1109,7 +1109,7 @@ class Y extends Pe {
   async sendConnect() {
     await this.appendToQueue(this.__internal__.serial.bytes_connection, "connect");
   }
-  async sendCustomCode(t) {
+  async sendCustomCode({ code: t = [] } = {}) {
     await this.appendToQueue(t, "custom");
   }
 }
@@ -1957,7 +1957,7 @@ class xn extends Y {
     if (isNaN(e) || e < 38 || e > 100) throw new Error("Invalid event");
     return await this.eventsConfig({ event: t, enable: !1 });
   }
-  async sendCustomCode(t = []) {
+  async sendCustomCode({ code: t = [] } = {}) {
     if (t.length < 5) throw new Error("Invalid code, minimum length is 5");
     const e = i(this, l, F).call(this, t);
     return await i(this, l, R).call(this, e, "custom");
@@ -2936,8 +2936,10 @@ class Tn extends Y {
     }
     x(this, J, 80), i(this, h, ue).call(this, { dispensed: e }), i(this, h, De).call(this);
   }
-  async sendCustomCode(t) {
-    t = i(this, h, de).call(this, t), await this.appendToQueue(t, "custom");
+  async sendCustomCode({ code: t = [] } = {}) {
+    if (t.length === 0) throw new Error("Invalid code");
+    const e = i(this, h, de).call(this, t);
+    await this.appendToQueue(e, "custom");
   }
   hasToReturnChange(t = 0) {
     let e = t;
@@ -3305,7 +3307,7 @@ class Dn extends Y {
     const t = this.parseStringToBytes("OTHER");
     await this.appendToQueue(t, "ara");
   }
-  async sendCustomCode(t = "") {
+  async sendCustomCode({ code: t = "" } = {}) {
     if (typeof t != "string") throw new Error("Invalid string");
     const e = this.parseStringToBytes(t);
     await this.appendToQueue(e, "custom");
