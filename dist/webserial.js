@@ -1625,7 +1625,7 @@ class xn extends Y {
     selection: t = 1,
     cart: e = !1
   } = {}) {
-    if (t = parseInt(t), isNaN(t) || t < 1 || t > 109) throw new Error("Invalid selection");
+    if (t = parseInt(t), isNaN(t) || t < 1 || t > 130) throw new Error("Invalid selection");
     const { channel: n, tray: s } = i(this, l, St).call(this, t);
     this.__internal__.dispense.backup_dispense = {
       selection: t,
