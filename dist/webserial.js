@@ -1679,7 +1679,7 @@ class xn extends Y {
     const n = i(this, l, F).call(this, ["02", "30", "30", "81", "50", t, e]);
     return await i(this, l, R).call(this, n, "program");
   }
-  async programDisplayLanguage(t = "spanish") {
+  async programDisplayLanguage({ language: t = "spanish" } = {}) {
     const e = { spanish: "30", english: "31", french: "32" };
     if (!e[t]) throw new Error("Invalid language");
     return await this.program("49", e[t]);
