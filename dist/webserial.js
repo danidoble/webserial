@@ -2522,7 +2522,7 @@ U = function({ type: t = null, severity: e = "high" } = {}) {
     e.name = "executed", e.description = "The last command was executed successfully", e.no_code = 8, !t[1] && this.__internal__.dispense.dispensing && i(this, l, P).call(this);
   return e;
 }, St = function(t) {
-  if (t = t.toString(), t.length !== 3)
+  if (t = parseInt(t) + 109, t = t.toString(), t.length !== 3)
     throw new Error("Invalid selection");
   const e = (parseInt(t.substring(0, 2)) + 128).toString(16).padStart(2, "0");
   return { channel: (parseInt(t.substring(2, 3)) + 128).toString(16).padStart(2, "0"), tray: e };
@@ -3333,7 +3333,7 @@ const En = {
   wait: $,
   getSeconds: we,
   supportWebSerial: Ne
-}, In = "3.0.0";
+}, In = void 0;
 export {
   Dn as Arduino,
   Tn as Boardroid,
