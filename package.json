@@ -1,7 +1,7 @@
 {
   "name": "@danidoble/webserial",
   "description": "WebSerial API for vending machines",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "type": "module",
   "license": "MIT",
   "author": "danidoble",
