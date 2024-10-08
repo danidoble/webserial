@@ -1,8 +1,24 @@
 {
   "name": "@danidoble/webserial",
-  "private": true,
+  "description": "WebSerial API for vending machines",
   "version": "4.0.0",
   "type": "module",
+  "license": "MIT",
+  "author": "danidoble",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danidoble/webserial.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danidoble/webserial/issues"
+  },
+  "homepage": "https://webserial-demo.danidoble.com",
+  "keywords": [
+    "webserial",
+    "vending",
+    "machine",
+    "api"
+  ],
   "files": [
     "dist"
   ],

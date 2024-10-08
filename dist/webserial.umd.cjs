@@ -7,4 +7,4 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */const xn={wait:J,getSeconds:we,supportWebSerial:Ne},Tn=void 0;y.Arduino=Cn,y.Boardroid=gn,y.Devices=S,y.Emulator=X,y.Jofemar=mn,y.Kernel=V,y.Locker=vn,y.Relay=kn,y.utils=xn,y.version=Tn,Object.defineProperty(y,Symbol.toStringTag,{value:"Module"})});
+ */const xn={wait:J,getSeconds:we,supportWebSerial:Ne},Tn="3.0.0";y.Arduino=Cn,y.Boardroid=gn,y.Devices=S,y.Emulator=X,y.Jofemar=mn,y.Kernel=V,y.Locker=vn,y.Relay=kn,y.utils=xn,y.version=Tn,Object.defineProperty(y,Symbol.toStringTag,{value:"Module"})});

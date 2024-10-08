@@ -3333,7 +3333,7 @@ const En = {
   wait: $,
   getSeconds: we,
   supportWebSerial: Ne
-}, In = void 0;
+}, In = "3.0.0";
 export {
   Dn as Arduino,
   Tn as Boardroid,
