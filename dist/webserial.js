@@ -1703,7 +1703,7 @@ class xn extends Y {
   async programWorkingTemperature({ degrees: t = 0.5 } = {}) {
     t = parseFloat(t);
     const e = this.__device.type === "iceplus" ? 6.5 : 32, n = this.__device.type === "iceplus" ? -25 : 0.5;
-    if (isNaN(t) || t < n || t > e || t % 0.5 !== 0) throw new Error("Invalid degrees");
+    if (isNaN(t) || t < n || t > e || t % 0.5 !== 0) throw new Error("Invalid degrees, must be a multiple of 0.5 and between 0.5 and 32");
     let s = t * 2 + 128;
     return this.__device.type === "iceplus" && (s += 51), s = Math.ceil(s), await this.program("54", s.toString(16));
   }
@@ -1763,7 +1763,7 @@ class xn extends Y {
    * @return {Promise<*>}
    */
   async programTemperatureBeforeExpiration({ degrees: t = 0.5 } = {}) {
-    if (t = parseFloat(t), isNaN(t) || t < 0.5 || t > 30 || t % 0.5 !== 0) throw new Error("Invalid degrees, valid range is 0.5 to 30");
+    if (t = parseFloat(t), isNaN(t) || t < 0.5 || t > 30 || t % 0.5 !== 0) throw new Error("Invalid degrees, must be a multiple of 0.5 and valid range is 0.5 to 30");
     const e = (128 + t * 2).toString(16);
     return await this.program("65", e);
   }
@@ -1787,7 +1787,7 @@ class xn extends Y {
    * @return {Promise<void>}
    */
   async programVoltageEngine({ selection: t = 1, voltage: e = 5 } = {}) {
-    if (e = parseFloat(e), t = parseInt(t), isNaN(t) || t < 1 || t > 80) throw new Error("Invalid selection, valid range is 1 to 80");
+    if (e = parseFloat(e), t = parseInt(t), isNaN(t) || t < 1 || t > this.__device.channels.verification.end) throw new Error(`Invalid selection, valid range is 1 to ${this.__device.channels.verification.end}`);
     if (isNaN(e) || e < 5 || e > 9.5 || e % 0.5 !== 0) throw new Error("Invalid voltage, valid range is 5 to 9.5");
     const n = 109 + t, c = (128 + (e - 5) * 2).toString(16), u = i(this, l, F).call(this, ["02", "30", "30", "81", "47", n, c]);
     return await i(this, l, R).call(this, u, "voltage-engine");
@@ -1798,7 +1798,7 @@ class xn extends Y {
    * @return {Promise<void>}
    */
   async programPushOverProducts({ selection: t = 1, enable: e = !0 } = {}) {
-    if (t = parseInt(t), isNaN(t) || t < 1 || t > 80) throw new Error("Invalid selection, valid range is 1 to 80");
+    if (t = parseInt(t), isNaN(t) || t < 1 || t > this.__device.channels.verification.end) throw new Error(`Invalid selection, valid range is 1 to ${this.__device.channels.verification.end}`);
     const n = 109 + t, s = e ? "31" : "30", c = i(this, l, F).call(this, ["02", "30", "30", "81", "4F", n, s]);
     return await i(this, l, R).call(this, c, "push-over-products");
   }
@@ -1808,8 +1808,8 @@ class xn extends Y {
    * @return {Promise<void>}
    */
   async programChannelRunningAfterDispense({ selection: t = 1, seconds: e = 0 } = {}) {
-    if (t = parseInt(t), e = parseFloat(e), isNaN(t) || t < 1 || t > 126) throw new Error("Invalid selection, valid range is 1 to 126");
-    if (isNaN(e) || e < 0 || e > 10) throw new Error("Invalid seconds, valid range is 0.0 to 10.0");
+    if (t = parseInt(t), e = parseFloat(e), isNaN(t) || t < 1 || t > this.__device.channels.verification.end) throw new Error(`Invalid selection, valid range is 1 to ${this.__device.channels.verification.end}`);
+    if (isNaN(e) || e < 0 || e > 10 || e % 0.1 !== 0) throw new Error("Invalid seconds, valid range is 0.0 to 10.0 with a step of 0.1");
     const n = 109 + t;
     e = e.toFixed(1);
     const s = 128 + e * 10, c = i(this, l, F).call(this, ["02", "30", "30", "81", "45", n, s]);
@@ -1930,7 +1930,7 @@ class xn extends Y {
     const e = i(this, l, ce).call(this, t);
     return await i(this, l, le).call(this, "FF", e);
   }
-  async programClock(t = /* @__PURE__ */ new Date()) {
+  async programClock({ date: t = /* @__PURE__ */ new Date() } = {}) {
     if (!(t instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
     const e = i(this, l, F).call(this, ["02", "30", "30", "81", "72", ...i(this, l, Pt).call(this, t)]);
     return await i(this, l, R).call(this, e, "clock");
