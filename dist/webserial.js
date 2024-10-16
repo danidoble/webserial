@@ -1249,7 +1249,7 @@ $ = function(t = [], e = null) {
   if (this.__internal__.timeout.until_response || this.__internal__.serial.queue.length === 0) return;
   const t = this.__internal__.serial.queue[0];
   let e = this.__internal__.time.response_general;
-  t.action === "dispense" && (e = this.__internal__.dispense.limit_counter * 1e3, this.__internal__.dispense.custom_limit_counter && (e = this.__internal__.dispense.custom_limit_counter * 1e3), e += Math.ceil(e * 0.6)), this.__internal__.timeout.until_response = setTimeout(async () => {
+  t.action === "dispense" && (e = 800), this.__internal__.timeout.until_response = setTimeout(async () => {
     await this.timeout(t.bytes, t.action);
   }, e), await i(this, w, me).call(this, t.bytes), this.dispatch("serial:sent", {
     action: t.action,
