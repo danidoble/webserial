@@ -1,7 +1,7 @@
 {
   "name": "@danidoble/webserial",
   "description": "WebSerial API wrapper",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "type": "module",
   "license": "MIT",
   "author": "danidoble",
