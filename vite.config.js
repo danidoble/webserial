@@ -1,7 +1,5 @@
 import {resolve} from 'path'
 import {defineConfig} from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import daisyui from "daisyui"
 import {dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
 import basicSsl from '@vitejs/plugin-basic-ssl'
@@ -14,7 +12,7 @@ const _dirname = typeof __dirname !== 'undefined'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        basicSsl(), react(), daisyui,
+        basicSsl(),
     ],
     build: {
         lib: {
@@ -27,13 +25,11 @@ export default defineConfig({
         rollupOptions: {
             // make sure to externalize deps that shouldn't be bundled
             // into your library
-            external: ['react'],
+            external: [],
             output: {
                 // Provide global variables to use in the UMD build
                 // for externalized deps
-                globals: {
-                    react: 'React',
-                },
+                globals: {},
             },
         },
     },

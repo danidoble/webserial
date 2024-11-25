@@ -1,9 +1,17 @@
-import { Locker } from './../lib/serial/locker.js';
+import { PinPad } from '../lib/serial/pinpad.js';
 
-const machine = new Locker();
+const machine = new PinPad();
 machine.on('serial:message', (data) => {
-  console.log(data);
+  console.log(data.detail);
 });
+
+machine.on('serial:timeout', (data) => {
+  console.log('serial:timeout', data.detail);
+});
+
+// machine.on('serial:sent', data => {
+//     console.log('serial:sent',data.detail);
+// });
 
 machine.on('serial:error', (event) => {
   document.getElementById('log').innerText += event.detail.message + '\n\n';
