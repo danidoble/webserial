@@ -1,40 +1,40 @@
-var pn = Object.defineProperty;
+var _n = Object.defineProperty;
 var Me = (f) => {
   throw TypeError(f);
 };
-var _n = (f, r, t) => r in f ? pn(f, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : f[r] = t;
-var A = (f, r, t) => _n(f, typeof r != "symbol" ? r + "" : r, t), be = (f, r, t) => r.has(f) || Me("Cannot " + t);
-var y = (f, r, t) => (be(f, r, "read from private field"), t ? t.call(f) : r.get(f)), S = (f, r, t) => r.has(f) ? Me("Cannot add the same private member more than once") : r instanceof WeakSet ? r.add(f) : r.set(f, t), g = (f, r, t, e) => (be(f, r, "write to private field"), e ? e.call(f, t) : r.set(f, t), t), i = (f, r, t) => (be(f, r, "access private method"), t);
+var fn = (f, r, t) => r in f ? _n(f, r, { enumerable: !0, configurable: !0, writable: !0, value: t }) : f[r] = t;
+var B = (f, r, t) => fn(f, typeof r != "symbol" ? r + "" : r, t), be = (f, r, t) => r.has(f) || Me("Cannot " + t);
+var w = (f, r, t) => (be(f, r, "read from private field"), t ? t.call(f) : r.get(f)), S = (f, r, t) => r.has(f) ? Me("Cannot add the same private member more than once") : r instanceof WeakSet ? r.add(f) : r.set(f, t), g = (f, r, t, e) => (be(f, r, "write to private field"), e ? e.call(f, t) : r.set(f, t), t), i = (f, r, t) => (be(f, r, "access private method"), t);
 var M = [];
 for (var ye = 0; ye < 256; ++ye)
   M.push((ye + 256).toString(16).slice(1));
-function fn(f, r = 0) {
+function bn(f, r = 0) {
   return (M[f[r + 0]] + M[f[r + 1]] + M[f[r + 2]] + M[f[r + 3]] + "-" + M[f[r + 4]] + M[f[r + 5]] + "-" + M[f[r + 6]] + M[f[r + 7]] + "-" + M[f[r + 8]] + M[f[r + 9]] + "-" + M[f[r + 10]] + M[f[r + 11]] + M[f[r + 12]] + M[f[r + 13]] + M[f[r + 14]] + M[f[r + 15]]).toLowerCase();
 }
-var te, bn = new Uint8Array(16);
-function yn() {
+var te, yn = new Uint8Array(16);
+function wn() {
   if (!te && (te = typeof crypto < "u" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto), !te))
     throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-  return te(bn);
+  return te(yn);
 }
-var wn = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
+var kn = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto);
 const Fe = {
-  randomUUID: wn
+  randomUUID: kn
 };
-function kn(f, r, t) {
+function vn(f, r, t) {
   if (Fe.randomUUID && !r && !f)
     return Fe.randomUUID();
   f = f || {};
-  var e = f.random || (f.rng || yn)();
-  return e[6] = e[6] & 15 | 64, e[8] = e[8] & 63 | 128, fn(e);
+  var e = f.random || (f.rng || wn)();
+  return e[6] = e[6] & 15 | 64, e[8] = e[8] & 63 | 128, bn(e);
 }
 class Pe extends EventTarget {
   constructor() {
     super(...arguments);
-    A(this, "__listeners__", {});
+    B(this, "__listeners__", {});
   }
   dispatch(t, e = null) {
-    const n = new vn(t, { detail: e });
+    const n = new mn(t, { detail: e });
     this.dispatchEvent(n);
   }
   dispatchAsync(t, e = null, n = 100) {
@@ -59,7 +59,7 @@ class Pe extends EventTarget {
     }));
   }
 }
-class vn extends CustomEvent {
+class mn extends CustomEvent {
   constructor(r, t) {
     super(r, t);
   }
@@ -67,24 +67,24 @@ class vn extends CustomEvent {
 function W(f = 100) {
   return new Promise((r) => setTimeout(() => r(), f));
 }
-function Be() {
+function Ae() {
   return "serial" in navigator;
 }
 function we(f = 1) {
   return f * 1e3;
 }
-var R, H, o, Ae, Ne, _, ke, x, m, ne, p, ve, Y;
+var R, L, o, Be, Ne, _, ke, x, m, ne, p, ve, K;
 const a = class a {
   static status(r = null) {
     var e, n;
     if (!i(e = a, o, _).call(e, r)) return !1;
     let t = [];
-    switch (y(a, R)) {
+    switch (w(a, R)) {
       case "locker":
         t = ["0", "8"];
         break;
       case "boardroid":
-        t = ["2", (5 + y(a, H)).toString(16).toUpperCase()];
+        t = ["2", (5 + w(a, L)).toString(16).toUpperCase()];
         break;
       case "jofemar":
         t = ["6"];
@@ -98,7 +98,7 @@ const a = class a {
     var e, n;
     if (!i(e = a, o, _).call(e, r)) return !1;
     let t = [];
-    switch (y(a, R)) {
+    switch (w(a, R)) {
       case "locker":
         t = ["0", "7", "4", "4", "4"];
         break;
@@ -117,7 +117,7 @@ const a = class a {
     var e, n;
     if (!i(e = a, o, _).call(e, r)) return !1;
     let t = [];
-    switch (y(a, R)) {
+    switch (w(a, R)) {
       case "locker":
         t = ["0", "7", "5", "5", "5"];
         break;
@@ -145,15 +145,15 @@ const a = class a {
   static keyPressed(r = null) {
     var s, c, u;
     if (!i(s = a, o, _).call(s, r) || !i(c = a, o, m).call(c)) return !1;
-    const t = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "2A", "23", "41", "42", "43", "44"], e = (128 + y(a, H)).toString(16), n = Math.floor(Math.random() * 15);
+    const t = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "2A", "23", "41", "42", "43", "44"], e = (128 + w(a, L)).toString(16), n = Math.floor(Math.random() * 15);
     i(u = a, o, p).call(u, ["2", e, "54", t[n]]);
   }
   static doorOpened(r = null) {
     var n, s;
     if (!i(n = a, o, _).call(n, r) || !i(this, o, ne).call(this)) return !1;
     let t = [];
-    const e = (128 + y(a, H)).toString(16);
-    switch (y(a, R)) {
+    const e = (128 + w(a, L)).toString(16);
+    switch (w(a, R)) {
       case "boardroid":
         t = ["2", "D8", "dc"];
         break;
@@ -167,8 +167,8 @@ const a = class a {
     var n, s;
     if (!i(n = a, o, _).call(n, r) || !i(this, o, ne).call(this)) return !1;
     let t = [];
-    const e = (128 + y(a, H)).toString(16);
-    switch (y(a, R)) {
+    const e = (128 + w(a, L)).toString(16);
+    switch (w(a, R)) {
       case "boardroid":
         t = ["2", "D8", "db"];
         break;
@@ -181,33 +181,33 @@ const a = class a {
   static channelDisconnected(r = null) {
     var e, n, s;
     if (!i(e = a, o, _).call(e, r) || !i(n = a, o, m).call(n)) return !1;
-    const t = (128 + y(a, H)).toString(16);
+    const t = (128 + w(a, L)).toString(16);
     i(s = a, o, p).call(s, ["2", t, "43", "43", "43", "FD"]);
   }
   static channelConnected(r = null) {
     var e, n, s;
     if (!i(e = a, o, _).call(e, r) || !i(n = a, o, m).call(n)) return !1;
-    const t = (128 + y(a, H)).toString(16);
+    const t = (128 + w(a, L)).toString(16);
     i(s = a, o, p).call(s, ["2", t, "43", "43", "43", "FC"]);
   }
   static channelEmpty(r = null) {
     var e, n, s;
     if (!i(e = a, o, _).call(e, r) || !i(n = a, o, m).call(n)) return !1;
-    const t = (128 + y(a, H)).toString(16);
+    const t = (128 + w(a, L)).toString(16);
     i(s = a, o, p).call(s, ["2", t, "43", "43", "43", "FF"]);
   }
   static workingTemperature(r = null) {
     var e, n, s;
     if (!i(e = a, o, _).call(e, r) || !i(n = a, o, m).call(n)) return !1;
-    const t = (128 + y(a, H)).toString(16);
+    const t = (128 + w(a, L)).toString(16);
     i(s = a, o, p).call(s, ["2", t, "43", "54", "16"]);
   }
   static currentTemperature(r = null) {
     var n, s, c;
     if (!i(n = a, o, _).call(n, r) || !i(s = a, o, ne).call(s)) return !1;
     let t = [];
-    const e = (128 + y(a, H)).toString(16);
-    switch (y(a, R)) {
+    const e = (128 + w(a, L)).toString(16);
+    switch (w(a, R)) {
       case "boardroid":
         t = ["2", "D9", "44", "30"];
         break;
@@ -377,25 +377,25 @@ const a = class a {
   static banknoteInsertedStacker(r = null, t = null) {
     var s, c, u, h;
     if (!i(s = a, o, _).call(s, r) || !i(c = a, o, x).call(c)) return !1;
-    const e = ["80", "81", "82", "83", "84"], n = i(u = a, o, Y).call(u, e, t);
+    const e = ["80", "81", "82", "83", "84"], n = i(u = a, o, K).call(u, e, t);
     i(h = a, o, p).call(h, ["2", "B0", n]);
   }
   static banknoteInsertedEscrow(r = null, t = null) {
     var s, c, u, h;
     if (!i(s = a, o, _).call(s, r) || !i(c = a, o, x).call(c)) return !1;
-    const e = ["90", "91", "92", "93", "94"], n = i(u = a, o, Y).call(u, e, t);
+    const e = ["90", "91", "92", "93", "94"], n = i(u = a, o, K).call(u, e, t);
     i(h = a, o, p).call(h, ["2", "B0", n]);
   }
   static banknoteEjected(r = null, t = null) {
     var s, c, u, h;
     if (!i(s = a, o, _).call(s, r) || !i(c = a, o, x).call(c)) return !1;
-    const e = ["A0", "A1", "A2", "A3", "A4"], n = i(u = a, o, Y).call(u, e, t);
+    const e = ["A0", "A1", "A2", "A3", "A4"], n = i(u = a, o, K).call(u, e, t);
     i(h = a, o, p).call(h, ["2", "B0", n]);
   }
   static banknoteInsertedRecycler(r = null, t = null) {
     var s, c, u, h;
     if (!i(s = a, o, _).call(s, r) || !i(c = a, o, x).call(c)) return !1;
-    const e = ["B0", "B1", "B2", "B3", "B4"], n = i(u = a, o, Y).call(u, e, t);
+    const e = ["B0", "B1", "B2", "B3", "B4"], n = i(u = a, o, K).call(u, e, t);
     i(h = a, o, p).call(h, ["2", "B0", n]);
   }
   static banknoteTaken(r = null) {
@@ -615,26 +615,26 @@ const a = class a {
     r.__internal__.serial.connected = !0;
   }
 };
-R = new WeakMap(), H = new WeakMap(), o = new WeakSet(), Ae = function() {
+R = new WeakMap(), L = new WeakMap(), o = new WeakSet(), Be = function() {
   if (a.enable === !1) throw new Error("Emulator is disabled");
   return a.enable;
 }, Ne = function(r) {
-  if (typeof r != "object" || !(r instanceof G)) throw new Error(`Type ${r.typeDevice} is not supported`);
-  return a.instance = r, g(a, R, r.typeDevice), g(a, H, r.deviceNumber), !0;
+  if (typeof r != "object" || !(r instanceof Y)) throw new Error(`Type ${r.typeDevice} is not supported`);
+  return a.instance = r, g(a, R, r.typeDevice), g(a, L, r.deviceNumber), !0;
 }, _ = function(r = null) {
   var t, e;
-  return !i(t = a, o, Ae).call(t) || r === null && a.instance === null ? !1 : (a.instance === null && i(e = a, o, Ne).call(e, r), !0);
+  return !i(t = a, o, Be).call(t) || r === null && a.instance === null ? !1 : (a.instance === null && i(e = a, o, Ne).call(e, r), !0);
 }, ke = function() {
-  if (y(a, R) !== "locker") throw new Error("This function is only available for Locker devices");
+  if (w(a, R) !== "locker") throw new Error("This function is only available for Locker devices");
   return !0;
 }, x = function() {
-  if (y(a, R) !== "boardroid") throw new Error("This function is only available for Boardroid devices");
+  if (w(a, R) !== "boardroid") throw new Error("This function is only available for Boardroid devices");
   return !0;
 }, m = function() {
-  if (y(a, R) !== "jofemar") throw new Error("This function is only available for Jofemar devices");
+  if (w(a, R) !== "jofemar") throw new Error("This function is only available for Jofemar devices");
   return !0;
 }, ne = function() {
-  if (y(a, R) === "locker") throw new Error("This function is not available for Locker devices");
+  if (w(a, R) === "locker") throw new Error("This function is not available for Locker devices");
   return !0;
 }, p = function(r) {
   a.instance.__emulate({ code: r });
@@ -659,7 +659,7 @@ R = new WeakMap(), H = new WeakMap(), o = new WeakSet(), Ae = function() {
         break;
     }
   return e;
-}, Y = function(r, t = null) {
+}, K = function(r, t = null) {
   let e = r[Math.floor(Math.random() * 4)];
   if (t !== null && !isNaN(parseFloat(t)))
     switch (t.toString()) {
@@ -680,76 +680,76 @@ R = new WeakMap(), H = new WeakMap(), o = new WeakSet(), Ae = function() {
         break;
     }
   return e;
-}, S(a, o), A(a, "enable", !1), A(a, "instance", null), S(a, R, null), S(a, H, 1);
+}, S(a, o), B(a, "enable", !1), B(a, "instance", null), S(a, R, null), S(a, L, 1);
 let pe = a;
-const k = class k extends Pe {
+const v = class v extends Pe {
   static typeError(r) {
     const t = new Error();
     throw t.message = `Type ${r} is not supported`, t.name = "DeviceTypeError", t;
   }
   static addCustom(r, t) {
-    typeof k.devices[r] > "u" && (k.devices[r] = []), k.add(t);
+    typeof v.devices[r] > "u" && (v.devices[r] = []), v.add(t);
   }
   static add(r) {
     const t = r.typeDevice, e = r.uuid;
-    if (typeof k.devices[t] > "u") return k.typeError(t);
-    if (this.instance.dispatch("change", k.devices), !k.devices[t][e])
-      return k.devices[t][e] = r, this.instance.dispatch("change", k.devices), k.devices[t].indexOf(r);
+    if (typeof v.devices[t] > "u") return v.typeError(t);
+    if (this.instance.dispatch("change", v.devices), !v.devices[t][e])
+      return v.devices[t][e] = r, this.instance.dispatch("change", v.devices), v.devices[t].indexOf(r);
   }
   static get(r, t) {
-    return typeof k.devices[r] > "u" ? k.typeError(r) : k.devices[r][t];
+    return typeof v.devices[r] > "u" ? v.typeError(r) : v.devices[r][t];
   }
   static getJofemarByUuid(r) {
-    return k.get("jofemar", r);
+    return v.get("jofemar", r);
   }
   static getLockerByUuid(r) {
-    return k.get("locker", r);
+    return v.get("locker", r);
   }
   static getRelayByUuid(r) {
-    return k.get("relay", r);
+    return v.get("relay", r);
   }
   static getBoardroidByUuid(r) {
-    return k.get("boardroid", r);
+    return v.get("boardroid", r);
   }
   static getArduinoByUuid(r) {
-    return k.get("arduino", r);
+    return v.get("arduino", r);
   }
   static getAll(r = null) {
-    return r === null ? k.devices : typeof k.devices[r] > "u" ? k.typeError(r) : k.devices[r];
+    return r === null ? v.devices : typeof v.devices[r] > "u" ? v.typeError(r) : v.devices[r];
   }
   static getList() {
-    return Object.values(k.devices).map((t) => Object.values(t)).flat();
+    return Object.values(v.devices).map((t) => Object.values(t)).flat();
   }
   static getJofemar(r = 1) {
-    return Object.values(k.devices.jofemar).find((e) => e.deviceNumber === r) ?? null;
+    return Object.values(v.devices.jofemar).find((e) => e.deviceNumber === r) ?? null;
   }
   static getBoardroid(r = 1) {
-    return Object.values(k.devices.boardroid).find((e) => e.deviceNumber === r) ?? null;
+    return Object.values(v.devices.boardroid).find((e) => e.deviceNumber === r) ?? null;
   }
   static getLocker(r = 1) {
-    return Object.values(k.devices.locker).find((e) => e.deviceNumber === r) ?? null;
+    return Object.values(v.devices.locker).find((e) => e.deviceNumber === r) ?? null;
   }
   static getRelay(r = 1) {
-    return Object.values(k.devices.relay).find((e) => e.deviceNumber === r) ?? null;
+    return Object.values(v.devices.relay).find((e) => e.deviceNumber === r) ?? null;
   }
   static getArduino(r = 1) {
-    return Object.values(k.devices.arduino).find((e) => e.deviceNumber === r) ?? null;
+    return Object.values(v.devices.arduino).find((e) => e.deviceNumber === r) ?? null;
   }
   static getCustom(r, t = 1) {
-    return typeof k.devices[r] > "u" ? k.typeError(r) : Object.values(k.devices[r]).find((n) => n.deviceNumber === t) ?? null;
+    return typeof v.devices[r] > "u" ? v.typeError(r) : Object.values(v.devices[r]).find((n) => n.deviceNumber === t) ?? null;
   }
 };
-A(k, "instance", null), A(k, "devices", {
+B(v, "instance", null), B(v, "devices", {
   relay: [],
   locker: [],
   jofemar: [],
   boardroid: [],
   arduino: []
 });
-let D = k;
+let D = v;
 D.instance || (D.instance = new D());
-var w, qe, me, Q, Re, He, Le, Oe, Ue, je, We, Qe, Ve, Je, ze, $e;
-class G extends Pe {
+var k, qe, me, Q, Re, Le, He, Oe, Ue, je, We, Qe, Ve, Je, ze, Ge;
+class Y extends Pe {
   /**
    *
    * @param {null|array} filters
@@ -764,8 +764,8 @@ class G extends Pe {
     device_listen_on_port: s = 1
   } = {}) {
     super();
-    S(this, w);
-    A(this, "__internal__", {
+    S(this, k);
+    B(this, "__internal__", {
       device_number: 1,
       aux_port_connector: 0,
       last_error: { message: null, action: null, code: null, no_code: 0 },
@@ -798,7 +798,7 @@ class G extends Pe {
       },
       device: {
         type: "unknown",
-        id: kn(),
+        id: vn(),
         listen_on_port: null,
         door_open: !1
       },
@@ -825,7 +825,7 @@ class G extends Pe {
         backup_dispense: {}
       }
     });
-    t && (this.serialFilters = t), e && (this.serialConfigPort = e), n && i(this, w, ze).call(this, n), s && (typeof s == "number" || typeof s == "string") && (this.listenOnPort = s), i(this, w, We).call(this), i(this, w, Qe).call(this);
+    t && (this.serialFilters = t), e && (this.serialConfigPort = e), n && i(this, k, ze).call(this, n), s && (typeof s == "number" || typeof s == "string") && (this.listenOnPort = s), i(this, k, We).call(this), i(this, k, Qe).call(this);
   }
   set listenOnPort(t) {
     if (t = parseInt(t), isNaN(t) || t < 1 || t > 255) throw new Error("Invalid port number");
@@ -882,7 +882,7 @@ class G extends Pe {
   }
   async connect() {
     return new Promise((t, e) => {
-      Be() || e("Web Serial not supported"), setTimeout(async () => {
+      Ae() || e("Web Serial not supported"), setTimeout(async () => {
         await W(499), await this.serialConnect(), this.isConnected ? t(`${this.typeDevice} device ${this.deviceNumber} connected`) : e(`${this.typeDevice} device ${this.deviceNumber} not connected`);
       }, 1);
     });
@@ -952,7 +952,7 @@ class G extends Pe {
   async serialConnect() {
     try {
       this.dispatch("serial:connecting", {});
-      const t = await i(this, w, Re).call(this);
+      const t = await i(this, k, Re).call(this);
       if (t.length > 0)
         await this.serialPortsSaved(t);
       else {
@@ -968,16 +968,16 @@ class G extends Pe {
         await n.disconnect(s.detail ?? null);
       }, await W(this.__internal__.serial.delay_first_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
         await n.timeout(n.__internal__.serial.bytes_connection, "connection:start");
-      }, this.__internal__.time.response_connection), await i(this, w, me).call(this, this.__internal__.serial.bytes_connection), this.dispatch("serial:sent", {
+      }, this.__internal__.time.response_connection), await i(this, k, me).call(this, this.__internal__.serial.bytes_connection), this.dispatch("serial:sent", {
         action: "connect",
         bytes: this.__internal__.serial.bytes_connection
-      }), this.typeDevice === "relay" && i(this, w, Q).call(this, ["DD", "DD"], null), await i(this, w, Ue).call(this);
+      }), this.typeDevice === "relay" && i(this, k, Q).call(this, ["DD", "DD"], null), await i(this, k, Ue).call(this);
     } catch (t) {
       this.serialErrors(t);
     }
   }
   async serialForget() {
-    return await i(this, w, je).call(this);
+    return await i(this, k, je).call(this);
   }
   decToHex(t) {
     return parseInt(t, 10).toString(16);
@@ -1112,7 +1112,7 @@ class G extends Pe {
     });
   }
   softReload() {
-    i(this, w, $e).call(this), this.dispatch("serial:soft-reload", {});
+    i(this, k, Ge).call(this), this.dispatch("serial:soft-reload", {});
   }
   async sendConnect() {
     await this.appendToQueue(this.__internal__.serial.bytes_connection, "connect");
@@ -1121,7 +1121,7 @@ class G extends Pe {
     await this.appendToQueue(t, "custom");
   }
 }
-w = new WeakSet(), qe = function(t) {
+k = new WeakSet(), qe = function(t) {
   return !!(t.readable && t.writable);
 }, me = async function(t) {
   const e = this.__internal__.serial.port;
@@ -1150,26 +1150,26 @@ Q = function(t = [], e = null) {
   return t.length === 0 ? e : e.filter((s) => {
     const c = s.getInfo();
     return t.some((u) => c.usbProductId === u.usbProductId && c.usbVendorId === u.usbVendorId);
-  }).filter((s) => !i(this, w, qe).call(this, s));
-}, He = function(t) {
+  }).filter((s) => !i(this, k, qe).call(this, s));
+}, Le = function(t) {
   if (t) {
     const e = this.__internal__.serial.response.buffer;
     let n = new Uint8Array(e.length + t.byteLength);
     n.set(e, 0), n.set(new Uint8Array(t), e.length), this.__internal__.serial.response.buffer = n;
   }
-}, Le = async function() {
+}, He = async function() {
   this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
     let t = [];
     for (const e in this.__internal__.serial.response.buffer)
       t.push(this.__internal__.serial.response.buffer[e].toString(16));
-    this.__internal__.serial.response.buffer && i(this, w, Q).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    this.__internal__.serial.response.buffer && i(this, k, Q).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
   }, 400);
 }, Oe = async function() {
   if (this.__internal__.serial.response.length === this.__internal__.serial.response.buffer.length) {
     const t = [];
     for (const e in this.__internal__.serial.response.buffer)
       t.push(this.__internal__.serial.response.buffer[e].toString(16));
-    await i(this, w, Q).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    await i(this, k, Q).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
   } else if (this.__internal__.serial.response.length < this.__internal__.serial.response.buffer.length) {
     let t = [];
     for (let n = 0; n < this.__internal__.serial.response.length; n++)
@@ -1178,7 +1178,7 @@ Q = function(t = [], e = null) {
       const n = [];
       for (const s in t)
         n.push(t[s].toString(16));
-      await i(this, w, Q).call(this, n), this.__internal__.serial.response.buffer = new Uint8Array(0);
+      await i(this, k, Q).call(this, n), this.__internal__.serial.response.buffer = new Uint8Array(0);
       return;
     }
     t = [];
@@ -1190,7 +1190,7 @@ Q = function(t = [], e = null) {
         const n = [];
         for (const s in t)
           n.push(t[s].toString(16));
-        await i(this, w, Q).call(this, n), this.__internal__.serial.response.buffer = new Uint8Array(0);
+        await i(this, k, Q).call(this, n), this.__internal__.serial.response.buffer = new Uint8Array(0);
       }
     }
   }
@@ -1207,7 +1207,7 @@ Q = function(t = [], e = null) {
           e.releaseLock(), this.__internal__.serial.keep_reading = !1, n = !1;
           break;
         }
-        i(this, w, He).call(this, s), this.__internal__.serial.response.length === null ? await i(this, w, Le).call(this) : await i(this, w, Oe).call(this);
+        i(this, k, Le).call(this, s), this.__internal__.serial.response.length === null ? await i(this, k, He).call(this) : await i(this, k, Oe).call(this);
       }
     } catch (n) {
       this.serialErrors(n);
@@ -1243,8 +1243,8 @@ Q = function(t = [], e = null) {
   const t = this;
   this.on("internal:queue", async () => {
     var e;
-    await i(e = t, w, Je).call(e);
-  }), i(this, w, Ve).call(this);
+    await i(e = t, k, Je).call(e);
+  }), i(this, k, Ve).call(this);
 }, Ve = function() {
   const t = this;
   navigator.serial.addEventListener("connect", async () => {
@@ -1261,19 +1261,19 @@ Q = function(t = [], e = null) {
   let e = this.__internal__.time.response_general;
   t.action === "connect" ? e = this.__internal__.time.response_connection : t.action === "dispense" && (e = this.__internal__.time.response_engines), this.__internal__.timeout.until_response = setTimeout(async () => {
     await this.timeout(t.bytes, t.action);
-  }, e), await i(this, w, me).call(this, t.bytes), this.dispatch("serial:sent", {
+  }, e), await i(this, k, me).call(this, t.bytes), this.dispatch("serial:sent", {
     action: t.action,
     bytes: t.bytes
-  }), this.typeDevice === "relay" && i(this, w, Q).call(this, ["DD", "DD"], null);
+  }), this.typeDevice === "relay" && i(this, k, Q).call(this, ["DD", "DD"], null);
   const n = [...this.__internal__.serial.queue];
   this.__internal__.serial.queue = n.splice(1);
 }, ze = function(t = 1) {
   this.__internal__.device_number = t, this.__internal__.serial.bytes_connection = this.serialSetConnectionConstant(t);
-}, $e = function() {
+}, Ge = function() {
   this.__internal__.last_error = { message: null, action: null, code: null, no_code: 0 };
 };
-var X, _e, Ge;
-class Cn extends G {
+var X, _e, $e;
+class gn extends Y {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -1286,7 +1286,7 @@ class Cn extends G {
       deactivate: ["A0", "01", "00", "A1"]
     });
     if (this.__internal__.device.type = "relay", D.getCustom(this.typeDevice, n)) throw new Error(`Device ${this.typeDevice} ${n} already exists`);
-    i(this, _e, Ge).call(this);
+    i(this, _e, $e).call(this);
   }
   serialMessage(t) {
     const e = {
@@ -1319,11 +1319,11 @@ class Cn extends G {
     return e[1] = this.hexMaker(this.decToHex(t.toString())), e[3] = this.serialRelaySumHex(e), this.add0x(e);
   }
   async turnOn() {
-    const t = y(this, X).activate;
+    const t = w(this, X).activate;
     t[3] = this.serialRelaySumHex(t), await this.appendToQueue(t, "relay:turn-on");
   }
   async turnOff() {
-    const t = y(this, X).deactivate;
+    const t = w(this, X).deactivate;
     t[3] = this.serialRelaySumHex(t), await this.appendToQueue(t, "relay:turn-off");
   }
   async toggle({ inverse: t = !1, ms: e = 300 } = {}) {
@@ -1331,11 +1331,11 @@ class Cn extends G {
     t ? (await n.turnOff(), await W(e), await n.turnOn()) : (await n.turnOn(), await W(e), await n.turnOff());
   }
 }
-X = new WeakMap(), _e = new WeakSet(), Ge = function() {
+X = new WeakMap(), _e = new WeakSet(), $e = function() {
   D.add(this);
 };
-var B, E, j, v, Ye, Ke, Ze, Ce, K, V, ie, re, se;
-class xn extends G {
+var A, E, j, y, Ye, Ke, Ze, Cn, Ce, Xe, V, J, ie, re, se;
+class Tn extends Y {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -1343,12 +1343,12 @@ class xn extends G {
     device_listen_on_port: s = 3
   } = {}) {
     super({ filters: t, config_port: e, no_device: n, device_listen_on_port: s });
-    S(this, v);
-    S(this, B, !1);
+    S(this, y);
+    S(this, A, !1);
     S(this, E, 0);
     S(this, j, 0);
     if (this.__internal__.device.type = "locker", D.getCustom(this.typeDevice, n)) throw new Error(`Device ${this.typeDevice} ${n} already exists`);
-    this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, i(this, v, Ke).call(this), i(this, v, Ye).call(this);
+    this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, i(this, y, Ke).call(this), i(this, y, Ye).call(this);
   }
   serialMessage(t) {
     const e = {
@@ -1365,14 +1365,14 @@ class xn extends G {
       case "07":
         switch (t[4]) {
           case "00":
-            e.name = "Cell closed.", e.description = "The selected cell is closed.", e.request = "dispense", e.no_code = 1102, this.__internal__.dispense.status = !1, this.dispatch("dispensed", {}), y(this, B) && y(this, E) >= 89 ? (e.finished_test = !0, g(this, B, !1), g(this, E, 0)) : y(this, B) && (e.finished_test = !1);
+            e.name = "Cell closed.", e.description = "The selected cell is closed.", e.request = "dispense", e.no_code = 1102, this.__internal__.dispense.status = !1, this.dispatch("dispensed", {}), w(this, A) && w(this, E) >= 89 ? (e.finished_test = !0, g(this, A, !1), g(this, E, 0)) : w(this, A) && (e.finished_test = !1);
             break;
           case "01":
           case "04":
-            e.name = "Cell open.", e.description = "The selected cell was open successfully.", e.request = "dispense", e.no_code = 102, this.__internal__.dispense.status = !0, this.dispatch("dispensed", {}), y(this, B) && y(this, E) >= 89 ? (e.finished_test = !0, g(this, B, !1), g(this, E, 0)) : y(this, B) && (e.finished_test = !1);
+            e.name = "Cell open.", e.description = "The selected cell was open successfully.", e.request = "dispense", e.no_code = 102, this.__internal__.dispense.status = !0, this.dispatch("dispensed", {}), w(this, A) && w(this, E) >= 89 ? (e.finished_test = !0, g(this, A, !1), g(this, E, 0)) : w(this, A) && (e.finished_test = !1);
             break;
           case "05":
-            e.name = "Cell inactive.", e.description = "The selected cell is inactive or doesn't exist.", e.request = "dispense", e.no_code = 101, this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", {}), y(this, B) && y(this, E) >= 89 ? (e.finished_test = !0, g(this, B, !1), g(this, E, 0)) : y(this, B) && (e.finished_test = !1);
+            e.name = "Cell inactive.", e.description = "The selected cell is inactive or doesn't exist.", e.request = "dispense", e.no_code = 101, this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", {}), w(this, A) && w(this, E) >= 89 ? (e.finished_test = !0, g(this, A, !1), g(this, E, 0)) : w(this, A) && (e.finished_test = !1);
             break;
         }
         break;
@@ -1420,53 +1420,55 @@ class xn extends G {
     if (t < 1 || t > 255) throw new Error("Invalid port number");
     return this.serialLockerHexCmd(new Uint8Array([0, t]));
   }
-  // #serialLockerGetLightScanCmd(since = 0, until = 10) {
-  //     return this.serialLockerHexCmd(new Uint8Array([32, this.__internal__.device.listen_on_port, since, until]));
-  // }
   parseCellToColumnRow(t) {
     const e = Math.floor((t - 1) / 10) + 1;
     let n = t % 8;
     return n === 0 && (n = 8), [e, n];
   }
   async dispense({ cell: t = 1 } = {}) {
-    t = i(this, v, K).call(this, t);
-    const e = i(this, v, Ze).call(this, t);
+    t = i(this, y, V).call(this, t);
+    const e = i(this, y, Xe).call(this, t);
     return await this.internalDispense(e);
   }
+  async status({ cell: t = 1 } = {}) {
+    t = i(this, y, V).call(this, t);
+    const e = i(this, y, Ze).call(this, t);
+    return await this.appendToQueue(e, "status");
+  }
   async enable({ cell: t = 1 } = {}) {
-    t = i(this, v, K).call(this, t);
-    const [e, n] = this.parseCellToColumnRow(t), s = i(this, v, Ce).call(this, { enable: !0, column: e, row: n });
+    t = i(this, y, V).call(this, t);
+    const [e, n] = this.parseCellToColumnRow(t), s = i(this, y, Ce).call(this, { enable: !0, column: e, row: n });
     await this.appendToQueue(s, "activate");
   }
   async disable({ cell: t = 1 } = {}) {
-    t = i(this, v, K).call(this, t);
-    const [e, n] = this.parseCellToColumnRow(t), s = i(this, v, Ce).call(this, { enable: !1, column: e, row: n });
+    t = i(this, y, V).call(this, t);
+    const [e, n] = this.parseCellToColumnRow(t), s = i(this, y, Ce).call(this, { enable: !1, column: e, row: n });
     await this.appendToQueue(s, "disable");
   }
   async openAll() {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
-    i(this, v, V).call(this), g(this, B, !0), i(this, v, ie).call(this);
+    i(this, y, J).call(this), g(this, A, !0), i(this, y, ie).call(this);
     const t = [];
     for (let e = 1; e <= 90; e++) {
       const n = await this.dispense(e);
-      t.push(n), g(this, E, e), i(this, v, ie).call(this);
+      t.push(n), g(this, E, e), i(this, y, ie).call(this);
     }
-    g(this, E, 90), i(this, v, ie).call(this, t), i(this, v, V).call(this);
+    g(this, E, 90), i(this, y, ie).call(this, t), i(this, y, J).call(this);
   }
   async enableAll() {
-    i(this, v, V).call(this), g(this, B, !0), i(this, v, re).call(this);
+    i(this, y, J).call(this), g(this, A, !0), i(this, y, re).call(this);
     for (let t = 1; t <= 90; t++)
-      await this.enable(t), g(this, E, t), i(this, v, re).call(this);
-    g(this, E, 90), i(this, v, re).call(this), i(this, v, V).call(this);
+      await this.enable(t), g(this, E, t), i(this, y, re).call(this);
+    g(this, E, 90), i(this, y, re).call(this), i(this, y, J).call(this);
   }
   async disableAll() {
-    i(this, v, V).call(this), g(this, B, !0), i(this, v, se).call(this);
+    i(this, y, J).call(this), g(this, A, !0), i(this, y, se).call(this);
     for (let t = 1; t <= 90; t++)
-      await this.enable(t), g(this, E, t), i(this, v, se).call(this);
-    g(this, E, 90), i(this, v, se).call(this), i(this, v, V).call(this);
+      await this.enable(t), g(this, E, t), i(this, y, se).call(this);
+    g(this, E, 90), i(this, y, se).call(this), i(this, y, J).call(this);
   }
 }
-B = new WeakMap(), E = new WeakMap(), j = new WeakMap(), v = new WeakSet(), Ye = function() {
+A = new WeakMap(), E = new WeakMap(), j = new WeakMap(), y = new WeakSet(), Ye = function() {
   const t = [
     "percentage:disable",
     "percentage:enable",
@@ -1477,35 +1479,33 @@ B = new WeakMap(), E = new WeakMap(), j = new WeakMap(), v = new WeakSet(), Ye =
 }, Ke = function() {
   D.add(this);
 }, Ze = function(t = 1) {
-  return t = i(this, v, K).call(this, t), this.serialLockerHexCmd(new Uint8Array([16, this.__internal__.device.listen_on_port, t]));
+  return t = i(this, y, V).call(this, t), this.serialLockerHexCmd(new Uint8Array([16, this.__internal__.device.listen_on_port, t]));
+}, Cn = function(t = 0, e = 10) {
+  return this.serialLockerHexCmd(new Uint8Array([32, this.__internal__.device.listen_on_port, t, e]));
 }, Ce = function({ enable: t = !0, column: e = 0, row: n = 10 } = {}) {
   if (e < 0 || e > 8) throw new Error("Invalid column number");
   if (n < 0 || n > 10) throw new Error("Invalid row number");
   let s = 1;
   return t || (s = 0), this.serialLockerHexCmd(new Uint8Array([48, this.__internal__.device.listen_on_port, e, n, s]));
-}, // #serialLockerGetOpenCmd(cell = 1) {
-//     cell = this.#validateCell(cell);
-//     const time = this.__internal__.device.milliseconds;
-//     //const time = new Date().getMilliseconds();
-//     const timeHigh = time % 256;
-//     const timeLow = Math.floor(time / 3) % 256;
-//     return this.serialLockerHexCmd(new Uint8Array([64, this.__internal__.device.listen_on_port, cell, timeHigh, timeLow]));
-// }
-K = function(t) {
+}, Xe = function(t = 1) {
+  t = i(this, y, V).call(this, t);
+  const e = this.__internal__.device.milliseconds, n = e % 256, s = Math.floor(e / 3) % 256;
+  return this.serialLockerHexCmd(new Uint8Array([64, this.__internal__.device.listen_on_port, t, n, s]));
+}, V = function(t) {
   const e = parseInt(t);
   if (isNaN(e) || e < 1 || e > 90) throw new Error("Invalid cell number");
   return e;
-}, V = function() {
-  g(this, B, !1), g(this, E, 0), g(this, j, 0);
+}, J = function() {
+  g(this, A, !1), g(this, E, 0), g(this, j, 0);
 }, ie = function(t = null) {
-  g(this, j, Math.round(y(this, E) * 100 / 90)), this.dispatch("percentage:open", { percentage: y(this, j), dispensed: t });
+  g(this, j, Math.round(w(this, E) * 100 / 90)), this.dispatch("percentage:open", { percentage: w(this, j), dispensed: t });
 }, re = function() {
-  g(this, j, Math.round(y(this, E) * 100 / 90)), this.dispatch("percentage:enable", { percentage: y(this, j) });
+  g(this, j, Math.round(w(this, E) * 100 / 90)), this.dispatch("percentage:enable", { percentage: w(this, j) });
 }, se = function() {
-  g(this, j, Math.round(y(this, E) * 100 / 90)), this.dispatch("percentage:disable", { percentage: y(this, j) });
+  g(this, j, Math.round(w(this, E) * 100 / 90)), this.dispatch("percentage:disable", { percentage: w(this, j) });
 };
-var l, Xe, et, tt, N, ae, nt, it, rt, st, at, ot, lt, ct, ht, dt, ut, pt, _t, ft, bt, yt, wt, kt, vt, mt, Ct, xt, gt, Tt, Dt, Et, L, F, oe, P, O, It, St, Mt, Ft, Z, xe, ge, le, ce, Pt;
-class gn extends G {
+var l, et, tt, nt, N, ae, it, rt, st, at, ot, lt, ct, ht, dt, ut, pt, _t, ft, bt, yt, wt, kt, vt, mt, Ct, xt, gt, Tt, Dt, Et, It, H, F, oe, P, O, St, Mt, Ft, Pt, Z, xe, ge, le, ce, At;
+class Dn extends Y {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -1516,7 +1516,7 @@ class gn extends G {
   } = {}) {
     super({ filters: t, config_port: e, no_device: n, device_listen_on_port: s });
     S(this, l);
-    A(this, "__device", {
+    B(this, "__device", {
       type: "esplus",
       support_cart: !1,
       withdraw: {
@@ -1546,7 +1546,7 @@ class gn extends G {
       locking_time: 60,
       locking_interval: 0,
       need_reset: !1
-    }, this.deviceType = c, this.supportCart = u, i(this, l, Xe).call(this), i(this, l, tt).call(this), i(this, l, et).call(this);
+    }, this.deviceType = c, this.supportCart = u, i(this, l, et).call(this), i(this, l, nt).call(this), i(this, l, tt).call(this);
   }
   set startChannelVerification(t) {
     const e = parseInt(t);
@@ -1608,10 +1608,10 @@ class gn extends G {
     };
     switch (t[0]) {
       case "02":
-        n = i(this, l, Et).call(this, t, n, 128);
+        n = i(this, l, It).call(this, t, n, 128);
         break;
       case "06":
-        n = i(this, l, It).call(this, t, n);
+        n = i(this, l, St).call(this, t, n);
         break;
       case "15":
         n.name = "Checksum error", n.description = "The calculated checksum does not match the received checksum", n.no_code = 38, i(this, l, F).call(this);
@@ -1636,7 +1636,7 @@ class gn extends G {
     cart: e = !1
   } = {}) {
     if (t = parseInt(t), isNaN(t) || t < 1 || t > 130) throw new Error("Invalid selection");
-    const { channel: n, tray: s } = i(this, l, St).call(this, t);
+    const { channel: n, tray: s } = i(this, l, Mt).call(this, t);
     this.__internal__.dispense.backup_dispense = {
       selection: t,
       cart: e,
@@ -1647,7 +1647,7 @@ class gn extends G {
     e && (u[4] = "4D"), u = i(this, l, ae).call(this, u);
     let h;
     do
-      h = await this.internalDispense(u), i(this, l, Mt).call(this), h.error === "elevator-locked" ? await i(this, l, nt).call(this) : h.error === "no-response" && await W(1e3);
+      h = await this.internalDispense(u), i(this, l, Ft).call(this), h.error === "elevator-locked" ? await i(this, l, it).call(this) : h.error === "no-response" && await W(1e3);
     while (["elevator-locked", "no-response"].includes(h.error));
     return this.__internal__.dispense.backup_dispense = {}, h;
   }
@@ -1945,7 +1945,7 @@ class gn extends G {
   }
   async programClock({ date: t = /* @__PURE__ */ new Date() } = {}) {
     if (!(t instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
-    const e = ["02", "30", "30", "81", "72", ...i(this, l, Pt).call(this, t)];
+    const e = ["02", "30", "30", "81", "72", ...i(this, l, At).call(this, t)];
     return await i(this, l, N).call(this, e, "clock");
   }
   /**
@@ -1987,7 +1987,7 @@ class gn extends G {
     });
   }
 }
-l = new WeakSet(), Xe = function() {
+l = new WeakSet(), et = function() {
   const t = [
     "dispensing:withdrawal",
     "command-executed",
@@ -2023,9 +2023,9 @@ l = new WeakSet(), Xe = function() {
   ];
   for (const e of t)
     this.serialRegisterAvailableListener(e);
-}, et = function() {
-  this.on("internal:dispense:running", i(this, l, Ft).bind(this));
 }, tt = function() {
+  this.on("internal:dispense:running", i(this, l, Pt).bind(this));
+}, nt = function() {
   D.add(this);
 }, N = function(t, e) {
   return t[3] = this.__internal__.device.hex_number, this.appendToQueue(i(this, l, ae).call(this, t), e);
@@ -2034,7 +2034,7 @@ l = new WeakSet(), Xe = function() {
   for (let s = 0; s < 2; s++)
     t.push(this.hexMaker(n[s]));
   return t.push("03"), t;
-}, nt = async function() {
+}, it = async function() {
   if (this.__internal__.dispense.elevator.locking_interval) return;
   this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await W(500)), await this.collect();
   const t = this;
@@ -2047,9 +2047,9 @@ l = new WeakSet(), Xe = function() {
       }), t.__internal__.dispense.elevator.locking_time -= 1, t.__internal__.dispense.elevator.locking_time <= 0 && (clearInterval(t.__internal__.dispense.elevator.locking_interval), t.__internal__.dispense.elevator.locking_interval = 0, e(!0));
     }, 1e3);
   });
-}, it = function(t, e) {
-  return e.name = "ok", e.description = "The last command was executed successfully", e.no_code = 1, this.dispatch("command-executed", e), e;
 }, rt = function(t, e) {
+  return e.name = "ok", e.description = "The last command was executed successfully", e.no_code = 1, this.dispatch("command-executed", e), e;
+}, st = function(t, e) {
   e.additional = {
     hex: t,
     dec: this.hexToDec(t),
@@ -2074,20 +2074,20 @@ l = new WeakSet(), Xe = function() {
     44: "D"
   };
   return e.additional.ascii = n[t] ?? null, e.name = "Key pressed", e.description = `The key ${e.additional.ascii} was pressed`, e.no_code = 2, this.dispatch("keyboard:pressed", e.additional), e;
-}, st = function(t, e) {
-  return e.additional = { open: !1 }, e.no_code = 3, t === "4f" ? (e.name = "door open", e.description = "The door was opened", e.additional.open = !0, this.__internal__.device.door_open = !0, this.dispatch("door:event", e.additional)) : t === "43" ? (e.name = "door close", e.description = "The door was closed", e.additional.open = !1, this.__internal__.device.door_open = !1, this.dispatch("door:event", e.additional)) : (e.name = "door event", e.description = "The door event received is unknown", this.dispatch("door:event", { open: e.additional.open, message: e })), e;
 }, at = function(t, e) {
+  return e.additional = { open: !1 }, e.no_code = 3, t === "4f" ? (e.name = "door open", e.description = "The door was opened", e.additional.open = !0, this.__internal__.device.door_open = !0, this.dispatch("door:event", e.additional)) : t === "43" ? (e.name = "door close", e.description = "The door was closed", e.additional.open = !1, this.__internal__.device.door_open = !1, this.dispatch("door:event", e.additional)) : (e.name = "door event", e.description = "The door event received is unknown", this.dispatch("door:event", { open: e.additional.open, message: e })), e;
+}, ot = function(t, e) {
   e.no_code = 404;
   let n = t[5] ?? null;
   return n && this.listenOnPort > 1 && (n = this.hexToDec(n) - this.listenOnPort + 1, n = this.decToHex(n)), n && (n === "FD" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : n === "FC" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running && (this.__device.channels.verification.channels.push({
     selection: this.__device.channels.verification.current,
     active: e.additional.active
   }), e.additional.selection = this.__device.channels.verification.current), this.dispatch("channel:status", e.additional)), e;
-}, ot = function(t, e) {
+}, lt = function(t, e) {
   e.no_code = 39, e.name = "Program version";
   const n = t.slice(4, 12), s = n.map((c) => String.fromCharCode(this.hexToDec(c))).join("");
   return e.additional = { version: s, hex: n }, e.description = `The program version is ${s}`, this.dispatch("program:version", e.additional), e;
-}, lt = function(t, e) {
+}, ct = function(t, e) {
   e.no_code = 39, e.name = "Machine faults", e.description = "No faults detected", e.additional = { no_faults: 0, faults: [] };
   const n = t.slice(4, -3);
   if (n.length > 1 && n[0] !== "30") {
@@ -2130,7 +2130,7 @@ l = new WeakSet(), Xe = function() {
       s[c] && (e.additional.faults.push(s[c]), e.additional.no_faults++);
   }
   return this.dispatch("machine:faults", e.additional), e;
-}, ct = function(t, e) {
+}, ht = function(t, e) {
   e.no_code = 40, e.name = "Clock registers", e.description = "Clock registers";
   const n = t.slice(4, -3), s = n.map((fe) => String.fromCharCode(this.hexToDec(fe))).join(""), [c, u] = s.split(" "), [h, b] = c.split(":"), [C, T, I] = u.split("-"), U = new Date(2e3 + parseInt(I), parseInt(T) - 1, parseInt(C), parseInt(h), parseInt(b));
   return e.additional = {
@@ -2143,7 +2143,7 @@ l = new WeakSet(), Xe = function() {
     date: U,
     hex: n
   }, this.dispatch("clock:registers", e.additional), e;
-}, ht = function(t, e) {
+}, dt = function(t, e) {
   e.no_code = 41, e.name = "Machine activity", e.description = "Events from read machine activity";
   const n = String.fromCharCode(this.hexToDec(t[4]));
   if (n !== "0") {
@@ -2178,7 +2178,7 @@ l = new WeakSet(), Xe = function() {
         meaning: C[n] ?? "Unknown"
       };
     } else if (s.length === 13) {
-      const c = s.map((un) => String.fromCharCode(this.hexToDec(un))).join(""), u = parseInt(c.slice(0, 2)), h = parseInt(c.slice(2, 4)), b = parseInt(c.slice(4, 6)), C = parseInt(c.slice(7, 9)), T = parseInt(c.slice(9, 11)) - 1, I = 2e3 + parseInt(c.slice(11, 13)), U = new Date(I, T, C, u, h, b), fe = {
+      const c = s.map((pn) => String.fromCharCode(this.hexToDec(pn))).join(""), u = parseInt(c.slice(0, 2)), h = parseInt(c.slice(2, 4)), b = parseInt(c.slice(4, 6)), C = parseInt(c.slice(7, 9)), T = parseInt(c.slice(9, 11)) - 1, I = 2e3 + parseInt(c.slice(11, 13)), U = new Date(I, T, C, u, h, b), fe = {
         A: "Attempt to close product exit door",
         C: "Closing of exterior door",
         H: "Error on opening of product exit door",
@@ -2207,7 +2207,7 @@ l = new WeakSet(), Xe = function() {
     }
   }
   return this.dispatch("machine:activity", e.additional), e;
-}, dt = function(t, e) {
+}, ut = function(t, e) {
   const n = {
     30: "Spanish",
     31: "English",
@@ -2217,91 +2217,91 @@ l = new WeakSet(), Xe = function() {
     hex: t,
     language: n[t] ?? "unknown"
   }, this.dispatch("check:language", e.additional), e;
-}, ut = function(t, e) {
+}, pt = function(t, e) {
   return e.no_code = 43, e.name = "Beeper", e.description = `The beeper is ${t === "30" ? "on" : "off"}`, e.additional = {
     hex: t,
     beeper: t === "30"
   }, this.dispatch("check:beeper", e.additional), e;
-}, pt = function(t, e) {
+}, _t = function(t, e) {
   e.no_code = 44, e.name = "Isolation tray", e.description = "Isolation tray";
   const n = this.hexToDec(t) - 139;
   return e.additional = {
     hex: t,
     tray: n
   }, this.dispatch("check:isolation-tray", e.additional), e;
-}, _t = function(t, e) {
+}, ft = function(t, e) {
   e.no_code = 45, e.name = "Engine voltage", e.description = "Engine voltage";
   const n = (this.hexToDec(t) - 128) / 2 + 5;
   return e.additional = {
     hex: t,
     voltage: n
   }, this.dispatch("check:engine-voltage", e.additional), e;
-}, ft = function(t, e) {
+}, bt = function(t, e) {
   e.no_code = 46, e.name = "Push over", e.description = "Push over";
   const n = t === "30";
   return e.additional = {
     hex: t,
     push: n
   }, this.dispatch("check:push-over", e.additional), e;
-}, bt = function(t, e) {
+}, yt = function(t, e) {
   e.no_code = 47, e.name = "Extractor after dispense", e.description = "Extractor after dispense";
   const n = (this.hexToDec(t) - 128) / 10;
   return e.additional = {
     hex: t,
     seconds: n
   }, this.dispatch("check:extractor-after-dispense", e.additional), e;
-}, yt = function(t, e) {
+}, wt = function(t, e) {
   e.no_code = 48, e.name = "Standby after collect", e.description = "Time to standby after collect product";
   const n = this.hexToDec(t) - 128;
   return e.additional = {
     hex: t,
     seconds: n
   }, this.dispatch("check:standby-after-collect", e.additional), e;
-}, wt = function(t, e) {
+}, kt = function(t, e) {
   e.no_code = 49, e.name = "Standby without collect", e.description = "Time to standby when product delivery is not collected";
   const n = this.hexToDec(t) - 128;
   return e.additional = {
     hex: t,
     minutes: n
   }, this.dispatch("check:standby-without-collect", e.additional), e;
-}, kt = function(t, e) {
+}, vt = function(t, e) {
   e.no_code = 50, e.name = "Elevator speed", e.description = "Elevator speed";
   const n = t === "30" ? "low" : "high";
   return e.additional = {
     hex: t,
     speed: n
   }, this.dispatch("check:elevator-speed", e.additional), e;
-}, vt = function(t, e) {
+}, mt = function(t, e) {
   e.no_code = 51, e.name = "Temperature expiration", e.description = "Temperature expiration";
   const n = t === "31";
   return e.additional = {
     hex: t,
     enabled: n
   }, this.dispatch("check:expiration-by-temperature", e.additional), e;
-}, mt = function(t, e) {
+}, Ct = function(t, e) {
   e.no_code = 52, e.name = "Temperature before expiration", e.description = "Temperature before expiration";
   const n = (this.hexToDec(t) - 128) / 2;
   return e.additional = {
     hex: t,
     temperature: n
   }, this.dispatch("check:temperature-before-expiration", e.additional), e;
-}, Ct = function(t, e) {
+}, xt = function(t, e) {
   e.no_code = 53, e.name = "Time before expiration", e.description = "Time before expiration";
   const n = this.hexToDec(t) - 128;
   return e.additional = {
     hex: t,
     minutes: n
   }, this.dispatch("check:expiration-after", e.additional), e;
-}, xt = function(t, e) {
+}, gt = function(t, e) {
   e.no_code = 54, e.name = "Temperature scale", e.description = "Temperature scale";
   const n = t === "43" ? "Celsius" : "Fahrenheit";
   return e.additional = {
     hex: t,
     scale: n
   }, this.dispatch("check:temperature-scale", e.additional), e;
-}, gt = function(t, e) {
-  return e.no_code = 54, e.name = "Machine ID", e.description = "Machine ID", e.additional = { hex: t[4], full_hex: t }, this.dispatch("check:machine-id", e.additional), e;
 }, Tt = function(t, e) {
+  return e.no_code = 54, e.name = "Machine ID", e.description = "Machine ID", e.additional = { hex: t[4], full_hex: t }, this.dispatch("check:machine-id", e.additional), e;
+}, Dt = function(t, e) {
   return e.no_code = 7, e.name = "working temperature", e.description = `The working temperature is ${t}`, e.additional = {
     hex: t,
     temperature: {
@@ -2309,7 +2309,7 @@ l = new WeakSet(), Xe = function() {
       ice_plus: (this.hexToDec(t) - this.hexToDec("80")) / 2 - 25.5
     }
   }, this.dispatch("temperature:working", e.additional), e;
-}, Dt = function(t, e) {
+}, Et = function(t, e) {
   return e.no_code = 8, e.name = "current temperature", e.additional = {
     sign: null,
     tens: null,
@@ -2320,87 +2320,87 @@ l = new WeakSet(), Xe = function() {
     decimal_point: t[7] === "2e" ? "." : null,
     degrees: t[9] === "7f" ? "°" : null
   }, t[4] === "2b" ? e.additional.sign = t[4] = "+" : ["2e", "2d"].includes(t[4]) && (e.additional.sign = t[4] = "-"), this.hexToDec(t[5]) >= 48 && this.hexToDec(t[5]) <= 57 && (e.additional.tens = this.hexToDec(t[5]) - 48), this.hexToDec(t[6]) >= 48 && this.hexToDec(t[6]) <= 57 && (e.additional.units = this.hexToDec(t[6]) - 48), this.hexToDec(t[8]) >= 48 && this.hexToDec(t[8]) <= 57 && (e.additional.decimals = this.hexToDec(t[8]) - 48), t[10] === "43" ? e.additional.type_degrees = "C" : t[10] === "46" && (e.additional.type_degrees = "F"), e.additional.formatted = (e.additional.sign ?? "") + (e.additional.tens ?? "") + (e.additional.units ?? "") + (e.additional.decimal_point ?? "") + (e.additional.decimals ?? "") + (e.additional.degrees ?? "") + (e.additional.type_degrees ?? ""), e.description = `The current temperature is ${e.additional.formatted}`, this.dispatch("temperature:current", e.additional), e;
-}, Et = function(t, e, n = 128) {
+}, It = function(t, e, n = 128) {
   if (t[1] && (e.additional.machine.hex = t[1], e.additional.machine.dec = this.hexToDec(t[1]) - n), !(t[1] && t[2]))
-    e = i(this, l, it).call(this, t, e);
+    e = i(this, l, rt).call(this, t, e);
   else
     switch (t[2]) {
       case "54":
-        e.request = "--automatic", e = i(this, l, rt).call(this, t[3], e);
+        e.request = "--automatic", e = i(this, l, st).call(this, t[3], e);
         break;
       case "50":
-        e.request = "--automatic", e = i(this, l, st).call(this, t[3], e);
+        e.request = "--automatic", e = i(this, l, at).call(this, t[3], e);
         break;
       case "43":
         switch (e.request = "check-data", t[3]) {
           case "41":
-            e = i(this, l, ht).call(this, t, e);
+            e = i(this, l, dt).call(this, t, e);
             break;
           case "43":
-            e.request = "channel-status", e = i(this, l, at).call(this, t, e);
+            e.request = "channel-status", e = i(this, l, ot).call(this, t, e);
             break;
           case "50":
-            e = i(this, l, ot).call(this, t, e);
-            break;
-          case "53":
             e = i(this, l, lt).call(this, t, e);
             break;
-          case "54":
-            e.request = "working-temperature", e = i(this, l, Tt).call(this, t[4], e);
-            break;
-          case "72":
+          case "53":
             e = i(this, l, ct).call(this, t, e);
             break;
+          case "54":
+            e.request = "working-temperature", e = i(this, l, Dt).call(this, t[4], e);
+            break;
+          case "72":
+            e = i(this, l, ht).call(this, t, e);
+            break;
           case "74":
-            e.request = "current-temperature", e = i(this, l, Dt).call(this, t, e);
+            e.request = "current-temperature", e = i(this, l, Et).call(this, t, e);
             break;
           case "49":
-            e = i(this, l, dt).call(this, t[4], e);
-            break;
-          case "5a":
             e = i(this, l, ut).call(this, t[4], e);
             break;
-          case "42":
+          case "5a":
             e = i(this, l, pt).call(this, t[4], e);
             break;
-          case "47":
+          case "42":
             e = i(this, l, _t).call(this, t[4], e);
             break;
-          case "4e":
-            e = i(this, l, gt).call(this, t, e);
-            break;
-          case "4f":
+          case "47":
             e = i(this, l, ft).call(this, t[4], e);
             break;
-          case "45":
+          case "4e":
+            e = i(this, l, Tt).call(this, t, e);
+            break;
+          case "4f":
             e = i(this, l, bt).call(this, t[4], e);
             break;
-          case "46":
+          case "45":
             e = i(this, l, yt).call(this, t[4], e);
             break;
-          case "48":
+          case "46":
             e = i(this, l, wt).call(this, t[4], e);
             break;
-          case "76":
+          case "48":
             e = i(this, l, kt).call(this, t[4], e);
             break;
-          case "63":
+          case "76":
             e = i(this, l, vt).call(this, t[4], e);
             break;
-          case "65":
+          case "63":
             e = i(this, l, mt).call(this, t[4], e);
             break;
-          case "66":
+          case "65":
             e = i(this, l, Ct).call(this, t[4], e);
             break;
-          case "67":
+          case "66":
             e = i(this, l, xt).call(this, t[4], e);
+            break;
+          case "67":
+            e = i(this, l, gt).call(this, t[4], e);
             break;
         }
         break;
     }
   return e;
-}, L = function() {
+}, H = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
 }, F = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !1);
@@ -2420,11 +2420,11 @@ P = function({ type: t = null, severity: e = "low" } = {}) {
  */
 O = function({ type: t = null, severity: e = "high" } = {}) {
   this.dispatch("jofemar:error", { type: t, severity: e });
-}, It = function(t, e) {
+}, St = function(t, e) {
   if (e.request = "status", t[1] && !t[2]) {
     switch (t[1]) {
       case "30":
-        e.name = "Machine ready", e.description = "The machine is ready for instructions", e.no_code = 9, i(this, l, L).call(this);
+        e.name = "Machine ready", e.description = "The machine is ready for instructions", e.no_code = 9, i(this, l, H).call(this);
         break;
       case "31":
         e.name = "Machine busy", e.description = "The machine is busy right now", e.no_code = 10;
@@ -2454,13 +2454,13 @@ O = function({ type: t = null, severity: e = "high" } = {}) {
         e.name = "Product detector fault", e.description = "Product detector fault", e.no_code = 18, i(this, l, oe).call(this), i(this, l, P).call(this, { type: "fault-product-detector" });
         break;
       case "41":
-        e.name = "Fault in 485 BUS", e.description = "Machine display is disconnected", e.no_code = 19, i(this, l, L).call(this), i(this, l, P).call(this, { type: "display-disconnected" });
+        e.name = "Fault in 485 BUS", e.description = "Machine display is disconnected", e.no_code = 19, i(this, l, H).call(this), i(this, l, P).call(this, { type: "display-disconnected" });
         break;
       case "42":
         e.name = "Product under elevator", e.description = "Product alarm under elevator", e.no_code = 20, i(this, l, F).call(this), i(this, l, P).call(this, { type: "product-under-elevator" });
         break;
       case "43":
-        e.name = "Error when elevator approaching to a position", e.description = "Error when elevator approaching to a position", e.no_code = 21, i(this, l, L).call(this), i(this, l, P).call(this, { type: "error-approaching-position", severity: "high" });
+        e.name = "Error when elevator approaching to a position", e.description = "Error when elevator approaching to a position", e.no_code = 21, i(this, l, H).call(this), i(this, l, P).call(this, { type: "error-approaching-position", severity: "high" });
         break;
       case "44":
         e.name = "Fault in keyboard", e.description = "Fault in keyboard", e.no_code = 22, i(this, l, F).call(this), i(this, l, O).call(this, { type: "fault-keyboard" });
@@ -2469,16 +2469,16 @@ O = function({ type: t = null, severity: e = "high" } = {}) {
         e.name = "Eeprom writing error", e.description = "Eeprom writing error", e.no_code = 23, i(this, l, F).call(this), i(this, l, O).call(this, { type: "eeprom-writing-error", severity: "critical" });
         break;
       case "46":
-        e.name = "Fault communicating with temperature control", e.description = "Fault communicating with temperature control", e.no_code = 24, i(this, l, L).call(this), i(this, l, P).call(this, { type: "fault-temperature-control" });
+        e.name = "Fault communicating with temperature control", e.description = "Fault communicating with temperature control", e.no_code = 24, i(this, l, H).call(this), i(this, l, P).call(this, { type: "fault-temperature-control" });
         break;
       case "47":
-        e.name = "Thermometer disconnected", e.description = "The thermometer is disconnected", e.no_code = 25, i(this, l, L).call(this), i(this, l, P).call(this, { type: "thermometer-disconnected" });
+        e.name = "Thermometer disconnected", e.description = "The thermometer is disconnected", e.no_code = 25, i(this, l, H).call(this), i(this, l, P).call(this, { type: "thermometer-disconnected" });
         break;
       case "48":
-        e.name = "Thermometer programming lost", e.description = "Thermometer programming lost", e.no_code = 26, i(this, l, L).call(this), i(this, l, P).call(this, { type: "thermometer-programming-lost" });
+        e.name = "Thermometer programming lost", e.description = "Thermometer programming lost", e.no_code = 26, i(this, l, H).call(this), i(this, l, P).call(this, { type: "thermometer-programming-lost" });
         break;
       case "49":
-        e.name = "Thermometer faulty", e.description = "Thermometer faulty", e.no_code = 27, i(this, l, L).call(this), i(this, l, P).call(this, { type: "thermometer-faulty" });
+        e.name = "Thermometer faulty", e.description = "Thermometer faulty", e.no_code = 27, i(this, l, H).call(this), i(this, l, P).call(this, { type: "thermometer-faulty" });
         break;
       case "4a":
         e.name = "Channels power consumption detector faulty", e.description = "Channels power consumption detector faulty", e.no_code = 28, i(this, l, F).call(this), i(this, l, O).call(this, { type: "channels-power-consumption-detector-faulty", severity: "critical" });
@@ -2499,10 +2499,10 @@ O = function({ type: t = null, severity: e = "high" } = {}) {
         e.name = "Waiting for product to be removed", e.description = "Waiting for product to be removed", e.no_code = 33, i(this, l, oe).call(this);
         break;
       case "50":
-        e.name = "Product expired by temperature reasons", e.description = "Product expired by temperature reasons", e.no_code = 34, i(this, l, L).call(this), i(this, l, P).call(this, { type: "product-expired-temperature" });
+        e.name = "Product expired by temperature reasons", e.description = "Product expired by temperature reasons", e.no_code = 34, i(this, l, H).call(this), i(this, l, P).call(this, { type: "product-expired-temperature" });
         break;
       case "51":
-        e.name = "Automatic door faulty", e.description = "Automatic door faulty", e.no_code = 35, i(this, l, L).call(this), i(this, l, P).call(this, { type: "automatic-door-faulty" });
+        e.name = "Automatic door faulty", e.description = "Automatic door faulty", e.no_code = 35, i(this, l, H).call(this), i(this, l, P).call(this, { type: "automatic-door-faulty" });
         break;
       case "59":
       case "5a":
@@ -2523,24 +2523,24 @@ O = function({ type: t = null, severity: e = "high" } = {}) {
             e.additional.nsf_alarm = 5;
             break;
         }
-        e.no_code = 36, i(this, l, L).call(this), i(this, l, P).call(this, { type: "product-expired" });
+        e.no_code = 36, i(this, l, H).call(this), i(this, l, P).call(this, { type: "product-expired" });
         break;
       case "64":
-        e.name = "Product detector didn't change during its verification test", e.description = "Product detector didn't change during its verification test", e.no_code = 37, i(this, l, L).call(this), i(this, l, P).call(this, { type: "automatic-door-faulty" });
+        e.name = "Product detector didn't change during its verification test", e.description = "Product detector didn't change during its verification test", e.no_code = 37, i(this, l, H).call(this), i(this, l, P).call(this, { type: "automatic-door-faulty" });
         break;
     }
     this.dispatch("machine:status", e);
   } else
     e.name = "executed", e.description = "The last command was executed successfully", e.no_code = 8, !t[1] && this.__internal__.dispense.dispensing && i(this, l, F).call(this);
   return e;
-}, St = function(t) {
+}, Mt = function(t) {
   if (t = parseInt(t) + 109, t = t.toString(), t.length !== 3)
     throw new Error("Invalid selection");
   const e = (parseInt(t.substring(0, 2)) + 128).toString(16).padStart(2, "0");
   return { channel: (parseInt(t.substring(2, 3)) + 128).toString(16).padStart(2, "0"), tray: e };
-}, Mt = function() {
-  this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.dispense.timeout = 0, this.__internal__.dispense.interval = 0;
 }, Ft = function() {
+  this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.dispense.timeout = 0, this.__internal__.dispense.interval = 0;
+}, Pt = function() {
   this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval);
   const t = this;
   t.__internal__.dispense.timeout = setTimeout(() => {
@@ -2572,15 +2572,15 @@ O = function({ type: t = null, severity: e = "high" } = {}) {
   for (let n = 0; n < 32; n++)
     e.push(t.charCodeAt(n).toString(16));
   return e;
-}, Pt = function(t) {
+}, At = function(t) {
   if (!(t instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
   const e = t.getHours().toString().padStart(2, "0"), n = t.getMinutes().toString().padStart(2, "0"), s = t.getDate().toString().padStart(2, "0"), c = (t.getMonth() + 1).toString().padStart(2, "0"), u = t.getFullYear().toString().substring(2, 4), h = `${e}:${n} ${s}-${c}-${u}`, b = [];
   for (let C = 0; C < 14; C++)
     b.push(h.charCodeAt(C).toString(16));
   return b;
 };
-var ee, J, z, d, Bt, At, he, Nt, qt, Rt, Ht, Lt, Ot, Ut, jt, Te, Wt, Qt, Vt, Jt, zt, $t, Gt, Yt, Kt, Zt, Xt, en, tn, nn, q, de, rn, sn, an, on, De, ue, ln, cn, Ee, Ie, Se;
-class Tn extends G {
+var ee, z, G, d, Bt, Nt, he, qt, Rt, Lt, Ht, Ot, Ut, jt, Wt, Te, Qt, Vt, Jt, zt, Gt, $t, Yt, Kt, Zt, Xt, en, tn, nn, rn, q, de, sn, an, on, ln, De, ue, cn, hn, Ee, Ie, Se;
+class En extends Y {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -2588,10 +2588,10 @@ class Tn extends G {
   } = {}) {
     super({ filters: t, config_port: e, no_device: n });
     S(this, d);
-    A(this, "__coin_purse", {
+    B(this, "__coin_purse", {
       available: !0
     });
-    A(this, "__banknote_purse", {
+    B(this, "__banknote_purse", {
       available: !0,
       isRecycler: !0,
       recycler: {
@@ -2600,7 +2600,7 @@ class Tn extends G {
         // 0: $20, 1: $50, 2: $100, 3: $200, 4: $500
       }
     });
-    A(this, "__sale", {
+    B(this, "__sale", {
       price: 0,
       change: 0,
       change_verified: 0,
@@ -2610,40 +2610,40 @@ class Tn extends G {
         this.price = 0, this.change = 0, this.change_verified = 0, this.dispense_all = !0, this.last_change = 0;
       }
     });
-    A(this, "__money_session", {
+    B(this, "__money_session", {
       inserted: 0,
       retired: 0,
       clear() {
         this.inserted = 0, this.retired = 0;
       }
     });
-    A(this, "coins", {
+    B(this, "coins", {
       tubes: { g50: 0, c50: 0, p1: 0, p2: 0, p5: 0, p10: 0 },
       box: { g50: 0, c50: 0, p1: 0, p2: 0, p5: 0, p10: 0 },
       totals: { g50: 0, c50: 0, p1: 0, p2: 0, p5: 0, p10: 0 },
       total: 0
     });
-    A(this, "banknotes", {
+    B(this, "banknotes", {
       stacker: { p20: 0, p50: 0, p100: 0, p200: 0, p500: 0, p1000: 0 },
       recycler: { p20: 0, p50: 0, p100: 0, p200: 0, p500: 0, p1000: 0 },
       out: { p20: 0, p50: 0, p100: 0, p200: 0, p500: 0, p1000: 0 },
       totals: { p20: 0, p50: 0, p100: 0, p200: 0, p500: 0, p1000: 0 },
       total: 0
     });
-    A(this, "card_reader", {
+    B(this, "card_reader", {
       available: !1,
       max_pre_credit: 0
     });
     S(this, ee, !1);
-    S(this, J, 0);
     S(this, z, 0);
+    S(this, G, 0);
     if (this.__internal__.device.type = "boardroid", D.getCustom(this.typeDevice, n)) throw new Error(`Device ${this.typeDevice} ${n} already exists`);
     this.__internal__.serial.config_port.baudRate = 115200, this.__internal__.serial.response.length = 14, this.__internal__.time.response_connection = 600, this.__internal__.time.response_general = 4e3, this.__internal__.time.response_engines = 15e3, this.__internal__.dispense.limit_counter = 15, this.__internal__.dispense.custom_limit_counter = null, this.__internal__.dispense.backup_dispense = {
       channel: 1,
       second_channel: null,
       sensor: !0,
       seconds: null
-    }, i(this, d, Bt).call(this), i(this, d, At).call(this);
+    }, i(this, d, Bt).call(this), i(this, d, Nt).call(this);
   }
   get totalInTubes() {
     return this.coins.tubes.g50 * 0.5 + this.coins.tubes.c50 * 0.5 + this.coins.tubes.p1 + this.coins.tubes.p2 * 2 + this.coins.tubes.p5 * 5 + this.coins.tubes.p10 * 10;
@@ -2703,46 +2703,46 @@ class Tn extends G {
     const n = (5 + this.deviceNumber).toString(16).padStart(2, "0").toLowerCase();
     switch (t[1]) {
       case n:
-        e.request = "connect", e = i(this, d, qt).call(this, e);
+        e.request = "connect", e = i(this, d, Rt).call(this, e);
         break;
       case "a0":
-        e.request = "--automatic", e = i(this, d, Wt).call(this, t, e);
-        break;
-      case "b0":
         e.request = "--automatic", e = i(this, d, Qt).call(this, t, e);
         break;
+      case "b0":
+        e.request = "--automatic", e = i(this, d, Vt).call(this, t, e);
+        break;
       case "d0":
-        e.request = "coin-purse:config", e = i(this, d, Vt).call(this, t[2], e);
+        e.request = "coin-purse:config", e = i(this, d, Jt).call(this, t[2], e);
         break;
       case "d1":
-        e.request = "banknote-purse:config", e.additional = { scrow: null }, e = i(this, d, Jt).call(this, t, e);
+        e.request = "banknote-purse:config", e.additional = { scrow: null }, e = i(this, d, zt).call(this, t, e);
         break;
       case "d2":
-        e.request = "coin-purse:read-tubes", e = i(this, d, zt).call(this, t, e);
+        e.request = "coin-purse:read-tubes", e = i(this, d, Gt).call(this, t, e);
         break;
       case "d3":
         e.request = "banknote-purse:read-recycler", e = i(this, d, $t).call(this, t, e);
         break;
       case "d4":
-        e.request = "banknote-purse:banknote-scrow-status", e = i(this, d, Gt).call(this, t[2], e);
+        e.request = "banknote-purse:banknote-scrow-status", e = i(this, d, Yt).call(this, t[2], e);
         break;
       case "d5":
-        e.request = "banknote-purse:dispense", e = i(this, d, Yt).call(this, t, e);
+        e.request = "banknote-purse:dispense", e = i(this, d, Kt).call(this, t, e);
         break;
       case "d6":
-        e.request = "coin-purse:dispense", e = i(this, d, Kt).call(this, t, e);
+        e.request = "coin-purse:dispense", e = i(this, d, Zt).call(this, t, e);
         break;
       case "d7":
-        e.request = "dispense", e = i(this, d, Zt).call(this, t[5], e);
+        e.request = "dispense", e = i(this, d, Xt).call(this, t[5], e);
         break;
       case "d8":
-        e.request = "--automatic", e = i(this, d, Xt).call(this, t[13], e);
+        e.request = "--automatic", e = i(this, d, en).call(this, t[13], e);
         break;
       case "d9":
-        e.request = "status:temperature", e = i(this, d, en).call(this, t, e);
+        e.request = "status:temperature", e = i(this, d, tn).call(this, t, e);
         break;
       case "da":
-        e.request = "status:relay", e = i(this, d, tn).call(this, t[2], e);
+        e.request = "status:relay", e = i(this, d, nn).call(this, t[2], e);
         break;
       case "db":
         e.request = "banknote-purse:save-memory", e.no_code = 18, e.name = "Bill purse memory saved?", e.description = "The memory of bill purse was saved successfully?", this.dispatch("banknote-purse:save-memory", { message: e });
@@ -2751,7 +2751,7 @@ class Tn extends G {
         e.request = "coin-purse:read-memory", e.no_code = 19, e.name = "Coin purse memory read?", e.description = "The memory of coin purse was read successfully?", this.dispatch("banknote-purse:read-memory", { message: e });
         break;
       case "dd":
-        e.request = "card-reader", i(this, d, nn).call(this, t, e);
+        e.request = "card-reader", i(this, d, rn).call(this, t, e);
         break;
       default:
         e.request = "--unknown", e.name = "Response unrecognized", e.description = "The response of application was received, but dont identify with any of current parameters", e.no_code = 400, this.dispatch("unknown", e);
@@ -2796,7 +2796,7 @@ class Tn extends G {
   async banknotePurseConfigure({ enable: t = !1, scrow: e = !1 } = {}) {
     if (!this.__banknote_purse.available) throw new Error("Banknote purse not available");
     let n;
-    return i(this, d, he).call(this) ? n = i(this, d, rn).call(this, { enable: t, scrow: e }) : n = i(this, d, sn).call(this, { enable: t, scrow: e }), await i(this, d, q).call(this, n, "banknote-purse:config");
+    return i(this, d, he).call(this) ? n = i(this, d, sn).call(this, { enable: t, scrow: e }) : n = i(this, d, an).call(this, { enable: t, scrow: e }), await i(this, d, q).call(this, n, "banknote-purse:config");
   }
   async banknotePurseDispense({ $_20: t = 0, $_50: e = 0, $_100: n = 0, $_200: s = 0, $_500: c = 0, $_1000: u = 0 } = {}) {
     if (!this.__banknote_purse.available) throw new Error("Banknote purse not available");
@@ -2804,9 +2804,9 @@ class Tn extends G {
     let h;
     if (i(this, d, he).call(this)) {
       const b = [t, e, n, s, c];
-      h = i(this, d, an).call(this, b[this.__banknote_purse.recycler.banknote]);
+      h = i(this, d, on).call(this, b[this.__banknote_purse.recycler.banknote]);
     } else
-      h = i(this, d, on).call(this, { $_20: t, $_50: e, $_100: n, $_200: s, $_500: c, $_1000: u });
+      h = i(this, d, ln).call(this, { $_20: t, $_50: e, $_100: n, $_200: s, $_500: c, $_1000: u });
     await i(this, d, q).call(this, h, "banknote-purse:dispense");
   }
   async banknotePurseEnable({ scrow: t = !1 }) {
@@ -2945,9 +2945,9 @@ class Tn extends G {
         seconds: 0.4,
         retry: !1
       });
-      e.push(s), g(this, J, n), i(this, d, ue).call(this), t || n++;
+      e.push(s), g(this, z, n), i(this, d, ue).call(this), t || n++;
     }
-    g(this, J, 80), i(this, d, ue).call(this, { dispensed: e }), i(this, d, De).call(this);
+    g(this, z, 80), i(this, d, ue).call(this, { dispensed: e }), i(this, d, De).call(this);
   }
   async sendCustomCode({ code: t = [] } = {}) {
     if (t.length === 0) throw new Error("Invalid code");
@@ -2968,7 +2968,7 @@ class Tn extends G {
     this.dispatch("corrupt:message", { data: t, message: e });
   }
 }
-ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt = function() {
+ee = new WeakMap(), z = new WeakMap(), G = new WeakMap(), d = new WeakSet(), Bt = function() {
   const t = [
     "banknote-purse:banknote-scrow-status",
     "banknote-purse:config",
@@ -2994,15 +2994,15 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
   ];
   for (const e of t)
     this.serialRegisterAvailableListener(e);
-}, At = function() {
+}, Nt = function() {
   D.add(this);
 }, he = function() {
   return this.__banknote_purse.isRecycler && this.__banknote_purse.recycler.ict;
-}, Nt = function() {
+}, qt = function() {
   return this.hasCoinPurse || this.hasRecycler;
-}, qt = function(t) {
-  return t.name = "Connection with the serial device completed.", t.description = "Your connection with the serial device was successfully completed.", t.no_code = 1, this.dispatch("run:default-load", {}), t;
 }, Rt = function(t) {
+  return t.name = "Connection with the serial device completed.", t.description = "Your connection with the serial device was successfully completed.", t.no_code = 1, this.dispatch("run:default-load", {}), t;
+}, Lt = function(t) {
   const e = {
     g50: ["40", "50", "60", "70", "90"],
     c50: ["41", "51", "61", "71", "91"],
@@ -3029,7 +3029,7 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
   }[n], n] : [`Undefined value: ¿${t}?`, null];
 }, Ht = function(t) {
   return ["g50", "c50", "p1", "p2", "p5", "p10", "p20"].includes(t);
-}, Lt = function(t) {
+}, Ot = function(t) {
   const e = {
     p20: ["80", "90", "a0", "b0"],
     p50: ["81", "91", "a1", "b1"],
@@ -3052,11 +3052,11 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
     p500: "500 pesos",
     p1000: "1000 pesos"
   }[n], n] : [`Undefined value: ¿${t}?`, null];
-}, Ot = function(t) {
-  return ["p20", "p50", "p100", "p200", "p500", "p1000"].includes(t);
 }, Ut = function(t) {
+  return ["p20", "p50", "p100", "p200", "p500", "p1000"].includes(t);
+}, jt = function(t) {
   return ["r20", "r50", "r100"].includes(t);
-}, jt = function() {
+}, Wt = function() {
   return [
     "r20",
     "r50",
@@ -3072,31 +3072,31 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
     e === "tube" ? this.coins.tubes[t] += 1 : e === "box" && (this.coins.box[t] += 1);
     let s = 0;
     ["g50", "c50"].includes(t) ? s = 0.5 : s += parseInt(t.slice(1)), this.coins.totals[t] += s, this.__money_session.inserted += s, this.coins.total += s;
-  } else if (i(this, d, Ot).call(this, t)) {
+  } else if (i(this, d, Ut).call(this, t)) {
     if (typeof this.banknotes.tubes[t] > "u") return;
     e === "recycler" ? this.banknotes.recycler[t] += 1 : e === "stacker" && (this.banknotes.stacker[t] += 1);
     let s = parseInt(t.slice(1));
     this.banknotes.totals[t] += s, this.__money_session.inserted += s, this.banknotes.total += s;
-  } else if (i(this, d, Ut).call(this, t) && e === "out") {
+  } else if (i(this, d, jt).call(this, t) && e === "out") {
     if (typeof this.banknotes.out[t] > "u") return;
     this.banknotes.out[t] += 1;
     let s = parseInt(t.slice(1));
     this.__money_session.retired += s, this.banknotes.recycler[t] -= 1, this.banknotes.total -= s, n = !1, this.dispatch("session:money-dispensed", { type_money: t, retired: s, finish: !1, type: "banknotes" });
   }
   n && this.dispatch("session:money-request", {});
-}, Wt = function(t, e) {
-  const n = parseInt(t[2], 16);
-  return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, n === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : n === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : n >= 64 && n <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : n >= 80 && n <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : n >= 96 && n <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : n >= 112 && n <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : n >= 144 && n <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${t[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), n === 1 || n === 2 || n >= 160 || n >= 128 && n <= 143 || ([e.description, e.additional.coin] = i(this, d, Rt).call(this, t[2]), e.no_code = 38 + n, i(this, d, Te).call(this, e.additional.coin, e.additional.where), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
 }, Qt = function(t, e) {
   const n = parseInt(t[2], 16);
-  return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, n === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = i(this, d, jt).call(this), e.additional.where = "out", e.no_code = 200) : n >= 128 && n <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : n >= 144 && n <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : n >= 160 && n <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : n >= 176 && n <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), n >= 128 && n <= 191 && ([e.description, e.additional.banknote] = i(this, d, Lt).call(this, t[2]), e.no_code = 74 + n), i(this, d, Te).call(this, e.additional.banknote, e.additional.where), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
+  return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, n === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : n === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : n >= 64 && n <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : n >= 80 && n <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : n >= 96 && n <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : n >= 112 && n <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : n >= 144 && n <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${t[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), n === 1 || n === 2 || n >= 160 || n >= 128 && n <= 143 || ([e.description, e.additional.coin] = i(this, d, Lt).call(this, t[2]), e.no_code = 38 + n, i(this, d, Te).call(this, e.additional.coin, e.additional.where), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
 }, Vt = function(t, e) {
+  const n = parseInt(t[2], 16);
+  return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, n === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = i(this, d, Wt).call(this), e.additional.where = "out", e.no_code = 200) : n >= 128 && n <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : n >= 144 && n <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : n >= 160 && n <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : n >= 176 && n <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), n >= 128 && n <= 191 && ([e.description, e.additional.banknote] = i(this, d, Ot).call(this, t[2]), e.no_code = 74 + n), i(this, d, Te).call(this, e.additional.banknote, e.additional.where), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
+}, Jt = function(t, e) {
   const n = parseInt(t, 16);
   return n === 1 ? (e.name = "Coin purse enabled", e.description = "Configuration complete, enabled", e.no_code = 3) : n === 0 ? (e.name = "Coin purse disabled", e.description = "Disabled by system request", e.no_code = 4) : (e.name = "Status unknown", e.description = "The response of coin purse doesn't identify successfully", e.no_code = 400), this.dispatch("coin-purse:config", { enabled: n === 1 }), e;
-}, Jt = function(t, e) {
+}, zt = function(t, e) {
   const n = parseInt(t[2], 16), s = parseInt(t[3], 16);
   return n === 0 ? (e.name = "Bill purse disabled", e.description = "Configuration complete, disabled") : n === 1 && (e.name = "Bill purse enabled", e.description = "Configuration complete, enabled"), s === 0 ? e.additional.scrow = "Scrow disabled, banknote received automatic" : s === 1 && (e.additional.scrow = "Scrow enabled, require manual action"), e.no_code = 5, this.dispatch("banknote-purse:config", { enabled: n === 1, scrow: s === 1 }), e;
-}, zt = function(t, e) {
+}, Gt = function(t, e) {
   e.no_code = 6;
   const [n, s, c, u, h, b] = [
     parseInt(t[2], 16),
@@ -3122,10 +3122,10 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
   return e.additional = {
     banknotes: { b20: n, b50: s, b100: c, b200: u, b500: h, b1000: b }
   }, this.banknotes.recycler.p20 = n, this.banknotes.recycler.p50 = s, this.banknotes.recycler.p100 = c, this.banknotes.recycler.p200 = u, this.banknotes.recycler.p500 = h, this.banknotes.recycler.p1000 = b, this.banknotes.totals.p20 = (this.banknotes.stacker.p20 + n) * 20, this.banknotes.totals.p50 = (this.banknotes.stacker.p50 + s) * 50, this.banknotes.totals.p100 = (this.banknotes.stacker.p100 + c) * 100, this.banknotes.totals.p200 = (this.banknotes.stacker.p200 + u) * 200, this.banknotes.totals.p500 = (this.banknotes.stacker.p500 + h) * 500, this.banknotes.totals.p1000 = (this.banknotes.stacker.p1000 + b) * 1e3, this.banknotes.total = this.banknotes.totals.p20 + this.banknotes.totals.p50 + this.banknotes.totals.p100 + this.banknotes.totals.p200 + this.banknotes.totals.p500 + this.banknotes.totals.p1000, e.name = "Read recycler", e.description = "Quantity of banknotes approximated", this.dispatch("banknote-purse:recycler", this.banknotes.recycler), e;
-}, Gt = function(t, e) {
+}, Yt = function(t, e) {
   const n = parseInt(t, 16);
   return n === 1 ? e.name = "Banknote accepted" : n === 0 ? e.name = "Banknote rejected" : e.name = "Unknown status banknote", e.no_code = 8, this.dispatch("banknote-purse:banknote-scrow-status", { status: n === 1 }), e;
-}, Yt = function(t, e) {
+}, Kt = function(t, e) {
   const [n, s, c, u, h, b] = [
     parseInt(t[2], 16),
     parseInt(t[3], 16),
@@ -3144,31 +3144,31 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
     type: "banknotes",
     data: e
   }), e;
-}, Kt = function(t, e) {
+}, Zt = function(t, e) {
   return e.name = "Coins dispensed", e.no_code = 10, e.description = "Coins dispensed by request", isNaN(this.__sale.last_change) && (this.__sale.last_change = 0), this.__money_session.retired += this.__sale.last_change, this.dispatchAsync("session:money-dispensed", {
     type_money: null,
     retired: null,
     finish: !1,
     type: "coins"
   }, 500), e;
-}, Zt = function(t, e) {
+}, Xt = function(t, e) {
   const n = parseInt(t, 16);
   return n === 1 ? (e.name = "Product not delivered", e.description = "The product requested wasn't delivered", e.no_code = 11, this.__internal__.dispense.status = !1) : n === 0 ? (e.name = "Product delivered", e.description = "The product requested was delivered", e.no_code = 12, this.__internal__.dispense.status = !0) : (e.name = "Unknown status product", e.description = "The response of product doesn't identify successfully", e.no_code = 400, this.__internal__.dispense.status = !1), this.dispatch("dispensed", {}), e;
-}, Xt = function(t, e) {
+}, en = function(t, e) {
   let n = "closed";
   return t === "db" ? (e.name = "Door closed", e.no_code = 13) : t === "dc" ? (e.name = "Door open", e.no_code = 14, n = "open") : (e.name = "Unknown status door", e.description = "The response of door doesn't identify successfully", e.no_code = 400, n = "unknown"), this.__internal__.device.door_open = n === "open", this.dispatch("event:door", { open: n === "open" }), this.dispatch("door:event", { open: n === "open" }), e;
-}, en = function(t, e) {
+}, tn = function(t, e) {
   const n = parseInt(t[2], 16) * 255, s = parseInt(t[3], 16), c = (n + s) * 0.1;
   return e.no_code = 15, e.name = "Temperature status", e.description = `Temperature: ${c}`, e.additional = {
     high: n,
     low: s,
     temperature: parseFloat(c.toString())
   }, this.dispatch("status:temperature", e.additional), e;
-}, tn = function(t, e) {
+}, nn = function(t, e) {
   const n = parseInt(t, 16);
   let s = "unknown";
   return n === 1 ? (e.name = "Relay on", e.description = "Relay on", e.no_code = 16, s = "on") : n === 0 ? (e.name = "Relay off", e.description = "Relay off", e.no_code = 17, s = "off") : (e.name = "Status unknown", e.description = "Status unknown", e.no_code = 400), this.dispatch("status:relay", { enabled: s === "on" }), e;
-}, nn = function(t, e) {
+}, rn = function(t, e) {
   const n = parseInt(t[2], 16);
   if (e.no_code = 20 + n, e.name = "Status unknown", e.description = "The status of card reader does not identified correctly", e.no_code = 400, n === 0)
     e.request += ":disable", e.name = "Card reader disabled", e.description = "Card reader device was disabled successfully";
@@ -3197,15 +3197,15 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
   return t[11] = this.serialBoardroidSumHex(t), t.map((e, n) => {
     t[n] = this.hexMaker(e);
   }), t;
-}, rn = function({ enable: t = !1, scrow: e = !1 } = {}) {
+}, sn = function({ enable: t = !1, scrow: e = !1 } = {}) {
   const n = t ? "FF" : "00", s = e ? "FF" : "00";
   return ["F1", "C0", n, n, s, s, "00", "00", "00", "00", "F2", "00"];
-}, sn = function({ enable: t = !1, scrow: e = !1 } = {}) {
+}, an = function({ enable: t = !1, scrow: e = !1 } = {}) {
   return ["F1", "C0", t ? "01" : "00", e ? "01" : "00", "00", "00", "00", "00", "00", "00", "F2", "00"];
-}, an = function(t = 1) {
+}, on = function(t = 1) {
   if (t < 1) throw new Error("No banknotes to dispense");
   return t = this.decToHex(t), ["F1", "C5", this.decToHex(this.__banknote_purse.recycler.banknote.toString()), t, "00", "00", "00", "00", "00", "00", "F2", "00"];
-}, on = function({ $_20: t = 0, $_50: e = 0, $_100: n = 0, $_200: s = 0, $_500: c = 0, $_1000: u = 0 } = {}) {
+}, ln = function({ $_20: t = 0, $_50: e = 0, $_100: n = 0, $_200: s = 0, $_500: c = 0, $_1000: u = 0 } = {}) {
   if ([t, e, n, s, c, u].some((h) => isNaN(h) || typeof h == "string"))
     throw new Error("One of the values is not a number");
   if (t < 1 && e < 1 && n < 1 && s < 1 && c < 1 && u < 1) throw new Error("No banknotes to dispense");
@@ -3218,15 +3218,15 @@ ee = new WeakMap(), J = new WeakMap(), z = new WeakMap(), d = new WeakSet(), Bt 
     this.decToHex(u)
   ], ["F1", "C5", t, e, n, s, c, u, "00", "00", "F2", "00"];
 }, De = function() {
-  g(this, ee, !1), g(this, J, 0), g(this, z, 0);
+  g(this, ee, !1), g(this, z, 0), g(this, G, 0);
 }, /**
  *
  * @param {null|object} dispensed
  * @param {number} limit
  */
 ue = function({ dispensed: t = null, limit: e = 80 } = {}) {
-  g(this, z, Math.round(y(this, J) * 100 / e)), this.dispatch("percentage:test", { percentage: y(this, z), dispensed: t });
-}, ln = function(t) {
+  g(this, G, Math.round(w(this, z) * 100 / e)), this.dispatch("percentage:test", { percentage: w(this, G), dispensed: t });
+}, cn = function(t) {
   const e = ["20", "50", "100", "200", "500"], n = this.__banknote_purse.recycler.banknote, s = "$_" + e[n], c = parseInt(e[n]), u = this.banknotes.recycler[`p${e[n]}`], h = Math.min(
     Math.floor(t / c),
     u
@@ -3236,7 +3236,7 @@ ue = function({ dispensed: t = null, limit: e = 80 } = {}) {
     will_dispense: h > 0
   };
   return this.totalInRecycler === 0 || h < 1 || t === 0 || (b.banknotes[s] = h, b.pending = parseFloat((t - h * c).toFixed(2))), b;
-}, cn = function(t) {
+}, hn = function(t) {
   const e = {
     banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
     pending: t,
@@ -3251,7 +3251,7 @@ ue = function({ dispensed: t = null, limit: e = 80 } = {}) {
   };
   return n(1e3, "p1000"), n(500, "p500"), n(200, "p200"), n(100, "p100"), n(50, "p50"), n(20, "p20"), e.will_dispense = Object.values(e.banknotes).some((s) => s > 0), e;
 }, Ee = function(t) {
-  return i(this, d, he).call(this) ? i(this, d, ln).call(this, t) : i(this, d, cn).call(this, t);
+  return i(this, d, he).call(this) ? i(this, d, cn).call(this, t) : i(this, d, hn).call(this, t);
 }, Ie = function(t) {
   const e = {
     coins: { $_50c: 0, $_1: 0, $_2: 0, $_5: 0, $_10: 0 },
@@ -3268,7 +3268,7 @@ ue = function({ dispensed: t = null, limit: e = 80 } = {}) {
   };
   return n(10, "p10"), n(5, "p5"), n(2, "p2"), n(1, "p1"), n(0.5, "g50", "$_50c"), e.will_dispense = Object.values(e.coins).some((s) => s > 0), e;
 }, Se = async function(t = null) {
-  if (!i(this, d, Nt).call(this)) throw new Error("Change not available");
+  if (!i(this, d, qt).call(this)) throw new Error("Change not available");
   let e = this.change, n = this.change;
   if (t !== null && (e = t, n = t), n <= 0) return !1;
   const s = i(this, d, Ee).call(this, n);
@@ -3276,8 +3276,8 @@ ue = function({ dispensed: t = null, limit: e = 80 } = {}) {
   const c = i(this, d, Ie).call(this, n);
   return n = c.pending, n > 0 && this.dispatch("change:pending", { pending: n }), n === e ? !1 : (s.will_dispense && await this.banknotePurseDispense(s.banknotes), c.will_dispense && await this.coinPurseDispense(c.coins), !0);
 };
-var $, hn, dn;
-class Dn extends G {
+var $, dn, un;
+class In extends Y {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -3286,7 +3286,7 @@ class Dn extends G {
     super({ filters: t, config_port: e, no_device: n });
     S(this, $);
     if (this.__internal__.device.type = "arduino", D.getCustom(this.typeDevice, n)) throw new Error(`Device ${this.typeDevice} ${n} already exists`);
-    this.__internal__.time.response_connection = 2e3, this.__internal__.time.response_general = 2e3, this.__internal__.serial.delay_first_connection = 1e3, i(this, $, dn).call(this), i(this, $, hn).call(this);
+    this.__internal__.time.response_connection = 2e3, this.__internal__.time.response_general = 2e3, this.__internal__.serial.delay_first_connection = 1e3, i(this, $, un).call(this), i(this, $, dn).call(this);
   }
   serialMessage(t) {
     const e = {
@@ -3348,9 +3348,9 @@ class Dn extends G {
     await this.sayCredits(), await this.sayAra(), await this.sayHi();
   }
 }
-$ = new WeakSet(), hn = function() {
+$ = new WeakSet(), dn = function() {
   D.addCustom("arduino", this);
-}, dn = function() {
+}, un = function() {
 };
 /**
  * @license Webserial
@@ -3361,20 +3361,20 @@ $ = new WeakSet(), hn = function() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const En = {
+const Sn = {
   wait: W,
   getSeconds: we,
-  supportWebSerial: Be
-}, In = "4.0.6";
+  supportWebSerial: Ae
+}, Mn = "4.0.6";
 export {
-  Dn as Arduino,
-  Tn as Boardroid,
+  In as Arduino,
+  En as Boardroid,
   D as Devices,
   pe as Emulator,
-  gn as Jofemar,
-  G as Kernel,
-  xn as Locker,
-  Cn as Relay,
-  En as utils,
-  In as version
+  Dn as Jofemar,
+  Y as Kernel,
+  Tn as Locker,
+  gn as Relay,
+  Sn as utils,
+  Mn as version
 };
