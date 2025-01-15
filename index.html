@@ -1,42 +1,44 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Webserial</title>
-<!--    <script src="test/connection.arduino.js" type="module"></script>-->
-<!--    <script src="test/connection.boardroid.js" type="module"></script>-->
-<!--    <script src="test/connection.relay.js" type="module"></script>-->
-<!--    <script src="test/connection.locker.js" type="module"></script>-->
-<!--    <script src="test/connection.jofemar.js" type="module"></script>-->
-    <script src="test/connection.pinpad.js" type="module"></script>
+    <script src="test/connection.arduino.js" type="module"></script>
+    <!-- <script src="test/connection.boardroid.js" type="module"></script> -->
+    <!-- <script src="test/connection.relay.js" type="module"></script> -->
+    <!-- <script src="test/connection.locker.js" type="module"></script> -->
+    <!-- <script src="test/connection.jofemar.js" type="module"></script> -->
+    <!-- <script src="test/connection.pinpad.js" type="module"></script> -->
+    <!-- <script src="test/plugin.test.js" type="module"></script> -->
 </head>
+
 <body class="bg-neutral-950 text-white p-4 w-full">
 
-<div class="webserial w-full max-w-xl mx-auto grid grid-cols-1 gap-y-4">
-    <div class="my-6"></div>
-    <button id="connect" class="hidden px-4 py-3 bg-gray-800 rounded-lg">Connect to serial</button>
+    <div class="webserial w-full max-w-xl mx-auto grid grid-cols-1 gap-y-4">
+        <div class="my-6"></div>
+        <button id="connect" class="hidden px-4 py-3 bg-gray-800 rounded-lg">Connect to serial</button>
 
-    <div id="need-permission" class="hidden p-4 bg-rose-900 rounded-lg">
-        Woooah! It seems that you need to give permission to access the serial port.
-        Please, click the button 'Connect to serial' to try again.
+        <div id="need-permission" class="hidden p-4 bg-rose-900 rounded-lg">
+            Woooah! It seems that you need to give permission to access the serial port.
+            Please, click the button 'Connect to serial' to try again.
+        </div>
+
+        <div id="disconnected" class="hidden p-4 bg-neutral-900 w-full">
+            The machine is disconnected. Please, check the connection.
+        </div>
+
+        <div id="unsupported" class="hidden p-4 bg-orange-700 w-full absolute bottom-0 left-0">
+            This browser does not support the WebSerial API. Please, use a compatible browser.
+        </div>
+
+        <div id="log" class="bg-neutral-800 p-4 rounded-lg">
+            Log: <br>
+        </div>
     </div>
 
-    <div id="disconnected" class="hidden p-4 bg-neutral-900 w-full">
-        The machine is disconnected. Please, check the connection.
-    </div>
-
-    <div id="unsupported" class="hidden p-4 bg-orange-700 w-full absolute bottom-0 left-0">
-        This browser does not support the WebSerial API. Please, use a compatible browser.
-    </div>
-
-    <div id="log" class="bg-neutral-800 p-4 rounded-lg">
-        Log: <br>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,container-queries"></script>
 </body>
+
 </html>

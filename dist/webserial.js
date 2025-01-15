@@ -23,10 +23,13 @@ function _a() {
 }
 const ga = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), qn = { randomUUID: ga };
 function ba(r, n, t) {
+  var i;
   if (qn.randomUUID && !n && !r)
     return qn.randomUUID();
   r = r || {};
-  const e = r.random || (r.rng || _a)();
+  const e = r.random ?? ((i = r.rng) == null ? void 0 : i.call(r)) ?? _a();
+  if (e.length < 16)
+    throw new Error("Random bytes length must be >= 16");
   return e[6] = e[6] & 15 | 64, e[8] = e[8] & 63 | 128, pa(e);
 }
 class fi extends EventTarget {
@@ -8552,7 +8555,7 @@ const Sc = {
   wait: ut,
   getSeconds: tn,
   supportWebSerial: _i
-}, kc = "4.1.0";
+}, kc = "4.1.1";
 export {
   Cc as Arduino,
   Tc as Boardroid,
