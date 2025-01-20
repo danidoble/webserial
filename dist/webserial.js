@@ -24,7 +24,7 @@ function _a() {
 const ga = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), qn = { randomUUID: ga };
 function ba(r, n, t) {
   var i;
-  if (qn.randomUUID && !n && !r)
+  if (qn.randomUUID && !r)
     return qn.randomUUID();
   r = r || {};
   const e = r.random ?? ((i = r.rng) == null ? void 0 : i.call(r)) ?? _a();
@@ -7225,7 +7225,7 @@ g = new WeakSet(), Zr = function() {
   return t.push("03"), t;
 }, es = async function() {
   if (this.__internal__.dispense.elevator.locking_interval) return;
-  this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await ut(500)), await this.collect();
+  this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await ut(500));
   const t = this;
   return this.__internal__.dispense.status = "elevator-locked", this.__internal__.dispense.elevator.locking_time = 60, new Promise((e) => {
     t.__internal__.dispense.elevator.locking_interval = setInterval(() => {
@@ -7513,8 +7513,9 @@ g = new WeakSet(), Zr = function() {
     type_degrees: null,
     formatted: null,
     decimal_point: t[7] === "2e" ? "." : null,
-    degrees: t[9] === "7f" ? "°" : null
-  }, t[4] === "2b" ? e.additional.sign = t[4] = "+" : ["2e", "2d"].includes(t[4]) && (e.additional.sign = t[4] = "-"), this.hexToDec(t[5]) >= 48 && this.hexToDec(t[5]) <= 57 && (e.additional.tens = this.hexToDec(t[5]) - 48), this.hexToDec(t[6]) >= 48 && this.hexToDec(t[6]) <= 57 && (e.additional.units = this.hexToDec(t[6]) - 48), this.hexToDec(t[8]) >= 48 && this.hexToDec(t[8]) <= 57 && (e.additional.decimals = this.hexToDec(t[8]) - 48), t[10] === "43" ? e.additional.type_degrees = "C" : t[10] === "46" && (e.additional.type_degrees = "F"), e.additional.formatted = (e.additional.sign ?? "") + (e.additional.tens ?? "") + (e.additional.units ?? "") + (e.additional.decimal_point ?? "") + (e.additional.decimals ?? "") + (e.additional.degrees ?? "") + (e.additional.type_degrees ?? ""), e.description = `The current temperature is ${e.additional.formatted}`, this.dispatch("temperature:current", e.additional), e;
+    degrees: t[9] === "7f" ? "°" : null,
+    error: null
+  }, t[4] === "2b" ? e.additional.sign = t[4] = "+" : ["2e", "2d"].includes(t[4]) ? e.additional.sign = t[4] = "-" : t[4] === "20" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[5]) >= 48 && this.hexToDec(t[5]) <= 57 ? e.additional.tens = this.hexToDec(t[5]) - 48 : t[5] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[6]) >= 48 && this.hexToDec(t[6]) <= 57 ? e.additional.units = this.hexToDec(t[6]) - 48 : t[6] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[8]) >= 48 && this.hexToDec(t[8]) <= 57 ? e.additional.decimals = this.hexToDec(t[8]) - 48 : t[8] === "2a" && (e.additional.error = "Error in thermometer"), t[10] === "43" ? e.additional.type_degrees = "C" : t[10] === "46" && (e.additional.type_degrees = "F"), e.additional.error === "Error in thermometer" ? (e.additional.formatted = "Error in thermometer", e.description = "The current temperature cannot be read because there is an error in the thermometer") : (e.additional.formatted = (e.additional.sign ?? "") + (e.additional.tens ?? "") + (e.additional.units ?? "") + (e.additional.decimal_point ?? "") + (e.additional.decimals ?? "") + (e.additional.degrees ?? "") + (e.additional.type_degrees ?? ""), e.description = `The current temperature is ${e.additional.formatted}`), this.dispatch("temperature:current", e.additional), e;
 }, Ss = function(t, e, i = 128) {
   if (t[1] && (e.additional.machine.hex = t[1], e.additional.machine.dec = this.hexToDec(t[1]) - i), !(t[1] && t[2]))
     e = o(this, g, ns).call(this, t, e);

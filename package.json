@@ -1,7 +1,7 @@
 {
   "name": "@danidoble/webserial",
   "description": "WebSerial API wrapper",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "type": "module",
   "license": "MIT",
   "author": "danidoble",
@@ -49,6 +49,6 @@
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "uuid": "^11.0.5",
-    "vite": "^6.0.7"
+    "vite": "^6.0.9"
   }
 }
