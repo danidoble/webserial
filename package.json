@@ -38,8 +38,9 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "webserial-core": "file:../webserial-core",
     "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.18.0",
+    "@eslint/js": "^9.19.0",
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
@@ -49,6 +50,6 @@
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "uuid": "^11.0.5",
-    "vite": "^6.0.9"
+    "vite": "^6.0.11"
   }
 }
