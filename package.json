@@ -44,7 +44,7 @@
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "globals": "^15.14.0",
     "jsencrypt": "^3.3.2",
     "postcss": "^8.5.1",
