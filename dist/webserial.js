@@ -24,7 +24,7 @@ function _a() {
 const ga = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), qn = { randomUUID: ga };
 function ba(r, n, t) {
   var i;
-  if (qn.randomUUID && !r)
+  if (qn.randomUUID && !n && !r)
     return qn.randomUUID();
   r = r || {};
   const e = r.random ?? ((i = r.rng) == null ? void 0 : i.call(r)) ?? _a();
@@ -8373,7 +8373,7 @@ Ht = new WeakMap(), Bt = new WeakMap(), Kt = new WeakMap(), w = new WeakSet(), I
   return i === 1 ? (e.name = "Relay on", e.description = "Relay on", e.no_code = 16, s = "on") : i === 0 ? (e.name = "Relay off", e.description = "Relay off", e.no_code = 17, s = "off") : (e.name = "Status unknown", e.description = "Status unknown", e.no_code = 400), this.dispatch("status:relay", { enabled: s === "on" }), e;
 }, ea = function(t, e) {
   const i = parseInt(t[2], 16);
-  if (e.no_code = 20 + i, e.name = "Status unknown", e.description = "The status of card reader does not identified correctly", e.no_code = 400, i === 0)
+  if (e.no_code = 20 + i, e.name = "Status unknown", e.description = "The status of card reader does not identified correctly", i === 0)
     e.request += ":disable", e.name = "Card reader disabled", e.description = "Card reader device was disabled successfully";
   else if (i === 1 || i === 2)
     e.request += ":dispense", e.name = "Card reader enabled", e.description = "Card reader device is now enabled";
@@ -8392,7 +8392,8 @@ Ht = new WeakMap(), Bt = new WeakMap(), Kt = new WeakMap(), w = new WeakSet(), I
   else if (i === 10) {
     const s = parseInt(t[8], 16);
     s === 0 ? (e.no_code = 30, e.name = "product not dispensed", e.description = "The product requested wasn't delivered") : s === 1 && (e.no_code = 31, e.name = "product dispensed", e.description = "The product requested was delivered");
-  }
+  } else
+    e.no_code = 400;
   return this.dispatch("card-reader:event", e), e;
 }, rt = function(t, e) {
   return this.appendToQueue(o(this, w, De).call(this, t), e);
@@ -8556,7 +8557,7 @@ const Sc = {
   wait: ut,
   getSeconds: tn,
   supportWebSerial: _i
-}, kc = "4.1.1";
+}, kc = "4.1.3";
 export {
   Cc as Arduino,
   Tc as Boardroid,
