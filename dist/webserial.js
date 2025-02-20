@@ -936,6 +936,8 @@ class Ft extends fi {
         backup_dispense: {}
       }
     });
+    if (!("serial" in navigator))
+      throw new Error("Web Serial not supported");
     t && (this.serialFilters = t), e && (this.serialConfigPort = e), i && o(this, I, Ai).call(this, i), s && (typeof s == "number" || typeof s == "string") && (this.listenOnPort = s), o(this, I, Ci).call(this), o(this, I, Si).call(this);
   }
   set listenOnPort(t) {
@@ -7866,6 +7868,11 @@ class Tc extends Ft {
   get hasCoinPurse() {
     return this.__coin_purse.available;
   }
+  set hasCoinPurse(t) {
+    if (typeof t != "boolean")
+      throw new Error(`Invalid value: ${t}`);
+    this.__coin_purse.available = t;
+  }
   set price(t) {
     let e = parseFloat(t);
     (isNaN(e) || e < 0) && (e = 0), this.__sale.price = e;
@@ -8183,6 +8190,7 @@ Ht = new WeakMap(), Bt = new WeakMap(), Kt = new WeakMap(), w = new WeakSet(), I
     "banknote-purse:save-memory",
     "card-reader:event",
     "change:pending",
+    "change:dispense",
     "coin-purse:coin-event",
     "coin-purse:config",
     "coin-purse:reject-lever",
@@ -8263,32 +8271,32 @@ Ht = new WeakMap(), Bt = new WeakMap(), Kt = new WeakMap(), w = new WeakSet(), I
   return ["r20", "r50", "r100"].includes(t);
 }, qs = function() {
   return ["r20", "r50", "r100", "r200", "r500"][this.__banknote_purse.recycler.banknote];
-}, Dn = function(t, e) {
+}, Dn = function(t, e, i) {
   if (!t) return;
-  let i = !0;
-  if (o(this, w, Fs).call(this, t)) {
+  let s = !0;
+  if (o(this, w, Fs).call(this, t) && i === "coin") {
     if (typeof this.coins.tubes[t] > "u") return;
     e === "tube" ? this.coins.tubes[t] += 1 : e === "box" && (this.coins.box[t] += 1);
-    let s = 0;
-    ["g50", "c50"].includes(t) ? s = 0.5 : s += parseInt(t.slice(1)), this.coins.totals[t] += s, this.__money_session.inserted += s, this.coins.total += s;
-  } else if (o(this, w, Ls).call(this, t)) {
-    if (typeof this.banknotes.tubes[t] > "u") return;
+    let a = 0;
+    ["g50", "c50"].includes(t) ? a = 0.5 : a += parseInt(t.slice(1)), this.coins.totals[t] += a, this.__money_session.inserted += a, this.coins.total += a;
+  } else if (o(this, w, Ls).call(this, t) && i === "banknote") {
+    if (typeof this.banknotes.recycler[t] > "u") return;
     e === "recycler" ? this.banknotes.recycler[t] += 1 : e === "stacker" && (this.banknotes.stacker[t] += 1);
-    let s = parseInt(t.slice(1));
-    this.banknotes.totals[t] += s, this.__money_session.inserted += s, this.banknotes.total += s;
-  } else if (o(this, w, Vs).call(this, t) && e === "out") {
-    if (typeof this.banknotes.out[t] > "u") return;
-    this.banknotes.out[t] += 1;
-    let s = parseInt(t.slice(1));
-    this.__money_session.retired += s, this.banknotes.recycler[t] -= 1, this.banknotes.total -= s, i = !1, this.dispatch("session:money-dispensed", { type_money: t, retired: s, finish: !1, type: "banknotes" });
+    let a = parseInt(t.slice(1));
+    this.banknotes.totals[t] += a, this.__money_session.inserted += a, this.banknotes.total += a;
+  } else if (o(this, w, Vs).call(this, t) && e === "out" && i === "banknote") {
+    if (typeof this.banknotes.out[t.replace("r", "p")] > "u") return;
+    this.banknotes.out[t.replace("r", "p")] += 1;
+    let a = parseInt(t.slice(1));
+    this.__money_session.retired += a, this.banknotes.recycler[t.replace("r", "p")] -= 1, this.banknotes.total -= a, s = !1, this.dispatch("session:money-dispensed", { type_money: t, retired: a, finish: !1, type: "banknotes" });
   }
-  i && this.dispatch("session:money-request", {});
+  s && this.dispatch("session:money-request", {});
 }, js = function(t, e) {
   const i = parseInt(t[2], 16);
-  return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, i === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : i === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : i >= 64 && i <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : i >= 80 && i <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : i >= 96 && i <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : i >= 112 && i <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : i >= 144 && i <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${t[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), i === 1 || i === 2 || i >= 160 || i >= 128 && i <= 143 || ([e.description, e.additional.coin] = o(this, w, Ms).call(this, t[2]), e.no_code = 38 + i, o(this, w, Dn).call(this, e.additional.coin, e.additional.where), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
+  return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, i === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : i === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : i >= 64 && i <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : i >= 80 && i <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : i >= 96 && i <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : i >= 112 && i <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : i >= 144 && i <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${t[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), i === 1 || i === 2 || i >= 160 || i >= 128 && i <= 143 || ([e.description, e.additional.coin] = o(this, w, Ms).call(this, t[2]), e.no_code = 38 + i, o(this, w, Dn).call(this, e.additional.coin, e.additional.where, "coin"), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
 }, Hs = function(t, e) {
   const i = parseInt(t[2], 16);
-  return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, i === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = o(this, w, qs).call(this), e.additional.where = "out", e.no_code = 200) : i >= 128 && i <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : i >= 144 && i <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : i >= 160 && i <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : i >= 176 && i <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), i >= 128 && i <= 191 && ([e.description, e.additional.banknote] = o(this, w, Us).call(this, t[2]), e.no_code = 74 + i), o(this, w, Dn).call(this, e.additional.banknote, e.additional.where), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
+  return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, i === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = o(this, w, qs).call(this), e.additional.where = "out", e.no_code = 200) : i >= 128 && i <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : i >= 144 && i <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : i >= 160 && i <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : i >= 176 && i <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), i >= 128 && i <= 191 && ([e.description, e.additional.banknote] = o(this, w, Us).call(this, t[2]), e.no_code = 74 + i), o(this, w, Dn).call(this, e.additional.banknote, e.additional.where, "banknote"), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
 }, Ks = function(t, e) {
   const i = parseInt(t, 16);
   return i === 1 ? (e.name = "Coin purse enabled", e.description = "Configuration complete, enabled", e.no_code = 3) : i === 0 ? (e.name = "Coin purse disabled", e.description = "Disabled by system request", e.no_code = 4) : (e.name = "Status unknown", e.description = "The response of coin purse doesn't identify successfully", e.no_code = 400), this.dispatch("coin-purse:config", { enabled: i === 1 }), e;
@@ -8476,7 +8484,12 @@ Re = function({ dispensed: t = null, limit: e = 80 } = {}) {
   const s = o(this, w, In).call(this, i);
   i = s.pending;
   const a = o(this, w, On).call(this, i);
-  return i = a.pending, i > 0 && this.dispatch("change:pending", { pending: i }), i === e ? !1 : (s.will_dispense && await this.banknotePurseDispense(s.banknotes), a.will_dispense && await this.coinPurseDispense(a.coins), !0);
+  return i = a.pending, i > 0 && this.dispatch("change:pending", { pending: i }), this.dispatch("change:dispense", {
+    recycler: s.banknotes,
+    coins: a.coins,
+    pending: i,
+    delivery: e - i
+  }), i === e ? !1 : (s.will_dispense && await this.banknotePurseDispense(s.banknotes), a.will_dispense && await this.coinPurseDispense(a.coins), !0);
 };
 var Wt, ca, la;
 class Cc extends Ft {
