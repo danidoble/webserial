@@ -8479,14 +8479,18 @@ Re = function({ dispensed: t = null, limit: e = 80 } = {}) {
   };
   return i(1e3, "p1000"), i(500, "p500"), i(200, "p200"), i(100, "p100"), i(50, "p50"), i(20, "p20"), e.will_dispense = Object.values(e.banknotes).some((s) => s > 0), e;
 }, In = function(t) {
-  return o(this, w, Ae).call(this) ? o(this, w, aa).call(this, t) : o(this, w, oa).call(this, t);
+  return this.hasRecycler ? o(this, w, Ae).call(this) ? o(this, w, aa).call(this, t) : o(this, w, oa).call(this, t) : {
+    banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
+    pending: t,
+    will_dispense: !1
+  };
 }, On = function(t) {
   const e = {
     coins: { $_50c: 0, $_1: 0, $_2: 0, $_5: 0, $_10: 0 },
     pending: t,
     will_dispense: !1
   };
-  if (t <= 0 || this.totalInTubes === 0) return e;
+  if (!this.hasCoinPurse || t <= 0 || this.totalInTubes === 0) return e;
   const i = (s, a, c = null) => {
     if (this.coins.tubes[a] > 0) {
       c === null && (c = "$_" + s);
