@@ -8406,7 +8406,7 @@ Ht = new WeakMap(), Nt = new WeakMap(), Kt = new WeakMap(), w = new WeakSet(), A
     e.request += ":cancel", e.name = "Cancelled", e.description = "Cancellation complete";
   else if (i === 10) {
     const s = parseInt(t[8], 16);
-    s === 1 ? (e.no_code = 30, e.name = "product not dispensed", e.description = "The product requested wasn't delivered") : s === 0 ? (e.no_code = 31, e.name = "product dispensed", e.description = "The product requested was delivered") : e.name = "finished-unknown";
+    s === 1 ? (e.no_code = 30, e.name = "product not dispensed", e.description = "The product requested wasn't delivered") : s === 0 ? (e.no_code = 31, e.name = "product dispensed", e.description = "The product requested was delivered") : (e.name = "finished-unknown", e.no_code = 400);
   } else
     e.no_code = 400;
   return this.dispatch("card-reader:event", e), e;
