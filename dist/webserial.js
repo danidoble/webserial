@@ -1,33 +1,33 @@
-var ya = Object.defineProperty;
-var zn = (r) => {
+var fa = Object.defineProperty;
+var Kn = (r) => {
   throw TypeError(r);
 };
-var ma = (r, n, t) => n in r ? ya(r, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[n] = t;
-var rt = (r, n, t) => ma(r, typeof n != "symbol" ? n + "" : n, t), Ge = (r, n, t) => n.has(r) || zn("Cannot " + t);
-var R = (r, n, t) => (Ge(r, n, "read from private field"), t ? t.call(r) : n.get(r)), $ = (r, n, t) => n.has(r) ? zn("Cannot add the same private member more than once") : n instanceof WeakSet ? n.add(r) : n.set(r, t), M = (r, n, t, e) => (Ge(r, n, "write to private field"), e ? e.call(r, t) : n.set(r, t), t), o = (r, n, t) => (Ge(r, n, "access private method"), t);
-function Tt(r = 100) {
+var ga = (r, n, t) => n in r ? fa(r, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[n] = t;
+var rt = (r, n, t) => ga(r, typeof n != "symbol" ? n + "" : n, t), $e = (r, n, t) => n.has(r) || Kn("Cannot " + t);
+var R = (r, n, t) => ($e(r, n, "read from private field"), t ? t.call(r) : n.get(r)), J = (r, n, t) => n.has(r) ? Kn("Cannot add the same private member more than once") : n instanceof WeakSet ? n.add(r) : n.set(r, t), M = (r, n, t, e) => ($e(r, n, "write to private field"), e ? e.call(r, t) : n.set(r, t), t), o = (r, n, t) => ($e(r, n, "access private method"), t);
+function Ct(r = 100) {
   return new Promise((n) => setTimeout(() => n(), r));
 }
-function wa() {
+function ba() {
   return "serial" in navigator;
 }
-function Xn() {
+function Wn() {
   return "geolocation" in navigator;
 }
-function va() {
+function ya() {
   return "crypto" in window;
 }
-function sn(r = 1) {
+function rn(r = 1) {
   return r * 1e3;
 }
-function Ct(r) {
+function Tt(r) {
   return r == null || r === "";
 }
-var ot, ht, d, ki, xi, T, on, B, N, ye, P, cn, Zt;
+var ot, ht, d, Ci, Ti, C, an, B, N, ye, P, on, Zt;
 const u = class u {
   static status(n = null) {
     var e, i;
-    if (!o(e = u, d, T).call(e, n)) return !1;
+    if (!o(e = u, d, C).call(e, n)) return !1;
     let t = [];
     switch (R(u, ot)) {
       case "locker":
@@ -46,7 +46,7 @@ const u = class u {
   }
   static dispensed(n = null) {
     var e, i;
-    if (!o(e = u, d, T).call(e, n)) return !1;
+    if (!o(e = u, d, C).call(e, n)) return !1;
     let t = [];
     switch (R(u, ot)) {
       case "locker":
@@ -65,7 +65,7 @@ const u = class u {
   }
   static notDispensed(n = null) {
     var e, i;
-    if (!o(e = u, d, T).call(e, n)) return !1;
+    if (!o(e = u, d, C).call(e, n)) return !1;
     let t = [];
     switch (R(u, ot)) {
       case "locker":
@@ -84,23 +84,23 @@ const u = class u {
   }
   static gateInactive(n = null) {
     var t;
-    if (!o(t = u, d, T).call(t, n) || !o(this, d, on).call(this)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(this, d, an).call(this)) return !1;
     o(this, d, P).call(this, ["0", "7", "5", "5", "5"]);
   }
   static gateConfigured(n = null) {
     var t;
-    if (!o(t = u, d, T).call(t, n) || !o(this, d, on).call(this)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(this, d, an).call(this)) return !1;
     o(this, d, P).call(this, ["0", "6"]);
   }
   static keyPressed(n = null) {
     var s, a, c;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, N).call(a)) return !1;
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, N).call(a)) return !1;
     const t = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "2A", "23", "41", "42", "43", "44"], e = (128 + R(u, ht)).toString(16), i = Math.floor(Math.random() * 15);
     o(c = u, d, P).call(c, ["2", e, "54", t[i]]);
   }
   static doorOpened(n = null) {
     var i, s;
-    if (!o(i = u, d, T).call(i, n) || !o(this, d, ye).call(this)) return !1;
+    if (!o(i = u, d, C).call(i, n) || !o(this, d, ye).call(this)) return !1;
     let t = [];
     const e = (128 + R(u, ht)).toString(16);
     switch (R(u, ot)) {
@@ -115,7 +115,7 @@ const u = class u {
   }
   static doorClosed(n = null) {
     var i, s;
-    if (!o(i = u, d, T).call(i, n) || !o(this, d, ye).call(this)) return !1;
+    if (!o(i = u, d, C).call(i, n) || !o(this, d, ye).call(this)) return !1;
     let t = [];
     const e = (128 + R(u, ht)).toString(16);
     switch (R(u, ot)) {
@@ -130,31 +130,31 @@ const u = class u {
   }
   static channelDisconnected(n = null) {
     var e, i, s;
-    if (!o(e = u, d, T).call(e, n) || !o(i = u, d, N).call(i)) return !1;
+    if (!o(e = u, d, C).call(e, n) || !o(i = u, d, N).call(i)) return !1;
     const t = (128 + R(u, ht)).toString(16);
     o(s = u, d, P).call(s, ["2", t, "43", "43", "43", "FD"]);
   }
   static channelConnected(n = null) {
     var e, i, s;
-    if (!o(e = u, d, T).call(e, n) || !o(i = u, d, N).call(i)) return !1;
+    if (!o(e = u, d, C).call(e, n) || !o(i = u, d, N).call(i)) return !1;
     const t = (128 + R(u, ht)).toString(16);
     o(s = u, d, P).call(s, ["2", t, "43", "43", "43", "FC"]);
   }
   static channelEmpty(n = null) {
     var e, i, s;
-    if (!o(e = u, d, T).call(e, n) || !o(i = u, d, N).call(i)) return !1;
+    if (!o(e = u, d, C).call(e, n) || !o(i = u, d, N).call(i)) return !1;
     const t = (128 + R(u, ht)).toString(16);
     o(s = u, d, P).call(s, ["2", t, "43", "43", "43", "FF"]);
   }
   static workingTemperature(n = null) {
     var e, i, s;
-    if (!o(e = u, d, T).call(e, n) || !o(i = u, d, N).call(i)) return !1;
+    if (!o(e = u, d, C).call(e, n) || !o(i = u, d, N).call(i)) return !1;
     const t = (128 + R(u, ht)).toString(16);
     o(s = u, d, P).call(s, ["2", t, "43", "54", "16"]);
   }
   static currentTemperature(n = null) {
     var i, s, a;
-    if (!o(i = u, d, T).call(i, n) || !o(s = u, d, ye).call(s)) return !1;
+    if (!o(i = u, d, C).call(i, n) || !o(s = u, d, ye).call(s)) return !1;
     let t = [];
     const e = (128 + R(u, ht)).toString(16);
     switch (R(u, ot)) {
@@ -169,213 +169,213 @@ const u = class u {
   }
   static ready(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "30"]);
   }
   static busy(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "31"]);
   }
   static invalidTray(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "32"]);
   }
   static invalidChannel(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "33"]);
   }
   static emptyChannel(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "34"]);
   }
   static elevatorJam(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "35"]);
   }
   static elevatorMalfunction(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "36"]);
   }
   static phototransistorFailure(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "37"]);
   }
   static allChannelsEmpty(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "38"]);
   }
   static productDetectorFailure(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "39"]);
   }
   static displayDisconnected(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "41"]);
   }
   static productUnderElevator(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "42"]);
   }
   static elevatorSettingAlarm(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "43"]);
   }
   static buttonPanelFailure(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "44"]);
   }
   static errorWritingEeprom(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "45"]);
   }
   static errorControlTemperature(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "46"]);
   }
   static thermometerDisconnected(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "47"]);
   }
   static thermometerMisconfigured(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "48"]);
   }
   static thermometerFailure(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "49"]);
   }
   static errorExtractorConsumption(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4A"]);
   }
   static channelSearchError(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4B"]);
   }
   static productExitMouthSearchError(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4C"]);
   }
   static elevatorInteriorLocked(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4D"]);
   }
   static productDetectorVerifierError(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4E"]);
   }
   static waitingForProductRecall(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4F"]);
   }
   static productExpiredByTemperature(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "50"]);
   }
   static faultyAutomaticDoor(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "51"]);
   }
   static rejectLever(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "A0", "1"]);
   }
   static resetCoinPurse(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "A0", "2"]);
   }
   static coinInsertedBox(n = null, t = null) {
     var s, a, c, l;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, B).call(a)) return !1;
-    const e = ["40", "41", "42", "43", "44", "45"], i = o(c = u, d, cn).call(c, e, t);
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, B).call(a)) return !1;
+    const e = ["40", "41", "42", "43", "44", "45"], i = o(c = u, d, on).call(c, e, t);
     o(l = u, d, P).call(l, ["2", "A0", i]);
   }
   static coinInsertedTube(n = null, t = null) {
     var s, a, c, l;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, B).call(a)) return !1;
-    const e = ["50", "51", "52", "53", "54", "55"], i = o(c = u, d, cn).call(c, e, t);
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, B).call(a)) return !1;
+    const e = ["50", "51", "52", "53", "54", "55"], i = o(c = u, d, on).call(c, e, t);
     o(l = u, d, P).call(l, ["2", "A0", i]);
   }
   static banknoteInsertedStacker(n = null, t = null) {
     var s, a, c, l;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, B).call(a)) return !1;
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, B).call(a)) return !1;
     const e = ["80", "81", "82", "83", "84"], i = o(c = u, d, Zt).call(c, e, t);
     o(l = u, d, P).call(l, ["2", "B0", i]);
   }
   static banknoteInsertedEscrow(n = null, t = null) {
     var s, a, c, l;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, B).call(a)) return !1;
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, B).call(a)) return !1;
     const e = ["90", "91", "92", "93", "94"], i = o(c = u, d, Zt).call(c, e, t);
     o(l = u, d, P).call(l, ["2", "B0", i]);
   }
   static banknoteEjected(n = null, t = null) {
     var s, a, c, l;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, B).call(a)) return !1;
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, B).call(a)) return !1;
     const e = ["A0", "A1", "A2", "A3", "A4"], i = o(c = u, d, Zt).call(c, e, t);
     o(l = u, d, P).call(l, ["2", "B0", i]);
   }
   static banknoteInsertedRecycler(n = null, t = null) {
     var s, a, c, l;
-    if (!o(s = u, d, T).call(s, n) || !o(a = u, d, B).call(a)) return !1;
+    if (!o(s = u, d, C).call(s, n) || !o(a = u, d, B).call(a)) return !1;
     const e = ["B0", "B1", "B2", "B3", "B4"], i = o(c = u, d, Zt).call(c, e, t);
     o(l = u, d, P).call(l, ["2", "B0", i]);
   }
   static banknoteTaken(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "B0", "2a"]);
   }
   static coinPurseEnabled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D0", "1"]);
   }
   static coinPurseDisabled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D0", "0"]);
   }
   static billPurseDisabled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D1", "0", "0"]);
   }
   static billPurseEnabled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D1", "1", "1"]);
   }
   static readTubes(n = null) {
     var h, p, f;
-    if (!o(h = u, d, T).call(h, n) || !o(p = u, d, B).call(p)) return !1;
+    if (!o(h = u, d, C).call(h, n) || !o(p = u, d, B).call(p)) return !1;
     const t = [
       "0",
       "1",
@@ -421,7 +421,7 @@ const u = class u {
   }
   static readBillPurse(n = null, t = null) {
     var i, s, a, c;
-    if (!o(i = u, d, T).call(i, n) || !o(s = u, d, B).call(s)) return !1;
+    if (!o(i = u, d, C).call(i, n) || !o(s = u, d, B).call(s)) return !1;
     let e = [
       "0",
       "1",
@@ -507,17 +507,17 @@ const u = class u {
   }
   static banknoteAccepted(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D4", "1"]);
   }
   static banknoteRejected(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D4", "0"]);
   }
   static banknotesDispensed(n = null) {
     var e, i, s, a;
-    if (!o(e = u, d, T).call(e, n) || !o(i = u, d, B).call(i)) return !1;
+    if (!o(e = u, d, C).call(e, n) || !o(i = u, d, B).call(i)) return !1;
     let t = [
       "1",
       "2",
@@ -583,91 +583,91 @@ const u = class u {
   }
   static coinsDispensed(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "D6"]);
   }
   static relayOn(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DA", "1"]);
   }
   static relayOff(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DA", "0"]);
   }
   static nayaxEnabled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "1"]);
   }
   static nayaxDisabled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "0"]);
   }
   static nayaxPreCreditAuthorized(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "3"]);
   }
   static nayaxCancelRequest(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "4"]);
   }
   static nayaxSellApproved(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "5"]);
   }
   static nayaxSellDenied(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "6"]);
   }
   static nayaxEndSession(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "7"]);
   }
   static nayaxCancelled(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "8"]);
   }
   static nayaxDispensed(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "A", "0"]);
   }
   static nayaxNotDispensed(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, B).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, B).call(e)) return !1;
     o(i = u, d, P).call(i, ["2", "DD", "A", "1"]);
   }
   static fullTray(n = null) {
     var t, e, i;
-    if (!o(t = u, d, T).call(t, n) || !o(e = u, d, N).call(e)) return !1;
+    if (!o(t = u, d, C).call(t, n) || !o(e = u, d, N).call(e)) return !1;
     o(i = u, d, P).call(i, ["6", "4F"]);
   }
   static setConnection(n = null) {
     var t;
-    if (!o(t = u, d, T).call(t, n)) return !1;
+    if (!o(t = u, d, C).call(t, n)) return !1;
     n.__internal__.serial.connected = !0;
   }
 };
-ot = new WeakMap(), ht = new WeakMap(), d = new WeakSet(), ki = function() {
+ot = new WeakMap(), ht = new WeakMap(), d = new WeakSet(), Ci = function() {
   if (u.enable === !1) throw new Error("Emulator is disabled");
   return u.enable;
-}, xi = function(n) {
+}, Ti = function(n) {
   if (typeof n != "object" || !(n instanceof Lt))
     throw new Error(`Type ${n.typeDevice} is not supported`);
   return u.instance = n, M(u, ot, n.typeDevice), M(u, ht, n.deviceNumber), !0;
-}, T = function(n = null) {
+}, C = function(n = null) {
   var t, e;
-  return !o(t = u, d, ki).call(t) || n === null && u.instance === null ? !1 : (u.instance === null && o(e = u, d, xi).call(e, n), !0);
-}, on = function() {
+  return !o(t = u, d, Ci).call(t) || n === null && u.instance === null ? !1 : (u.instance === null && o(e = u, d, Ti).call(e, n), !0);
+}, an = function() {
   if (R(u, ot) !== "locker") throw new Error("This function is only available for Locker devices");
   return !0;
 }, B = function() {
@@ -682,7 +682,7 @@ ot = new WeakMap(), ht = new WeakMap(), d = new WeakSet(), ki = function() {
   return !0;
 }, P = function(n) {
   u.instance.__emulate({ code: n });
-}, cn = function(n, t = null) {
+}, on = function(n, t = null) {
   let e = n[Math.floor(Math.random() * 5)];
   if (t !== null && !isNaN(parseFloat(t)))
     switch (t.toString()) {
@@ -724,52 +724,52 @@ ot = new WeakMap(), ht = new WeakMap(), d = new WeakSet(), ki = function() {
         break;
     }
   return e;
-}, $(u, d), rt(u, "enable", !1), rt(u, "instance", null), $(u, ot, null), $(u, ht, 1);
-let an = u;
-var Ea = Object.defineProperty, Ai = (r) => {
+}, J(u, d), rt(u, "enable", !1), rt(u, "instance", null), J(u, ot, null), J(u, ht, 1);
+let sn = u;
+var ma = Object.defineProperty, Si = (r) => {
   throw TypeError(r);
-}, Pa = (r, n, t) => n in r ? Ea(r, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[n] = t, ae = (r, n, t) => Pa(r, typeof n != "symbol" ? n + "" : n, t), Ta = (r, n, t) => n.has(r) || Ai("Cannot " + t), Ca = (r, n, t) => n.has(r) ? Ai("Cannot add the same private member more than once") : n instanceof WeakSet ? n.add(r) : n.set(r, t), K = (r, n, t) => (Ta(r, n, "access private method"), t);
+}, wa = (r, n, t) => n in r ? ma(r, n, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[n] = t, ae = (r, n, t) => wa(r, typeof n != "symbol" ? n + "" : n, t), va = (r, n, t) => n.has(r) || Si("Cannot " + t), Ea = (r, n, t) => n.has(r) ? Si("Cannot add the same private member more than once") : n instanceof WeakSet ? n.add(r) : n.set(r, t), K = (r, n, t) => (va(r, n, "access private method"), t);
 const Q = [];
 for (let r = 0; r < 256; ++r)
   Q.push((r + 256).toString(16).slice(1));
-function Sa(r, n = 0) {
+function Pa(r, n = 0) {
   return (Q[r[n + 0]] + Q[r[n + 1]] + Q[r[n + 2]] + Q[r[n + 3]] + "-" + Q[r[n + 4]] + Q[r[n + 5]] + "-" + Q[r[n + 6]] + Q[r[n + 7]] + "-" + Q[r[n + 8]] + Q[r[n + 9]] + "-" + Q[r[n + 10]] + Q[r[n + 11]] + Q[r[n + 12]] + Q[r[n + 13]] + Q[r[n + 14]] + Q[r[n + 15]]).toLowerCase();
 }
-let Je;
-const ka = new Uint8Array(16);
-function xa() {
-  if (!Je) {
+let Ge;
+const Ca = new Uint8Array(16);
+function Ta() {
+  if (!Ge) {
     if (typeof crypto > "u" || !crypto.getRandomValues)
       throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-    Je = crypto.getRandomValues.bind(crypto);
+    Ge = crypto.getRandomValues.bind(crypto);
   }
-  return Je(ka);
+  return Ge(Ca);
 }
-const Aa = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), Gn = { randomUUID: Aa };
-function Da(r, n, t) {
+const Sa = typeof crypto < "u" && crypto.randomUUID && crypto.randomUUID.bind(crypto), zn = { randomUUID: Sa };
+function ka(r, n, t) {
   var e;
-  if (Gn.randomUUID && !r)
-    return Gn.randomUUID();
+  if (zn.randomUUID && !r)
+    return zn.randomUUID();
   r = r || {};
-  const i = r.random ?? ((e = r.rng) == null ? void 0 : e.call(r)) ?? xa();
+  const i = r.random ?? ((e = r.rng) == null ? void 0 : e.call(r)) ?? Ta();
   if (i.length < 16)
     throw new Error("Random bytes length must be >= 16");
-  return i[6] = i[6] & 15 | 64, i[8] = i[8] & 63 | 128, Sa(i);
+  return i[6] = i[6] & 15 | 64, i[8] = i[8] & 63 | 128, Pa(i);
 }
-class Jn extends CustomEvent {
+class Xn extends CustomEvent {
   constructor(n, t) {
     super(n, t);
   }
 }
-class Di extends EventTarget {
+class ki extends EventTarget {
   constructor() {
     super(...arguments), ae(this, "__listeners__", {
       debug: !1
     }), ae(this, "__debug__", !1);
   }
   dispatch(n, t = null) {
-    const e = new Jn(n, { detail: t });
-    this.dispatchEvent(e), this.__debug__ && this.dispatchEvent(new Jn("debug", { detail: { type: n, data: t } }));
+    const e = new Xn(n, { detail: t });
+    this.dispatchEvent(e), this.__debug__ && this.dispatchEvent(new Xn("debug", { detail: { type: n, data: t } }));
   }
   dispatchAsync(n, t = null, e = 100) {
     const i = this;
@@ -798,10 +798,10 @@ function $n(r = 100) {
     (n) => setTimeout(() => n(), r)
   );
 }
-function Ra() {
+function xa() {
   return "serial" in navigator;
 }
-const $e = {
+const Je = {
   baudRate: 9600,
   dataBits: 8,
   stopBits: 1,
@@ -809,20 +809,20 @@ const $e = {
   bufferSize: 32768,
   flowControl: "none"
 };
-var q, Qn, ln, Rt, Ri, Zn, Yn, ti, Ii, Oi, Ni, Bi, ei, ni, Mi, Fi;
-let Ia = class extends Di {
+var j, Gn, cn, Rt, xi, Jn, Qn, Zn, Ai, Di, Ri, Ii, Yn, ti, Oi, Ni;
+let Aa = class extends ki {
   constructor({
     filters: n = null,
-    config_port: t = $e,
+    config_port: t = Je,
     no_device: e = 1,
     device_listen_on_channel: i = 1
   } = {
     filters: null,
-    config_port: $e,
+    config_port: Je,
     no_device: 1,
     device_listen_on_channel: 1
   }) {
-    super(), Ca(this, q), ae(this, "__internal__", {
+    if (super(), Ea(this, j), ae(this, "__internal__", {
       auto_response: !1,
       device_number: 1,
       aux_port_connector: 0,
@@ -851,12 +851,12 @@ let Ia = class extends Di {
         delay_first_connection: 200,
         bytes_connection: null,
         filters: [],
-        config_port: $e,
+        config_port: Je,
         queue: []
       },
       device: {
         type: "unknown",
-        id: Da(),
+        id: ka(),
         listen_on_port: null
       },
       time: {
@@ -869,7 +869,9 @@ let Ia = class extends Di {
       interval: {
         reconnection: 0
       }
-    }), n && (this.serialFilters = n), t && (this.serialConfigPort = t), e && K(this, q, Mi).call(this, e), i && ["number", "string"].includes(typeof i) && (this.listenOnChannel = i), K(this, q, Ni).call(this), K(this, q, Bi).call(this);
+    }), !("serial" in navigator))
+      throw new Error("Web Serial not supported");
+    n && (this.serialFilters = n), t && (this.serialConfigPort = t), e && K(this, j, Oi).call(this, e), i && ["number", "string"].includes(typeof i) && (this.listenOnChannel = i), K(this, j, Ri).call(this), K(this, j, Ii).call(this);
   }
   set listenOnChannel(n) {
     if (typeof n == "string" && (n = parseInt(n)), isNaN(n) || n < 1 || n > 255)
@@ -924,7 +926,7 @@ let Ia = class extends Di {
   }
   async connect() {
     return new Promise((n, t) => {
-      Ra() || t("Web Serial not supported"), setTimeout(async () => {
+      xa() || t("Web Serial not supported"), setTimeout(async () => {
         await $n(499), await this.serialConnect(), this.isConnected ? n(`${this.typeDevice} device ${this.deviceNumber} connected`) : t(`${this.typeDevice} device ${this.deviceNumber} not connected`);
       }, 1);
     });
@@ -964,10 +966,6 @@ let Ia = class extends Di {
       throw new Error("Select another port please");
   }
   serialErrors(n) {
-    if (!(n instanceof Error) || !(n instanceof DOMException)) {
-      console.error(n);
-      return;
-    }
     const t = n.toString().toLowerCase();
     switch (!0) {
       case t.includes("must be handling a user gesture to show a permission request"):
@@ -1015,7 +1013,7 @@ let Ia = class extends Di {
   async serialConnect() {
     try {
       this.dispatch("serial:connecting", {});
-      const n = await K(this, q, Ri).call(this);
+      const n = await K(this, j, xi).call(this);
       if (n.length > 0)
         await this.serialPortsSaved(n);
       else {
@@ -1035,16 +1033,16 @@ let Ia = class extends Di {
         await e.disconnect();
       }, await $n(this.__internal__.serial.delay_first_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
         await e.timeout(e.__internal__.serial.bytes_connection ?? [], "connection:start");
-      }, this.__internal__.time.response_connection), this.__internal__.serial.last_action = "connect", await K(this, q, ln).call(this, this.__internal__.serial.bytes_connection ?? []), this.dispatch("serial:sent", {
+      }, this.__internal__.time.response_connection), this.__internal__.serial.last_action = "connect", await K(this, j, cn).call(this, this.__internal__.serial.bytes_connection ?? []), this.dispatch("serial:sent", {
         action: "connect",
         bytes: this.__internal__.serial.bytes_connection
-      }), this.__internal__.auto_response && K(this, q, Rt).call(this, ["DD", "DD"], null), await K(this, q, Ii).call(this);
+      }), this.__internal__.auto_response && K(this, j, Rt).call(this, ["DD", "DD"], null), await K(this, j, Ai).call(this);
     } catch (n) {
       this.serialErrors(n);
     }
   }
   async serialForget() {
-    return await K(this, q, Oi).call(this);
+    return await K(this, j, Di).call(this);
   }
   decToHex(n) {
     return typeof n == "string" && (n = parseInt(n, 10)), n.toString(16);
@@ -1101,7 +1099,7 @@ let Ia = class extends Di {
     });
   }
   softReload() {
-    K(this, q, Fi).call(this), this.dispatch("serial:soft-reload", {});
+    K(this, j, Ni).call(this), this.dispatch("serial:soft-reload", {});
   }
   async sendConnect() {
     if (!this.__internal__.serial.bytes_connection)
@@ -1166,9 +1164,9 @@ let Ia = class extends Di {
     return t.join("");
   }
 };
-q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
+j = /* @__PURE__ */ new WeakSet(), Gn = function(r) {
   return !!(r.readable && r.writable);
-}, ln = async function(r) {
+}, cn = async function(r) {
   const n = this.__internal__.serial.port;
   if (!n || !n.writable)
     throw new Error("The port is closed or is not writable");
@@ -1195,31 +1193,31 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
   } else
     this.serialCorruptMessage(r, n);
   this.__internal__.serial.queue.length !== 0 && this.dispatch("internal:queue", {});
-}, Ri = async function() {
+}, xi = async function() {
   const r = this.serialFilters, n = await navigator.serial.getPorts({ filters: r });
   return r.length === 0 ? n : n.filter((t) => {
     const e = t.getInfo();
     return r.some((i) => e.usbProductId === i.usbProductId && e.usbVendorId === i.usbVendorId);
-  }).filter((t) => !K(this, q, Qn).call(this, t));
-}, Zn = function(r) {
+  }).filter((t) => !K(this, j, Gn).call(this, t));
+}, Jn = function(r) {
   if (r) {
     const n = this.__internal__.serial.response.buffer, t = new Uint8Array(n.length + r.byteLength);
     t.set(n, 0), t.set(new Uint8Array(r), n.length), this.__internal__.serial.response.buffer = t;
   }
-}, Yn = async function() {
+}, Qn = async function() {
   this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
     const r = [];
     for (const n in this.__internal__.serial.response.buffer)
       r.push(this.__internal__.serial.response.buffer[n].toString(16));
-    this.__internal__.serial.response.buffer && K(this, q, Rt).call(this, r), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    this.__internal__.serial.response.buffer && K(this, j, Rt).call(this, r), this.__internal__.serial.response.buffer = new Uint8Array(0);
   }, 400);
-}, ti = async function() {
+}, Zn = async function() {
   if (this.__internal__.serial.response.length !== null) {
     if (this.__internal__.serial.response.length === this.__internal__.serial.response.buffer.length) {
       const r = [];
       for (const n in this.__internal__.serial.response.buffer)
         r.push(this.__internal__.serial.response.buffer[n].toString(16));
-      K(this, q, Rt).call(this, r), this.__internal__.serial.response.buffer = new Uint8Array(0);
+      K(this, j, Rt).call(this, r), this.__internal__.serial.response.buffer = new Uint8Array(0);
     } else if (this.__internal__.serial.response.length < this.__internal__.serial.response.buffer.length) {
       let r = new Uint8Array(0);
       for (let t = 0; t < this.__internal__.serial.response.length; t++)
@@ -1228,7 +1226,7 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
         const t = [];
         for (const e in r)
           t.push(r[e].toString(16));
-        K(this, q, Rt).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
+        K(this, j, Rt).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
         return;
       }
       r = new Uint8Array(0);
@@ -1240,12 +1238,12 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
           const t = [];
           for (const e in r)
             t.push(r[e].toString(16));
-          K(this, q, Rt).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
+          K(this, j, Rt).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
         }
       }
     }
   }
-}, Ii = async function() {
+}, Ai = async function() {
   const r = this.__internal__.serial.port;
   if (!r || !r.readable) throw new Error("Port is not readable");
   for (; r.readable && this.__internal__.serial.keep_reading; ) {
@@ -1259,7 +1257,7 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
           n.releaseLock(), this.__internal__.serial.keep_reading = !1, t = !1;
           break;
         }
-        K(this, q, Zn).call(this, e), this.__internal__.serial.response.length === null ? await K(this, q, Yn).call(this) : await K(this, q, ti).call(this);
+        K(this, j, Jn).call(this, e), this.__internal__.serial.response.length === null ? await K(this, j, Qn).call(this) : await K(this, j, Zn).call(this);
       }
     } catch (t) {
       this.serialErrors(t);
@@ -1268,9 +1266,9 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
     }
   }
   this.__internal__.serial.keep_reading = !0, this.__internal__.serial.port && await this.__internal__.serial.port.close();
-}, Oi = async function() {
+}, Di = async function() {
   return typeof window > "u" ? !1 : "serial" in navigator && "forget" in SerialPort.prototype && this.__internal__.serial.port ? (await this.__internal__.serial.port.forget(), !0) : !1;
-}, Ni = function() {
+}, Ri = function() {
   [
     "serial:connected",
     "serial:connecting",
@@ -1289,19 +1287,19 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
   ].forEach((r) => {
     this.serialRegisterAvailableListener(r);
   });
-}, Bi = function() {
+}, Ii = function() {
   const r = this;
   this.on("internal:queue", async () => {
     var n;
-    await K(n = r, q, ni).call(n);
-  }), K(this, q, ei).call(this);
-}, ei = function() {
+    await K(n = r, j, ti).call(n);
+  }), K(this, j, Yn).call(this);
+}, Yn = function() {
   const r = this;
   navigator.serial.addEventListener("connect", async () => {
     r.isDisconnected && await r.serialConnect().catch(() => {
     });
   });
-}, ni = async function() {
+}, ti = async function() {
   if (!this.__internal__.serial.connected) {
     await this.serialConnect();
     return;
@@ -1311,15 +1309,15 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
   let n = this.__internal__.time.response_general;
   r.action === "connect" && (n = this.__internal__.time.response_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
     await this.timeout(r.bytes, r.action);
-  }, n), this.__internal__.serial.last_action = r.action ?? "unknown", await K(this, q, ln).call(this, r.bytes), this.dispatch("serial:sent", {
+  }, n), this.__internal__.serial.last_action = r.action ?? "unknown", await K(this, j, cn).call(this, r.bytes), this.dispatch("serial:sent", {
     action: r.action,
     bytes: r.bytes
-  }), this.__internal__.auto_response && K(this, q, Rt).call(this, ["DD", "DD"], null);
+  }), this.__internal__.auto_response && K(this, j, Rt).call(this, ["DD", "DD"], null);
   const t = [...this.__internal__.serial.queue];
   this.__internal__.serial.queue = t.splice(1);
-}, Mi = function(r = 1) {
+}, Oi = function(r = 1) {
   this.__internal__.device_number = r, this.__internal__.serial.bytes_connection = this.serialSetConnectionConstant(r);
-}, Fi = function() {
+}, Ni = function() {
   this.__internal__.last_error = {
     message: null,
     action: null,
@@ -1327,34 +1325,40 @@ q = /* @__PURE__ */ new WeakSet(), Qn = function(r) {
     no_code: 0
   };
 };
-const hn = class H extends Di {
+const ln = class L extends ki {
   static typeError(n) {
     const t = new Error();
     throw t.message = `Type ${n} is not supported`, t.name = "DeviceTypeError", t;
   }
+  static registerType(n) {
+    typeof L.devices[n] > "u" && (L.devices[n] = {});
+  }
   static add(n) {
     const t = n.typeDevice;
-    typeof H.devices[t] > "u" && (H.devices[t] = {});
+    typeof L.devices[t] > "u" && (L.devices[t] = {});
     const e = n.uuid;
-    if (typeof H.devices[t] > "u" && H.typeError(t), this.instance.dispatch("change", H.devices), H.devices[t][e])
+    if (typeof L.devices[t] > "u" && L.typeError(t), this.instance.dispatch("change", L.devices), L.devices[t][e])
       throw new Error(`Device with id ${e} already exists`);
-    return H.devices[t][e] = n, this.instance.dispatch("change", H.devices), Object.keys(H.devices[t]).indexOf(e);
+    return L.devices[t][e] = n, this.instance.dispatch("change", L.devices), Object.keys(L.devices[t]).indexOf(e);
   }
   static get(n, t) {
-    return typeof H.devices[n] > "u" && H.typeError(n), H.devices[n][t];
+    return typeof L.devices[n] > "u" && (L.devices[n] = {}), typeof L.devices[n] > "u" && L.typeError(n), L.devices[n][t];
   }
   static getAll(n = null) {
-    return n === null ? H.devices : (typeof H.devices[n] > "u" && H.typeError(n), H.devices[n]);
+    return n === null ? L.devices : (typeof L.devices[n] > "u" && L.typeError(n), L.devices[n]);
   }
   static getList() {
-    return Object.values(H.devices).map((n) => Object.values(n)).flat();
+    return Object.values(L.devices).map((n) => Object.values(n)).flat();
+  }
+  static getByNumber(n, t) {
+    return typeof L.devices[n] > "u" && L.typeError(n), Object.values(L.devices[n]).find((e) => e.deviceNumber === t) ?? null;
   }
   static getCustom(n, t = 1) {
-    return typeof H.devices[n] > "u" && H.typeError(n), Object.values(H.devices[n]).find((e) => e.deviceNumber === t) ?? null;
+    return typeof L.devices[n] > "u" && L.typeError(n), Object.values(L.devices[n]).find((e) => e.deviceNumber === t) ?? null;
   }
 };
-ae(hn, "instance"), ae(hn, "devices", {});
-let me = hn;
+ae(ln, "instance"), ae(ln, "devices", {});
+let me = ln;
 me.instance || (me.instance = new me());
 const I = class I extends me {
   static typeError(n) {
@@ -1427,9 +1431,9 @@ rt(I, "instance", null), rt(I, "devices", {
   arduino: [],
   pinpad: []
 });
-let G = I;
-G.instance || (G.instance = new G());
-class Lt extends Ia {
+let $ = I;
+$.instance || ($.instance = new $());
+class Lt extends Aa {
   constructor(n) {
     super(n), this.getResponseAsArrayHex(), this.__internal__.device.door_open = !1, this.__internal__.time.response_engines = 2e3, this.__internal__.time.sense = 100, this.__internal__.interval.waiting_sense = 0, this.__internal__.dispense = {
       must_response: !1,
@@ -1472,7 +1476,7 @@ class Lt extends Ia {
     }), null);
   }
   async internalDispenseStatus() {
-    if (this.__internal__.dispense.must_response && (await Tt(this.__internal__.time.response_engines + 10), this.__internal__.dispense.status === "no-response"))
+    if (this.__internal__.dispense.must_response && (await Ct(this.__internal__.time.response_engines + 10), this.__internal__.dispense.status === "no-response"))
       return this.internalClearSensing(), this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", { reason: "no-response" }), { status: !1, error: "no-response" };
     this.__internal__.dispense.status = null, this.__internal__.dispense.dispensing = !0, this.dispatch("internal:dispense:running", {});
     const n = this;
@@ -1500,7 +1504,7 @@ class Lt extends Ia {
   }
   async internalDispense(n) {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
-    if (!an.enable && !this.__internal__.serial.connected && (await this.serialConnect(), !this.__internal__.serial.connected))
+    if (!sn.enable && !this.__internal__.serial.connected && (await this.serialConnect(), !this.__internal__.serial.connected))
       throw new Error("Serial device not connected");
     return this.__internal__.serial.queue.length === 0 ? (await this.appendToQueue(n, "dispense"), await this.internalDispenseStatus()) : new Promise((t) => {
       const e = setInterval(async () => {
@@ -1516,7 +1520,7 @@ class Lt extends Ia {
       console.error("Invalid data to make an emulation");
       return;
     }
-    this.__internal__.serial.connected || (this.__internal__.serial.connected = !0, this.dispatch("serial:connected"), G.instance.dispatch("change"), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0)), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
+    this.__internal__.serial.connected || (this.__internal__.serial.connected = !0, this.dispatch("serial:connected"), $.instance.dispatch("change"), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0)), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
     const t = [];
     for (const e in n.code)
       t.push(n.code[e].toString().padStart(2, "0").toLowerCase());
@@ -1536,18 +1540,18 @@ class Lt extends Ia {
     return this.__internal__.device.listen_on_port ?? 1;
   }
 }
-var ce, Le, Ui;
-class Bc extends Lt {
+var ce, Le, Bi;
+class Ic extends Lt {
   constructor({ filters: t = null, config_port: e = null, no_device: i = 1 } = {}) {
     super({ filters: t, config_port: e, no_device: i });
-    $(this, Le);
-    $(this, ce, {
+    J(this, Le);
+    J(this, ce, {
       activate: ["A0", "01", "01", "A2"],
       deactivate: ["A0", "01", "00", "A1"]
     });
-    if (this.__internal__.device.type = "relay", this.__internal__.auto_response = !0, G.getCustom(this.typeDevice, i))
+    if (this.__internal__.device.type = "relay", this.__internal__.auto_response = !0, $.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
-    o(this, Le, Ui).call(this);
+    o(this, Le, Bi).call(this);
   }
   serialMessage(t) {
     const e = {
@@ -1589,23 +1593,23 @@ class Bc extends Lt {
   }
   async toggle({ inverse: t = !1, ms: e = 300 } = {}) {
     const i = this;
-    t ? (await i.turnOff(), await Tt(e), await i.turnOn()) : (await i.turnOn(), await Tt(e), await i.turnOff());
+    t ? (await i.turnOff(), await Ct(e), await i.turnOn()) : (await i.turnOn(), await Ct(e), await i.turnOff());
   }
 }
-ce = new WeakMap(), Le = new WeakSet(), Ui = function() {
-  G.add(this);
+ce = new WeakMap(), Le = new WeakSet(), Bi = function() {
+  $.add(this);
 };
-var tt, X, Pt, D, Li, Vi, qi, ji, un, Hi, It, Ot, we, ve, Ee;
-class Mc extends Lt {
+var tt, X, Pt, D, Mi, Fi, Ui, Li, hn, Vi, It, Ot, we, ve, Ee;
+class Oc extends Lt {
   constructor({ filters: t = null, config_port: e = null, no_device: i = 1, device_listen_on_port: s = 3 } = {}) {
     super({ filters: t, config_port: e, no_device: i, device_listen_on_port: s });
-    $(this, D);
-    $(this, tt, !1);
-    $(this, X, 0);
-    $(this, Pt, 0);
-    if (this.__internal__.device.type = "locker", G.getCustom(this.typeDevice, i))
+    J(this, D);
+    J(this, tt, !1);
+    J(this, X, 0);
+    J(this, Pt, 0);
+    if (this.__internal__.device.type = "locker", $.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
-    this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, o(this, D, Vi).call(this), o(this, D, Li).call(this);
+    this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, o(this, D, Fi).call(this), o(this, D, Mi).call(this);
   }
   serialMessage(t) {
     const e = {
@@ -1685,28 +1689,28 @@ class Mc extends Lt {
   }
   async dispense({ cell: t = 1 } = {}) {
     t = o(this, D, It).call(this, t);
-    const e = o(this, D, Hi).call(this, t);
+    const e = o(this, D, Vi).call(this, t);
     return await this.internalDispense(e);
   }
   async status({ cell: t = 1 } = {}) {
     t = o(this, D, It).call(this, t);
-    const e = o(this, D, qi).call(this, t);
+    const e = o(this, D, Ui).call(this, t);
     return await this.appendToQueue(e, "status");
   }
   async lightScan({ since: t = 0, until: e = 10 } = {}) {
     if (t < 0 || t > 10) throw new Error("Invalid since number");
     if (e < 0 || e > 10) throw new Error("Invalid until number");
-    const i = o(this, D, ji).call(this, t, e);
+    const i = o(this, D, Li).call(this, t, e);
     return await this.appendToQueue(i, "light-scan");
   }
   async enable({ cell: t = 1 } = {}) {
     t = o(this, D, It).call(this, t);
-    const [e, i] = this.parseCellToColumnRow(t), s = o(this, D, un).call(this, { enable: !0, column: e, row: i });
+    const [e, i] = this.parseCellToColumnRow(t), s = o(this, D, hn).call(this, { enable: !0, column: e, row: i });
     await this.appendToQueue(s, "activate");
   }
   async disable({ cell: t = 1 } = {}) {
     t = o(this, D, It).call(this, t);
-    const [e, i] = this.parseCellToColumnRow(t), s = o(this, D, un).call(this, { enable: !1, column: e, row: i });
+    const [e, i] = this.parseCellToColumnRow(t), s = o(this, D, hn).call(this, { enable: !1, column: e, row: i });
     await this.appendToQueue(s, "disable");
   }
   async openAll() {
@@ -1732,22 +1736,22 @@ class Mc extends Lt {
     M(this, X, 90), o(this, D, Ee).call(this), o(this, D, Ot).call(this);
   }
 }
-tt = new WeakMap(), X = new WeakMap(), Pt = new WeakMap(), D = new WeakSet(), Li = function() {
+tt = new WeakMap(), X = new WeakMap(), Pt = new WeakMap(), D = new WeakSet(), Mi = function() {
   const t = ["percentage:disable", "percentage:enable", "percentage:open"];
   for (const e of t)
     this.serialRegisterAvailableListener(e);
-}, Vi = function() {
-  G.add(this);
-}, qi = function(t = 1) {
+}, Fi = function() {
+  $.add(this);
+}, Ui = function(t = 1) {
   return t = o(this, D, It).call(this, t), this.serialLockerHexCmd(new Uint8Array([16, this.__internal__.device.listen_on_port, t]));
-}, ji = function(t = 0, e = 10) {
+}, Li = function(t = 0, e = 10) {
   return this.serialLockerHexCmd(new Uint8Array([32, this.__internal__.device.listen_on_port, t, e]));
-}, un = function({ enable: t = !0, column: e = 0, row: i = 10 } = {}) {
+}, hn = function({ enable: t = !0, column: e = 0, row: i = 10 } = {}) {
   if (e < 0 || e > 8) throw new Error("Invalid column number");
   if (i < 0 || i > 10) throw new Error("Invalid row number");
   let s = 1;
   return t || (s = 0), this.serialLockerHexCmd(new Uint8Array([48, this.__internal__.device.listen_on_port, e, i, s]));
-}, Hi = function(t = 1) {
+}, Vi = function(t = 1) {
   t = o(this, D, It).call(this, t);
   const e = this.__internal__.device.milliseconds, i = e % 256, s = Math.floor(e / 3) % 256;
   return this.serialLockerHexCmd(
@@ -1766,51 +1770,51 @@ tt = new WeakMap(), X = new WeakMap(), Pt = new WeakMap(), D = new WeakSet(), Li
 }, Ee = function() {
   M(this, Pt, Math.round(R(this, X) * 100 / 90)), this.dispatch("percentage:disable", { percentage: R(this, Pt) });
 };
-var Oa = "0123456789abcdefghijklmnopqrstuvwxyz";
+var Da = "0123456789abcdefghijklmnopqrstuvwxyz";
 function St(r) {
-  return Oa.charAt(r);
+  return Da.charAt(r);
 }
-function Na(r, n) {
+function Ra(r, n) {
   return r & n;
 }
 function de(r, n) {
   return r | n;
 }
-function ii(r, n) {
+function ei(r, n) {
   return r ^ n;
 }
-function ri(r, n) {
+function ni(r, n) {
   return r & ~n;
 }
-function Ba(r) {
+function Ia(r) {
   if (r == 0)
     return -1;
   var n = 0;
-  return r & 65535 || (r >>= 16, n += 16), r & 255 || (r >>= 8, n += 8), r & 15 || (r >>= 4, n += 4), r & 3 || (r >>= 2, n += 2), r & 1 || ++n, n;
+  return (r & 65535) == 0 && (r >>= 16, n += 16), (r & 255) == 0 && (r >>= 8, n += 8), (r & 15) == 0 && (r >>= 4, n += 4), (r & 3) == 0 && (r >>= 2, n += 2), (r & 1) == 0 && ++n, n;
 }
-function Ma(r) {
+function Oa(r) {
   for (var n = 0; r != 0; )
     r &= r - 1, ++n;
   return n;
 }
-var jt = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", Ki = "=";
+var jt = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", qi = "=";
 function Me(r) {
   var n, t, e = "";
   for (n = 0; n + 3 <= r.length; n += 3)
     t = parseInt(r.substring(n, n + 3), 16), e += jt.charAt(t >> 6) + jt.charAt(t & 63);
   for (n + 1 == r.length ? (t = parseInt(r.substring(n, n + 1), 16), e += jt.charAt(t << 2)) : n + 2 == r.length && (t = parseInt(r.substring(n, n + 2), 16), e += jt.charAt(t >> 2) + jt.charAt((t & 3) << 4)); (e.length & 3) > 0; )
-    e += Ki;
+    e += qi;
   return e;
 }
-function si(r) {
+function ii(r) {
   var n = "", t, e = 0, i = 0;
-  for (t = 0; t < r.length && r.charAt(t) != Ki; ++t) {
+  for (t = 0; t < r.length && r.charAt(t) != qi; ++t) {
     var s = jt.indexOf(r.charAt(t));
     s < 0 || (e == 0 ? (n += St(s >> 2), i = s & 3, e = 1) : e == 1 ? (n += St(i << 2 | s >> 4), i = s & 15, e = 2) : e == 2 ? (n += St(i), n += St(s >> 2), i = s & 3, e = 3) : (n += St(i << 2 | s >> 4), n += St(s & 15), e = 0));
   }
   return e == 1 && (n += St(i << 2)), n;
 }
-var Vt, Fa = {
+var Vt, Na = {
   decode: function(r) {
     var n;
     if (Vt === void 0) {
@@ -1838,7 +1842,7 @@ var Vt, Fa = {
       throw new Error("Hex encoding incomplete: 4 bits missing");
     return i;
   }
-}, Dt, dn = {
+}, Dt, un = {
   decode: function(r) {
     var n;
     if (Dt === void 0) {
@@ -1874,7 +1878,7 @@ var Vt, Fa = {
   },
   re: /-----BEGIN [^-]+-----([A-Za-z0-9+\/=\s]+)-----END [^-]+-----|begin-base64[^\n]+\n([A-Za-z0-9+\/=\s]+)====/,
   unarmor: function(r) {
-    var n = dn.re.exec(r);
+    var n = un.re.exec(r);
     if (n)
       if (n[1])
         r = n[1];
@@ -1882,7 +1886,7 @@ var Vt, Fa = {
         r = n[2];
       else
         throw new Error("RegExp out of sync");
-    return dn.decode(r);
+    return un.decode(r);
   }
 }, qt = 1e13, Yt = (
   /** @class */
@@ -1916,9 +1920,9 @@ var Vt, Fa = {
       return n.length == 1 ? n[0] : this;
     }, r;
   }()
-), Wi = "…", Ua = /^(\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/, La = /^(\d\d\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/;
+), ji = "…", Ba = /^(\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/, Ma = /^(\d\d\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/;
 function Kt(r, n) {
-  return r.length > n && (r = r.substring(0, n) + Wi), r;
+  return r.length > n && (r = r.substring(0, n) + ji), r;
 }
 var Qe = (
   /** @class */
@@ -1969,7 +1973,7 @@ var Qe = (
         i = this.get(a++), s = this.get(a++), e += String.fromCharCode(i << 8 | s);
       return e;
     }, r.prototype.parseTime = function(n, t, e) {
-      var i = this.parseStringISO(n, t), s = (e ? Ua : La).exec(i);
+      var i = this.parseStringISO(n, t), s = (e ? Ba : Ma).exec(i);
       return s ? (e && (s[1] = +s[1], s[1] += +s[1] < 70 ? 2e3 : 1900), i = s[1] + "-" + s[2] + "-" + s[3] + " " + s[4], s[5] && (i += ":" + s[5], s[6] && (i += ":" + s[6], s[7] && (i += "." + s[7]))), s[8] && (i += " UTC", s[8] != "Z" && (i += s[8], s[9] && (i += ":" + s[9]))), i) : "Unrecognized time: " + i;
     }, r.prototype.parseInteger = function(n, t) {
       for (var e = this.get(n), i = e > 127, s = i ? 255 : 0, a, c = ""; e == s && ++n < t; )
@@ -1977,7 +1981,7 @@ var Qe = (
       if (a = t - n, a === 0)
         return i ? -1 : 0;
       if (a > 4) {
-        for (c = e, a <<= 3; !((+c ^ s) & 128); )
+        for (c = e, a <<= 3; ((+c ^ s) & 128) == 0; )
           c = +c << 1, --a;
         c = "(" + a + ` bit)
 `;
@@ -2003,7 +2007,7 @@ var Qe = (
       e /= 2, i > e && (t = n + e);
       for (var a = n; a < t; ++a)
         s += this.hexByte(this.get(a));
-      return i > e && (s += Wi), s;
+      return i > e && (s += ji), s;
     }, r.prototype.parseOID = function(n, t, e) {
       for (var i = "", s = new Yt(), a = 0, c = n; c < t; ++c) {
         var l = this.get(c);
@@ -2025,11 +2029,11 @@ var Qe = (
       return a > 0 && (i += ".incomplete"), i;
     }, r;
   }()
-), Va = (
+), Fa = (
   /** @class */
   function() {
     function r(n, t, e, i, s) {
-      if (!(i instanceof ai))
+      if (!(i instanceof ri))
         throw new Error("Invalid tag value.");
       this.stream = n, this.header = t, this.length = e, this.tag = i, this.sub = s;
     }
@@ -2194,7 +2198,7 @@ var Qe = (
     }, r.decode = function(n) {
       var t;
       n instanceof Qe ? t = n : t = new Qe(n, 0);
-      var e = new Qe(t), i = new ai(t), s = r.decodeLength(t), a = t.pos, c = a - e.pos, l = null, h = function() {
+      var e = new Qe(t), i = new ri(t), s = r.decodeLength(t), a = t.pos, c = a - e.pos, l = null, h = function() {
         var f = [];
         if (s !== null) {
           for (var y = a + s; t.pos < y; )
@@ -2236,7 +2240,7 @@ var Qe = (
       return new r(e, c, s, i, l);
     }, r;
   }()
-), ai = (
+), ri = (
   /** @class */
   function() {
     function r(n) {
@@ -2255,7 +2259,7 @@ var Qe = (
       return this.tagClass === 0 && this.tagNumber === 0;
     }, r;
   }()
-), At, qa = 244837814094590, oi = (qa & 16777215) == 15715070, nt = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997], ja = (1 << 26) / nt[nt.length - 1], A = (
+), At, Ua = 244837814094590, si = (Ua & 16777215) == 15715070, nt = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997], La = (1 << 26) / nt[nt.length - 1], A = (
   /** @class */
   function() {
     function r(n, t, e) {
@@ -2305,7 +2309,7 @@ var Qe = (
       return this.abs().divRemTo(n, null, t), this.s < 0 && t.compareTo(r.ZERO) > 0 && n.subTo(t, t), t;
     }, r.prototype.modPowInt = function(n, t) {
       var e;
-      return n < 256 || t.isEven() ? e = new ci(t) : e = new li(t), this.exp(n, e);
+      return n < 256 || t.isEven() ? e = new ai(t) : e = new oi(t), this.exp(n, e);
     }, r.prototype.clone = function() {
       var n = O();
       return this.copyTo(n), n;
@@ -2334,7 +2338,7 @@ var Qe = (
       var e = this.DB - n * this.DB % 8, i, s = 0;
       if (n-- > 0)
         for (e < this.DB && (i = this[n] >> e) != (this.s & this.DM) >> e && (t[s++] = i | this.s << this.DB - e); n >= 0; )
-          e < 8 ? (i = (this[n] & (1 << e) - 1) << 8 - e, i |= this[--n] >> (e += this.DB - 8)) : (i = this[n] >> (e -= 8) & 255, e <= 0 && (e += this.DB, --n)), i & 128 && (i |= -256), s == 0 && (this.s & 128) != (i & 128) && ++s, (s > 0 || i != this.s) && (t[s++] = i);
+          e < 8 ? (i = (this[n] & (1 << e) - 1) << 8 - e, i |= this[--n] >> (e += this.DB - 8)) : (i = this[n] >> (e -= 8) & 255, e <= 0 && (e += this.DB, --n)), (i & 128) != 0 && (i |= -256), s == 0 && (this.s & 128) != (i & 128) && ++s, (s > 0 || i != this.s) && (t[s++] = i);
       return t;
     }, r.prototype.equals = function(n) {
       return this.compareTo(n) == 0;
@@ -2344,16 +2348,16 @@ var Qe = (
       return this.compareTo(n) > 0 ? this : n;
     }, r.prototype.and = function(n) {
       var t = O();
-      return this.bitwiseTo(n, Na, t), t;
+      return this.bitwiseTo(n, Ra, t), t;
     }, r.prototype.or = function(n) {
       var t = O();
       return this.bitwiseTo(n, de, t), t;
     }, r.prototype.xor = function(n) {
       var t = O();
-      return this.bitwiseTo(n, ii, t), t;
+      return this.bitwiseTo(n, ei, t), t;
     }, r.prototype.andNot = function(n) {
       var t = O();
-      return this.bitwiseTo(n, ri, t), t;
+      return this.bitwiseTo(n, ni, t), t;
     }, r.prototype.not = function() {
       for (var n = O(), t = 0; t < this.t; ++t)
         n[t] = this.DM & ~this[t];
@@ -2367,11 +2371,11 @@ var Qe = (
     }, r.prototype.getLowestSetBit = function() {
       for (var n = 0; n < this.t; ++n)
         if (this[n] != 0)
-          return n * this.DB + Ba(this[n]);
+          return n * this.DB + Ia(this[n]);
       return this.s < 0 ? this.t * this.DB : -1;
     }, r.prototype.bitCount = function() {
       for (var n = 0, t = this.s & this.DM, e = 0; e < this.t; ++e)
-        n += Ma(this[e] ^ t);
+        n += Oa(this[e] ^ t);
       return n;
     }, r.prototype.testBit = function(n) {
       var t = Math.floor(n / this.DB);
@@ -2379,9 +2383,9 @@ var Qe = (
     }, r.prototype.setBit = function(n) {
       return this.changeBit(n, de);
     }, r.prototype.clearBit = function(n) {
-      return this.changeBit(n, ri);
+      return this.changeBit(n, ni);
     }, r.prototype.flipBit = function(n) {
-      return this.changeBit(n, ii);
+      return this.changeBit(n, ei);
     }, r.prototype.add = function(n) {
       var t = O();
       return this.addTo(n, t), t;
@@ -2404,26 +2408,26 @@ var Qe = (
       var e = n.bitLength(), i, s = kt(1), a;
       if (e <= 0)
         return s;
-      e < 18 ? i = 1 : e < 48 ? i = 3 : e < 144 ? i = 4 : e < 768 ? i = 5 : i = 6, e < 8 ? a = new ci(t) : t.isEven() ? a = new Ka(t) : a = new li(t);
+      e < 18 ? i = 1 : e < 48 ? i = 3 : e < 144 ? i = 4 : e < 768 ? i = 5 : i = 6, e < 8 ? a = new ai(t) : t.isEven() ? a = new qa(t) : a = new oi(t);
       var c = [], l = 3, h = i - 1, p = (1 << i) - 1;
       if (c[1] = a.convert(this), i > 1) {
         var f = O();
         for (a.sqrTo(c[1], f); l <= p; )
           c[l] = O(), a.mulTo(f, c[l - 2], c[l]), l += 2;
       }
-      var y = n.t - 1, E, v = !0, S = O(), C;
+      var y = n.t - 1, E, v = !0, S = O(), T;
       for (e = pe(n[y]) - 1; y >= 0; ) {
-        for (e >= h ? E = n[y] >> e - h & p : (E = (n[y] & (1 << e + 1) - 1) << h - e, y > 0 && (E |= n[y - 1] >> this.DB + e - h)), l = i; !(E & 1); )
+        for (e >= h ? E = n[y] >> e - h & p : (E = (n[y] & (1 << e + 1) - 1) << h - e, y > 0 && (E |= n[y - 1] >> this.DB + e - h)), l = i; (E & 1) == 0; )
           E >>= 1, --l;
         if ((e -= l) < 0 && (e += this.DB, --y), v)
           c[E].copyTo(s), v = !1;
         else {
           for (; l > 1; )
             a.sqrTo(s, S), a.sqrTo(S, s), l -= 2;
-          l > 0 ? a.sqrTo(s, S) : (C = s, s = S, S = C), a.mulTo(S, c[E], s);
+          l > 0 ? a.sqrTo(s, S) : (T = s, s = S, S = T), a.mulTo(S, c[E], s);
         }
-        for (; y >= 0 && !(n[y] & 1 << e); )
-          a.sqrTo(s, S), C = s, s = S, S = C, --e < 0 && (e = this.DB - 1, --y);
+        for (; y >= 0 && (n[y] & 1 << e) == 0; )
+          a.sqrTo(s, S), T = s, s = S, S = T, --e < 0 && (e = this.DB - 1, --y);
       }
       return a.revert(s);
     }, r.prototype.modInverse = function(n) {
@@ -2447,7 +2451,7 @@ var Qe = (
         return l;
       return l.signum() < 0 ? l.add(n) : l;
     }, r.prototype.pow = function(n) {
-      return this.exp(n, new Ha());
+      return this.exp(n, new Va());
     }, r.prototype.gcd = function(n) {
       var t = this.s < 0 ? this.negate() : this.clone(), e = n.s < 0 ? n.negate() : n.clone();
       if (t.compareTo(e) < 0) {
@@ -2471,7 +2475,7 @@ var Qe = (
       if (e.isEven())
         return !1;
       for (t = 1; t < nt.length; ) {
-        for (var i = nt[t], s = t + 1; s < nt.length && i < ja; )
+        for (var i = nt[t], s = t + 1; s < nt.length && i < La; )
           i *= nt[s++];
         for (i = e.modInt(i); t < s; )
           if (i % nt[t++] == 0)
@@ -2504,14 +2508,14 @@ var Qe = (
       }
       this.t = 0, this.s = 0;
       for (var i = n.length, s = !1, a = 0; --i >= 0; ) {
-        var c = e == 8 ? +n[i] & 255 : ui(n, i);
+        var c = e == 8 ? +n[i] & 255 : li(n, i);
         if (c < 0) {
           n.charAt(i) == "-" && (s = !0);
           continue;
         }
         s = !1, a == 0 ? this[this.t++] = c : a + e > this.DB ? (this[this.t - 1] |= (c & (1 << this.DB - a) - 1) << a, this[this.t++] = c >> this.DB - a) : this[this.t - 1] |= c << a, a += e, a >= this.DB && (a -= this.DB);
       }
-      e == 8 && +n[0] & 128 && (this.s = -1, a > 0 && (this[this.t - 1] |= (1 << this.DB - a) - 1 << a)), this.clamp(), s && r.ZERO.subTo(this, this);
+      e == 8 && (+n[0] & 128) != 0 && (this.s = -1, a > 0 && (this[this.t - 1] |= (1 << this.DB - a) - 1 << a)), this.clamp(), s && r.ZERO.subTo(this, this);
     }, r.prototype.clamp = function() {
       for (var n = this.s & this.DM; this.t > 0 && this[this.t - 1] == n; )
         --this.t;
@@ -2585,13 +2589,13 @@ var Qe = (
         h > 0 ? (i.lShiftTo(h, a), s.lShiftTo(h, e)) : (i.copyTo(a), s.copyTo(e));
         var p = a.t, f = a[p - 1];
         if (f != 0) {
-          var y = f * (1 << this.F1) + (p > 1 ? a[p - 2] >> this.F2 : 0), E = this.FV / y, v = (1 << this.F1) / y, S = 1 << this.F2, C = e.t, U = C - p, F = t ?? O();
+          var y = f * (1 << this.F1) + (p > 1 ? a[p - 2] >> this.F2 : 0), E = this.FV / y, v = (1 << this.F1) / y, S = 1 << this.F2, T = e.t, U = T - p, F = t ?? O();
           for (a.dlShiftTo(U, F), e.compareTo(F) >= 0 && (e[e.t++] = 1, e.subTo(F, e)), r.ONE.dlShiftTo(p, F), F.subTo(a, a); a.t < p; )
             a[a.t++] = 0;
           for (; --U >= 0; ) {
-            var L = e[--C] == f ? this.DM : Math.floor(e[C] * E + (e[C - 1] + S) * v);
-            if ((e[C] += a.am(0, L, e, U, 0, p)) < L)
-              for (a.dlShiftTo(U, F), e.subTo(F, e); e[C] < --L; )
+            var q = e[--T] == f ? this.DM : Math.floor(e[T] * E + (e[T - 1] + S) * v);
+            if ((e[T] += a.am(0, q, e, U, 0, p)) < q)
+              for (a.dlShiftTo(U, F), e.subTo(F, e); e[T] < --q; )
                 e.subTo(F, e);
           }
           t != null && (e.drShiftTo(p, t), c != l && r.ZERO.subTo(t, t)), e.t = p, e.clamp(), h > 0 && e.rShiftTo(h, e), c < 0 && r.ZERO.subTo(e, e);
@@ -2601,7 +2605,7 @@ var Qe = (
       if (this.t < 1)
         return 0;
       var n = this[0];
-      if (!(n & 1))
+      if ((n & 1) == 0)
         return 0;
       var t = n & 3;
       return t = t * (2 - (n & 15) * t) & 15, t = t * (2 - (n & 255) * t) & 255, t = t * (2 - ((n & 65535) * t & 65535)) & 65535, t = t * (2 - n * t % this.DV) % this.DV, t > 0 ? this.DV - t : -t;
@@ -2631,7 +2635,7 @@ var Qe = (
     }, r.prototype.fromRadix = function(n, t) {
       this.fromInt(0), t == null && (t = 10);
       for (var e = this.chunkSize(t), i = Math.pow(t, e), s = !1, a = 0, c = 0, l = 0; l < n.length; ++l) {
-        var h = ui(n, l);
+        var h = li(n, l);
         if (h < 0) {
           n.charAt(l) == "-" && this.signum() == 0 && (s = !0);
           continue;
@@ -2775,7 +2779,7 @@ var Qe = (
       }
     }, r;
   }()
-), Ha = (
+), Va = (
   /** @class */
   function() {
     function r() {
@@ -2790,7 +2794,7 @@ var Qe = (
       n.squareTo(t);
     }, r;
   }()
-), ci = (
+), ai = (
   /** @class */
   function() {
     function r(n) {
@@ -2808,7 +2812,7 @@ var Qe = (
       n.squareTo(t), this.reduce(t);
     }, r;
   }()
-), li = (
+), oi = (
   /** @class */
   function() {
     function r(n) {
@@ -2835,7 +2839,7 @@ var Qe = (
       n.squareTo(t), this.reduce(t);
     }, r;
   }()
-), Ka = (
+), qa = (
   /** @class */
   function() {
     function r(n) {
@@ -2865,17 +2869,17 @@ var Qe = (
 function O() {
   return new A(null);
 }
-function j(r, n) {
+function H(r, n) {
   return new A(r, n);
 }
-var hi = typeof navigator < "u";
-hi && oi && navigator.appName == "Microsoft Internet Explorer" ? (A.prototype.am = function(n, t, e, i, s, a) {
+var ci = typeof navigator < "u";
+ci && si && navigator.appName == "Microsoft Internet Explorer" ? (A.prototype.am = function(n, t, e, i, s, a) {
   for (var c = t & 32767, l = t >> 15; --a >= 0; ) {
     var h = this[n] & 32767, p = this[n++] >> 15, f = l * h + p * c;
     h = c * h + ((f & 32767) << 15) + e[i] + (s & 1073741823), s = (h >>> 30) + (f >>> 15) + l * p + (s >>> 30), e[i++] = h & 1073741823;
   }
   return s;
-}, At = 30) : hi && oi && navigator.appName != "Netscape" ? (A.prototype.am = function(n, t, e, i, s, a) {
+}, At = 30) : ci && si && navigator.appName != "Netscape" ? (A.prototype.am = function(n, t, e, i, s, a) {
   for (; --a >= 0; ) {
     var c = t * this[n++] + e[i] + s;
     s = Math.floor(c / 67108864), e[i++] = c & 67108863;
@@ -2891,21 +2895,21 @@ hi && oi && navigator.appName == "Microsoft Internet Explorer" ? (A.prototype.am
 A.prototype.DB = At;
 A.prototype.DM = (1 << At) - 1;
 A.prototype.DV = 1 << At;
-var qn = 52;
-A.prototype.FV = Math.pow(2, qn);
-A.prototype.F1 = qn - At;
-A.prototype.F2 = 2 * At - qn;
-var Ve = [], Gt, pt;
-Gt = 48;
+var Vn = 52;
+A.prototype.FV = Math.pow(2, Vn);
+A.prototype.F1 = Vn - At;
+A.prototype.F2 = 2 * At - Vn;
+var Ve = [], $t, pt;
+$t = 48;
 for (pt = 0; pt <= 9; ++pt)
-  Ve[Gt++] = pt;
-Gt = 97;
+  Ve[$t++] = pt;
+$t = 97;
 for (pt = 10; pt < 36; ++pt)
-  Ve[Gt++] = pt;
-Gt = 65;
+  Ve[$t++] = pt;
+$t = 65;
 for (pt = 10; pt < 36; ++pt)
-  Ve[Gt++] = pt;
-function ui(r, n) {
+  Ve[$t++] = pt;
+function li(r, n) {
   var t = Ve[r.charCodeAt(n)];
   return t ?? -1;
 }
@@ -2919,7 +2923,7 @@ function pe(r) {
 }
 A.ZERO = kt(0);
 A.ONE = kt(1);
-var Wa = (
+var ja = (
   /** @class */
   function() {
     function r() {
@@ -2938,10 +2942,10 @@ var Wa = (
     }, r;
   }()
 );
-function za() {
-  return new Wa();
+function Ha() {
+  return new ja();
 }
-var zi = 256, _e, xt = null, yt;
+var Hi = 256, _e, xt = null, yt;
 if (xt == null) {
   xt = [], yt = 0;
   var fe = void 0;
@@ -2951,7 +2955,7 @@ if (xt == null) {
       xt[yt++] = Ze[fe] & 255;
   }
   var ge = 0, be = function(r) {
-    if (ge = ge || 0, ge >= 256 || yt >= zi) {
+    if (ge = ge || 0, ge >= 256 || yt >= Hi) {
       window.removeEventListener ? window.removeEventListener("mousemove", be, !1) : window.detachEvent && window.detachEvent("onmousemove", be);
       return;
     }
@@ -2963,9 +2967,9 @@ if (xt == null) {
   };
   typeof window < "u" && (window.addEventListener ? window.addEventListener("mousemove", be, !1) : window.attachEvent && window.attachEvent("onmousemove", be));
 }
-function Xa() {
+function Ka() {
   if (_e == null) {
-    for (_e = za(); yt < zi; ) {
+    for (_e = Ha(); yt < Hi; ) {
       var r = Math.floor(65536 * Math.random());
       xt[yt++] = r & 255;
     }
@@ -2975,26 +2979,26 @@ function Xa() {
   }
   return _e.next();
 }
-var pn = (
+var dn = (
   /** @class */
   function() {
     function r() {
     }
     return r.prototype.nextBytes = function(n) {
       for (var t = 0; t < n.length; ++t)
-        n[t] = Xa();
+        n[t] = Ka();
     }, r;
   }()
 );
-function Ga(r, n) {
+function Wa(r, n) {
   if (n < r.length + 22)
     return console.error("Message too long for RSA"), null;
   for (var t = n - r.length - 6, e = "", i = 0; i < t; i += 2)
     e += "ff";
   var s = "0001" + e + "00" + r;
-  return j(s, 16);
+  return H(s, 16);
 }
-function Ja(r, n) {
+function za(r, n) {
   if (n < r.length + 11)
     return console.error("Message too long for RSA"), null;
   for (var t = [], e = r.length - 1; e >= 0 && n > 0; ) {
@@ -3002,14 +3006,14 @@ function Ja(r, n) {
     i < 128 ? t[--n] = i : i > 127 && i < 2048 ? (t[--n] = i & 63 | 128, t[--n] = i >> 6 | 192) : (t[--n] = i & 63 | 128, t[--n] = i >> 6 & 63 | 128, t[--n] = i >> 12 | 224);
   }
   t[--n] = 0;
-  for (var s = new pn(), a = []; n > 2; ) {
+  for (var s = new dn(), a = []; n > 2; ) {
     for (a[0] = 0; a[0] == 0; )
       s.nextBytes(a);
     t[--n] = a[0];
   }
   return t[--n] = 2, t[--n] = 0, new A(t);
 }
-var $a = (
+var Xa = (
   /** @class */
   function() {
     function r() {
@@ -3024,9 +3028,9 @@ var $a = (
         t = t.add(this.p);
       return t.subtract(e).multiply(this.coeff).mod(this.p).multiply(this.q).add(e);
     }, r.prototype.setPublic = function(n, t) {
-      n != null && t != null && n.length > 0 && t.length > 0 ? (this.n = j(n, 16), this.e = parseInt(t, 16)) : console.error("Invalid RSA public key");
+      n != null && t != null && n.length > 0 && t.length > 0 ? (this.n = H(n, 16), this.e = parseInt(t, 16)) : console.error("Invalid RSA public key");
     }, r.prototype.encrypt = function(n) {
-      var t = this.n.bitLength() + 7 >> 3, e = Ja(n, t);
+      var t = this.n.bitLength() + 7 >> 3, e = za(n, t);
       if (e == null)
         return null;
       var i = this.doPublic(e);
@@ -3036,11 +3040,11 @@ var $a = (
         s = "0" + s;
       return s;
     }, r.prototype.setPrivate = function(n, t, e) {
-      n != null && t != null && n.length > 0 && t.length > 0 ? (this.n = j(n, 16), this.e = parseInt(t, 16), this.d = j(e, 16)) : console.error("Invalid RSA private key");
+      n != null && t != null && n.length > 0 && t.length > 0 ? (this.n = H(n, 16), this.e = parseInt(t, 16), this.d = H(e, 16)) : console.error("Invalid RSA private key");
     }, r.prototype.setPrivateEx = function(n, t, e, i, s, a, c, l) {
-      n != null && t != null && n.length > 0 && t.length > 0 ? (this.n = j(n, 16), this.e = parseInt(t, 16), this.d = j(e, 16), this.p = j(i, 16), this.q = j(s, 16), this.dmp1 = j(a, 16), this.dmq1 = j(c, 16), this.coeff = j(l, 16)) : console.error("Invalid RSA private key");
+      n != null && t != null && n.length > 0 && t.length > 0 ? (this.n = H(n, 16), this.e = parseInt(t, 16), this.d = H(e, 16), this.p = H(i, 16), this.q = H(s, 16), this.dmp1 = H(a, 16), this.dmq1 = H(c, 16), this.coeff = H(l, 16)) : console.error("Invalid RSA private key");
     }, r.prototype.generate = function(n, t) {
-      var e = new pn(), i = n >> 1;
+      var e = new dn(), i = n >> 1;
       this.e = parseInt(t, 16);
       for (var s = new A(t, 16); ; ) {
         for (; this.p = new A(n - i, 1, e), !(this.p.subtract(A.ONE).gcd(s).compareTo(A.ONE) == 0 && this.p.isProbablePrime(10)); )
@@ -3058,10 +3062,10 @@ var $a = (
         }
       }
     }, r.prototype.decrypt = function(n) {
-      var t = j(n, 16), e = this.doPrivate(t);
-      return e == null ? null : Qa(e, this.n.bitLength() + 7 >> 3);
+      var t = H(n, 16), e = this.doPrivate(t);
+      return e == null ? null : $a(e, this.n.bitLength() + 7 >> 3);
     }, r.prototype.generateAsync = function(n, t, e) {
-      var i = new pn(), s = n >> 1;
+      var i = new dn(), s = n >> 1;
       this.e = parseInt(t, 16);
       var a = new A(t, 16), c = this, l = function() {
         var h = function() {
@@ -3090,24 +3094,24 @@ var $a = (
       };
       setTimeout(l, 0);
     }, r.prototype.sign = function(n, t, e) {
-      var i = Za(e), s = i + t(n).toString(), a = Ga(s, this.n.bitLength() / 4);
+      var i = Ga(e), s = i + t(n).toString(), a = Wa(s, this.n.bitLength() / 4);
       if (a == null)
         return null;
       var c = this.doPrivate(a);
       if (c == null)
         return null;
       var l = c.toString(16);
-      return l.length & 1 ? "0" + l : l;
+      return (l.length & 1) == 0 ? l : "0" + l;
     }, r.prototype.verify = function(n, t, e) {
-      var i = j(t, 16), s = this.doPublic(i);
+      var i = H(t, 16), s = this.doPublic(i);
       if (s == null)
         return null;
-      var a = s.toString(16).replace(/^1f+00/, ""), c = Ya(a);
+      var a = s.toString(16).replace(/^1f+00/, ""), c = Ja(a);
       return c == e(n).toString();
     }, r;
   }()
 );
-function Qa(r, n) {
+function $a(r, n) {
   for (var t = r.toByteArray(), e = 0; e < t.length && t[e] == 0; )
     ++e;
   if (t.length - e != n - 1 || t[e] != 2)
@@ -3131,10 +3135,10 @@ var Pe = {
   sha512: "3051300d060960864801650304020305000440",
   ripemd160: "3021300906052b2403020105000414"
 };
-function Za(r) {
+function Ga(r) {
   return Pe[r] || "";
 }
-function Ya(r) {
+function Ja(r) {
   for (var n in Pe)
     if (Pe.hasOwnProperty(n)) {
       var t = Pe[n], e = t.length;
@@ -3219,10 +3223,10 @@ m.asn1.ASN1Util = new function() {
   }, this.getPEMStringFromHex = function(r, n) {
     return hextopem(r, n);
   }, this.newObject = function(r) {
-    var n = m, t = n.asn1, e = t.DERBoolean, i = t.DERInteger, s = t.DERBitString, a = t.DEROctetString, c = t.DERNull, l = t.DERObjectIdentifier, h = t.DEREnumerated, p = t.DERUTF8String, f = t.DERNumericString, y = t.DERPrintableString, E = t.DERTeletexString, v = t.DERIA5String, S = t.DERUTCTime, C = t.DERGeneralizedTime, U = t.DERSequence, F = t.DERSet, L = t.DERTaggedObject, it = t.ASN1Util.newObject, J = Object.keys(r);
-    if (J.length != 1)
+    var n = m, t = n.asn1, e = t.DERBoolean, i = t.DERInteger, s = t.DERBitString, a = t.DEROctetString, c = t.DERNull, l = t.DERObjectIdentifier, h = t.DEREnumerated, p = t.DERUTF8String, f = t.DERNumericString, y = t.DERPrintableString, E = t.DERTeletexString, v = t.DERIA5String, S = t.DERUTCTime, T = t.DERGeneralizedTime, U = t.DERSequence, F = t.DERSet, q = t.DERTaggedObject, it = t.ASN1Util.newObject, G = Object.keys(r);
+    if (G.length != 1)
       throw "key of param shall be only one.";
-    var k = J[0];
+    var k = G[0];
     if (":bool:int:bitstr:octstr:null:oid:enum:utf8str:numstr:prnstr:telstr:ia5str:utctime:gentime:seq:set:tag:".indexOf(":" + k + ":") == -1)
       throw "undefined key: " + k;
     if (k == "bool")
@@ -3252,7 +3256,7 @@ m.asn1.ASN1Util = new function() {
     if (k == "utctime")
       return new S(r[k]);
     if (k == "gentime")
-      return new C(r[k]);
+      return new T(r[k]);
     if (k == "seq") {
       for (var lt = r[k], wt = [], vt = 0; vt < lt.length; vt++) {
         var Xe = it(lt[vt]);
@@ -3270,17 +3274,17 @@ m.asn1.ASN1Util = new function() {
     if (k == "tag") {
       var _t = r[k];
       if (Object.prototype.toString.call(_t) === "[object Array]" && _t.length == 3) {
-        var ba = it(_t[2]);
-        return new L({
+        var _a = it(_t[2]);
+        return new q({
           tag: _t[0],
           explicit: _t[1],
-          obj: ba
+          obj: _a
         });
       } else {
         var ue = {};
         if (_t.explicit !== void 0 && (ue.explicit = _t.explicit), _t.tag !== void 0 && (ue.tag = _t.tag), _t.obj === void 0)
           throw "obj shall be specified for 'tag'.";
-        return ue.obj = it(_t.obj), new L(ue);
+        return ue.obj = it(_t.obj), new q(ue);
       }
     }
   }, this.jsonToASN1HEX = function(r) {
@@ -3575,7 +3579,7 @@ m.asn1.DERTaggedObject = function(r) {
   }, typeof r < "u" && (typeof r.tag < "u" && (this.hT = r.tag), typeof r.explicit < "u" && (this.isExplicit = r.explicit), typeof r.obj < "u" && (this.asn1Object = r.obj, this.setASN1Object(this.isExplicit, this.hT, this.asn1Object)));
 };
 W.lang.extend(m.asn1.DERTaggedObject, m.asn1.ASN1Object);
-var to = /* @__PURE__ */ function() {
+var Qa = /* @__PURE__ */ function() {
   var r = function(n, t) {
     return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(e, i) {
       e.__proto__ = i;
@@ -3592,37 +3596,37 @@ var to = /* @__PURE__ */ function() {
     }
     n.prototype = t === null ? Object.create(t) : (e.prototype = t.prototype, new e());
   };
-}(), di = (
+}(), hi = (
   /** @class */
   function(r) {
-    to(n, r);
+    Qa(n, r);
     function n(t) {
       var e = r.call(this) || this;
       return t && (typeof t == "string" ? e.parseKey(t) : (n.hasPrivateKeyProperty(t) || n.hasPublicKeyProperty(t)) && e.parsePropertiesFrom(t)), e;
     }
     return n.prototype.parseKey = function(t) {
       try {
-        var e = 0, i = 0, s = /^\s*(?:[0-9A-Fa-f][0-9A-Fa-f]\s*)+$/, a = s.test(t) ? Fa.decode(t) : dn.unarmor(t), c = Va.decode(a);
+        var e = 0, i = 0, s = /^\s*(?:[0-9A-Fa-f][0-9A-Fa-f]\s*)+$/, a = s.test(t) ? Na.decode(t) : un.unarmor(t), c = Fa.decode(a);
         if (c.sub.length === 3 && (c = c.sub[2].sub[0]), c.sub.length === 9) {
-          e = c.sub[1].getHexStringValue(), this.n = j(e, 16), i = c.sub[2].getHexStringValue(), this.e = parseInt(i, 16);
+          e = c.sub[1].getHexStringValue(), this.n = H(e, 16), i = c.sub[2].getHexStringValue(), this.e = parseInt(i, 16);
           var l = c.sub[3].getHexStringValue();
-          this.d = j(l, 16);
+          this.d = H(l, 16);
           var h = c.sub[4].getHexStringValue();
-          this.p = j(h, 16);
+          this.p = H(h, 16);
           var p = c.sub[5].getHexStringValue();
-          this.q = j(p, 16);
+          this.q = H(p, 16);
           var f = c.sub[6].getHexStringValue();
-          this.dmp1 = j(f, 16);
+          this.dmp1 = H(f, 16);
           var y = c.sub[7].getHexStringValue();
-          this.dmq1 = j(y, 16);
+          this.dmq1 = H(y, 16);
           var E = c.sub[8].getHexStringValue();
-          this.coeff = j(E, 16);
+          this.coeff = H(E, 16);
         } else if (c.sub.length === 2)
           if (c.sub[0].sub) {
             var v = c.sub[1], S = v.sub[0];
-            e = S.sub[0].getHexStringValue(), this.n = j(e, 16), i = S.sub[1].getHexStringValue(), this.e = parseInt(i, 16);
+            e = S.sub[0].getHexStringValue(), this.n = H(e, 16), i = S.sub[1].getHexStringValue(), this.e = parseInt(i, 16);
           } else
-            e = c.sub[0].getHexStringValue(), this.n = j(e, 16), i = c.sub[1].getHexStringValue(), this.e = parseInt(i, 16);
+            e = c.sub[0].getHexStringValue(), this.n = H(e, 16), i = c.sub[1].getHexStringValue(), this.e = parseInt(i, 16);
         else
           return !1;
         return !0;
@@ -3689,22 +3693,22 @@ var to = /* @__PURE__ */ function() {
     }, n.prototype.parsePropertiesFrom = function(t) {
       this.n = t.n, this.e = t.e, t.hasOwnProperty("d") && (this.d = t.d, this.p = t.p, this.q = t.q, this.dmp1 = t.dmp1, this.dmq1 = t.dmq1, this.coeff = t.coeff);
     }, n;
-  }($a)
-), Ye, eo = typeof process < "u" ? (Ye = process.env) === null || Ye === void 0 ? void 0 : Ye.npm_package_version : void 0, no = (
+  }(Xa)
+), Ye, Za = typeof process < "u" ? (Ye = process.env) === null || Ye === void 0 ? void 0 : Ye.npm_package_version : void 0, Ya = (
   /** @class */
   function() {
     function r(n) {
       n === void 0 && (n = {}), n = n || {}, this.default_key_size = n.default_key_size ? parseInt(n.default_key_size, 10) : 1024, this.default_public_exponent = n.default_public_exponent || "010001", this.log = n.log || !1, this.key = null;
     }
     return r.prototype.setKey = function(n) {
-      this.log && this.key && console.warn("A key was already set, overriding existing."), this.key = new di(n);
+      this.log && this.key && console.warn("A key was already set, overriding existing."), this.key = new hi(n);
     }, r.prototype.setPrivateKey = function(n) {
       this.setKey(n);
     }, r.prototype.setPublicKey = function(n) {
       this.setKey(n);
     }, r.prototype.decrypt = function(n) {
       try {
-        return this.getKey().decrypt(si(n));
+        return this.getKey().decrypt(ii(n));
       } catch {
         return !1;
       }
@@ -3722,13 +3726,13 @@ var to = /* @__PURE__ */ function() {
       }
     }, r.prototype.verify = function(n, t, e) {
       try {
-        return this.getKey().verify(n, si(t), e);
+        return this.getKey().verify(n, ii(t), e);
       } catch {
         return !1;
       }
     }, r.prototype.getKey = function(n) {
       if (!this.key) {
-        if (this.key = new di(), n && {}.toString.call(n) === "[object Function]") {
+        if (this.key = new hi(), n && {}.toString.call(n) === "[object Function]") {
           this.key.generateAsync(this.default_key_size, this.default_public_exponent, n);
           return;
         }
@@ -3743,41 +3747,41 @@ var to = /* @__PURE__ */ function() {
       return this.getKey().getPublicKey();
     }, r.prototype.getPublicKeyB64 = function() {
       return this.getKey().getPublicBaseKeyB64();
-    }, r.version = eo, r;
+    }, r.version = Za, r;
   }()
 );
-function Xi(r, n) {
+function Ki(r, n) {
   return function() {
     return r.apply(n, arguments);
   };
 }
-const { toString: io } = Object.prototype, { getPrototypeOf: jn } = Object, qe = /* @__PURE__ */ ((r) => (n) => {
-  const t = io.call(n);
+const { toString: to } = Object.prototype, { getPrototypeOf: qn } = Object, qe = /* @__PURE__ */ ((r) => (n) => {
+  const t = to.call(n);
   return r[t] || (r[t] = t.slice(8, -1).toLowerCase());
-})(/* @__PURE__ */ Object.create(null)), mt = (r) => (r = r.toLowerCase(), (n) => qe(n) === r), je = (r) => (n) => typeof n === r, { isArray: Jt } = Array, oe = je("undefined");
-function ro(r) {
+})(/* @__PURE__ */ Object.create(null)), mt = (r) => (r = r.toLowerCase(), (n) => qe(n) === r), je = (r) => (n) => typeof n === r, { isArray: Gt } = Array, oe = je("undefined");
+function eo(r) {
   return r !== null && !oe(r) && r.constructor !== null && !oe(r.constructor) && ut(r.constructor.isBuffer) && r.constructor.isBuffer(r);
 }
-const Gi = mt("ArrayBuffer");
-function so(r) {
+const Wi = mt("ArrayBuffer");
+function no(r) {
   let n;
-  return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? n = ArrayBuffer.isView(r) : n = r && r.buffer && Gi(r.buffer), n;
+  return typeof ArrayBuffer < "u" && ArrayBuffer.isView ? n = ArrayBuffer.isView(r) : n = r && r.buffer && Wi(r.buffer), n;
 }
-const ao = je("string"), ut = je("function"), Ji = je("number"), He = (r) => r !== null && typeof r == "object", oo = (r) => r === !0 || r === !1, Te = (r) => {
+const io = je("string"), ut = je("function"), zi = je("number"), He = (r) => r !== null && typeof r == "object", ro = (r) => r === !0 || r === !1, Ce = (r) => {
   if (qe(r) !== "object")
     return !1;
-  const n = jn(r);
+  const n = qn(r);
   return (n === null || n === Object.prototype || Object.getPrototypeOf(n) === null) && !(Symbol.toStringTag in r) && !(Symbol.iterator in r);
-}, co = mt("Date"), lo = mt("File"), ho = mt("Blob"), uo = mt("FileList"), po = (r) => He(r) && ut(r.pipe), _o = (r) => {
+}, so = mt("Date"), ao = mt("File"), oo = mt("Blob"), co = mt("FileList"), lo = (r) => He(r) && ut(r.pipe), ho = (r) => {
   let n;
   return r && (typeof FormData == "function" && r instanceof FormData || ut(r.append) && ((n = qe(r)) === "formdata" || // detect form-data instance
   n === "object" && ut(r.toString) && r.toString() === "[object FormData]"));
-}, fo = mt("URLSearchParams"), [go, bo, yo, mo] = ["ReadableStream", "Request", "Response", "Headers"].map(mt), wo = (r) => r.trim ? r.trim() : r.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
+}, uo = mt("URLSearchParams"), [po, _o, fo, go] = ["ReadableStream", "Request", "Response", "Headers"].map(mt), bo = (r) => r.trim ? r.trim() : r.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "");
 function le(r, n, { allOwnKeys: t = !1 } = {}) {
   if (r === null || typeof r > "u")
     return;
   let e, i;
-  if (typeof r != "object" && (r = [r]), Jt(r))
+  if (typeof r != "object" && (r = [r]), Gt(r))
     for (e = 0, i = r.length; e < i; e++)
       n.call(null, r[e], e, r);
   else {
@@ -3787,7 +3791,7 @@ function le(r, n, { allOwnKeys: t = !1 } = {}) {
       c = s[e], n.call(null, r[c], c, r);
   }
 }
-function $i(r, n) {
+function Xi(r, n) {
   n = n.toLowerCase();
   const t = Object.keys(r);
   let e = t.length, i;
@@ -3796,71 +3800,71 @@ function $i(r, n) {
       return i;
   return null;
 }
-const Bt = typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : global, Qi = (r) => !oe(r) && r !== Bt;
-function _n() {
-  const { caseless: r } = Qi(this) && this || {}, n = {}, t = (e, i) => {
-    const s = r && $i(n, i) || i;
-    Te(n[s]) && Te(e) ? n[s] = _n(n[s], e) : Te(e) ? n[s] = _n({}, e) : Jt(e) ? n[s] = e.slice() : n[s] = e;
+const Bt = typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : typeof window < "u" ? window : global, $i = (r) => !oe(r) && r !== Bt;
+function pn() {
+  const { caseless: r } = $i(this) && this || {}, n = {}, t = (e, i) => {
+    const s = r && Xi(n, i) || i;
+    Ce(n[s]) && Ce(e) ? n[s] = pn(n[s], e) : Ce(e) ? n[s] = pn({}, e) : Gt(e) ? n[s] = e.slice() : n[s] = e;
   };
   for (let e = 0, i = arguments.length; e < i; e++)
     arguments[e] && le(arguments[e], t);
   return n;
 }
-const vo = (r, n, t, { allOwnKeys: e } = {}) => (le(n, (i, s) => {
-  t && ut(i) ? r[s] = Xi(i, t) : r[s] = i;
-}, { allOwnKeys: e }), r), Eo = (r) => (r.charCodeAt(0) === 65279 && (r = r.slice(1)), r), Po = (r, n, t, e) => {
+const yo = (r, n, t, { allOwnKeys: e } = {}) => (le(n, (i, s) => {
+  t && ut(i) ? r[s] = Ki(i, t) : r[s] = i;
+}, { allOwnKeys: e }), r), mo = (r) => (r.charCodeAt(0) === 65279 && (r = r.slice(1)), r), wo = (r, n, t, e) => {
   r.prototype = Object.create(n.prototype, e), r.prototype.constructor = r, Object.defineProperty(r, "super", {
     value: n.prototype
   }), t && Object.assign(r.prototype, t);
-}, To = (r, n, t, e) => {
+}, vo = (r, n, t, e) => {
   let i, s, a;
   const c = {};
   if (n = n || {}, r == null) return n;
   do {
     for (i = Object.getOwnPropertyNames(r), s = i.length; s-- > 0; )
       a = i[s], (!e || e(a, r, n)) && !c[a] && (n[a] = r[a], c[a] = !0);
-    r = t !== !1 && jn(r);
+    r = t !== !1 && qn(r);
   } while (r && (!t || t(r, n)) && r !== Object.prototype);
   return n;
-}, Co = (r, n, t) => {
+}, Eo = (r, n, t) => {
   r = String(r), (t === void 0 || t > r.length) && (t = r.length), t -= n.length;
   const e = r.indexOf(n, t);
   return e !== -1 && e === t;
-}, So = (r) => {
+}, Po = (r) => {
   if (!r) return null;
-  if (Jt(r)) return r;
+  if (Gt(r)) return r;
   let n = r.length;
-  if (!Ji(n)) return null;
+  if (!zi(n)) return null;
   const t = new Array(n);
   for (; n-- > 0; )
     t[n] = r[n];
   return t;
-}, ko = /* @__PURE__ */ ((r) => (n) => r && n instanceof r)(typeof Uint8Array < "u" && jn(Uint8Array)), xo = (r, n) => {
+}, Co = /* @__PURE__ */ ((r) => (n) => r && n instanceof r)(typeof Uint8Array < "u" && qn(Uint8Array)), To = (r, n) => {
   const e = (r && r[Symbol.iterator]).call(r);
   let i;
   for (; (i = e.next()) && !i.done; ) {
     const s = i.value;
     n.call(r, s[0], s[1]);
   }
-}, Ao = (r, n) => {
+}, So = (r, n) => {
   let t;
   const e = [];
   for (; (t = r.exec(n)) !== null; )
     e.push(t);
   return e;
-}, Do = mt("HTMLFormElement"), Ro = (r) => r.toLowerCase().replace(
+}, ko = mt("HTMLFormElement"), xo = (r) => r.toLowerCase().replace(
   /[-_\s]([a-z\d])(\w*)/g,
   function(t, e, i) {
     return e.toUpperCase() + i;
   }
-), pi = (({ hasOwnProperty: r }) => (n, t) => r.call(n, t))(Object.prototype), Io = mt("RegExp"), Zi = (r, n) => {
+), ui = (({ hasOwnProperty: r }) => (n, t) => r.call(n, t))(Object.prototype), Ao = mt("RegExp"), Gi = (r, n) => {
   const t = Object.getOwnPropertyDescriptors(r), e = {};
   le(t, (i, s) => {
     let a;
     (a = n(i, s, r)) !== !1 && (e[s] = a || i);
   }), Object.defineProperties(r, e);
-}, Oo = (r) => {
-  Zi(r, (n, t) => {
+}, Do = (r) => {
+  Gi(r, (n, t) => {
     if (ut(r) && ["arguments", "caller", "callee"].indexOf(t) !== -1)
       return !1;
     const e = r[t];
@@ -3874,36 +3878,26 @@ const vo = (r, n, t, { allOwnKeys: e } = {}) => (le(n, (i, s) => {
       });
     }
   });
-}, No = (r, n) => {
+}, Ro = (r, n) => {
   const t = {}, e = (i) => {
     i.forEach((s) => {
       t[s] = !0;
     });
   };
-  return Jt(r) ? e(r) : e(String(r).split(n)), t;
-}, Bo = () => {
-}, Mo = (r, n) => r != null && Number.isFinite(r = +r) ? r : n, tn = "abcdefghijklmnopqrstuvwxyz", _i = "0123456789", Yi = {
-  DIGIT: _i,
-  ALPHA: tn,
-  ALPHA_DIGIT: tn + tn.toUpperCase() + _i
-}, Fo = (r = 16, n = Yi.ALPHA_DIGIT) => {
-  let t = "";
-  const { length: e } = n;
-  for (; r--; )
-    t += n[Math.random() * e | 0];
-  return t;
-};
-function Uo(r) {
+  return Gt(r) ? e(r) : e(String(r).split(n)), t;
+}, Io = () => {
+}, Oo = (r, n) => r != null && Number.isFinite(r = +r) ? r : n;
+function No(r) {
   return !!(r && ut(r.append) && r[Symbol.toStringTag] === "FormData" && r[Symbol.iterator]);
 }
-const Lo = (r) => {
+const Bo = (r) => {
   const n = new Array(10), t = (e, i) => {
     if (He(e)) {
       if (n.indexOf(e) >= 0)
         return;
       if (!("toJSON" in e)) {
         n[i] = e;
-        const s = Jt(e) ? [] : {};
+        const s = Gt(e) ? [] : {};
         return le(e, (a, c) => {
           const l = t(a, i + 1);
           !oe(l) && (s[c] = l);
@@ -3913,72 +3907,70 @@ const Lo = (r) => {
     return e;
   };
   return t(r, 0);
-}, Vo = mt("AsyncFunction"), qo = (r) => r && (He(r) || ut(r)) && ut(r.then) && ut(r.catch), tr = ((r, n) => r ? setImmediate : n ? ((t, e) => (Bt.addEventListener("message", ({ source: i, data: s }) => {
+}, Mo = mt("AsyncFunction"), Fo = (r) => r && (He(r) || ut(r)) && ut(r.then) && ut(r.catch), Ji = ((r, n) => r ? setImmediate : n ? ((t, e) => (Bt.addEventListener("message", ({ source: i, data: s }) => {
   i === Bt && s === t && e.length && e.shift()();
 }, !1), (i) => {
   e.push(i), Bt.postMessage(t, "*");
 }))(`axios@${Math.random()}`, []) : (t) => setTimeout(t))(
   typeof setImmediate == "function",
   ut(Bt.postMessage)
-), jo = typeof queueMicrotask < "u" ? queueMicrotask.bind(Bt) : typeof process < "u" && process.nextTick || tr, b = {
-  isArray: Jt,
-  isArrayBuffer: Gi,
-  isBuffer: ro,
-  isFormData: _o,
-  isArrayBufferView: so,
-  isString: ao,
-  isNumber: Ji,
-  isBoolean: oo,
+), Uo = typeof queueMicrotask < "u" ? queueMicrotask.bind(Bt) : typeof process < "u" && process.nextTick || Ji, b = {
+  isArray: Gt,
+  isArrayBuffer: Wi,
+  isBuffer: eo,
+  isFormData: ho,
+  isArrayBufferView: no,
+  isString: io,
+  isNumber: zi,
+  isBoolean: ro,
   isObject: He,
-  isPlainObject: Te,
-  isReadableStream: go,
-  isRequest: bo,
-  isResponse: yo,
-  isHeaders: mo,
+  isPlainObject: Ce,
+  isReadableStream: po,
+  isRequest: _o,
+  isResponse: fo,
+  isHeaders: go,
   isUndefined: oe,
-  isDate: co,
-  isFile: lo,
-  isBlob: ho,
-  isRegExp: Io,
+  isDate: so,
+  isFile: ao,
+  isBlob: oo,
+  isRegExp: Ao,
   isFunction: ut,
-  isStream: po,
-  isURLSearchParams: fo,
-  isTypedArray: ko,
-  isFileList: uo,
+  isStream: lo,
+  isURLSearchParams: uo,
+  isTypedArray: Co,
+  isFileList: co,
   forEach: le,
-  merge: _n,
-  extend: vo,
-  trim: wo,
-  stripBOM: Eo,
-  inherits: Po,
-  toFlatObject: To,
+  merge: pn,
+  extend: yo,
+  trim: bo,
+  stripBOM: mo,
+  inherits: wo,
+  toFlatObject: vo,
   kindOf: qe,
   kindOfTest: mt,
-  endsWith: Co,
-  toArray: So,
-  forEachEntry: xo,
-  matchAll: Ao,
-  isHTMLForm: Do,
-  hasOwnProperty: pi,
-  hasOwnProp: pi,
+  endsWith: Eo,
+  toArray: Po,
+  forEachEntry: To,
+  matchAll: So,
+  isHTMLForm: ko,
+  hasOwnProperty: ui,
+  hasOwnProp: ui,
   // an alias to avoid ESLint no-prototype-builtins detection
-  reduceDescriptors: Zi,
-  freezeMethods: Oo,
-  toObjectSet: No,
-  toCamelCase: Ro,
-  noop: Bo,
-  toFiniteNumber: Mo,
-  findKey: $i,
+  reduceDescriptors: Gi,
+  freezeMethods: Do,
+  toObjectSet: Ro,
+  toCamelCase: xo,
+  noop: Io,
+  toFiniteNumber: Oo,
+  findKey: Xi,
   global: Bt,
-  isContextDefined: Qi,
-  ALPHABET: Yi,
-  generateString: Fo,
-  isSpecCompliantForm: Uo,
-  toJSONObject: Lo,
-  isAsyncFn: Vo,
-  isThenable: qo,
-  setImmediate: tr,
-  asap: jo
+  isContextDefined: $i,
+  isSpecCompliantForm: No,
+  toJSONObject: Bo,
+  isAsyncFn: Mo,
+  isThenable: Fo,
+  setImmediate: Ji,
+  asap: Uo
 };
 function x(r, n, t, e, i) {
   Error.call(this), Error.captureStackTrace ? Error.captureStackTrace(this, this.constructor) : this.stack = new Error().stack, this.message = r, this.name = "AxiosError", n && (this.code = n), t && (this.config = t), e && (this.request = e), i && (this.response = i, this.status = i.status ? i.status : null);
@@ -4004,7 +3996,7 @@ b.inherits(x, Error, {
     };
   }
 });
-const er = x.prototype, nr = {};
+const Qi = x.prototype, Zi = {};
 [
   "ERR_BAD_OPTION_VALUE",
   "ERR_BAD_OPTION",
@@ -4020,32 +4012,32 @@ const er = x.prototype, nr = {};
   "ERR_INVALID_URL"
   // eslint-disable-next-line func-names
 ].forEach((r) => {
-  nr[r] = { value: r };
+  Zi[r] = { value: r };
 });
-Object.defineProperties(x, nr);
-Object.defineProperty(er, "isAxiosError", { value: !0 });
+Object.defineProperties(x, Zi);
+Object.defineProperty(Qi, "isAxiosError", { value: !0 });
 x.from = (r, n, t, e, i, s) => {
-  const a = Object.create(er);
+  const a = Object.create(Qi);
   return b.toFlatObject(r, a, function(l) {
     return l !== Error.prototype;
   }, (c) => c !== "isAxiosError"), x.call(a, r.message, n, t, e, i), a.cause = r, a.name = r.name, s && Object.assign(a, s), a;
 };
-const Ho = null;
-function fn(r) {
+const Lo = null;
+function _n(r) {
   return b.isPlainObject(r) || b.isArray(r);
 }
-function ir(r) {
+function Yi(r) {
   return b.endsWith(r, "[]") ? r.slice(0, -2) : r;
 }
-function fi(r, n, t) {
+function di(r, n, t) {
   return r ? r.concat(n).map(function(i, s) {
-    return i = ir(i), !t && s ? "[" + i + "]" : i;
+    return i = Yi(i), !t && s ? "[" + i + "]" : i;
   }).join(t ? "." : "") : n;
 }
-function Ko(r) {
-  return b.isArray(r) && !r.some(fn);
+function Vo(r) {
+  return b.isArray(r) && !r.some(_n);
 }
-const Wo = b.toFlatObject(b, {}, null, function(n) {
+const qo = b.toFlatObject(b, {}, null, function(n) {
   return /^is[A-Z]/.test(n);
 });
 function Ke(r, n, t) {
@@ -4055,8 +4047,8 @@ function Ke(r, n, t) {
     metaTokens: !0,
     dots: !1,
     indexes: !1
-  }, !1, function(S, C) {
-    return !b.isUndefined(C[S]);
+  }, !1, function(S, T) {
+    return !b.isUndefined(T[S]);
   });
   const e = t.metaTokens, i = t.visitor || p, s = t.dots, a = t.indexes, l = (t.Blob || typeof Blob < "u" && Blob) && b.isSpecCompliantForm(n);
   if (!b.isFunction(i))
@@ -4069,26 +4061,26 @@ function Ke(r, n, t) {
       throw new x("Blob is not supported. Use a Buffer instead.");
     return b.isArrayBuffer(v) || b.isTypedArray(v) ? l && typeof Blob == "function" ? new Blob([v]) : Buffer.from(v) : v;
   }
-  function p(v, S, C) {
+  function p(v, S, T) {
     let U = v;
-    if (v && !C && typeof v == "object") {
+    if (v && !T && typeof v == "object") {
       if (b.endsWith(S, "{}"))
         S = e ? S : S.slice(0, -2), v = JSON.stringify(v);
-      else if (b.isArray(v) && Ko(v) || (b.isFileList(v) || b.endsWith(S, "[]")) && (U = b.toArray(v)))
-        return S = ir(S), U.forEach(function(L, it) {
-          !(b.isUndefined(L) || L === null) && n.append(
+      else if (b.isArray(v) && Vo(v) || (b.isFileList(v) || b.endsWith(S, "[]")) && (U = b.toArray(v)))
+        return S = Yi(S), U.forEach(function(q, it) {
+          !(b.isUndefined(q) || q === null) && n.append(
             // eslint-disable-next-line no-nested-ternary
-            a === !0 ? fi([S], it, s) : a === null ? S : S + "[]",
-            h(L)
+            a === !0 ? di([S], it, s) : a === null ? S : S + "[]",
+            h(q)
           );
         }), !1;
     }
-    return fn(v) ? !0 : (n.append(fi(C, S, s), h(v)), !1);
+    return _n(v) ? !0 : (n.append(di(T, S, s), h(v)), !1);
   }
-  const f = [], y = Object.assign(Wo, {
+  const f = [], y = Object.assign(qo, {
     defaultVisitor: p,
     convertValue: h,
-    isVisitable: fn
+    isVisitable: _n
   });
   function E(v, S) {
     if (!b.isUndefined(v)) {
@@ -4109,7 +4101,7 @@ function Ke(r, n, t) {
     throw new TypeError("data must be an object");
   return E(r), n;
 }
-function gi(r) {
+function pi(r) {
   const n = {
     "!": "%21",
     "'": "%27",
@@ -4123,40 +4115,40 @@ function gi(r) {
     return n[e];
   });
 }
-function Hn(r, n) {
+function jn(r, n) {
   this._pairs = [], r && Ke(r, this, n);
 }
-const rr = Hn.prototype;
-rr.append = function(n, t) {
+const tr = jn.prototype;
+tr.append = function(n, t) {
   this._pairs.push([n, t]);
 };
-rr.toString = function(n) {
+tr.toString = function(n) {
   const t = n ? function(e) {
-    return n.call(this, e, gi);
-  } : gi;
+    return n.call(this, e, pi);
+  } : pi;
   return this._pairs.map(function(i) {
     return t(i[0]) + "=" + t(i[1]);
   }, "").join("&");
 };
-function zo(r) {
+function jo(r) {
   return encodeURIComponent(r).replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",").replace(/%20/g, "+").replace(/%5B/gi, "[").replace(/%5D/gi, "]");
 }
-function sr(r, n, t) {
+function er(r, n, t) {
   if (!n)
     return r;
-  const e = t && t.encode || zo;
+  const e = t && t.encode || jo;
   b.isFunction(t) && (t = {
     serialize: t
   });
   const i = t && t.serialize;
   let s;
-  if (i ? s = i(n, t) : s = b.isURLSearchParams(n) ? n.toString() : new Hn(n, t).toString(e), s) {
+  if (i ? s = i(n, t) : s = b.isURLSearchParams(n) ? n.toString() : new jn(n, t).toString(e), s) {
     const a = r.indexOf("#");
     a !== -1 && (r = r.slice(0, a)), r += (r.indexOf("?") === -1 ? "?" : "&") + s;
   }
   return r;
 }
-class bi {
+class _i {
   constructor() {
     this.handlers = [];
   }
@@ -4210,41 +4202,41 @@ class bi {
     });
   }
 }
-const ar = {
+const nr = {
   silentJSONParsing: !0,
   forcedJSONParsing: !0,
   clarifyTimeoutError: !1
-}, Xo = typeof URLSearchParams < "u" ? URLSearchParams : Hn, Go = typeof FormData < "u" ? FormData : null, Jo = typeof Blob < "u" ? Blob : null, $o = {
+}, Ho = typeof URLSearchParams < "u" ? URLSearchParams : jn, Ko = typeof FormData < "u" ? FormData : null, Wo = typeof Blob < "u" ? Blob : null, zo = {
   isBrowser: !0,
   classes: {
-    URLSearchParams: Xo,
-    FormData: Go,
-    Blob: Jo
+    URLSearchParams: Ho,
+    FormData: Ko,
+    Blob: Wo
   },
   protocols: ["http", "https", "file", "blob", "url", "data"]
-}, Kn = typeof window < "u" && typeof document < "u", gn = typeof navigator == "object" && navigator || void 0, Qo = Kn && (!gn || ["ReactNative", "NativeScript", "NS"].indexOf(gn.product) < 0), Zo = typeof WorkerGlobalScope < "u" && // eslint-disable-next-line no-undef
-self instanceof WorkerGlobalScope && typeof self.importScripts == "function", Yo = Kn && window.location.href || "http://localhost", tc = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}, Hn = typeof window < "u" && typeof document < "u", fn = typeof navigator == "object" && navigator || void 0, Xo = Hn && (!fn || ["ReactNative", "NativeScript", "NS"].indexOf(fn.product) < 0), $o = typeof WorkerGlobalScope < "u" && // eslint-disable-next-line no-undef
+self instanceof WorkerGlobalScope && typeof self.importScripts == "function", Go = Hn && window.location.href || "http://localhost", Jo = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  hasBrowserEnv: Kn,
-  hasStandardBrowserEnv: Qo,
-  hasStandardBrowserWebWorkerEnv: Zo,
-  navigator: gn,
-  origin: Yo
+  hasBrowserEnv: Hn,
+  hasStandardBrowserEnv: Xo,
+  hasStandardBrowserWebWorkerEnv: $o,
+  navigator: fn,
+  origin: Go
 }, Symbol.toStringTag, { value: "Module" })), et = {
-  ...tc,
-  ...$o
+  ...Jo,
+  ...zo
 };
-function ec(r, n) {
+function Qo(r, n) {
   return Ke(r, new et.classes.URLSearchParams(), Object.assign({
     visitor: function(t, e, i, s) {
       return et.isNode && b.isBuffer(t) ? (this.append(e, t.toString("base64")), !1) : s.defaultVisitor.apply(this, arguments);
     }
   }, n));
 }
-function nc(r) {
+function Zo(r) {
   return b.matchAll(/\w+|\[(\w*)]/g, r).map((n) => n[0] === "[]" ? "" : n[1] || n[0]);
 }
-function ic(r) {
+function Yo(r) {
   const n = {}, t = Object.keys(r);
   let e;
   const i = t.length;
@@ -4253,22 +4245,22 @@ function ic(r) {
     s = t[e], n[s] = r[s];
   return n;
 }
-function or(r) {
+function ir(r) {
   function n(t, e, i, s) {
     let a = t[s++];
     if (a === "__proto__") return !0;
     const c = Number.isFinite(+a), l = s >= t.length;
-    return a = !a && b.isArray(i) ? i.length : a, l ? (b.hasOwnProp(i, a) ? i[a] = [i[a], e] : i[a] = e, !c) : ((!i[a] || !b.isObject(i[a])) && (i[a] = []), n(t, e, i[a], s) && b.isArray(i[a]) && (i[a] = ic(i[a])), !c);
+    return a = !a && b.isArray(i) ? i.length : a, l ? (b.hasOwnProp(i, a) ? i[a] = [i[a], e] : i[a] = e, !c) : ((!i[a] || !b.isObject(i[a])) && (i[a] = []), n(t, e, i[a], s) && b.isArray(i[a]) && (i[a] = Yo(i[a])), !c);
   }
   if (b.isFormData(r) && b.isFunction(r.entries)) {
     const t = {};
     return b.forEachEntry(r, (e, i) => {
-      n(nc(e), i, t, 0);
+      n(Zo(e), i, t, 0);
     }), t;
   }
   return null;
 }
-function rc(r, n, t) {
+function tc(r, n, t) {
   if (b.isString(r))
     try {
       return (n || JSON.parse)(r), b.trim(r);
@@ -4276,15 +4268,15 @@ function rc(r, n, t) {
       if (e.name !== "SyntaxError")
         throw e;
     }
-  return (0, JSON.stringify)(r);
+  return (t || JSON.stringify)(r);
 }
 const he = {
-  transitional: ar,
+  transitional: nr,
   adapter: ["xhr", "http", "fetch"],
   transformRequest: [function(n, t) {
     const e = t.getContentType() || "", i = e.indexOf("application/json") > -1, s = b.isObject(n);
     if (s && b.isHTMLForm(n) && (n = new FormData(n)), b.isFormData(n))
-      return i ? JSON.stringify(or(n)) : n;
+      return i ? JSON.stringify(ir(n)) : n;
     if (b.isArrayBuffer(n) || b.isBuffer(n) || b.isStream(n) || b.isFile(n) || b.isBlob(n) || b.isReadableStream(n))
       return n;
     if (b.isArrayBufferView(n))
@@ -4294,7 +4286,7 @@ const he = {
     let c;
     if (s) {
       if (e.indexOf("application/x-www-form-urlencoded") > -1)
-        return ec(n, this.formSerializer).toString();
+        return Qo(n, this.formSerializer).toString();
       if ((c = b.isFileList(n)) || e.indexOf("multipart/form-data") > -1) {
         const l = this.env && this.env.FormData;
         return Ke(
@@ -4304,7 +4296,7 @@ const he = {
         );
       }
     }
-    return s || i ? (t.setContentType("application/json", !1), rc(n)) : n;
+    return s || i ? (t.setContentType("application/json", !1), tc(n)) : n;
   }],
   transformResponse: [function(n) {
     const t = this.transitional || he.transitional, e = t && t.forcedJSONParsing, i = this.responseType === "json";
@@ -4347,7 +4339,7 @@ const he = {
 b.forEach(["delete", "get", "head", "post", "put", "patch"], (r) => {
   he.headers[r] = {};
 });
-const sc = b.toObjectSet([
+const ec = b.toObjectSet([
   "age",
   "authorization",
   "content-length",
@@ -4365,29 +4357,29 @@ const sc = b.toObjectSet([
   "referer",
   "retry-after",
   "user-agent"
-]), ac = (r) => {
+]), nc = (r) => {
   const n = {};
   let t, e, i;
   return r && r.split(`
 `).forEach(function(a) {
-    i = a.indexOf(":"), t = a.substring(0, i).trim().toLowerCase(), e = a.substring(i + 1).trim(), !(!t || n[t] && sc[t]) && (t === "set-cookie" ? n[t] ? n[t].push(e) : n[t] = [e] : n[t] = n[t] ? n[t] + ", " + e : e);
+    i = a.indexOf(":"), t = a.substring(0, i).trim().toLowerCase(), e = a.substring(i + 1).trim(), !(!t || n[t] && ec[t]) && (t === "set-cookie" ? n[t] ? n[t].push(e) : n[t] = [e] : n[t] = n[t] ? n[t] + ", " + e : e);
   }), n;
-}, yi = Symbol("internals");
+}, fi = Symbol("internals");
 function Qt(r) {
   return r && String(r).trim().toLowerCase();
 }
-function Ce(r) {
-  return r === !1 || r == null ? r : b.isArray(r) ? r.map(Ce) : String(r);
+function Te(r) {
+  return r === !1 || r == null ? r : b.isArray(r) ? r.map(Te) : String(r);
 }
-function oc(r) {
+function ic(r) {
   const n = /* @__PURE__ */ Object.create(null), t = /([^\s,;=]+)\s*(?:=\s*([^,;]+))?/g;
   let e;
   for (; e = t.exec(r); )
     n[e[1]] = e[2];
   return n;
 }
-const cc = (r) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(r.trim());
-function en(r, n, t, e, i) {
+const rc = (r) => /^[-_a-zA-Z0-9^`|~,!#$%&'*+.]+$/.test(r.trim());
+function tn(r, n, t, e, i) {
   if (b.isFunction(e))
     return e.call(this, n, t);
   if (i && (n = t), !!b.isString(n)) {
@@ -4397,10 +4389,10 @@ function en(r, n, t, e, i) {
       return e.test(n);
   }
 }
-function lc(r) {
+function sc(r) {
   return r.trim().toLowerCase().replace(/([a-z\d])(\w*)/g, (n, t, e) => t.toUpperCase() + e);
 }
-function hc(r, n) {
+function ac(r, n) {
   const t = b.toCamelCase(" " + n);
   ["get", "set", "has"].forEach((e) => {
     Object.defineProperty(r, e + t, {
@@ -4411,7 +4403,7 @@ function hc(r, n) {
     });
   });
 }
-class ct {
+let ct = class {
   constructor(n) {
     n && this.set(n);
   }
@@ -4422,13 +4414,13 @@ class ct {
       if (!p)
         throw new Error("header name must be a non-empty string");
       const f = b.findKey(i, p);
-      (!f || i[f] === void 0 || h === !0 || h === void 0 && i[f] !== !1) && (i[f || l] = Ce(c));
+      (!f || i[f] === void 0 || h === !0 || h === void 0 && i[f] !== !1) && (i[f || l] = Te(c));
     }
     const a = (c, l) => b.forEach(c, (h, p) => s(h, p, l));
     if (b.isPlainObject(n) || n instanceof this.constructor)
       a(n, t);
-    else if (b.isString(n) && (n = n.trim()) && !cc(n))
-      a(ac(n), t);
+    else if (b.isString(n) && (n = n.trim()) && !rc(n))
+      a(nc(n), t);
     else if (b.isHeaders(n))
       for (const [c, l] of n.entries())
         s(l, c, e);
@@ -4444,7 +4436,7 @@ class ct {
         if (!t)
           return i;
         if (t === !0)
-          return oc(i);
+          return ic(i);
         if (b.isFunction(t))
           return t.call(this, i, e);
         if (b.isRegExp(t))
@@ -4456,7 +4448,7 @@ class ct {
   has(n, t) {
     if (n = Qt(n), n) {
       const e = b.findKey(this, n);
-      return !!(e && this[e] !== void 0 && (!t || en(this, this[e], e, t)));
+      return !!(e && this[e] !== void 0 && (!t || tn(this, this[e], e, t)));
     }
     return !1;
   }
@@ -4466,7 +4458,7 @@ class ct {
     function s(a) {
       if (a = Qt(a), a) {
         const c = b.findKey(e, a);
-        c && (!t || en(e, e[c], c, t)) && (delete e[c], i = !0);
+        c && (!t || tn(e, e[c], c, t)) && (delete e[c], i = !0);
       }
     }
     return b.isArray(n) ? n.forEach(s) : s(n), i;
@@ -4476,7 +4468,7 @@ class ct {
     let e = t.length, i = !1;
     for (; e--; ) {
       const s = t[e];
-      (!n || en(this, this[s], s, n, !0)) && (delete this[s], i = !0);
+      (!n || tn(this, this[s], s, n, !0)) && (delete this[s], i = !0);
     }
     return i;
   }
@@ -4485,11 +4477,11 @@ class ct {
     return b.forEach(this, (i, s) => {
       const a = b.findKey(e, s);
       if (a) {
-        t[a] = Ce(i), delete t[s];
+        t[a] = Te(i), delete t[s];
         return;
       }
-      const c = n ? lc(s) : String(s).trim();
-      c !== s && delete t[s], t[c] = Ce(i), e[c] = !0;
+      const c = n ? sc(s) : String(s).trim();
+      c !== s && delete t[s], t[c] = Te(i), e[c] = !0;
     }), this;
   }
   concat(...n) {
@@ -4519,16 +4511,16 @@ class ct {
     return t.forEach((i) => e.set(i)), e;
   }
   static accessor(n) {
-    const e = (this[yi] = this[yi] = {
+    const e = (this[fi] = this[fi] = {
       accessors: {}
     }).accessors, i = this.prototype;
     function s(a) {
       const c = Qt(a);
-      e[c] || (hc(i, a), e[c] = !0);
+      e[c] || (ac(i, a), e[c] = !0);
     }
     return b.isArray(n) ? n.forEach(s) : s(n), this;
   }
-}
+};
 ct.accessor(["Content-Type", "Content-Length", "Accept", "Accept-Encoding", "User-Agent", "Authorization"]);
 b.reduceDescriptors(ct.prototype, ({ value: r }, n) => {
   let t = n[0].toUpperCase() + n.slice(1);
@@ -4540,23 +4532,23 @@ b.reduceDescriptors(ct.prototype, ({ value: r }, n) => {
   };
 });
 b.freezeMethods(ct);
-function nn(r, n) {
+function en(r, n) {
   const t = this || he, e = n || t, i = ct.from(e.headers);
   let s = e.data;
   return b.forEach(r, function(c) {
     s = c.call(t, s, i.normalize(), n ? n.status : void 0);
   }), i.normalize(), s;
 }
-function cr(r) {
+function rr(r) {
   return !!(r && r.__CANCEL__);
 }
-function $t(r, n, t) {
+function Jt(r, n, t) {
   x.call(this, r ?? "canceled", x.ERR_CANCELED, n, t), this.name = "CanceledError";
 }
-b.inherits($t, x, {
+b.inherits(Jt, x, {
   __CANCEL__: !0
 });
-function lr(r, n, t) {
+function sr(r, n, t) {
   const e = t.config.validateStatus;
   !t.status || !e || e(t.status) ? r(t) : n(new x(
     "Request failed with status code " + t.status,
@@ -4566,11 +4558,11 @@ function lr(r, n, t) {
     t
   ));
 }
-function uc(r) {
+function oc(r) {
   const n = /^([-+\w]{1,25})(:?\/\/|:)/.exec(r);
   return n && n[1] || "";
 }
-function dc(r, n) {
+function cc(r, n) {
   r = r || 10;
   const t = new Array(r), e = new Array(r);
   let i = 0, s = 0, a;
@@ -4586,7 +4578,7 @@ function dc(r, n) {
     return E ? Math.round(y * 1e3 / E) : void 0;
   };
 }
-function pc(r, n) {
+function lc(r, n) {
   let t = 0, e = 1e3 / n, i, s;
   const a = (h, p = Date.now()) => {
     t = p, i = null, s && (clearTimeout(s), s = null), r.apply(null, h);
@@ -4600,8 +4592,8 @@ function pc(r, n) {
 }
 const Fe = (r, n, t = 3) => {
   let e = 0;
-  const i = dc(50, 250);
-  return pc((s) => {
+  const i = cc(50, 250);
+  return lc((s) => {
     const a = s.loaded, c = s.lengthComputable ? s.total : void 0, l = a - e, h = i(l), p = a <= c;
     e = a;
     const f = {
@@ -4617,17 +4609,17 @@ const Fe = (r, n, t = 3) => {
     };
     r(f);
   }, t);
-}, mi = (r, n) => {
+}, gi = (r, n) => {
   const t = r != null;
   return [(e) => n[0]({
     lengthComputable: t,
     total: r,
     loaded: e
   }), n[1]];
-}, wi = (r) => (...n) => b.asap(() => r(...n)), _c = et.hasStandardBrowserEnv ? /* @__PURE__ */ ((r, n) => (t) => (t = new URL(t, et.origin), r.protocol === t.protocol && r.host === t.host && (n || r.port === t.port)))(
+}, bi = (r) => (...n) => b.asap(() => r(...n)), hc = et.hasStandardBrowserEnv ? /* @__PURE__ */ ((r, n) => (t) => (t = new URL(t, et.origin), r.protocol === t.protocol && r.host === t.host && (n || r.port === t.port)))(
   new URL(et.origin),
   et.navigator && /(msie|trident)/i.test(et.navigator.userAgent)
-) : () => !0, fc = et.hasStandardBrowserEnv ? (
+) : () => !0, uc = et.hasStandardBrowserEnv ? (
   // Standard browser envs support document.cookie
   {
     write(r, n, t, e, i, s) {
@@ -4654,16 +4646,17 @@ const Fe = (r, n, t = 3) => {
     }
   }
 );
-function gc(r) {
+function dc(r) {
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(r);
 }
-function bc(r, n) {
+function pc(r, n) {
   return n ? r.replace(/\/?\/$/, "") + "/" + n.replace(/^\/+/, "") : r;
 }
-function hr(r, n) {
-  return r && !gc(n) ? bc(r, n) : n;
+function ar(r, n, t) {
+  let e = !dc(n);
+  return r && e || t == !1 ? pc(r, n) : n;
 }
-const vi = (r) => r instanceof ct ? { ...r } : r;
+const yi = (r) => r instanceof ct ? { ...r } : r;
 function Ut(r, n) {
   n = n || {};
   const t = {};
@@ -4721,17 +4714,17 @@ function Ut(r, n) {
     socketPath: a,
     responseEncoding: a,
     validateStatus: c,
-    headers: (h, p, f) => i(vi(h), vi(p), f, !0)
+    headers: (h, p, f) => i(yi(h), yi(p), f, !0)
   };
   return b.forEach(Object.keys(Object.assign({}, r, n)), function(p) {
     const f = l[p] || i, y = f(r[p], n[p], p);
     b.isUndefined(y) && f !== c || (t[p] = y);
   }), t;
 }
-const ur = (r) => {
+const or = (r) => {
   const n = Ut({}, r);
   let { data: t, withXSRFToken: e, xsrfHeaderName: i, xsrfCookieName: s, headers: a, auth: c } = n;
-  n.headers = a = ct.from(a), n.url = sr(hr(n.baseURL, n.url), r.params, r.paramsSerializer), c && a.set(
+  n.headers = a = ct.from(a), n.url = er(ar(n.baseURL, n.url), r.params, r.paramsSerializer), c && a.set(
     "Authorization",
     "Basic " + btoa((c.username || "") + ":" + (c.password ? unescape(encodeURIComponent(c.password)) : ""))
   );
@@ -4744,69 +4737,69 @@ const ur = (r) => {
       a.setContentType([h || "multipart/form-data", ...p].join("; "));
     }
   }
-  if (et.hasStandardBrowserEnv && (e && b.isFunction(e) && (e = e(n)), e || e !== !1 && _c(n.url))) {
-    const h = i && s && fc.read(s);
+  if (et.hasStandardBrowserEnv && (e && b.isFunction(e) && (e = e(n)), e || e !== !1 && hc(n.url))) {
+    const h = i && s && uc.read(s);
     h && a.set(i, h);
   }
   return n;
-}, yc = typeof XMLHttpRequest < "u", mc = yc && function(r) {
+}, _c = typeof XMLHttpRequest < "u", fc = _c && function(r) {
   return new Promise(function(t, e) {
-    const i = ur(r);
+    const i = or(r);
     let s = i.data;
     const a = ct.from(i.headers).normalize();
     let { responseType: c, onUploadProgress: l, onDownloadProgress: h } = i, p, f, y, E, v;
     function S() {
       E && E(), v && v(), i.cancelToken && i.cancelToken.unsubscribe(p), i.signal && i.signal.removeEventListener("abort", p);
     }
-    let C = new XMLHttpRequest();
-    C.open(i.method.toUpperCase(), i.url, !0), C.timeout = i.timeout;
+    let T = new XMLHttpRequest();
+    T.open(i.method.toUpperCase(), i.url, !0), T.timeout = i.timeout;
     function U() {
-      if (!C)
+      if (!T)
         return;
-      const L = ct.from(
-        "getAllResponseHeaders" in C && C.getAllResponseHeaders()
-      ), J = {
-        data: !c || c === "text" || c === "json" ? C.responseText : C.response,
-        status: C.status,
-        statusText: C.statusText,
-        headers: L,
+      const q = ct.from(
+        "getAllResponseHeaders" in T && T.getAllResponseHeaders()
+      ), G = {
+        data: !c || c === "text" || c === "json" ? T.responseText : T.response,
+        status: T.status,
+        statusText: T.statusText,
+        headers: q,
         config: r,
-        request: C
+        request: T
       };
-      lr(function(lt) {
+      sr(function(lt) {
         t(lt), S();
       }, function(lt) {
         e(lt), S();
-      }, J), C = null;
+      }, G), T = null;
     }
-    "onloadend" in C ? C.onloadend = U : C.onreadystatechange = function() {
-      !C || C.readyState !== 4 || C.status === 0 && !(C.responseURL && C.responseURL.indexOf("file:") === 0) || setTimeout(U);
-    }, C.onabort = function() {
-      C && (e(new x("Request aborted", x.ECONNABORTED, r, C)), C = null);
-    }, C.onerror = function() {
-      e(new x("Network Error", x.ERR_NETWORK, r, C)), C = null;
-    }, C.ontimeout = function() {
+    "onloadend" in T ? T.onloadend = U : T.onreadystatechange = function() {
+      !T || T.readyState !== 4 || T.status === 0 && !(T.responseURL && T.responseURL.indexOf("file:") === 0) || setTimeout(U);
+    }, T.onabort = function() {
+      T && (e(new x("Request aborted", x.ECONNABORTED, r, T)), T = null);
+    }, T.onerror = function() {
+      e(new x("Network Error", x.ERR_NETWORK, r, T)), T = null;
+    }, T.ontimeout = function() {
       let it = i.timeout ? "timeout of " + i.timeout + "ms exceeded" : "timeout exceeded";
-      const J = i.transitional || ar;
+      const G = i.transitional || nr;
       i.timeoutErrorMessage && (it = i.timeoutErrorMessage), e(new x(
         it,
-        J.clarifyTimeoutError ? x.ETIMEDOUT : x.ECONNABORTED,
+        G.clarifyTimeoutError ? x.ETIMEDOUT : x.ECONNABORTED,
         r,
-        C
-      )), C = null;
-    }, s === void 0 && a.setContentType(null), "setRequestHeader" in C && b.forEach(a.toJSON(), function(it, J) {
-      C.setRequestHeader(J, it);
-    }), b.isUndefined(i.withCredentials) || (C.withCredentials = !!i.withCredentials), c && c !== "json" && (C.responseType = i.responseType), h && ([y, v] = Fe(h, !0), C.addEventListener("progress", y)), l && C.upload && ([f, E] = Fe(l), C.upload.addEventListener("progress", f), C.upload.addEventListener("loadend", E)), (i.cancelToken || i.signal) && (p = (L) => {
-      C && (e(!L || L.type ? new $t(null, r, C) : L), C.abort(), C = null);
+        T
+      )), T = null;
+    }, s === void 0 && a.setContentType(null), "setRequestHeader" in T && b.forEach(a.toJSON(), function(it, G) {
+      T.setRequestHeader(G, it);
+    }), b.isUndefined(i.withCredentials) || (T.withCredentials = !!i.withCredentials), c && c !== "json" && (T.responseType = i.responseType), h && ([y, v] = Fe(h, !0), T.addEventListener("progress", y)), l && T.upload && ([f, E] = Fe(l), T.upload.addEventListener("progress", f), T.upload.addEventListener("loadend", E)), (i.cancelToken || i.signal) && (p = (q) => {
+      T && (e(!q || q.type ? new Jt(null, r, T) : q), T.abort(), T = null);
     }, i.cancelToken && i.cancelToken.subscribe(p), i.signal && (i.signal.aborted ? p() : i.signal.addEventListener("abort", p)));
-    const F = uc(i.url);
+    const F = oc(i.url);
     if (F && et.protocols.indexOf(F) === -1) {
       e(new x("Unsupported protocol " + F + ":", x.ERR_BAD_REQUEST, r));
       return;
     }
-    C.send(s || null);
+    T.send(s || null);
   });
-}, wc = (r, n) => {
+}, gc = (r, n) => {
   const { length: t } = r = r ? r.filter(Boolean) : [];
   if (n || t) {
     let e = new AbortController(), i;
@@ -4814,7 +4807,7 @@ const ur = (r) => {
       if (!i) {
         i = !0, c();
         const p = h instanceof Error ? h : this.reason;
-        e.abort(p instanceof x ? p : new $t(p instanceof Error ? p.message : p));
+        e.abort(p instanceof x ? p : new Jt(p instanceof Error ? p.message : p));
       }
     };
     let a = n && setTimeout(() => {
@@ -4829,7 +4822,7 @@ const ur = (r) => {
     const { signal: l } = e;
     return l.unsubscribe = () => b.asap(c), l;
   }
-}, vc = function* (r, n) {
+}, bc = function* (r, n) {
   let t = r.byteLength;
   if (t < n) {
     yield r;
@@ -4838,10 +4831,10 @@ const ur = (r) => {
   let e = 0, i;
   for (; e < t; )
     i = e + n, yield r.slice(e, i), e = i;
-}, Ec = async function* (r, n) {
-  for await (const t of Pc(r))
-    yield* vc(t, n);
-}, Pc = async function* (r) {
+}, yc = async function* (r, n) {
+  for await (const t of mc(r))
+    yield* bc(t, n);
+}, mc = async function* (r) {
   if (r[Symbol.asyncIterator]) {
     yield* r;
     return;
@@ -4857,8 +4850,8 @@ const ur = (r) => {
   } finally {
     await n.cancel();
   }
-}, Ei = (r, n, t, e) => {
-  const i = Ec(r, n);
+}, mi = (r, n, t, e) => {
+  const i = yc(r, n);
   let s = 0, a, c = (l) => {
     a || (a = !0, e && e(l));
   };
@@ -4886,13 +4879,13 @@ const ur = (r) => {
   }, {
     highWaterMark: 2
   });
-}, We = typeof fetch == "function" && typeof Request == "function" && typeof Response == "function", dr = We && typeof ReadableStream == "function", Tc = We && (typeof TextEncoder == "function" ? /* @__PURE__ */ ((r) => (n) => r.encode(n))(new TextEncoder()) : async (r) => new Uint8Array(await new Response(r).arrayBuffer())), pr = (r, ...n) => {
+}, We = typeof fetch == "function" && typeof Request == "function" && typeof Response == "function", cr = We && typeof ReadableStream == "function", wc = We && (typeof TextEncoder == "function" ? /* @__PURE__ */ ((r) => (n) => r.encode(n))(new TextEncoder()) : async (r) => new Uint8Array(await new Response(r).arrayBuffer())), lr = (r, ...n) => {
   try {
     return !!r(...n);
   } catch {
     return !1;
   }
-}, Cc = dr && pr(() => {
+}, vc = cr && lr(() => {
   let r = !1;
   const n = new Request(et.origin, {
     body: new ReadableStream(),
@@ -4902,8 +4895,8 @@ const ur = (r) => {
     }
   }).headers.has("Content-Type");
   return r && !n;
-}), Pi = 64 * 1024, bn = dr && pr(() => b.isReadableStream(new Response("").body)), Ue = {
-  stream: bn && ((r) => r.body)
+}), wi = 64 * 1024, gn = cr && lr(() => b.isReadableStream(new Response("").body)), Ue = {
+  stream: gn && ((r) => r.body)
 };
 We && ((r) => {
   ["text", "arrayBuffer", "blob", "formData", "stream"].forEach((n) => {
@@ -4912,7 +4905,7 @@ We && ((r) => {
     });
   });
 })(new Response());
-const Sc = async (r) => {
+const Ec = async (r) => {
   if (r == null)
     return 0;
   if (b.isBlob(r))
@@ -4925,11 +4918,11 @@ const Sc = async (r) => {
   if (b.isArrayBufferView(r) || b.isArrayBuffer(r))
     return r.byteLength;
   if (b.isURLSearchParams(r) && (r = r + ""), b.isString(r))
-    return (await Tc(r)).byteLength;
-}, kc = async (r, n) => {
+    return (await wc(r)).byteLength;
+}, Pc = async (r, n) => {
   const t = b.toFiniteNumber(r.getContentLength());
-  return t ?? Sc(n);
-}, xc = We && (async (r) => {
+  return t ?? Ec(n);
+}, Cc = We && (async (r) => {
   let {
     url: n,
     method: t,
@@ -4943,26 +4936,26 @@ const Sc = async (r) => {
     headers: p,
     withCredentials: f = "same-origin",
     fetchOptions: y
-  } = ur(r);
+  } = or(r);
   h = h ? (h + "").toLowerCase() : "text";
-  let E = wc([i, s && s.toAbortSignal()], a), v;
+  let E = gc([i, s && s.toAbortSignal()], a), v;
   const S = E && E.unsubscribe && (() => {
     E.unsubscribe();
   });
-  let C;
+  let T;
   try {
-    if (l && Cc && t !== "get" && t !== "head" && (C = await kc(p, e)) !== 0) {
-      let J = new Request(n, {
+    if (l && vc && t !== "get" && t !== "head" && (T = await Pc(p, e)) !== 0) {
+      let G = new Request(n, {
         method: "POST",
         body: e,
         duplex: "half"
       }), k;
-      if (b.isFormData(e) && (k = J.headers.get("content-type")) && p.setContentType(k), J.body) {
-        const [lt, wt] = mi(
-          C,
-          Fe(wi(l))
+      if (b.isFormData(e) && (k = G.headers.get("content-type")) && p.setContentType(k), G.body) {
+        const [lt, wt] = gi(
+          T,
+          Fe(bi(l))
         );
-        e = Ei(J.body, Pi, lt, wt);
+        e = mi(G.body, wi, lt, wt);
       }
     }
     b.isString(f) || (f = f ? "include" : "omit");
@@ -4977,27 +4970,27 @@ const Sc = async (r) => {
       credentials: U ? f : void 0
     });
     let F = await fetch(v);
-    const L = bn && (h === "stream" || h === "response");
-    if (bn && (c || L && S)) {
-      const J = {};
+    const q = gn && (h === "stream" || h === "response");
+    if (gn && (c || q && S)) {
+      const G = {};
       ["status", "statusText", "headers"].forEach((vt) => {
-        J[vt] = F[vt];
+        G[vt] = F[vt];
       });
-      const k = b.toFiniteNumber(F.headers.get("content-length")), [lt, wt] = c && mi(
+      const k = b.toFiniteNumber(F.headers.get("content-length")), [lt, wt] = c && gi(
         k,
-        Fe(wi(c), !0)
+        Fe(bi(c), !0)
       ) || [];
       F = new Response(
-        Ei(F.body, Pi, lt, () => {
+        mi(F.body, wi, lt, () => {
           wt && wt(), S && S();
         }),
-        J
+        G
       );
     }
     h = h || "text";
     let it = await Ue[b.findKey(Ue, h) || "text"](F, r);
-    return !L && S && S(), await new Promise((J, k) => {
-      lr(J, k, {
+    return !q && S && S(), await new Promise((G, k) => {
+      sr(G, k, {
         data: it,
         headers: ct.from(F.headers),
         status: F.status,
@@ -5014,12 +5007,12 @@ const Sc = async (r) => {
       }
     ) : x.from(U, U && U.code, r, v);
   }
-}), yn = {
-  http: Ho,
-  xhr: mc,
-  fetch: xc
+}), bn = {
+  http: Lo,
+  xhr: fc,
+  fetch: Cc
 };
-b.forEach(yn, (r, n) => {
+b.forEach(bn, (r, n) => {
   if (r) {
     try {
       Object.defineProperty(r, "name", { value: n });
@@ -5028,7 +5021,7 @@ b.forEach(yn, (r, n) => {
     Object.defineProperty(r, "adapterName", { value: n });
   }
 });
-const Ti = (r) => `- ${r}`, Ac = (r) => b.isFunction(r) || r === null || r === !1, _r = {
+const vi = (r) => `- ${r}`, Tc = (r) => b.isFunction(r) || r === null || r === !1, hr = {
   getAdapter: (r) => {
     r = b.isArray(r) ? r : [r];
     const { length: n } = r;
@@ -5037,7 +5030,7 @@ const Ti = (r) => `- ${r}`, Ac = (r) => b.isFunction(r) || r === null || r === !
     for (let s = 0; s < n; s++) {
       t = r[s];
       let a;
-      if (e = t, !Ac(t) && (e = yn[(a = String(t)).toLowerCase()], e === void 0))
+      if (e = t, !Tc(t) && (e = bn[(a = String(t)).toLowerCase()], e === void 0))
         throw new x(`Unknown adapter '${a}'`);
       if (e)
         break;
@@ -5048,8 +5041,8 @@ const Ti = (r) => `- ${r}`, Ac = (r) => b.isFunction(r) || r === null || r === !
         ([c, l]) => `adapter ${c} ` + (l === !1 ? "is not supported by the environment" : "is not available in the build")
       );
       let a = n ? s.length > 1 ? `since :
-` + s.map(Ti).join(`
-`) : " " + Ti(s[0]) : "as no adapter specified";
+` + s.map(vi).join(`
+`) : " " + vi(s[0]) : "as no adapter specified";
       throw new x(
         "There is no suitable adapter to dispatch the request " + a,
         "ERR_NOT_SUPPORT"
@@ -5057,40 +5050,40 @@ const Ti = (r) => `- ${r}`, Ac = (r) => b.isFunction(r) || r === null || r === !
     }
     return e;
   },
-  adapters: yn
+  adapters: bn
 };
-function rn(r) {
+function nn(r) {
   if (r.cancelToken && r.cancelToken.throwIfRequested(), r.signal && r.signal.aborted)
-    throw new $t(null, r);
+    throw new Jt(null, r);
 }
-function Ci(r) {
-  return rn(r), r.headers = ct.from(r.headers), r.data = nn.call(
+function Ei(r) {
+  return nn(r), r.headers = ct.from(r.headers), r.data = en.call(
     r,
     r.transformRequest
-  ), ["post", "put", "patch"].indexOf(r.method) !== -1 && r.headers.setContentType("application/x-www-form-urlencoded", !1), _r.getAdapter(r.adapter || he.adapter)(r).then(function(e) {
-    return rn(r), e.data = nn.call(
+  ), ["post", "put", "patch"].indexOf(r.method) !== -1 && r.headers.setContentType("application/x-www-form-urlencoded", !1), hr.getAdapter(r.adapter || he.adapter)(r).then(function(e) {
+    return nn(r), e.data = en.call(
       r,
       r.transformResponse,
       e
     ), e.headers = ct.from(e.headers), e;
   }, function(e) {
-    return cr(e) || (rn(r), e && e.response && (e.response.data = nn.call(
+    return rr(e) || (nn(r), e && e.response && (e.response.data = en.call(
       r,
       r.transformResponse,
       e.response
     ), e.response.headers = ct.from(e.response.headers))), Promise.reject(e);
   });
 }
-const fr = "1.7.9", ze = {};
+const ur = "1.8.1", ze = {};
 ["object", "boolean", "number", "function", "string", "symbol"].forEach((r, n) => {
   ze[r] = function(e) {
     return typeof e === r || "a" + (n < 1 ? "n " : " ") + r;
   };
 });
-const Si = {};
+const Pi = {};
 ze.transitional = function(n, t, e) {
   function i(s, a) {
-    return "[Axios v" + fr + "] Transitional option '" + s + "'" + a + (e ? ". " + e : "");
+    return "[Axios v" + ur + "] Transitional option '" + s + "'" + a + (e ? ". " + e : "");
   }
   return (s, a, c) => {
     if (n === !1)
@@ -5098,7 +5091,7 @@ ze.transitional = function(n, t, e) {
         i(a, " has been removed" + (t ? " in " + t : "")),
         x.ERR_DEPRECATED
       );
-    return t && !Si[a] && (Si[a] = !0, console.warn(
+    return t && !Pi[a] && (Pi[a] = !0, console.warn(
       i(
         a,
         " has been deprecated since v" + t + " and will be removed in the near future"
@@ -5109,7 +5102,7 @@ ze.transitional = function(n, t, e) {
 ze.spelling = function(n) {
   return (t, e) => (console.warn(`${e} is likely a misspelling of ${n}`), !0);
 };
-function Dc(r, n, t) {
+function Sc(r, n, t) {
   if (typeof r != "object")
     throw new x("options must be an object", x.ERR_BAD_OPTION_VALUE);
   const e = Object.keys(r);
@@ -5127,14 +5120,14 @@ function Dc(r, n, t) {
   }
 }
 const Se = {
-  assertOptions: Dc,
+  assertOptions: Sc,
   validators: ze
 }, Et = Se.validators;
-class Ft {
+let Ft = class {
   constructor(n) {
     this.defaults = n, this.interceptors = {
-      request: new bi(),
-      response: new bi()
+      request: new _i(),
+      response: new _i()
     };
   }
   /**
@@ -5174,7 +5167,7 @@ class Ft {
     } : Se.assertOptions(i, {
       encode: Et.function,
       serialize: Et.function
-    }, !0)), Se.assertOptions(t, {
+    }, !0)), t.allowAbsoluteUrls !== void 0 || (this.defaults.allowAbsoluteUrls !== void 0 ? t.allowAbsoluteUrls = this.defaults.allowAbsoluteUrls : t.allowAbsoluteUrls = !0), Se.assertOptions(t, {
       baseUrl: Et.spelling("baseURL"),
       withXsrfToken: Et.spelling("withXSRFToken")
     }, !0), t.method = (t.method || this.defaults.method || "get").toLowerCase();
@@ -5199,7 +5192,7 @@ class Ft {
     });
     let p, f = 0, y;
     if (!l) {
-      const v = [Ci.bind(this), void 0];
+      const v = [Ei.bind(this), void 0];
       for (v.unshift.apply(v, c), v.push.apply(v, h), y = v.length, p = Promise.resolve(t); f < y; )
         p = p.then(v[f++], v[f++]);
       return p;
@@ -5210,13 +5203,13 @@ class Ft {
       const v = c[f++], S = c[f++];
       try {
         E = v(E);
-      } catch (C) {
-        S.call(this, C);
+      } catch (T) {
+        S.call(this, T);
         break;
       }
     }
     try {
-      p = Ci.call(this, E);
+      p = Ei.call(this, E);
     } catch (v) {
       return Promise.reject(v);
     }
@@ -5226,10 +5219,10 @@ class Ft {
   }
   getUri(n) {
     n = Ut(this.defaults, n);
-    const t = hr(n.baseURL, n.url);
-    return sr(t, n.params, n.paramsSerializer);
+    const t = ar(n.baseURL, n.url, n.allowAbsoluteUrls);
+    return er(t, n.params, n.paramsSerializer);
   }
-}
+};
 b.forEach(["delete", "get", "head", "options"], function(n) {
   Ft.prototype[n] = function(t, e) {
     return this.request(Ut(e || {}, {
@@ -5254,7 +5247,7 @@ b.forEach(["post", "put", "patch"], function(n) {
   }
   Ft.prototype[n] = t(), Ft.prototype[n + "Form"] = t(!0);
 });
-class Wn {
+let kc = class dr {
   constructor(n) {
     if (typeof n != "function")
       throw new TypeError("executor must be a function.");
@@ -5278,7 +5271,7 @@ class Wn {
         e.unsubscribe(s);
       }, a;
     }, n(function(s, a, c) {
-      e.reason || (e.reason = new $t(s, a, c), t(e.reason));
+      e.reason || (e.reason = new Jt(s, a, c), t(e.reason));
     });
   }
   /**
@@ -5320,22 +5313,22 @@ class Wn {
   static source() {
     let n;
     return {
-      token: new Wn(function(i) {
+      token: new dr(function(i) {
         n = i;
       }),
       cancel: n
     };
   }
-}
-function Rc(r) {
+};
+function xc(r) {
   return function(t) {
     return r.apply(null, t);
   };
 }
-function Ic(r) {
+function Ac(r) {
   return b.isObject(r) && r.isAxiosError === !0;
 }
-const mn = {
+const yn = {
   Continue: 100,
   SwitchingProtocols: 101,
   Processing: 102,
@@ -5400,37 +5393,55 @@ const mn = {
   NotExtended: 510,
   NetworkAuthenticationRequired: 511
 };
-Object.entries(mn).forEach(([r, n]) => {
-  mn[n] = r;
+Object.entries(yn).forEach(([r, n]) => {
+  yn[n] = r;
 });
-function gr(r) {
-  const n = new Ft(r), t = Xi(Ft.prototype.request, n);
+function pr(r) {
+  const n = new Ft(r), t = Ki(Ft.prototype.request, n);
   return b.extend(t, Ft.prototype, n, { allOwnKeys: !0 }), b.extend(t, n, null, { allOwnKeys: !0 }), t.create = function(i) {
-    return gr(Ut(r, i));
+    return pr(Ut(r, i));
   }, t;
 }
-const V = gr(he);
+const V = pr(he);
 V.Axios = Ft;
-V.CanceledError = $t;
-V.CancelToken = Wn;
-V.isCancel = cr;
-V.VERSION = fr;
+V.CanceledError = Jt;
+V.CancelToken = kc;
+V.isCancel = rr;
+V.VERSION = ur;
 V.toFormData = Ke;
 V.AxiosError = x;
 V.Cancel = V.CanceledError;
 V.all = function(n) {
   return Promise.all(n);
 };
-V.spread = Rc;
-V.isAxiosError = Ic;
+V.spread = xc;
+V.isAxiosError = Ac;
 V.mergeConfig = Ut;
 V.AxiosHeaders = ct;
-V.formToJSON = (r) => or(b.isHTMLForm(r) ? new FormData(r) : r);
-V.getAdapter = _r.getAdapter;
-V.HttpStatusCode = mn;
+V.formToJSON = (r) => ir(b.isHTMLForm(r) ? new FormData(r) : r);
+V.getAdapter = hr.getAdapter;
+V.HttpStatusCode = yn;
 V.default = V;
-var _, br, yr, mr, wn, wr, vr, Er, Pr, Tr, Cr, Sr, kr, xr, Ar, te, ee, Dr, ne, Rr, Nt, Ir, z, Or, Nr, vn, Br, Mr, Fr, En, Pn, ie, Tn, Ur, ft, gt, ke, Cn, re, Sn, kn, Lr, xn, An, Vr, qr, Ht, Dn, jr, Hr, Kr, xe, Wr, zr, Rn, Xr, Gr, Jr, $r, Qr, Zr, Yr, ts, es, In, On, ns, is, rs;
-class Fc extends Lt {
+const {
+  Axios: Mc,
+  AxiosError: Fc,
+  CanceledError: Uc,
+  isCancel: Lc,
+  CancelToken: Vc,
+  VERSION: qc,
+  all: jc,
+  Cancel: Hc,
+  isAxiosError: Kc,
+  spread: Wc,
+  toFormData: zc,
+  AxiosHeaders: Xc,
+  HttpStatusCode: $c,
+  formToJSON: Gc,
+  getAdapter: Jc,
+  mergeConfig: Qc
+} = V;
+var _, _r, fr, gr, mn, br, yr, mr, wr, vr, Er, Pr, Cr, Tr, Sr, te, ee, kr, ne, xr, Nt, Ar, z, Dr, Rr, wn, Ir, Or, Nr, vn, En, ie, Pn, Br, ft, gt, ke, Cn, re, Tn, Sn, Mr, kn, xn, Fr, Ur, Ht, An, Lr, Vr, qr, xe, jr, Hr, Dn, Kr, Wr, zr, Xr, $r, Gr, Jr, Qr, Zr, Rn, In, Yr, ts, es;
+class Zc extends Lt {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -5440,7 +5451,7 @@ class Fc extends Lt {
     environment: c = "production"
   } = {}) {
     super({ filters: t, config_port: e, no_device: i });
-    $(this, _);
+    J(this, _);
     rt(this, "__pinPad__", {
       buffer: null,
       about: {
@@ -5586,11 +5597,11 @@ class Fc extends Lt {
         statusSecondGenerateWaiting: null
       }
     });
-    if (this.__internal__.device.type = "pinpad", !va())
+    if (this.__internal__.device.type = "pinpad", !ya())
       throw new Error("Crypto not supported in this browser");
-    if (G.getCustom(this.typeDevice, i))
+    if ($.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
-    this.__internal__.time.response_connection = 3e3, this.__internal__.time.response_general = 5e3, this.__internal__.serial.delay_first_connection = 1e3, this.__internal__.serial.config_port.baudRate = 19200, this.environment = c, s && (this.username = s), a && (this.password = a), o(this, _, yr).call(this), o(this, _, br).call(this);
+    this.__internal__.time.response_connection = 3e3, this.__internal__.time.response_general = 5e3, this.__internal__.serial.delay_first_connection = 1e3, this.__internal__.serial.config_port.baudRate = 19200, this.environment = c, s && (this.username = s), a && (this.password = a), o(this, _, fr).call(this), o(this, _, _r).call(this);
   }
   async timeout(t, e) {
     await super.timeout(t, e), this.__pinPad__.waiting.statusAboutWaiting && e === "about" ? this.__pinPad__.waiting.statusAboutWaiting = "rejected" : this.__pinPad__.waiting.statusInjectWaiting && e === "inject" ? this.__pinPad__.waiting.statusInjectWaiting = "rejected" : this.__pinPad__.waiting.statusinitDUKPTWaiting && e === "init-dukpt" ? this.__pinPad__.waiting.statusinitDUKPTWaiting = "rejected" : this.__pinPad__.waiting.statuswritingDUKPTWaiting && e === "dukpt" ? this.__pinPad__.waiting.statuswritingDUKPTWaiting = "rejected" : this.__pinPad__.waiting.statusReadCardWaiting && e === "read-card" ? this.__pinPad__.waiting.statusReadCardWaiting = "rejected" : this.__pinPad__.waiting.statusSecondGenerateWaiting && e === "second-generate" && (this.__pinPad__.waiting.statusSecondGenerateWaiting = "rejected");
@@ -5605,43 +5616,43 @@ class Fc extends Lt {
       no_code: 0,
       parsed: null
     }, i = this.parseHexToUint8(t), s = this.parseUint8ArrayToString(i);
-    let a = o(this, _, mr).call(this, s);
+    let a = o(this, _, gr).call(this, s);
     switch (this.__pinPad__.buffer = s, e.parsed = a, e.code = s, e.request) {
       case "connect":
-        e.name = "connected", e.description = "Connection established", e.no_code = 100, o(this, _, wn).call(this, a, s);
+        e.name = "connected", e.description = "Connection established", e.no_code = 100, o(this, _, mn).call(this, a, s);
         break;
       case "about":
-        e.name = "About PinPad", e.description = "Response of about", e.no_code = 101, o(this, _, wn).call(this, a, s);
+        e.name = "About PinPad", e.description = "Response of about", e.no_code = 101, o(this, _, mn).call(this, a, s);
         break;
       case "inject":
-        e.name = "Inject", e.description = "Response of inject values", e.no_code = 102, o(this, _, wr).call(this, a, s);
+        e.name = "Inject", e.description = "Response of inject values", e.no_code = 102, o(this, _, br).call(this, a, s);
         break;
       case "init-dukpt":
-        e.name = "Init DUKPT", e.description = "Response of init DUKPT", e.no_code = 103, o(this, _, vr).call(this, a, s);
+        e.name = "Init DUKPT", e.description = "Response of init DUKPT", e.no_code = 103, o(this, _, yr).call(this, a, s);
         break;
       case "dukpt":
-        e.name = "Write DUKPT", e.description = "Response of write DUKPT", e.no_code = 104, o(this, _, Er).call(this, a, s);
+        e.name = "Write DUKPT", e.description = "Response of write DUKPT", e.no_code = 104, o(this, _, mr).call(this, a, s);
         break;
       case "read-card":
-        e.name = "read card", e.description = "response of read card", e.no_code = 105, o(this, _, Pr).call(this, a, s);
+        e.name = "read card", e.description = "response of read card", e.no_code = 105, o(this, _, wr).call(this, a, s);
         break;
       case "second-generate":
-        e.name = "second generate", e.description = "response of second generate", e.no_code = 106, o(this, _, Tr).call(this, a, s);
+        e.name = "second generate", e.description = "response of second generate", e.no_code = 106, o(this, _, vr).call(this, a, s);
         break;
       case "cancel":
         e.name = "cancel pinpad", e.description = "response of cancel", e.no_code = 107;
         break;
       case "print":
-        o(this, _, kr).call(this, a, s), e.name = "print voucher", e.description = "response of print", e.no_code = 108;
+        o(this, _, Cr).call(this, a, s), e.name = "print voucher", e.description = "response of print", e.no_code = 108;
         break;
       case "cancel-read-card":
-        o(this, _, Sr).call(this, a, s), e.name = "cancel read card", e.description = "response of cancel read card", e.no_code = 109;
+        o(this, _, Pr).call(this, a, s), e.name = "cancel read card", e.description = "response of cancel read card", e.no_code = 109;
         break;
       case "code93":
-        o(this, _, xr).call(this, a, s), e.name = "code 93", e.description = "response of code 93", e.no_code = 110;
+        o(this, _, Tr).call(this, a, s), e.name = "code 93", e.description = "response of code 93", e.no_code = 110;
         break;
       case "finish-emv-end":
-        o(this, _, Ar).call(this, a, s), e.name = "Finish EMV End", e.description = "response of finish EMV End", e.no_code = 111;
+        o(this, _, Sr).call(this, a, s), e.name = "Finish EMV End", e.description = "response of finish EMV End", e.no_code = 111;
         break;
       default:
         e.name = "unknown", e.description = "Unknown command", e.no_code = 400;
@@ -5690,7 +5701,7 @@ class Fc extends Lt {
     return parseFloat(this.__pinPad__.operation.amount) || 0;
   }
   set reference(t) {
-    if (!o(this, _, Tn).call(this, t.trim())) throw new Error("Invalid reference");
+    if (!o(this, _, Pn).call(this, t.trim())) throw new Error("Invalid reference");
     this.__pinPad__.operation.reference = t.trim().toString().replaceAll(" ", "").toUpperCase();
   }
   get reference() {
@@ -5735,13 +5746,13 @@ class Fc extends Lt {
     return parseInt(this.__pinPad__.config.timeoutPinPad);
   }
   async login({ force: t = !1 } = {}) {
-    return await o(this, _, Nr).call(this, t);
+    return await o(this, _, Rr).call(this, t);
   }
   clearSession() {
     localStorage.removeItem("ppLoginResponse"), localStorage.removeItem("ppRSAKey"), localStorage.removeItem("ppPublicIP");
   }
   async checkPositionPermission() {
-    if (!Xn())
+    if (!Wn())
       throw new Error("Geolocation not supported");
     return new Promise((t, e) => {
       navigator.permissions.query({ name: "geolocation" }).then((i) => {
@@ -5768,7 +5779,7 @@ class Fc extends Lt {
       });
       return;
     }
-    s = o(this, _, Ir).call(this, s), s = o(this, _, Or).call(this, s, this.__pinPad__.constants.appName + this.__pinPad__.constants.appVersion);
+    s = o(this, _, Ar).call(this, s), s = o(this, _, Dr).call(this, s, this.__pinPad__.constants.appName + this.__pinPad__.constants.appVersion);
     let a = "C59A" + s;
     a = e + o(this, _, ft).call(this, a) + a + i, a = a + o(this, _, gt).call(this, a), t === "client" ? this.__pinPad__.operation.clientVoucher = "" : t === "commerce" && (this.__pinPad__.operation.commerceVoucher = "");
     const c = this.parseStringToBytes(a, "");
@@ -5785,7 +5796,7 @@ class Fc extends Lt {
    * @return {Promise<any>}
    */
   async consult({ reference: t = null }) {
-    return t || (t = this.reference), Ct(t) && (t = "--", this.reference = t), o(this, _, Ur).call(this, this.reference), this.__pinPad__.operation.consultDate = (/* @__PURE__ */ new Date()).toLocaleDateString("en-GB"), await o(this, _, re).call(this, {
+    return t || (t = this.reference), Tt(t) && (t = "--", this.reference = t), o(this, _, Br).call(this, this.reference), this.__pinPad__.operation.consultDate = (/* @__PURE__ */ new Date()).toLocaleDateString("en-GB"), await o(this, _, re).call(this, {
       Ambiente: this.environment,
       User: this.username,
       Pwd: this.password,
@@ -5807,7 +5818,7 @@ class Fc extends Lt {
    * @return {Promise<any>}
    */
   async rePrint({ folio: t = null } = {}) {
-    t === null && (t = this.__pinPad__.operation.folio || ""), o(this, _, Sn).call(this, t), await o(this, _, re).call(this, {
+    t === null && (t = this.__pinPad__.operation.folio || ""), o(this, _, Tn).call(this, t), await o(this, _, re).call(this, {
       Ambiente: this.environment,
       User: this.username,
       Pwd: this.password,
@@ -5834,9 +5845,9 @@ class Fc extends Lt {
   }
   async cancelPurchase({ amount: t = 0, authorization: e = "", folio: i = "" } = {}) {
     if (!o(this, _, Cn).call(this, t)) throw new Error("Invalid amount");
-    if (!o(this, _, Qr).call(this, e)) throw new Error("Invalid authorization");
-    if (!o(this, _, Sn).call(this, i)) throw new Error("Invalid folio");
-    t = o(this, _, Rn).call(this, t, 2);
+    if (!o(this, _, $r).call(this, e)) throw new Error("Invalid authorization");
+    if (!o(this, _, Tn).call(this, i)) throw new Error("Invalid folio");
+    t = o(this, _, Dn).call(this, t, 2);
     const s = {
       Ambiente: this.environment,
       User: this.username,
@@ -5882,7 +5893,7 @@ class Fc extends Lt {
   async makeSale({ amount: t = 0, reference: e = null } = {}) {
     if (t = parseFloat(t.toString()), isNaN(t) || t <= 0)
       throw new Error("Amount is required and must be greater than 0");
-    if (this.amount = t, !e || Ct(e) || !o(this, _, Tn).call(this, e))
+    if (this.amount = t, !e || Tt(e) || !o(this, _, Pn).call(this, e))
       throw new Error("Reference is required and must be alphanumeric");
     if (this.reference = e, /^[A-Z-a-z\s]+$/g.test(this.__pinPad__.config.currency) === !1)
       throw new Error("Invalid currency");
@@ -5893,16 +5904,16 @@ class Fc extends Lt {
       object: {}
     };
     try {
-      return await this.login(), await o(this, _, zr).call(this), !await o(this, _, Xr).call(this) || !await o(this, _, Hr).call(this) ? i : await o(this, _, Yr).call(this);
+      return await this.login(), await o(this, _, Hr).call(this), !await o(this, _, Kr).call(this) || !await o(this, _, Vr).call(this) ? i : await o(this, _, Jr).call(this);
     } catch (s) {
       console.warn(s), i.error = !0, i.message = s.message, i.approved = !1, i.object = s;
     }
     return i;
   }
 }
-_ = new WeakSet(), br = function() {
-  G.addCustom("pinpad", this);
-}, yr = function() {
+_ = new WeakSet(), _r = function() {
+  $.addCustom("pinpad", this);
+}, fr = function() {
   const t = [
     "pp:processing-card",
     "pp:read-card",
@@ -5917,7 +5928,7 @@ _ = new WeakSet(), br = function() {
   ];
   for (const e of t)
     this.serialRegisterAvailableListener(e);
-}, mr = function(t) {
+}, gr = function(t) {
   const e = this.__pinPad__.constants.STX, i = this.__pinPad__.constants.ETX, s = this.__pinPad__.constants.FS, a = this.__pinPad__.constants.getNULL;
   t = t.replace(new RegExp(e, "g"), "");
   const c = t.split(i);
@@ -5929,7 +5940,7 @@ _ = new WeakSet(), br = function() {
     const y = f > 0 ? p.substring(0, 1) : "A", E = f > 0 ? p.substring(1) : p;
     return { [y]: E.replace(new RegExp(a, "g"), "") };
   }).forEach((p) => Object.assign(h, p)), h;
-}, wn = function(t, e) {
+}, mn = function(t, e) {
   const i = this.__pinPad__.constants.ETX, s = e.substring(e.indexOf("D") + 2, e.indexOf("E"));
   let a = 0;
   const c = e.indexOf("N") > 0, l = e.substring(e.indexOf("A00") + 3, e.indexOf("B"));
@@ -5962,9 +5973,9 @@ _ = new WeakSet(), br = function() {
     model: this.__pinPad__.about.model
   }, this.__pinPad__.waiting.statusAboutWaiting && (this.__pinPad__.waiting.statusAboutWaiting = "resolved");
 }, // eslint-disable-next-line no-unused-vars
-wr = function(t, e) {
+br = function(t, e) {
   this.__pinPad__.waiting.statusInjectWaiting = "resolved";
-}, vr = function(t, e) {
+}, yr = function(t, e) {
   e = e.replace("010P93A00B01t036P81AACERQUE, INSERTE CHIP O  DESLICE*", ""), this.__pinPad__.config.terminal = {
     nb_kcv: e.substring(e.indexOf("E") + 2, e.indexOf("F")),
     nb_marca_terminal: e.substring(e.indexOf("P91A") + 4, e.indexOf("B")),
@@ -5974,23 +5985,23 @@ wr = function(t, e) {
     nb_version_terminal: e.substring(e.indexOf("D") + 2, e.indexOf("E"))
   }, this.__pinPad__.waiting.statusinitDUKPTWaiting = "resolved";
 }, // eslint-disable-next-line no-unused-vars
-Er = function(t, e) {
+mr = function(t, e) {
   this.__pinPad__.waiting.statuswritingDUKPTWaiting = "resolved";
-}, Pr = function(t, e) {
+}, wr = function(t, e) {
   const i = this.__pinPad__.about.brand.toLowerCase(), s = this.__pinPad__.about.model.toLowerCase(), a = i === "ingenico" && s === "ipp320" ? 500 : 350;
   if (e.length < a) {
-    e = e.replace("006P93A00.", "").replace("006P93A00,", ""), e.includes("E93") ? this.__pinPad__.operation.ignore.error = e.substring(e.indexOf("E93") + 3, e.indexOf("E93") + 6) : e.includes("E71") && (this.__pinPad__.operation.ignore.error = e.substring(e.indexOf("E71") + 3, e.indexOf("E71") + 6)), this.__pinPad__.operation.ignore.error !== "" && e.indexOf("OPERACION       CANCELADA") === -1 && e.indexOf("TIEMPO         EXCEDIDO") === -1 && this.__pinPad__.operation.ignore.error.length === 3 && (this.__pinPad__.operation.last_error = o(this, _, On).call(this, this.__pinPad__.operation.ignore.error), this.__pinPad__.waiting.statusReadCardWaiting = "rejected");
+    e = e.replace("006P93A00.", "").replace("006P93A00,", ""), e.includes("E93") ? this.__pinPad__.operation.ignore.error = e.substring(e.indexOf("E93") + 3, e.indexOf("E93") + 6) : e.includes("E71") && (this.__pinPad__.operation.ignore.error = e.substring(e.indexOf("E71") + 3, e.indexOf("E71") + 6)), this.__pinPad__.operation.ignore.error !== "" && e.indexOf("OPERACION       CANCELADA") === -1 && e.indexOf("TIEMPO         EXCEDIDO") === -1 && this.__pinPad__.operation.ignore.error.length === 3 && (this.__pinPad__.operation.last_error = o(this, _, In).call(this, this.__pinPad__.operation.ignore.error), this.__pinPad__.waiting.statusReadCardWaiting = "rejected");
     return;
   }
   if (e.includes("M1") || e.includes("M0") || e.includes("M1") || e.includes("N1") || e.includes("N1") || e.includes("P93A022") && e.substring(e.length - 24).includes("I") && e.substring(e.length - 1).includes("") || e.includes("P93A800") && e.substring(e.length - 24).includes("I") && e.substring(e.length - 1).includes("") || e.includes("P93A022") && e.length >= 406 && s === "vx820" || e.includes("P93A022") && e.length >= 406 && s === "vx520" || e.includes("P93A800") && e.length >= 406 && s === "vx520" || e.includes("P93A800") && e.length >= 406 && s === "vx820" || e.includes("P93A022") && e.length >= 406 && s === "p400" || e.includes("P93A800") && e.length >= 406 && s === "p400" || e.includes("P93A022") && e.length >= 406 && s === "v205c" || e.includes("P93A800") && e.length >= 406 && s === "v205c" || e.includes("P93A022") && e.length >= 406 && s === "move2500" || e.includes("P93A800") && e.length >= 406 && s === "move2500" || e.includes("P93A022") && e.length >= 406 && s === "lane3000" || e.includes("P93A800") && e.length >= 406 && s === "lane3000") {
     let c = e;
-    i === "verifone" && (c = e.replace("006P93A00.", "").substring(e.indexOf("P93A"), e.indexOf("P93A") + 7)), e.includes("P81APROCESANDO, NO RETIRE TARJETA") || e.includes("P81APROCESANDO TARJETA") || c.includes("P93A022") || c.includes("P81AINSERTE CHIP O  DESLICE TARJETA") || c.includes("ACERQUE, INSERTE CHIP O  DESLICE") || c.includes("P81AACERQUE, INSERTE CHIP O  DESLICE TARJETA") ? this.dispatch("pp:processing-card", { waiting: !0 }) : e.length > a && o(this, _, Cr).call(this, e);
+    i === "verifone" && (c = e.replace("006P93A00.", "").substring(e.indexOf("P93A"), e.indexOf("P93A") + 7)), e.includes("P81APROCESANDO, NO RETIRE TARJETA") || e.includes("P81APROCESANDO TARJETA") || c.includes("P93A022") || c.includes("P81AINSERTE CHIP O  DESLICE TARJETA") || c.includes("ACERQUE, INSERTE CHIP O  DESLICE") || c.includes("P81AACERQUE, INSERTE CHIP O  DESLICE TARJETA") ? this.dispatch("pp:processing-card", { waiting: !0 }) : e.length > a && o(this, _, Er).call(this, e);
   }
-}, Tr = function(t, e) {
+}, vr = function(t, e) {
   const i = this.__pinPad__.constants.ETX;
   let s = e.replace("023P81AFAVOR RETIRAR TARJ.", "").replace("020P81A DECLINADA EMV  ", "").replace("020P81A DECLINADA EMV  ", "");
   s = s.substring(s.indexOf("B") + 2, s.indexOf(i)), s.includes("006E93A16") && (s = "01"), this.__pinPad__.operation.applyReverse = s === "01" && this.__pinPad__.operation.responseMit._approved && this.__pinPad__.config.otherLogin.executeReverse === "1", this.__pinPad__.waiting.statusSecondGenerateWaiting = "resolved";
-}, Cr = function(t) {
+}, Er = function(t) {
   const e = this.__pinPad__.constants.ETX, i = this.__pinPad__.about.brand.toLowerCase();
   let s, a, c, l, h;
   i === "verifone" ? t = t.replace("006P93A00.", "").replace("009P93A00", "").replace("010P93A00B01v", "") : t = t.replace("006P93A00,", ""), this.__pinPad__.config.read.POSEM = t.substring(t.indexOf("P93A") + 4, t.indexOf("B"));
@@ -6032,9 +6043,9 @@ Er = function(t, e) {
     month: h,
     year: l
   });
-}, Sr = function(t, e) {
+}, Pr = function(t, e) {
   e.length > 10 && e.includes("E93A10") && (this.__pinPad__.waiting.statusReadCardWaiting === "pending" && (this.__pinPad__.waiting.statusReadCardWaiting = "rejected"), this.dispatch("pp:error", { message: "Operation cancelled by user." }));
-}, kr = function(t, e) {
+}, Cr = function(t, e) {
   const i = this;
   if (this.__pinPad__.about.model.toLowerCase() === "vx520") {
     if (e.length > 11)
@@ -6061,14 +6072,14 @@ Er = function(t, e) {
     this.dispatch("pp:print", s);
   }
 }, // eslint-disable-next-line no-unused-vars
-xr = function(t, e) {
+Tr = function(t, e) {
 }, // eslint-disable-next-line no-unused-vars
-Ar = function(t, e) {
+Sr = function(t, e) {
 }, // ========================================================================================
 // Updated to WS v4
 // ========================================================================================
 te = function(t, e) {
-  const i = new no();
+  const i = new Ya();
   return i.setPublicKey(t), i.encrypt(e);
 }, ee = function(t) {
   const e = "0123456789ABCDEF";
@@ -6078,7 +6089,7 @@ te = function(t, e) {
     i += e.substring(a, a + 1);
   }
   return i;
-}, Dr = function(t) {
+}, kr = function(t) {
   const e = "0123456789abcdef", i = [], s = [];
   for (let a = 0; a < 256; a++)
     i[a] = e.charAt(a >> 4) + e.charAt(a & 15);
@@ -6111,7 +6122,7 @@ te = function(t, e) {
 //   const decoder = new TextDecoder();
 //   return decoder.decode(decrypted);
 // }
-Rr = function(t, e, i = !1) {
+xr = function(t, e, i = !1) {
   const s = [];
   for (let p = 0; p < 256; p++)
     s[p] = p;
@@ -6124,10 +6135,10 @@ Rr = function(t, e, i = !1) {
     let f = s[(s[c] + s[l]) % 256];
     h += String.fromCharCode(p.charCodeAt(0) ^ f);
   }
-  return i ? o(this, _, Dr).call(this, h).toUpperCase() : h;
+  return i ? o(this, _, kr).call(this, h).toUpperCase() : h;
 }, Nt = function(t, e) {
-  return o(this, _, Rr).call(this, t, this.hexToAscii(e));
-}, Ir = function(t) {
+  return o(this, _, xr).call(this, t, this.hexToAscii(e));
+}, Ar = function(t) {
   return t.replaceAll("Á", "A"), t.replaceAll("É", "E"), t.replaceAll("Í", "I"), t.replaceAll("Ó", "O"), t.replaceAll("Ú", "U"), t.replaceAll("á", "a"), t.replaceAll("é", "e"), t.replaceAll("í", "i"), t.replaceAll("ó", "o"), t.replaceAll("ú", "u"), t.replaceAll("ñ", "n"), t.replaceAll("Ñ", "N"), t.replaceAll('Electr?a"', "Electronica"), t;
 }, z = function(t, e, i) {
   if (t = t.replace("@cnb logo_cpagos", e), t = t.replace("@cnn ver_app", i), t = t.replace(/@/g, " @"), t = t.replace(/ {2}@/g, " @"), t = t.replace(/ {3}@/g, " @"), t = t.replace(/\r/g, ""), t = t.replace(/\n/g, ""), t.includes("@lsn POR ESTE PAGARE ME OBLIGO INCONDI")) {
@@ -6135,11 +6146,11 @@ Rr = function(t, e, i = !1) {
     t = t.substring(0, s);
   }
   return t.trim() + "@br @br @br @br @br";
-}, Or = function(t, e) {
+}, Dr = function(t, e) {
   const i = "@logo3 @br", s = "@cnn " + e;
   return t.includes("@cnb Santander") ? (t = t.replace("@cnb Santander", "@logo1@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb American Express") ? (t = t.replace("@cnb American Express", "@logo2@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb HSBC") ? (t = t.replace("@cnb HSBC", "@logo7@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb IXE") ? (t = t.replace("@cnb IXE", "@logo11@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb MULTIVA") ? (t = t.replace("@cnb MULTIVA", "@logo15@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb Multiva") ? (t = t.replace("@cnb Multiva", "@logo15@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb SCOTIA BANK") ? (t = t.replace("@cnb SCOTIA BANK", "@logo16@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb SCOTIABANK") ? (t = t.replace("@cnb SCOTIABANK", "@logo16@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb BANCOMER") ? (t = t.replace("@cnb BANCOMER", "@logo17@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb Bancomer") ? (t = t.replace("@cnb Bancomer", "@logo17@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb BBVA") ? (t = t.replace("@cnb BBVA", "@logo17@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb BANORTE") ? (t = t.replace("@cnb BANORTE", "@logo18@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb Banorte") ? (t = t.replace("@cnb Banorte", "@logo18@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb BANREGIO") ? (t = t.replace("@cnb BANREGIO", "@logo19@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb Banregio") ? (t = t.replace("@cnb Banregio", "@logo19@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb GETNET") ? (t = t.replace("@cnb GETNET", "@logo20@br"), o(this, _, z).call(this, t, i, s)) : t.includes("@cnb GetNET") ? (t = t.replace("@cnb GetNET", "@logo20@br"), o(this, _, z).call(this, t, i, s)) : o(this, _, z).call(this, t, i, s);
-}, Nr = async function(t = !1) {
-  if (o(this, _, Mr).call(this), this.__pinPad__.config.loginResponse && !t) return await o(this, _, vn).call(this);
+}, Rr = async function(t = !1) {
+  if (o(this, _, Or).call(this), this.__pinPad__.config.loginResponse && !t) return await o(this, _, wn).call(this);
   const e = this.url + this.__pinPad__.constants.uris.login, i = {
     usuario: this.username,
     password: this.password,
@@ -6148,7 +6159,7 @@ Rr = function(t, e, i = !1) {
     serieLector: "",
     canal: this.__pinPad__.constants.appChannel
   };
-  if (await o(this, _, ie).call(this), o(this, _, En).call(this))
+  if (await o(this, _, ie).call(this), o(this, _, vn).call(this))
     throw new Error("Empty RSA Key");
   const s = o(this, _, ee).call(this, 32), a = o(this, _, te).call(this, this.__pinPad__.config.publicKeyRSA, s), c = await o(this, _, ne).call(this, s, JSON.stringify(i)), l = await V.post(e, c, {
     headers: {
@@ -6160,7 +6171,7 @@ Rr = function(t, e, i = !1) {
     var f;
     throw new Error(`Error in request, verify internet connection: ${(f = p.response) == null ? void 0 : f.status} ${p.message}`);
   });
-  let h = o(this, _, kn).call(this, JSON.stringify(l.data));
+  let h = o(this, _, Sn).call(this, JSON.stringify(l.data));
   if (typeof h == "string" && (h = JSON.parse(h)), !h)
     throw new Error("Invalid response JSON");
   if (h.RESPUESTA === "error")
@@ -6171,16 +6182,16 @@ Rr = function(t, e, i = !1) {
       timestamp: (/* @__PURE__ */ new Date()).getTime(),
       data: h
     })
-  ), await o(this, _, vn).call(this);
-}, vn = async function() {
-  await o(this, _, qr).call(this);
+  ), await o(this, _, wn).call(this);
+}, wn = async function() {
+  await o(this, _, Ur).call(this);
   try {
-    await o(this, _, Vr).call(this);
+    await o(this, _, Fr).call(this);
   } catch (t) {
     console.log("Error getting position", t);
   }
-  return this.__pinPad__.config.otherLogin = {}, o(this, _, Br).call(this, this.__pinPad__.config.loginResponse), this.__pinPad__.config.otherLogin;
-}, Br = function(t) {
+  return this.__pinPad__.config.otherLogin = {}, o(this, _, Ir).call(this, this.__pinPad__.config.loginResponse), this.__pinPad__.config.otherLogin;
+}, Ir = function(t) {
   var a, c, l, h, p, f;
   let e = "", i = "";
   (c = (a = t.xml) == null ? void 0 : a.ventaspropias) != null && c.merchant_currencyb && (e = t.xml.ventaspropias.merchant_currencyb), (h = (l = t.xml) == null ? void 0 : l.ventaspropias) != null && h.merchant_currencym && (i = t.xml.ventaspropias.merchant_currencym);
@@ -6198,10 +6209,10 @@ Rr = function(t, e, i = !1) {
     coinsMOTO: i,
     executeReverse: s
   };
-}, Mr = function() {
+}, Or = function() {
   let t = localStorage.getItem("ppLoginResponse");
   t && (t = JSON.parse(t), this.__pinPad__.config.loginResponse || (this.__pinPad__.config.loginResponse = t.data), (/* @__PURE__ */ new Date()).getTime() - t.timestamp >= 864e5 && (this.__pinPad__.config.loginResponse = null));
-}, Fr = async function() {
+}, Nr = async function() {
   const t = this.url + this.__pinPad__.constants.uris.RSAKey, e = await V.get(t).catch((i) => {
     throw new Error(`Error in request, verify internet connection: ${i.response.status} ${i.message}`);
   });
@@ -6214,18 +6225,18 @@ Rr = function(t, e, i = !1) {
       data: e.data.key_public
     })
   ), this.__pinPad__.config.publicKeyRSA;
-}, En = function() {
+}, vn = function() {
   let t = localStorage.getItem("ppRSAKey");
   return !t || (t = JSON.parse(t), this.__pinPad__.config.publicKeyRSA = t.data, (/* @__PURE__ */ new Date()).getTime() - t.timestamp >= 864e5) ? !0 : !this.__pinPad__.config.publicKeyRSA;
-}, Pn = async function() {
-  return o(this, _, En).call(this) ? await o(this, _, Fr).call(this) : this.__pinPad__.config.publicKeyRSA;
+}, En = async function() {
+  return o(this, _, vn).call(this) ? await o(this, _, Nr).call(this) : this.__pinPad__.config.publicKeyRSA;
 }, ie = async function() {
-  if (!await o(this, _, Pn).call(this))
+  if (!await o(this, _, En).call(this))
     throw new Error("RSA public key is empty");
-}, Tn = function(t) {
+}, Pn = function(t) {
   return /^[A-Z-a-z0-9\s]+$/g.test(t);
-}, Ur = function(t) {
-  if (Ct(t))
+}, Br = function(t) {
+  if (Tt(t))
     return !0;
   const e = /^[A-Z-a-z0-9\s]+$/g.test(t) === !0;
   if (!e)
@@ -6247,27 +6258,27 @@ Rr = function(t, e, i = !1) {
     if (typeof t[e] > "u" || t[e] === null || t[e] === "")
       throw new Error("Object incomplete to process");
   return t;
-}, Sn = function(t) {
+}, Tn = function(t) {
   if (!t || isNaN(parseInt(t)) || t.toString().length !== 9)
     throw new Error("Number of operation must be number of 9 digits");
   return t;
-}, kn = function(t) {
+}, Sn = function(t) {
   if (typeof t != "string") throw new Error("Invalid string");
   return !t || /<html(?:\s+lang=["'][^"']*["'])?>/i.test(t) || (t = t.replace(/aaa/g, "á"), t = t.replace(/eee/g, "é"), t = t.replace(/iii/g, "í"), t = t.replace(/ooo/g, "ó"), t = t.replace(/uuu/g, "ú"), t = t.replace(/NNN/g, "Ñ"), t = t.replace(/nnn/g, "ñ"), t = t.replace(/Ã¡/g, "á")), t;
-}, Lr = async function() {
+}, Mr = async function() {
   const t = this.__pinPad__.constants.STX, e = this.__pinPad__.constants.ETX;
   let i = "C55ACANCEL";
   i = t + o(this, _, ft).call(this, i) + i + e, i = i + o(this, _, gt).call(this, i);
   const s = this.parseStringToBytes(i, "");
   await this.appendToQueue(s, "cancel");
-}, xn = function() {
+}, kn = function() {
   const t = /* @__PURE__ */ new Date(), e = t.getDate().toString().padStart(2, "0"), i = (t.getMonth() + 1).toString().padStart(2, "0"), s = t.getFullYear().toString().substring(2);
   return e + i + s;
-}, An = function() {
+}, xn = function() {
   const t = /* @__PURE__ */ new Date(), e = t.getHours().toString().padStart(2, "0"), i = t.getMinutes().toString().padStart(2, "0");
   return e + i;
-}, Vr = async function() {
-  return this.__pinPad__.config.latitude && this.__pinPad__.config.longitude ? this.latitudeLongitude : (this.__pinPad__.config.latitude = null, this.__pinPad__.config.longitude = null, Xn() ? new Promise((t) => {
+}, Fr = async function() {
+  return this.__pinPad__.config.latitude && this.__pinPad__.config.longitude ? this.latitudeLongitude : (this.__pinPad__.config.latitude = null, this.__pinPad__.config.longitude = null, Wn() ? new Promise((t) => {
     navigator.geolocation.getCurrentPosition(
       (e) => {
         this.__pinPad__.config.latitude = e.coords.latitude, this.__pinPad__.config.longitude = e.coords.longitude, t(this.latitudeLongitude);
@@ -6277,7 +6288,7 @@ Rr = function(t, e, i = !1) {
       }
     );
   }) : this.latitudeLongitude);
-}, qr = async function() {
+}, Ur = async function() {
   let t = localStorage.getItem("ppPublicIP");
   if (t && (t = JSON.parse(t), this.__pinPad__.config.publicIP = t.data, (/* @__PURE__ */ new Date()).getTime() - t.timestamp >= 864e5 && (this.__pinPad__.config.publicIP = null)), this.__pinPad__.config.publicIP) return this.__pinPad__.config.publicIP;
   this.__pinPad__.config.publicIP = null;
@@ -6304,7 +6315,7 @@ Rr = function(t, e, i = !1) {
     var h;
     throw l.response.data.includes("Ha ocurrido un error al procesar su solicitud.") ? new Error("It was not possible to obtain the affiliations.") : l.response.status >= 500 && l.response.status <= 599 ? new Error(`Service Temporarily Unavailable ${l.message}`) : new Error(`Error in request, verify internet connection: ${(h = l.response) == null ? void 0 : h.status} ${l.message}`);
   })).data;
-}, Dn = async function({ data: t, url: e, cancelable: i = !1 } = {}) {
+}, An = async function({ data: t, url: e, cancelable: i = !1 } = {}) {
   await o(this, _, ie).call(this);
   const s = o(this, _, ee).call(this, 32), a = o(this, _, te).call(this, this.__pinPad__.config.publicKeyRSA, s), c = await o(this, _, ne).call(this, s, JSON.stringify(t)), l = this;
   return (await V.post(e, c, {
@@ -6316,18 +6327,18 @@ Rr = function(t, e, i = !1) {
   }).catch(async (p) => {
     var y;
     let f = `Error in request, verify internet connection: ${p.status} ${p.message}`;
-    throw p.response.status >= 500 && p.response.status <= 599 ? f = "Service Temporarily Unavailable" : p.response.status >= 400 && p.response.status <= 499 && (f = "Bad Request"), i && await o(y = l, _, Lr).call(y), new Error(f);
+    throw p.response.status >= 500 && p.response.status <= 599 ? f = "Service Temporarily Unavailable" : p.response.status >= 400 && p.response.status <= 499 && (f = "Bad Request"), i && await o(y = l, _, Mr).call(y), new Error(f);
   })).data;
-}, jr = async function() {
+}, Lr = async function() {
   const t = this.__pinPad__.constants.FS, e = this.__pinPad__.constants.ETX, i = this.__pinPad__.constants.STX;
   let s = "C57A" + this.__pinPad__.config.internal.qpsDomestic;
   if (s = s + t + "B" + this.__pinPad__.config.internal.qpsInternational, s = s + t + "C" + this.__pinPad__.config.internal.cvmlVMCDomestic, s = s + t + "D" + this.__pinPad__.config.internal.cvmlVMCInternational, s = s + t + "E" + this.__pinPad__.config.internal.cvmlAmex, s = s + t + "F" + this.__pinPad__.config.internal.translimitCTLSVMC, s = s + t + "G" + this.__pinPad__.config.internal.translimitCTLSAmex, s = i + o(this, _, ft).call(this, s) + s + e, s = s + o(this, _, gt).call(this, s), !this.__pinPad__.about.injectedValues) {
     const a = this.parseStringToBytes(s, "");
     await this.appendToQueue(a, "inject");
   }
-}, Hr = async function() {
+}, Vr = async function() {
   this.__pinPad__.operation.bin8 && (this.__pinPad__.operation.bin = this.__pinPad__.operation.bin8), this.__pinPad__.operation.bin8 = "";
-  const t = await o(this, _, Dn).call(this, {
+  const t = await o(this, _, An).call(this, {
     data: {
       accion: "tipoPagoInfo",
       cc_num: this.__pinPad__.operation.bin,
@@ -6347,11 +6358,11 @@ Rr = function(t, e, i = !1) {
     return await this.appendToQueue(a, "cancel"), !1;
   }
   return this.__pinPad__.operation.merchant = t, this.__pinPad__.operation.onlyMerchant = t.contado.af.length > 1 ? t.contado.af[0].merchant : t.contado.af.merchant, !0;
-}, Kr = async function(t = null) {
+}, qr = async function(t = null) {
   if (this.__pinPad__.waiting.statusAboutWaiting) throw new Error("AboutPP is already running");
   const e = this.__pinPad__.constants.STX, i = this.__pinPad__.constants.ETX;
   let s = "C56AABOUT";
-  if (s = e + o(this, _, ft).call(this, s) + s + i, s = s + o(this, _, gt).call(this, s), Ct(this.__pinPad__.about.pp)) {
+  if (s = e + o(this, _, ft).call(this, s) + s + i, s = s + o(this, _, gt).call(this, s), Tt(this.__pinPad__.about.pp)) {
     this.__pinPad__.waiting.statusAboutWaiting = "pending";
     const l = this.parseStringToBytes(s, "");
     await this.appendToQueue(l, "about");
@@ -6362,22 +6373,22 @@ Rr = function(t, e, i = !1) {
   return new Promise((l, h) => {
     c = setInterval(() => {
       if (a.__pinPad__.waiting.statusAboutWaiting === "resolved") {
-        if (clearInterval(c), a.__pinPad__.waiting.statusAboutWaiting = null, Ct(a.__pinPad__.about.pp))
+        if (clearInterval(c), a.__pinPad__.waiting.statusAboutWaiting = null, Tt(a.__pinPad__.about.pp))
           return;
         t || l(!0), l(t(a.__pinPad__.about.pp.supportDUKPT, a.__pinPad__.about.pp.hasDUKPTKeys));
       } else a.__pinPad__.waiting.statusAboutWaiting === "rejected" && (clearInterval(c), a.__pinPad__.waiting.statusAboutWaiting = null, h("Error"));
     }, 500);
   });
 }, xe = async function(t, e) {
-  if (t = t ? t.toString() : "", e = e ? e.toString() : "", Ct(t) || t === "0") {
+  if (t = t ? t.toString() : "", e = e ? e.toString() : "", Tt(t) || t === "0") {
     this.dispatch("pp:dukpt", { status: "unsupported", already: !1 });
     return;
   }
-  if (Ct(e) || e === "1") {
+  if (Tt(e) || e === "1") {
     this.dispatch("pp:dukpt", { status: "charged", already: !0 });
     return;
   }
-  const i = o(this, _, xn).call(this), s = o(this, _, An).call(this), a = this.__pinPad__.constants.FS, c = this.__pinPad__.constants.ETX, l = this.__pinPad__.constants.STX;
+  const i = o(this, _, kn).call(this), s = o(this, _, xn).call(this), a = this.__pinPad__.constants.FS, c = this.__pinPad__.constants.ETX, l = this.__pinPad__.constants.STX;
   let h = "C91A" + i + a + "B" + s;
   h = l + o(this, _, ft).call(this, h) + h + c, h = h + o(this, _, gt).call(this, h);
   const p = this.parseStringToBytes(h, "");
@@ -6388,10 +6399,10 @@ Rr = function(t, e, i = !1) {
   return new Promise((E, v) => {
     f = setInterval(async () => {
       var S;
-      y.__pinPad__.waiting.statusinitDUKPTWaiting === "resolved" ? (clearInterval(f), y.__pinPad__.waiting.statusinitDUKPTWaiting = null, y.dispatch("pp:dukpt", { status: "charged", already: !1 }), await o(S = y, _, Wr).call(S), E(!0)) : y.__pinPad__.waiting.statusinitDUKPTWaiting === "rejected" && (clearInterval(f), y.__pinPad__.waiting.statusinitDUKPTWaiting = null, v("Error"));
+      y.__pinPad__.waiting.statusinitDUKPTWaiting === "resolved" ? (clearInterval(f), y.__pinPad__.waiting.statusinitDUKPTWaiting = null, y.dispatch("pp:dukpt", { status: "charged", already: !1 }), await o(S = y, _, jr).call(S), E(!0)) : y.__pinPad__.waiting.statusinitDUKPTWaiting === "rejected" && (clearInterval(f), y.__pinPad__.waiting.statusinitDUKPTWaiting = null, v("Error"));
     }, 500);
   });
-}, Wr = async function() {
+}, jr = async function() {
   const t = {
     IPEK_REQUESTType: {
       business: {
@@ -6403,37 +6414,37 @@ Rr = function(t, e, i = !1) {
       },
       terminal: this.__pinPad__.config.terminal
     }
-  }, e = await o(this, _, Dn).call(this, {
+  }, e = await o(this, _, An).call(this, {
     data: t,
     url: this.url + this.__pinPad__.constants.uris.keysDUKPT
   });
-  await o(this, _, is).call(this, e);
-}, zr = async function() {
-  if (!await o(this, _, Pn).call(this))
+  await o(this, _, ts).call(this, e);
+}, Hr = async function() {
+  if (!await o(this, _, En).call(this))
     throw new Error("RSA public key is empty");
   const e = this;
-  await o(this, _, Kr).call(this, async function(s, a) {
+  await o(this, _, qr).call(this, async function(s, a) {
     var l, h;
     if (e.__pinPad__.about.supportInjection && e.__pinPad__.config.internal.emv && e.__pinPad__.about.injectedValues)
       return await o(l = e, _, xe).call(l, s, a), !0;
     let c = 0;
-    return e.__pinPad__.waiting.statusInjectWaiting = "pending", await o(h = e, _, jr).call(h), new Promise((p, f) => {
+    return e.__pinPad__.waiting.statusInjectWaiting = "pending", await o(h = e, _, Lr).call(h), new Promise((p, f) => {
       c = setInterval(async () => {
         var y;
         e.__pinPad__.waiting.statusInjectWaiting === "resolved" ? (clearInterval(c), e.__pinPad__.waiting.statusInjectWaiting = null, await o(y = e, _, xe).call(y, s, a), p(!0)) : e.__pinPad__.waiting.statusInjectWaiting === "rejected" && (clearInterval(c), e.__pinPad__.waiting.statusInjectWaiting = null, f("Error"));
       }, 500);
     });
   });
-}, Rn = function(t, e = 0) {
+}, Dn = function(t, e = 0) {
   if (t = parseFloat(t.toString().replace(/[^0-9.-]/g, "")), isNaN(t) || t === 0)
     return parseFloat("0").toFixed(e);
   t = t.toFixed(e);
   let i = t.split(".");
   return i[0] = i[0].replace(/\B(?=(\d{3})+(?!\d))/g, ""), i.join(".");
-}, Xr = async function() {
+}, Kr = async function() {
   this.__pinPad__.operation.errors = 0;
   let t = "ACERQUE, INSERTE CHIP O  DESLICE TARJETA";
-  if (this.__pinPad__.about.supportContactless || (t = "INSERTE CHIP O  DESLICE TARJETA"), this.__pinPad__.about.model.toUpperCase().includes("UX300") && (t = "ACERQUE O INSERTE TARJETA"), Ct(this.amount) || this.amount <= 0)
+  if (this.__pinPad__.about.supportContactless || (t = "INSERTE CHIP O  DESLICE TARJETA"), this.__pinPad__.about.model.toUpperCase().includes("UX300") && (t = "ACERQUE O INSERTE TARJETA"), Tt(this.amount) || this.amount <= 0)
     throw new Error("Amount required");
   if (o(this, _, Cn).call(this, this.amount) === !1)
     throw new Error("Invalid amount required");
@@ -6441,7 +6452,7 @@ Rr = function(t, e, i = !1) {
     throw new Error("Amount must be greater than 0");
   const e = this.__pinPad__.constants.FS, i = this.__pinPad__.constants.STX, s = this.__pinPad__.constants.ETX;
   let a = "C93A" + t;
-  a = a + e + "B" + o(this, _, xn).call(this), a = a + e + "C" + o(this, _, An).call(this), a = a + e + "D" + o(this, _, ke).call(this, this.amount, 2), a = a + e + "E0.00", a = a + e + "F" + this.__pinPad__.config.currencyCode, this.__pinPad__.about.supportDUKPT && this.__pinPad__.about.supportDUKPT !== "0" && this.__pinPad__.about.supportDUKPT !== "false" && (this.__pinPad__.about.supportContactless ? (a = a + e + "G" + this.timeoutPinPad, a = a + e + "HTAGS", a = a + e + "I" + this.__pinPad__.config.requireCVVAmex, a = a + e + "J" + this.__pinPad__.config.forceOnline, a = a + e + "K" + this.__pinPad__.about.supportContactless, a = a + e + "L" + this.__pinPad__.config.emvCard, this.__pinPad__.about.hasCashback && (a = a + e + "M0", a = a + e + "N00")) : (a = a + e + "G" + this.timeoutPinPad, a = a + e + "HTAGS", a = a + e + "I" + this.__pinPad__.config.requireCVVAmex, a = a + e + "L" + this.__pinPad__.config.emvCard), this.__pinPad__.about.supportInjection && (a = a + e + "O" + this.__pinPad__.config.validateQPS)), a = i + o(this, _, ft).call(this, a) + a + s, a = a + o(this, _, gt).call(this, a), o(this, _, rs).call(this);
+  a = a + e + "B" + o(this, _, kn).call(this), a = a + e + "C" + o(this, _, xn).call(this), a = a + e + "D" + o(this, _, ke).call(this, this.amount, 2), a = a + e + "E0.00", a = a + e + "F" + this.__pinPad__.config.currencyCode, this.__pinPad__.about.supportDUKPT && this.__pinPad__.about.supportDUKPT !== "0" && this.__pinPad__.about.supportDUKPT !== "false" && (this.__pinPad__.about.supportContactless ? (a = a + e + "G" + this.timeoutPinPad, a = a + e + "HTAGS", a = a + e + "I" + this.__pinPad__.config.requireCVVAmex, a = a + e + "J" + this.__pinPad__.config.forceOnline, a = a + e + "K" + this.__pinPad__.about.supportContactless, a = a + e + "L" + this.__pinPad__.config.emvCard, this.__pinPad__.about.hasCashback && (a = a + e + "M0", a = a + e + "N00")) : (a = a + e + "G" + this.timeoutPinPad, a = a + e + "HTAGS", a = a + e + "I" + this.__pinPad__.config.requireCVVAmex, a = a + e + "L" + this.__pinPad__.config.emvCard), this.__pinPad__.about.supportInjection && (a = a + e + "O" + this.__pinPad__.config.validateQPS)), a = i + o(this, _, ft).call(this, a) + a + s, a = a + o(this, _, gt).call(this, a), o(this, _, es).call(this);
   const c = this.parseStringToBytes(a, "");
   await this.appendToQueue(c, "read-card");
   let l = 0;
@@ -6457,9 +6468,9 @@ Rr = function(t, e, i = !1) {
       }
     }, 500);
   });
-}, Gr = async function(t) {
-  return await Tt(t * 1e3);
-}, Jr = async function(t) {
+}, Wr = async function(t) {
+  return await Ct(t * 1e3);
+}, zr = async function(t) {
   let e = this.url + this.__pinPad__.constants.uris.consult;
   return t > 1 && this.environment === "production" && (e = e.replace(
     this.__pinPad__.constants.urls.production,
@@ -6472,13 +6483,13 @@ Rr = function(t, e, i = !1) {
     date: this.__pinPad__.operation.consultDate,
     reference: this.reference
   });
-}, $r = async function(t = "", e = {}) {
+}, Xr = async function(t = "", e = {}) {
   let i = 1, s = null;
   do {
     i > 1 && this.environment === "production" && (t = t.replace(
       this.__pinPad__.constants.urls.production,
       this.__pinPad__.constants.urls.productionAlternative
-    ), await o(this, _, Gr).call(this, 5)), await o(this, _, ie).call(this);
+    ), await o(this, _, Wr).call(this, 5)), await o(this, _, ie).call(this);
     const a = o(this, _, ee).call(this, 32), c = o(this, _, te).call(this, this.__pinPad__.config.publicKeyRSA, a), l = await o(this, _, ne).call(this, a, JSON.stringify(e));
     let h = !1;
     const p = await V.post(t, l, {
@@ -6489,15 +6500,15 @@ Rr = function(t, e, i = !1) {
     }).catch(async (f) => {
       let y = `Error in request, verify internet connection: ${f.status} ${f.message}`;
       f.response.status >= 500 && f.response.status <= 599 ? y = "Service Temporarily Unavailable" : f.response.status >= 400 && f.response.status <= 499 && (y = "Bad Request"), console.warn(f), s = y;
-      const E = await o(this, _, Jr).call(this, i);
+      const E = await o(this, _, zr).call(this, i);
       E && E !== "{}" && !E.includes('"transacciones":""') && E.includes("nu_operaion") && (i = 5, s = "EE32"), h = !0;
     });
     if (!h)
       return p.data;
   } while (i++ <= 3);
   return s ? Promise.reject(s) : Promise.reject("Communication error with CDP. IL/MTY");
-}, Qr = function(t) {
-  if (Ct(t)) throw new Error("Number of authorization invalid");
+}, $r = function(t) {
+  if (Tt(t)) throw new Error("Number of authorization invalid");
   if (/^[A-Za-z0-9]+$/g.test(t) !== !0) throw new Error("Number of authorization invalid");
   if (t.length !== 6) throw new Error("Number of authorization invalid");
   return !0;
@@ -6531,7 +6542,7 @@ Rr = function(t, e, i = !1) {
 //     },
 //   };
 // }
-Zr = function(t) {
+Gr = function(t) {
   var s, a;
   const e = this;
   this.__pinPad__.operation.responseMit._approved = t.response === "approved", this.__pinPad__.operation.responseMit._status = t.response, this.__pinPad__.operation.responseMit._originalToken = t.number_tkn ?? "", this.__pinPad__.operation.folio = t.foliocpagos, this.__pinPad__.operation.authorization = t.auth;
@@ -6543,7 +6554,7 @@ Zr = function(t) {
     auth: t.auth,
     cd_response: i,
     cd_error: t.cd_error,
-    nb_error: o(a = e, _, kn).call(a, t.nb_error ?? ""),
+    nb_error: o(a = e, _, Sn).call(a, t.nb_error ?? ""),
     time: t.time,
     date: t.date,
     nb_company: t.nb_company,
@@ -6563,7 +6574,7 @@ Zr = function(t) {
     appidlabel: t.appidlabel,
     arqc: t.arqc
   };
-}, Yr = async function() {
+}, Jr = async function() {
   var s, a;
   const t = this;
   this.__pinPad__.operation.errors = 0, this.__pinPad__.operation.ignore.counterSale = !1;
@@ -6577,7 +6588,7 @@ Zr = function(t) {
     object: {}
   };
   try {
-    const c = await o(this, _, Rn).call(this, this.amount, 2);
+    const c = await o(this, _, Dn).call(this, this.amount, 2);
     await o(this, _, re).call(this, {
       Ambiente: this.environment,
       Country: this.__pinPad__.config.country,
@@ -6599,7 +6610,7 @@ Zr = function(t) {
       Merchant: e,
       Reverse: this.__pinPad__.config.otherLogin.executeReverse
     });
-    const l = this.__pinPad__.about.supportContactless && this.__pinPad__.about.supportContactless !== "0" ? "1" : "0", h = await o(this, _, $r).call(this, this.url + this.__pinPad__.constants.uris.sale, {
+    const l = this.__pinPad__.about.supportContactless && this.__pinPad__.about.supportContactless !== "0" ? "1" : "0", h = await o(this, _, Xr).call(this, this.url + this.__pinPad__.constants.uris.sale, {
       VMCAMEXB: {
         business: {
           country: this.__pinPad__.config.country.toUpperCase(),
@@ -6659,12 +6670,12 @@ Zr = function(t) {
       }
     });
     h.response === "error" && (i.error = !0, i.message = h.nb_error || "Error in response");
-    const p = o(this, _, Zr).call(this, h);
-    return i.object = p, await o(this, _, ts).call(this, p), i.approved = this.__pinPad__.operation.responseMit._approved, this.__pinPad__.operation.finalResult = p, i;
+    const p = o(this, _, Gr).call(this, h);
+    return i.object = p, await o(this, _, Qr).call(this, p), i.approved = this.__pinPad__.operation.responseMit._approved, this.__pinPad__.operation.finalResult = p, i;
   } catch (c) {
-    throw t.__pinPad__.finishCommand.A = "01", t.__pinPad__.finishCommand.B = "", t.__pinPad__.finishCommand.C = "", t.__pinPad__.finishCommand.D = "", t.__pinPad__.finishCommand.E = "", t.__pinPad__.finishCommand.F = "", t.__pinPad__.finishCommand.G = "", t.__pinPad__.finishCommand.H = "", t.__pinPad__.finishCommand.I = "", t.__pinPad__.finishCommand.J = "", t.__pinPad__.finishCommand.K = "", await o(a = t, _, ns).call(a, o(s = t, _, On).call(s, c)), c;
+    throw t.__pinPad__.finishCommand.A = "01", t.__pinPad__.finishCommand.B = "", t.__pinPad__.finishCommand.C = "", t.__pinPad__.finishCommand.D = "", t.__pinPad__.finishCommand.E = "", t.__pinPad__.finishCommand.F = "", t.__pinPad__.finishCommand.G = "", t.__pinPad__.finishCommand.H = "", t.__pinPad__.finishCommand.I = "", t.__pinPad__.finishCommand.J = "", t.__pinPad__.finishCommand.K = "", await o(a = t, _, Yr).call(a, o(s = t, _, In).call(s, c)), c;
   }
-}, ts = async function(t) {
+}, Qr = async function(t) {
   if (this.__pinPad__.config.read.POSEM === "022" || this.__pinPad__.config.read.POSEM === "800" || this.__pinPad__.config.read.ReadCTLS === "1")
     return this.dispatch("pp:finish-emv", t), !0;
   const e = this.__pinPad__.constants.FS, i = this.__pinPad__.constants.STX, s = this.__pinPad__.constants.ETX;
@@ -6699,24 +6710,24 @@ Zr = function(t) {
               }
             }
           }), S = JSON.parse(v);
-          let C;
-          S.response === "approved" ? C = { message: "Transaction rejected by PinPad." } : C = { message: "No communication, please check your report." }, h.__pinPad__.operation.ignore.counterSale || (h.dispatch("pp:finish-emv", C), h.__pinPad__.operation.ignore.counterSale = !0);
+          let T;
+          S.response === "approved" ? T = { message: "Transaction rejected by PinPad." } : T = { message: "No communication, please check your report." }, h.__pinPad__.operation.ignore.counterSale || (h.dispatch("pp:finish-emv", T), h.__pinPad__.operation.ignore.counterSale = !0);
         } else
           h.__pinPad__.operation.ignore.counterSale || (h.dispatch("pp:finish-emv", t), h.__pinPad__.operation.ignore.counterSale = !0);
-        t.cd_error === "92" && await o(E = h, _, es).call(E, t, a), p(!0);
+        t.cd_error === "92" && await o(E = h, _, Zr).call(E, t, a), p(!0);
       } else h.__pinPad__.waiting.statusSecondGenerateWaiting === "rejected" && (clearInterval(l), h.__pinPad__.waiting.statusSecondGenerateWaiting = null, f("There is no response from the reader, check that it is connected."));
     }, 500);
   });
-}, es = async function(t, e) {
+}, Zr = async function(t, e) {
   this.__pinPad__.operation.ignore.responseGlobal = t, this.__pinPad__.operation.ignore.C93Global = e, this.__pinPad__.operation.ignore.isError92TRX = !0, await o(this, _, xe).call(this, 1, 0);
-}, In = async function() {
+}, Rn = async function() {
   if (this.__pinPad__.operation.ignore.isError92TRX = !1, this.__pinPad__.config.read.POSEM === "022" || this.__pinPad__.config.read.POSEM === "800" || this.__pinPad__.config.read.ReadCTLS === "1")
     this.dispatch("pp:response", this.__pinPad__.operation.ignore.responseGlobal);
   else {
     const t = this.parseStringToBytes(this.__pinPad__.operation.ignore.C93Global, "");
-    await this.appendToQueue(t, "code93"), await Tt(1400), this.dispatch("pp:response", this.__pinPad__.operation.ignore.responseGlobal);
+    await this.appendToQueue(t, "code93"), await Ct(1400), this.dispatch("pp:response", this.__pinPad__.operation.ignore.responseGlobal);
   }
-}, On = function(t) {
+}, In = function(t) {
   const e = {
     PPE02: "Importe Incorrecto.",
     A02: "Importe Incorrecto.",
@@ -6761,7 +6772,7 @@ Zr = function(t) {
     message: e[t]
   } : { error: t, message: "Error desconocido" };
   return this.dispatch("pp:error", i), i;
-}, ns = async function(t) {
+}, Yr = async function(t) {
   const e = this.__pinPad__.constants.FS, i = this.__pinPad__.constants.STX, s = this.__pinPad__.constants.ETX;
   let a = "C93A" + this.__pinPad__.finishCommand.A;
   if (a = a + e + "B" + this.__pinPad__.finishCommand.B, a = a + e + "C" + this.__pinPad__.finishCommand.C, a = a + e + "D" + this.__pinPad__.finishCommand.D, a = a + e + "E" + this.__pinPad__.finishCommand.E, a = a + e + "F" + this.__pinPad__.finishCommand.F, a = a + e + "G" + this.__pinPad__.finishCommand.G, a = a + e + "H" + this.__pinPad__.finishCommand.H, a = a + e + "I" + this.__pinPad__.finishCommand.I, a = a + e + "J" + this.__pinPad__.finishCommand.J, a = a + e + "K" + this.__pinPad__.finishCommand.K, a = i + o(this, _, ft).call(this, a) + a + s, a = a + o(this, _, gt).call(this, a), this.__pinPad__.config.read.POSEM === "022" || this.__pinPad__.config.read.POSEM === "800" || this.__pinPad__.config.read.ReadCTLS === "1") {
@@ -6770,9 +6781,9 @@ Zr = function(t) {
   }
   const c = this.parseStringToBytes(a, "");
   await this.appendToQueue(c, "finish-emv-end");
-}, is = async function(t) {
+}, ts = async function(t) {
   if (t.cd_estatus = t.cd_estatus ? t.cd_estatus : "0", t.cd_estatus !== "1") {
-    this.__pinPad__.operation.ignore.isError92TRX && await o(this, _, In).call(this);
+    this.__pinPad__.operation.ignore.isError92TRX && await o(this, _, Rn).call(this);
     return;
   }
   const e = this.__pinPad__.constants.FS, i = this.__pinPad__.constants.ETX, s = this.__pinPad__.constants.STX, a = t.nb_ksn, c = t.nb_kcv || "", l = t.nb_ipek || "";
@@ -6786,14 +6797,14 @@ Zr = function(t) {
   return new Promise((E, v) => {
     f = setInterval(async () => {
       var S;
-      y.__pinPad__.waiting.statuswritingDUKPTWaiting === "resolved" ? (clearInterval(f), y.__pinPad__.waiting.statuswritingDUKPTWaiting = null, this.__pinPad__.operation.ignore.isError92TRX && await o(S = y, _, In).call(S), E(!0)) : y.__pinPad__.waiting.statuswritingDUKPTWaiting === "rejected" && (clearInterval(f), y.__pinPad__.waiting.statuswritingDUKPTWaiting = null, v("Error writing DUKPT keys"));
+      y.__pinPad__.waiting.statuswritingDUKPTWaiting === "resolved" ? (clearInterval(f), y.__pinPad__.waiting.statuswritingDUKPTWaiting = null, this.__pinPad__.operation.ignore.isError92TRX && await o(S = y, _, Rn).call(S), E(!0)) : y.__pinPad__.waiting.statuswritingDUKPTWaiting === "rejected" && (clearInterval(f), y.__pinPad__.waiting.statuswritingDUKPTWaiting = null, v("Error writing DUKPT keys"));
     }, 500);
   });
-}, rs = function() {
+}, es = function() {
   this.__pinPad__.config.read.AppId = "", this.__pinPad__.config.read.AppIdLabel = "", this.__pinPad__.config.read.Arqc = "", this.__pinPad__.config.read.ChipName = "", this.__pinPad__.config.read.ReadCTLS = "", this.__pinPad__.config.read.NB_Data = "", this.__pinPad__.config.read.NB_ksn = "", this.__pinPad__.config.read.PIN = "", this.__pinPad__.config.read.POSEM = "", this.__pinPad__.config.read.Tags = "", this.__pinPad__.config.read.Type = "", this.__pinPad__.config.read.Chip = "", this.__pinPad__.config.read.ChipNameEnc = "", this.__pinPad__.operation.ignore.error = "", this.__pinPad__.operation.ignore.C93Global = "", this.__pinPad__.operation.folio = "", this.__pinPad__.operation.authorization = "", this.__pinPad__.config.tokenizeTRX = !1;
 };
-var g, ss, as, os, st, Ae, cs, ls, hs, us, ds, ps, _s, fs, gs, bs, ys, ms, ws, vs, Es, Ps, Ts, Cs, Ss, ks, xs, As, Ds, Rs, Is, Os, dt, Z, De, Y, bt, Ns, Bs, Ms, Fs, se, Nn, Bn, Re, Ie, Us;
-class Uc extends Lt {
+var g, ns, is, rs, st, Ae, ss, as, os, cs, ls, hs, us, ds, ps, _s, fs, gs, bs, ys, ms, ws, vs, Es, Ps, Cs, Ts, Ss, ks, xs, As, Ds, dt, Z, De, Y, bt, Rs, Is, Os, Ns, se, On, Nn, Re, Ie, Bs;
+class Yc extends Lt {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -6803,7 +6814,7 @@ class Uc extends Lt {
     support_cart: c = !0
   } = {}) {
     super({ filters: t, config_port: e, no_device: i, device_listen_on_port: s });
-    $(this, g);
+    J(this, g);
     rt(this, "__device", {
       type: "esplus",
       support_cart: !1,
@@ -6829,13 +6840,13 @@ class Uc extends Lt {
         }
       }
     });
-    if (this.__internal__.device.type = "jofemar", G.getCustom(this.typeDevice, i))
+    if (this.__internal__.device.type = "jofemar", $.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
     this.__internal__.dispense.must_response = !0, this.__internal__.time.response_general = 800, this.__internal__.time.response_engines = 800, this.__internal__.dispense.limit_counter = 40, this.__internal__.dispense.timeout = 0, this.__internal__.dispense.timeout_time = 4e3, this.__internal__.dispense.interval = 0, this.__internal__.dispense.interval_time = 1e3, this.__internal__.device.hex_number = (128 + this.listenOnChannel).toString(16), this.__internal__.device.door_open = !1, this.__internal__.dispense.elevator = {
       locking_time: 60,
       locking_interval: 0,
       need_reset: !1
-    }, this.deviceType = a, this.supportCart = c, o(this, g, ss).call(this), o(this, g, os).call(this), o(this, g, as).call(this);
+    }, this.deviceType = a, this.supportCart = c, o(this, g, ns).call(this), o(this, g, rs).call(this), o(this, g, is).call(this);
   }
   set startChannelVerification(t) {
     const e = parseInt(t);
@@ -6901,10 +6912,10 @@ class Uc extends Lt {
     };
     switch (t[0]) {
       case "02":
-        i = o(this, g, Os).call(this, t, i, 128);
+        i = o(this, g, Ds).call(this, t, i, 128);
         break;
       case "06":
-        i = o(this, g, Ns).call(this, t, i);
+        i = o(this, g, Rs).call(this, t, i);
         break;
       case "15":
         i.name = "Checksum error", i.description = "The calculated checksum does not match the received checksum", i.no_code = 38, o(this, g, Z).call(this);
@@ -6926,7 +6937,7 @@ class Uc extends Lt {
    */
   async dispense({ selection: t = 1, cart: e = !1 } = {}) {
     if (t = parseInt(t), isNaN(t) || t < 1 || t > 130) throw new Error("Invalid selection");
-    const { channel: i, tray: s } = o(this, g, Bs).call(this, t);
+    const { channel: i, tray: s } = o(this, g, Is).call(this, t);
     this.__internal__.dispense.backup_dispense = {
       selection: t,
       cart: e,
@@ -6937,7 +6948,7 @@ class Uc extends Lt {
     e && (c[4] = "4D"), c = o(this, g, Ae).call(this, c);
     let l;
     do
-      l = await this.internalDispense(c), o(this, g, Ms).call(this), l.error === "elevator-locked" ? await o(this, g, cs).call(this) : l.error === "no-response" && await Tt(1e3);
+      l = await this.internalDispense(c), o(this, g, Os).call(this), l.error === "elevator-locked" ? await o(this, g, ss).call(this) : l.error === "no-response" && await Ct(1e3);
     while (["elevator-locked", "no-response"].includes(l.error));
     return this.__internal__.dispense.backup_dispense = {}, l;
   }
@@ -6959,24 +6970,24 @@ class Uc extends Lt {
     return await o(this, g, se).call(this, "81");
   }
   async resetMachineErrors() {
-    return this.__internal__.serial.queue.length === 0 ? (o(this, g, Nn).call(this), await o(this, g, se).call(this, "FF")) : new Promise((t) => {
+    return this.__internal__.serial.queue.length === 0 ? (o(this, g, On).call(this), await o(this, g, se).call(this, "FF")) : new Promise((t) => {
       const e = setInterval(async () => {
-        this.__internal__.serial.queue.length > 0 || (clearInterval(e), await o(this, g, se).call(this, "FF"), o(this, g, Nn).call(this), t(!0));
+        this.__internal__.serial.queue.length > 0 || (clearInterval(e), await o(this, g, se).call(this, "FF"), o(this, g, On).call(this), t(!0));
       }, 100);
     });
   }
   async resetAllErrors() {
-    return await this.resetSoldOutErrors(), await Tt(100), await this.resetWaitingProductRemovedError(), await Tt(100), await this.resetMachineErrors();
+    return await this.resetSoldOutErrors(), await Ct(100), await this.resetWaitingProductRemovedError(), await Ct(100), await this.resetMachineErrors();
   }
   async status() {
     const t = ["02", "30", "30", "81", "53", "FF", "FF"];
     return await o(this, g, st).call(this, t, "status");
   }
   async lightsOn() {
-    return await o(this, g, Bn).call(this, "81");
+    return await o(this, g, Nn).call(this, "81");
   }
   async lightsOff() {
-    return await o(this, g, Bn).call(this, "80");
+    return await o(this, g, Nn).call(this, "80");
   }
   async program(t, e) {
     const i = ["02", "30", "30", "81", "50", t, e];
@@ -7246,7 +7257,7 @@ class Uc extends Lt {
   }
   async programClock({ date: t = /* @__PURE__ */ new Date() } = {}) {
     if (!(t instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
-    const e = ["02", "30", "30", "81", "72", ...o(this, g, Us).call(this, t)];
+    const e = ["02", "30", "30", "81", "72", ...o(this, g, Bs).call(this, t)];
     return await o(this, g, st).call(this, e, "clock");
   }
   /**
@@ -7288,7 +7299,7 @@ class Uc extends Lt {
     });
   }
 }
-g = new WeakSet(), ss = function() {
+g = new WeakSet(), ns = function() {
   const t = [
     "dispensing:withdrawal",
     "command-executed",
@@ -7324,10 +7335,10 @@ g = new WeakSet(), ss = function() {
   ];
   for (const e of t)
     this.serialRegisterAvailableListener(e);
-}, as = function() {
-  this.on("internal:dispense:running", o(this, g, Fs).bind(this));
-}, os = function() {
-  G.add(this);
+}, is = function() {
+  this.on("internal:dispense:running", o(this, g, Ns).bind(this));
+}, rs = function() {
+  $.add(this);
 }, st = function(t, e) {
   return t[3] = this.__internal__.device.hex_number, this.appendToQueue(o(this, g, Ae).call(this, t), e);
 }, Ae = function(t) {
@@ -7335,9 +7346,9 @@ g = new WeakSet(), ss = function() {
   for (let s = 0; s < 2; s++)
     t.push(this.hexMaker(i[s]));
   return t.push("03"), t;
-}, cs = async function() {
+}, ss = async function() {
   if (this.__internal__.dispense.elevator.locking_interval) return;
-  this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await Tt(500));
+  this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await Ct(500));
   const t = this;
   return this.__internal__.dispense.status = "elevator-locked", this.__internal__.dispense.elevator.locking_time = 60, new Promise((e) => {
     t.__internal__.dispense.elevator.locking_interval = setInterval(() => {
@@ -7348,9 +7359,9 @@ g = new WeakSet(), ss = function() {
       }), t.__internal__.dispense.elevator.locking_time -= 1, t.__internal__.dispense.elevator.locking_time <= 0 && (clearInterval(t.__internal__.dispense.elevator.locking_interval), t.__internal__.dispense.elevator.locking_interval = 0, e(!0));
     }, 1e3);
   });
-}, ls = function(t, e) {
+}, as = function(t, e) {
   return e.name = "ok", e.description = "The last command was executed successfully", e.no_code = 1, this.dispatch("command-executed", e), e;
-}, hs = function(t, e) {
+}, os = function(t, e) {
   e.additional = {
     hex: t,
     dec: this.hexToDec(t),
@@ -7375,20 +7386,20 @@ g = new WeakSet(), ss = function() {
     44: "D"
   };
   return e.additional.ascii = i[t] ?? null, e.name = "Key pressed", e.description = `The key ${e.additional.ascii} was pressed`, e.no_code = 2, this.dispatch("keyboard:pressed", e.additional), e;
-}, us = function(t, e) {
+}, cs = function(t, e) {
   return e.additional = { open: !1 }, e.no_code = 3, t === "4f" ? (e.name = "door open", e.description = "The door was opened", e.additional.open = !0, this.__internal__.device.door_open = !0, this.dispatch("door:event", e.additional)) : t === "43" ? (e.name = "door close", e.description = "The door was closed", e.additional.open = !1, this.__internal__.device.door_open = !1, this.dispatch("door:event", e.additional)) : (e.name = "door event", e.description = "The door event received is unknown", this.dispatch("door:event", { open: e.additional.open, message: e })), e;
-}, ds = function(t, e) {
+}, ls = function(t, e) {
   e.no_code = 404;
   let i = t[5] ?? null;
   return i && this.listenOnChannel > 1 && (i = this.hexToDec(i) - this.listenOnChannel + 1, i = this.decToHex(i)), i && (i === "FD" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : i === "FC" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running && (this.__device.channels.verification.channels.push({
     selection: this.__device.channels.verification.current,
     active: e.additional.active
   }), e.additional.selection = this.__device.channels.verification.current), this.dispatch("channel:status", e.additional)), e;
-}, ps = function(t, e) {
+}, hs = function(t, e) {
   e.no_code = 39, e.name = "Program version";
   const i = t.slice(4, 12), s = i.map((a) => String.fromCharCode(this.hexToDec(a))).join("");
   return e.additional = { version: s, hex: i }, e.description = `The program version is ${s}`, this.dispatch("program:version", e.additional), e;
-}, _s = function(t, e) {
+}, us = function(t, e) {
   e.no_code = 39, e.name = "Machine faults", e.description = "No faults detected", e.additional = { no_faults: 0, faults: [] };
   const i = t.slice(4, -3);
   if (i.length > 1 && i[0] !== "30") {
@@ -7431,7 +7442,7 @@ g = new WeakSet(), ss = function() {
       s[a] && (e.additional.faults.push(s[a]), e.additional.no_faults++);
   }
   return this.dispatch("machine:faults", e.additional), e;
-}, fs = function(t, e) {
+}, ds = function(t, e) {
   e.no_code = 40, e.name = "Clock registers", e.description = "Clock registers";
   const i = t.slice(4, -3), s = i.map((v) => String.fromCharCode(this.hexToDec(v))).join(""), [a, c] = s.split(" "), [l, h] = a.split(":"), [p, f, y] = c.split("-"), E = new Date(
     2e3 + parseInt(y),
@@ -7450,7 +7461,7 @@ g = new WeakSet(), ss = function() {
     date: E,
     hex: i
   }, this.dispatch("clock:registers", e.additional), e;
-}, gs = function(t, e) {
+}, ps = function(t, e) {
   e.no_code = 41, e.name = "Machine activity", e.description = "Events from read machine activity";
   const i = String.fromCharCode(this.hexToDec(t[4]));
   if (i !== "0") {
@@ -7514,7 +7525,7 @@ g = new WeakSet(), ss = function() {
     }
   }
   return this.dispatch("machine:activity", e.additional), e;
-}, bs = function(t, e) {
+}, _s = function(t, e) {
   const i = {
     30: "Spanish",
     31: "English",
@@ -7524,91 +7535,91 @@ g = new WeakSet(), ss = function() {
     hex: t,
     language: i[t] ?? "unknown"
   }, this.dispatch("check:language", e.additional), e;
-}, ys = function(t, e) {
+}, fs = function(t, e) {
   return e.no_code = 43, e.name = "Beeper", e.description = `The beeper is ${t === "30" ? "on" : "off"}`, e.additional = {
     hex: t,
     beeper: t === "30"
   }, this.dispatch("check:beeper", e.additional), e;
-}, ms = function(t, e) {
+}, gs = function(t, e) {
   e.no_code = 44, e.name = "Isolation tray", e.description = "Isolation tray";
   const i = this.hexToDec(t) - 139;
   return e.additional = {
     hex: t,
     tray: i
   }, this.dispatch("check:isolation-tray", e.additional), e;
-}, ws = function(t, e) {
+}, bs = function(t, e) {
   e.no_code = 45, e.name = "Engine voltage", e.description = "Engine voltage";
   const i = (this.hexToDec(t) - 128) / 2 + 5;
   return e.additional = {
     hex: t,
     voltage: i
   }, this.dispatch("check:engine-voltage", e.additional), e;
-}, vs = function(t, e) {
+}, ys = function(t, e) {
   e.no_code = 46, e.name = "Push over", e.description = "Push over";
   const i = t === "30";
   return e.additional = {
     hex: t,
     push: i
   }, this.dispatch("check:push-over", e.additional), e;
-}, Es = function(t, e) {
+}, ms = function(t, e) {
   e.no_code = 47, e.name = "Extractor after dispense", e.description = "Extractor after dispense";
   const i = (this.hexToDec(t) - 128) / 10;
   return e.additional = {
     hex: t,
     seconds: i
   }, this.dispatch("check:extractor-after-dispense", e.additional), e;
-}, Ps = function(t, e) {
+}, ws = function(t, e) {
   e.no_code = 48, e.name = "Standby after collect", e.description = "Time to standby after collect product";
   const i = this.hexToDec(t) - 128;
   return e.additional = {
     hex: t,
     seconds: i
   }, this.dispatch("check:standby-after-collect", e.additional), e;
-}, Ts = function(t, e) {
+}, vs = function(t, e) {
   e.no_code = 49, e.name = "Standby without collect", e.description = "Time to standby when product delivery is not collected";
   const i = this.hexToDec(t) - 128;
   return e.additional = {
     hex: t,
     minutes: i
   }, this.dispatch("check:standby-without-collect", e.additional), e;
-}, Cs = function(t, e) {
+}, Es = function(t, e) {
   e.no_code = 50, e.name = "Elevator speed", e.description = "Elevator speed";
   const i = t === "30" ? "low" : "high";
   return e.additional = {
     hex: t,
     speed: i
   }, this.dispatch("check:elevator-speed", e.additional), e;
-}, Ss = function(t, e) {
+}, Ps = function(t, e) {
   e.no_code = 51, e.name = "Temperature expiration", e.description = "Temperature expiration";
   const i = t === "31";
   return e.additional = {
     hex: t,
     enabled: i
   }, this.dispatch("check:expiration-by-temperature", e.additional), e;
-}, ks = function(t, e) {
+}, Cs = function(t, e) {
   e.no_code = 52, e.name = "Temperature before expiration", e.description = "Temperature before expiration";
   const i = (this.hexToDec(t) - 128) / 2;
   return e.additional = {
     hex: t,
     temperature: i
   }, this.dispatch("check:temperature-before-expiration", e.additional), e;
-}, xs = function(t, e) {
+}, Ts = function(t, e) {
   e.no_code = 53, e.name = "Time before expiration", e.description = "Time before expiration";
   const i = this.hexToDec(t) - 128;
   return e.additional = {
     hex: t,
     minutes: i
   }, this.dispatch("check:expiration-after", e.additional), e;
-}, As = function(t, e) {
+}, Ss = function(t, e) {
   e.no_code = 54, e.name = "Temperature scale", e.description = "Temperature scale";
   const i = t === "43" ? "Celsius" : "Fahrenheit";
   return e.additional = {
     hex: t,
     scale: i
   }, this.dispatch("check:temperature-scale", e.additional), e;
-}, Ds = function(t, e) {
+}, ks = function(t, e) {
   return e.no_code = 54, e.name = "Machine ID", e.description = "Machine ID", e.additional = { hex: t[4], full_hex: t }, this.dispatch("check:machine-id", e.additional), e;
-}, Rs = function(t, e) {
+}, xs = function(t, e) {
   return e.no_code = 7, e.name = "working temperature", e.description = `The working temperature is ${t}`, e.additional = {
     hex: t,
     temperature: {
@@ -7616,7 +7627,7 @@ g = new WeakSet(), ss = function() {
       ice_plus: (this.hexToDec(t) - this.hexToDec("80")) / 2 - 25.5
     }
   }, this.dispatch("temperature:working", e.additional), e;
-}, Is = function(t, e) {
+}, As = function(t, e) {
   return e.no_code = 8, e.name = "current temperature", e.additional = {
     sign: null,
     tens: null,
@@ -7628,81 +7639,81 @@ g = new WeakSet(), ss = function() {
     degrees: t[9] === "7f" ? "°" : null,
     error: null
   }, t[4] === "2b" ? e.additional.sign = t[4] = "+" : ["2e", "2d"].includes(t[4]) ? e.additional.sign = t[4] = "-" : t[4] === "20" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[5]) >= 48 && this.hexToDec(t[5]) <= 57 ? e.additional.tens = this.hexToDec(t[5]) - 48 : t[5] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[6]) >= 48 && this.hexToDec(t[6]) <= 57 ? e.additional.units = this.hexToDec(t[6]) - 48 : t[6] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[8]) >= 48 && this.hexToDec(t[8]) <= 57 ? e.additional.decimals = this.hexToDec(t[8]) - 48 : t[8] === "2a" && (e.additional.error = "Error in thermometer"), t[10] === "43" ? e.additional.type_degrees = "C" : t[10] === "46" && (e.additional.type_degrees = "F"), e.additional.error === "Error in thermometer" ? (e.additional.formatted = "Error in thermometer", e.description = "The current temperature cannot be read because there is an error in the thermometer") : (e.additional.formatted = (e.additional.sign ?? "") + (e.additional.tens ?? "") + (e.additional.units ?? "") + (e.additional.decimal_point ?? "") + (e.additional.decimals ?? "") + (e.additional.degrees ?? "") + (e.additional.type_degrees ?? ""), e.description = `The current temperature is ${e.additional.formatted}`), this.dispatch("temperature:current", e.additional), e;
-}, Os = function(t, e, i = 128) {
+}, Ds = function(t, e, i = 128) {
   if (t[1] && (e.additional.machine.hex = t[1], e.additional.machine.dec = this.hexToDec(t[1]) - i), !(t[1] && t[2]))
-    e = o(this, g, ls).call(this, t, e);
+    e = o(this, g, as).call(this, t, e);
   else
     switch (t[2]) {
       case "54":
-        e.request = "--automatic", e = o(this, g, hs).call(this, t[3], e);
+        e.request = "--automatic", e = o(this, g, os).call(this, t[3], e);
         break;
       case "50":
-        e.request = "--automatic", e = o(this, g, us).call(this, t[3], e);
+        e.request = "--automatic", e = o(this, g, cs).call(this, t[3], e);
         break;
       case "43":
         switch (e.request = "check-data", t[3]) {
           case "41":
-            e = o(this, g, gs).call(this, t, e);
-            break;
-          case "43":
-            e.request = "channel-status", e = o(this, g, ds).call(this, t, e);
-            break;
-          case "50":
             e = o(this, g, ps).call(this, t, e);
             break;
+          case "43":
+            e.request = "channel-status", e = o(this, g, ls).call(this, t, e);
+            break;
+          case "50":
+            e = o(this, g, hs).call(this, t, e);
+            break;
           case "53":
-            e = o(this, g, _s).call(this, t, e);
+            e = o(this, g, us).call(this, t, e);
             break;
           case "54":
-            e.request = "working-temperature", e = o(this, g, Rs).call(this, t[4], e);
+            e.request = "working-temperature", e = o(this, g, xs).call(this, t[4], e);
             break;
           case "72":
-            e = o(this, g, fs).call(this, t, e);
+            e = o(this, g, ds).call(this, t, e);
             break;
           case "74":
-            e.request = "current-temperature", e = o(this, g, Is).call(this, t, e);
+            e.request = "current-temperature", e = o(this, g, As).call(this, t, e);
             break;
           case "49":
-            e = o(this, g, bs).call(this, t[4], e);
+            e = o(this, g, _s).call(this, t[4], e);
             break;
           case "5a":
-            e = o(this, g, ys).call(this, t[4], e);
+            e = o(this, g, fs).call(this, t[4], e);
             break;
           case "42":
-            e = o(this, g, ms).call(this, t[4], e);
+            e = o(this, g, gs).call(this, t[4], e);
             break;
           case "47":
-            e = o(this, g, ws).call(this, t[4], e);
+            e = o(this, g, bs).call(this, t[4], e);
             break;
           case "4e":
-            e = o(this, g, Ds).call(this, t, e);
+            e = o(this, g, ks).call(this, t, e);
             break;
           case "4f":
-            e = o(this, g, vs).call(this, t[4], e);
+            e = o(this, g, ys).call(this, t[4], e);
             break;
           case "45":
-            e = o(this, g, Es).call(this, t[4], e);
+            e = o(this, g, ms).call(this, t[4], e);
             break;
           case "46":
-            e = o(this, g, Ps).call(this, t[4], e);
+            e = o(this, g, ws).call(this, t[4], e);
             break;
           case "48":
-            e = o(this, g, Ts).call(this, t[4], e);
+            e = o(this, g, vs).call(this, t[4], e);
             break;
           case "76":
-            e = o(this, g, Cs).call(this, t[4], e);
+            e = o(this, g, Es).call(this, t[4], e);
             break;
           case "63":
-            e = o(this, g, Ss).call(this, t[4], e);
+            e = o(this, g, Ps).call(this, t[4], e);
             break;
           case "65":
-            e = o(this, g, ks).call(this, t[4], e);
+            e = o(this, g, Cs).call(this, t[4], e);
             break;
           case "66":
-            e = o(this, g, xs).call(this, t[4], e);
+            e = o(this, g, Ts).call(this, t[4], e);
             break;
           case "67":
-            e = o(this, g, As).call(this, t[4], e);
+            e = o(this, g, Ss).call(this, t[4], e);
             break;
         }
         break;
@@ -7728,7 +7739,7 @@ Y = function({ type: t = null, severity: e = "low" } = {}) {
  */
 bt = function({ type: t = null, severity: e = "high" } = {}) {
   this.dispatch("jofemar:error", { type: t, severity: e });
-}, Ns = function(t, e) {
+}, Rs = function(t, e) {
   if (e.request = "status", t[1] && !t[2]) {
     switch (t[1]) {
       case "30":
@@ -7841,14 +7852,14 @@ bt = function({ type: t = null, severity: e = "high" } = {}) {
   } else
     e.name = "executed", e.description = "The last command was executed successfully", e.no_code = 8, !t[1] && this.__internal__.dispense.dispensing && o(this, g, Z).call(this);
   return e;
-}, Bs = function(t) {
+}, Is = function(t) {
   if (t = parseInt(t) + 109, t = t.toString(), t.length !== 3)
     throw new Error("Invalid selection");
   const e = (parseInt(t.substring(0, 2)) + 128).toString(16).padStart(2, "0");
   return { channel: (parseInt(t.substring(2, 3)) + 128).toString(16).padStart(2, "0"), tray: e };
-}, Ms = function() {
+}, Os = function() {
   this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.dispense.timeout = 0, this.__internal__.dispense.interval = 0;
-}, Fs = function() {
+}, Ns = function() {
   this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval);
   const t = this;
   t.__internal__.dispense.timeout = setTimeout(() => {
@@ -7860,15 +7871,15 @@ bt = function({ type: t = null, severity: e = "high" } = {}) {
 }, se = async function(t) {
   const e = ["02", "30", "30", "81", "52", t, "FF"];
   return await o(this, g, st).call(this, e, "reset");
-}, Nn = function() {
-  const t = this.__device.type === "iceplus" ? sn(40) : sn(25), e = /* @__PURE__ */ new Date(), i = 1e3 * t + e.getTime(), s = new Date(i);
+}, On = function() {
+  const t = this.__device.type === "iceplus" ? rn(40) : rn(25), e = /* @__PURE__ */ new Date(), i = 1e3 * t + e.getTime(), s = new Date(i);
   this.dispatch("reset:errors", {
     description: "Resetting machine errors",
     duration: t,
     started_at: e,
     finished_at: s
   });
-}, Bn = async function(t) {
+}, Nn = async function(t) {
   const e = ["02", "30", "30", "81", "4C", t, "FF"];
   return await o(this, g, st).call(this, e, "lights");
 }, Re = async function(t = "80", e = []) {
@@ -7880,18 +7891,18 @@ bt = function({ type: t = null, severity: e = "high" } = {}) {
   for (let i = 0; i < 32; i++)
     e.push(t.charCodeAt(i).toString(16));
   return e;
-}, Us = function(t) {
+}, Bs = function(t) {
   if (!(t instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
   const e = t.getHours().toString().padStart(2, "0"), i = t.getMinutes().toString().padStart(2, "0"), s = t.getDate().toString().padStart(2, "0"), a = (t.getMonth() + 1).toString().padStart(2, "0"), c = t.getFullYear().toString().substring(2, 4), l = `${e}:${i} ${s}-${a}-${c}`, h = [];
   for (let p = 0; p < 14; p++)
     h.push(l.charCodeAt(p).toString(16));
   return h;
 };
-var Wt, Mt, zt, w, Ls, Vs, Oe, qs, js, Hs, Ks, Ws, zs, Xs, Gs, Mn, Js, $s, Qs, Zs, Ys, ta, ea, na, ia, ra, sa, aa, oa, ca, at, Ne, la, ha, ua, da, Fn, Be, pa, _a, Un, Ln, Vn;
-class Lc extends Lt {
+var Wt, Mt, zt, w, Ms, Fs, Oe, Us, Ls, Vs, qs, js, Hs, Ks, Ws, Bn, zs, Xs, $s, Gs, Js, Qs, Zs, Ys, ta, ea, na, ia, ra, sa, at, Ne, aa, oa, ca, la, Mn, Be, ha, ua, Fn, Un, Ln;
+class tl extends Lt {
   constructor({ filters: t = null, config_port: e = null, no_device: i = 1 } = {}) {
     super({ filters: t, config_port: e, no_device: i });
-    $(this, w);
+    J(this, w);
     rt(this, "__coin_purse", {
       available: !0
     });
@@ -7938,17 +7949,17 @@ class Lc extends Lt {
       available: !1,
       max_pre_credit: 0
     });
-    $(this, Wt, !1);
-    $(this, Mt, 0);
-    $(this, zt, 0);
-    if (this.__internal__.device.type = "boardroid", G.getCustom(this.typeDevice, i))
+    J(this, Wt, !1);
+    J(this, Mt, 0);
+    J(this, zt, 0);
+    if (this.__internal__.device.type = "boardroid", $.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
     this.__internal__.serial.config_port.baudRate = 115200, this.__internal__.serial.response.length = 14, this.__internal__.time.response_connection = 600, this.__internal__.time.response_general = 4e3, this.__internal__.time.response_engines = 15e3, this.__internal__.dispense.limit_counter = 15, this.__internal__.dispense.custom_limit_counter = null, this.__internal__.dispense.backup_dispense = {
       channel: 1,
       second_channel: null,
       sensor: !0,
       seconds: null
-    }, o(this, w, Ls).call(this), o(this, w, Vs).call(this);
+    }, o(this, w, Ms).call(this), o(this, w, Fs).call(this);
   }
   get totalInTubes() {
     return this.coins.tubes.g50 * 0.5 + this.coins.tubes.c50 * 0.5 + this.coins.tubes.p1 + this.coins.tubes.p2 * 2 + this.coins.tubes.p5 * 5 + this.coins.tubes.p10 * 10;
@@ -7977,6 +7988,11 @@ class Lc extends Lt {
   }
   get hasCoinPurse() {
     return this.__coin_purse.available;
+  }
+  set hasCoinPurse(t) {
+    if (typeof t != "boolean")
+      throw new Error(`Invalid value: ${t}`);
+    this.__coin_purse.available = t;
   }
   set price(t) {
     let e = parseFloat(t);
@@ -8008,46 +8024,46 @@ class Lc extends Lt {
     const i = (5 + this.deviceNumber).toString(16).padStart(2, "0").toLowerCase();
     switch (t[1]) {
       case i:
-        e.request = "connect", e = o(this, w, js).call(this, e);
+        e.request = "connect", e = o(this, w, Ls).call(this, e);
         break;
       case "a0":
-        e.request = "--automatic", e = o(this, w, Js).call(this, t, e);
+        e.request = "--automatic", e = o(this, w, zs).call(this, t, e);
         break;
       case "b0":
-        e.request = "--automatic", e = o(this, w, $s).call(this, t, e);
+        e.request = "--automatic", e = o(this, w, Xs).call(this, t, e);
         break;
       case "d0":
-        e.request = "coin-purse:config", e = o(this, w, Qs).call(this, t[2], e);
+        e.request = "coin-purse:config", e = o(this, w, $s).call(this, t[2], e);
         break;
       case "d1":
-        e.request = "banknote-purse:config", e.additional = { scrow: null }, e = o(this, w, Zs).call(this, t, e);
+        e.request = "banknote-purse:config", e.additional = { scrow: null }, e = o(this, w, Gs).call(this, t, e);
         break;
       case "d2":
-        e.request = "coin-purse:read-tubes", e = o(this, w, Ys).call(this, t, e);
+        e.request = "coin-purse:read-tubes", e = o(this, w, Js).call(this, t, e);
         break;
       case "d3":
-        e.request = "banknote-purse:read-recycler", e = o(this, w, ta).call(this, t, e);
+        e.request = "banknote-purse:read-recycler", e = o(this, w, Qs).call(this, t, e);
         break;
       case "d4":
-        e.request = "banknote-purse:banknote-scrow-status", e = o(this, w, ea).call(this, t[2], e);
+        e.request = "banknote-purse:banknote-scrow-status", e = o(this, w, Zs).call(this, t[2], e);
         break;
       case "d5":
-        e.request = "banknote-purse:dispense", e = o(this, w, na).call(this, t, e);
+        e.request = "banknote-purse:dispense", e = o(this, w, Ys).call(this, t, e);
         break;
       case "d6":
-        e.request = "coin-purse:dispense", e = o(this, w, ia).call(this, t, e);
+        e.request = "coin-purse:dispense", e = o(this, w, ta).call(this, t, e);
         break;
       case "d7":
-        e.request = "dispense", e = o(this, w, ra).call(this, t[5], e);
+        e.request = "dispense", e = o(this, w, ea).call(this, t[5], e);
         break;
       case "d8":
-        e.request = "--automatic", e = o(this, w, sa).call(this, t[13], e);
+        e.request = "--automatic", e = o(this, w, na).call(this, t[13], e);
         break;
       case "d9":
-        e.request = "status:temperature", e = o(this, w, aa).call(this, t, e);
+        e.request = "status:temperature", e = o(this, w, ia).call(this, t, e);
         break;
       case "da":
-        e.request = "status:relay", e = o(this, w, oa).call(this, t[2], e);
+        e.request = "status:relay", e = o(this, w, ra).call(this, t[2], e);
         break;
       case "db":
         e.request = "banknote-purse:save-memory", e.no_code = 18, e.name = "Bill purse memory saved?", e.description = "The memory of bill purse was saved successfully?", this.dispatch("banknote-purse:save-memory", { message: e });
@@ -8056,7 +8072,7 @@ class Lc extends Lt {
         e.request = "coin-purse:read-memory", e.no_code = 19, e.name = "Coin purse memory read?", e.description = "The memory of coin purse was read successfully?", this.dispatch("banknote-purse:read-memory", { message: e });
         break;
       case "dd":
-        e.request = "card-reader", o(this, w, ca).call(this, t, e);
+        e.request = "card-reader", o(this, w, sa).call(this, t, e);
         break;
       default:
         e.request = "--unknown", e.name = "Response unrecognized", e.description = "The response of application was received, but dont identify with any of current parameters", e.no_code = 400, this.dispatch("unknown", e);
@@ -8101,7 +8117,7 @@ class Lc extends Lt {
   async banknotePurseConfigure({ enable: t = !1, scrow: e = !1 } = {}) {
     if (!this.__banknote_purse.available) throw new Error("Banknote purse not available");
     let i;
-    return o(this, w, Oe).call(this) ? i = o(this, w, la).call(this, { enable: t, scrow: e }) : i = o(this, w, ha).call(this, { enable: t, scrow: e }), await o(this, w, at).call(this, i, "banknote-purse:config");
+    return o(this, w, Oe).call(this) ? i = o(this, w, aa).call(this, { enable: t, scrow: e }) : i = o(this, w, oa).call(this, { enable: t, scrow: e }), await o(this, w, at).call(this, i, "banknote-purse:config");
   }
   async banknotePurseDispense({ $_20: t = 0, $_50: e = 0, $_100: i = 0, $_200: s = 0, $_500: a = 0, $_1000: c = 0 } = {}) {
     if (!this.__banknote_purse.available) throw new Error("Banknote purse not available");
@@ -8109,9 +8125,9 @@ class Lc extends Lt {
     let l;
     if (o(this, w, Oe).call(this)) {
       const h = [t, e, i, s, a];
-      l = o(this, w, ua).call(this, h[this.__banknote_purse.recycler.banknote]);
+      l = o(this, w, ca).call(this, h[this.__banknote_purse.recycler.banknote]);
     } else
-      l = o(this, w, da).call(this, { $_20: t, $_50: e, $_100: i, $_200: s, $_500: a, $_1000: c });
+      l = o(this, w, la).call(this, { $_20: t, $_50: e, $_100: i, $_200: s, $_500: a, $_1000: c });
     await o(this, w, at).call(this, l, "banknote-purse:dispense");
   }
   async banknotePurseEnable({ scrow: t = !1 }) {
@@ -8251,7 +8267,7 @@ class Lc extends Lt {
   async testEngines({ singleEngine: t = !1 } = {}) {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
     if (R(this, Wt)) throw new Error("Another test is running");
-    o(this, w, Fn).call(this), M(this, Wt, !0);
+    o(this, w, Mn).call(this), M(this, Wt, !0);
     const e = [];
     o(this, w, Be).call(this);
     for (let i = 1; i <= 80; i++) {
@@ -8264,7 +8280,7 @@ class Lc extends Lt {
       });
       e.push(s), M(this, Mt, i), o(this, w, Be).call(this), t || i++;
     }
-    M(this, Mt, 80), o(this, w, Be).call(this, { dispensed: e }), o(this, w, Fn).call(this);
+    M(this, Mt, 80), o(this, w, Be).call(this, { dispensed: e }), o(this, w, Mn).call(this);
   }
   async sendCustomCode({ code: t = [] } = {}) {
     if (t.length === 0) throw new Error("Invalid code");
@@ -8273,19 +8289,19 @@ class Lc extends Lt {
   }
   hasToReturnChange(t = 0) {
     let e = t;
-    return e <= 0 ? !0 : (e = o(this, w, Un).call(this, e).pending, e = o(this, w, Ln).call(this, e).pending, !(e > 0));
+    return e <= 0 ? !0 : (e = o(this, w, Fn).call(this, e).pending, e = o(this, w, Un).call(this, e).pending, !(e > 0));
   }
   async returnChange() {
-    return await o(this, w, Vn).call(this);
+    return await o(this, w, Ln).call(this);
   }
   async returnInsertedMoney() {
-    return this.__money_session.inserted <= 0 ? !1 : await o(this, w, Vn).call(this, this.__money_session.inserted);
+    return this.__money_session.inserted <= 0 ? !1 : await o(this, w, Ln).call(this, this.__money_session.inserted);
   }
   async serialCorruptMessage(t, e) {
     this.dispatch("corrupt:message", { data: t, message: e });
   }
 }
-Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), Ls = function() {
+Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), Ms = function() {
   const t = [
     "banknote-purse:banknote-scrow-status",
     "banknote-purse:config",
@@ -8295,6 +8311,7 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     "banknote-purse:save-memory",
     "card-reader:event",
     "change:pending",
+    "change:dispense",
     "coin-purse:coin-event",
     "coin-purse:config",
     "coin-purse:reject-lever",
@@ -8311,15 +8328,15 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
   ];
   for (const e of t)
     this.serialRegisterAvailableListener(e);
-}, Vs = function() {
-  G.add(this);
+}, Fs = function() {
+  $.add(this);
 }, Oe = function() {
   return this.__banknote_purse.isRecycler && this.__banknote_purse.recycler.ict;
-}, qs = function() {
+}, Us = function() {
   return this.hasCoinPurse || this.hasRecycler;
-}, js = function(t) {
+}, Ls = function(t) {
   return t.name = "Connection with the serial device completed.", t.description = "Your connection with the serial device was successfully completed.", t.no_code = 1, this.dispatch("run:default-load", {}), t;
-}, Hs = function(t) {
+}, Vs = function(t) {
   const e = {
     g50: ["40", "50", "60", "70", "90"],
     c50: ["41", "51", "61", "71", "91"],
@@ -8344,9 +8361,9 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     p10: "10 pesos",
     p20: "20 pesos"
   }[i], i] : [`Undefined value: ¿${t}?`, null];
-}, Ks = function(t) {
+}, qs = function(t) {
   return ["g50", "c50", "p1", "p2", "p5", "p10", "p20"].includes(t);
-}, Ws = function(t) {
+}, js = function(t) {
   const e = {
     p20: ["80", "90", "a0", "b0"],
     p50: ["81", "91", "a1", "b1"],
@@ -8369,45 +8386,45 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     p500: "500 pesos",
     p1000: "1000 pesos"
   }[i], i] : [`Undefined value: ¿${t}?`, null];
-}, zs = function(t) {
+}, Hs = function(t) {
   return ["p20", "p50", "p100", "p200", "p500", "p1000"].includes(t);
-}, Xs = function(t) {
+}, Ks = function(t) {
   return ["r20", "r50", "r100"].includes(t);
-}, Gs = function() {
+}, Ws = function() {
   return ["r20", "r50", "r100", "r200", "r500"][this.__banknote_purse.recycler.banknote];
-}, Mn = function(t, e) {
+}, Bn = function(t, e, i) {
   if (!t) return;
-  let i = !0;
-  if (o(this, w, Ks).call(this, t)) {
+  let s = !0;
+  if (o(this, w, qs).call(this, t) && i === "coin") {
     if (typeof this.coins.tubes[t] > "u") return;
     e === "tube" ? this.coins.tubes[t] += 1 : e === "box" && (this.coins.box[t] += 1);
-    let s = 0;
-    ["g50", "c50"].includes(t) ? s = 0.5 : s += parseInt(t.slice(1)), this.coins.totals[t] += s, this.__money_session.inserted += s, this.coins.total += s;
-  } else if (o(this, w, zs).call(this, t)) {
-    if (typeof this.banknotes.tubes[t] > "u") return;
+    let a = 0;
+    ["g50", "c50"].includes(t) ? a = 0.5 : a += parseInt(t.slice(1)), this.coins.totals[t] += a, this.__money_session.inserted += a, this.coins.total += a;
+  } else if (o(this, w, Hs).call(this, t) && i === "banknote") {
+    if (typeof this.banknotes.recycler[t] > "u") return;
     e === "recycler" ? this.banknotes.recycler[t] += 1 : e === "stacker" && (this.banknotes.stacker[t] += 1);
-    let s = parseInt(t.slice(1));
-    this.banknotes.totals[t] += s, this.__money_session.inserted += s, this.banknotes.total += s;
-  } else if (o(this, w, Xs).call(this, t) && e === "out") {
-    if (typeof this.banknotes.out[t] > "u") return;
-    this.banknotes.out[t] += 1;
-    let s = parseInt(t.slice(1));
-    this.__money_session.retired += s, this.banknotes.recycler[t] -= 1, this.banknotes.total -= s, i = !1, this.dispatch("session:money-dispensed", { type_money: t, retired: s, finish: !1, type: "banknotes" });
+    let a = parseInt(t.slice(1));
+    this.banknotes.totals[t] += a, this.__money_session.inserted += a, this.banknotes.total += a;
+  } else if (o(this, w, Ks).call(this, t) && e === "out" && i === "banknote") {
+    if (typeof this.banknotes.out[t.replace("r", "p")] > "u") return;
+    this.banknotes.out[t.replace("r", "p")] += 1;
+    let a = parseInt(t.slice(1));
+    this.__money_session.retired += a, this.banknotes.recycler[t.replace("r", "p")] -= 1, this.banknotes.total -= a, s = !1, this.dispatch("session:money-dispensed", { type_money: t, retired: a, finish: !1, type: "banknotes" });
   }
-  i && this.dispatch("session:money-request", {});
-}, Js = function(t, e) {
+  s && this.dispatch("session:money-request", {});
+}, zs = function(t, e) {
   const i = parseInt(t[2], 16);
-  return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, i === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : i === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : i >= 64 && i <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : i >= 80 && i <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : i >= 96 && i <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : i >= 112 && i <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : i >= 144 && i <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${t[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), i === 1 || i === 2 || i >= 160 || i >= 128 && i <= 143 || ([e.description, e.additional.coin] = o(this, w, Hs).call(this, t[2]), e.no_code = 38 + i, o(this, w, Mn).call(this, e.additional.coin, e.additional.where), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
+  return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, i === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : i === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : i >= 64 && i <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : i >= 80 && i <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : i >= 96 && i <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : i >= 112 && i <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : i >= 144 && i <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${t[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), i === 1 || i === 2 || i >= 160 || i >= 128 && i <= 143 || ([e.description, e.additional.coin] = o(this, w, Vs).call(this, t[2]), e.no_code = 38 + i, o(this, w, Bn).call(this, e.additional.coin, e.additional.where, "coin"), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
+}, Xs = function(t, e) {
+  const i = parseInt(t[2], 16);
+  return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, i === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = o(this, w, Ws).call(this), e.additional.where = "out", e.no_code = 200) : i >= 128 && i <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : i >= 144 && i <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : i >= 160 && i <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : i >= 176 && i <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), i >= 128 && i <= 191 && ([e.description, e.additional.banknote] = o(this, w, js).call(this, t[2]), e.no_code = 74 + i), o(this, w, Bn).call(this, e.additional.banknote, e.additional.where, "banknote"), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
 }, $s = function(t, e) {
-  const i = parseInt(t[2], 16);
-  return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, i === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = o(this, w, Gs).call(this), e.additional.where = "out", e.no_code = 200) : i >= 128 && i <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : i >= 144 && i <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : i >= 160 && i <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : i >= 176 && i <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), i >= 128 && i <= 191 && ([e.description, e.additional.banknote] = o(this, w, Ws).call(this, t[2]), e.no_code = 74 + i), o(this, w, Mn).call(this, e.additional.banknote, e.additional.where), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
-}, Qs = function(t, e) {
   const i = parseInt(t, 16);
   return i === 1 ? (e.name = "Coin purse enabled", e.description = "Configuration complete, enabled", e.no_code = 3) : i === 0 ? (e.name = "Coin purse disabled", e.description = "Disabled by system request", e.no_code = 4) : (e.name = "Status unknown", e.description = "The response of coin purse doesn't identify successfully", e.no_code = 400), this.dispatch("coin-purse:config", { enabled: i === 1 }), e;
-}, Zs = function(t, e) {
+}, Gs = function(t, e) {
   const i = parseInt(t[2], 16), s = parseInt(t[3], 16);
   return i === 0 ? (e.name = "Bill purse disabled", e.description = "Configuration complete, disabled") : i === 1 && (e.name = "Bill purse enabled", e.description = "Configuration complete, enabled"), s === 0 ? e.additional.scrow = "Scrow disabled, banknote received automatic" : s === 1 && (e.additional.scrow = "Scrow enabled, require manual action"), e.no_code = 5, this.dispatch("banknote-purse:config", { enabled: i === 1, scrow: s === 1 }), e;
-}, Ys = function(t, e) {
+}, Js = function(t, e) {
   e.no_code = 6;
   const [i, s, a, c, l, h] = [
     parseInt(t[2], 16),
@@ -8420,7 +8437,7 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
   return e.additional = {
     coins: { g50: i, c50: s, p1: a, p2: c, p5: l, p10: h }
   }, this.coins.tubes.g50 = i, this.coins.tubes.c50 = s, this.coins.tubes.p1 = a, this.coins.tubes.p2 = c, this.coins.tubes.p5 = l, this.coins.tubes.p10 = h, this.coins.totals.g50 = (this.coins.box.g50 + i) * 0.5, this.coins.totals.c50 = (this.coins.box.c50 + s) * 0.5, this.coins.totals.p1 = this.coins.box.p1 + a, this.coins.totals.p2 = (this.coins.box.p2 + c) * 2, this.coins.totals.p5 = (this.coins.box.p5 + l) * 5, this.coins.totals.p10 = (this.coins.box.p10 + h) * 10, this.coins.total = this.coins.totals.g50 + this.coins.totals.c50 + this.coins.totals.p1 + this.coins.totals.p2 + this.coins.totals.p5 + this.coins.totals.p10, e.name = "Read tubes", e.description = "Quantity of coins approximated", this.dispatch("coin-purse:tubes", this.coins.tubes), e;
-}, ta = function(t, e) {
+}, Qs = function(t, e) {
   e.no_code = 7;
   const [i, s, a, c, l, h] = [
     parseInt(t[2], 16),
@@ -8433,10 +8450,10 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
   return e.additional = {
     banknotes: { b20: i, b50: s, b100: a, b200: c, b500: l, b1000: h }
   }, this.banknotes.recycler.p20 = i, this.banknotes.recycler.p50 = s, this.banknotes.recycler.p100 = a, this.banknotes.recycler.p200 = c, this.banknotes.recycler.p500 = l, this.banknotes.recycler.p1000 = h, this.banknotes.totals.p20 = (this.banknotes.stacker.p20 + i) * 20, this.banknotes.totals.p50 = (this.banknotes.stacker.p50 + s) * 50, this.banknotes.totals.p100 = (this.banknotes.stacker.p100 + a) * 100, this.banknotes.totals.p200 = (this.banknotes.stacker.p200 + c) * 200, this.banknotes.totals.p500 = (this.banknotes.stacker.p500 + l) * 500, this.banknotes.totals.p1000 = (this.banknotes.stacker.p1000 + h) * 1e3, this.banknotes.total = this.banknotes.totals.p20 + this.banknotes.totals.p50 + this.banknotes.totals.p100 + this.banknotes.totals.p200 + this.banknotes.totals.p500 + this.banknotes.totals.p1000, e.name = "Read recycler", e.description = "Quantity of banknotes approximated", this.dispatch("banknote-purse:recycler", this.banknotes.recycler), e;
-}, ea = function(t, e) {
+}, Zs = function(t, e) {
   const i = parseInt(t, 16);
   return i === 1 ? e.name = "Banknote accepted" : i === 0 ? e.name = "Banknote rejected" : e.name = "Unknown status banknote", e.no_code = 8, this.dispatch("banknote-purse:banknote-scrow-status", { status: i === 1 }), e;
-}, na = function(t, e) {
+}, Ys = function(t, e) {
   const [i, s, a, c, l, h] = [
     parseInt(t[2], 16),
     parseInt(t[3], 16),
@@ -8455,7 +8472,7 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     type: "banknotes",
     data: e
   }), e;
-}, ia = function(t, e) {
+}, ta = function(t, e) {
   return e.name = "Coins dispensed", e.no_code = 10, e.description = "Coins dispensed by request", isNaN(this.__sale.last_change) && (this.__sale.last_change = 0), this.__money_session.retired += this.__sale.last_change, this.dispatchAsync(
     "session:money-dispensed",
     {
@@ -8466,26 +8483,26 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     },
     500
   ), e;
-}, ra = function(t, e) {
+}, ea = function(t, e) {
   const i = parseInt(t, 16);
   return i === 1 ? (e.name = "Product not delivered", e.description = "The product requested wasn't delivered", e.no_code = 11, this.__internal__.dispense.status = !1) : i === 0 ? (e.name = "Product delivered", e.description = "The product requested was delivered", e.no_code = 12, this.__internal__.dispense.status = !0) : (e.name = "Unknown status product", e.description = "The response of product doesn't identify successfully", e.no_code = 400, this.__internal__.dispense.status = !1), this.dispatch("dispensed", {}), e;
-}, sa = function(t, e) {
+}, na = function(t, e) {
   let i = "closed";
   return t === "db" ? (e.name = "Door closed", e.no_code = 13) : t === "dc" ? (e.name = "Door open", e.no_code = 14, i = "open") : (e.name = "Unknown status door", e.description = "The response of door doesn't identify successfully", e.no_code = 400, i = "unknown"), this.__internal__.device.door_open = i === "open", this.dispatch("event:door", { open: i === "open" }), this.dispatch("door:event", { open: i === "open" }), e;
-}, aa = function(t, e) {
+}, ia = function(t, e) {
   const i = parseInt(t[2], 16) * 255, s = parseInt(t[3], 16), a = (i + s) * 0.1;
   return e.no_code = 15, e.name = "Temperature status", e.description = `Temperature: ${a}`, e.additional = {
     high: i,
     low: s,
     temperature: parseFloat(a.toString())
   }, this.dispatch("status:temperature", e.additional), e;
-}, oa = function(t, e) {
+}, ra = function(t, e) {
   const i = parseInt(t, 16);
   let s = "unknown";
   return i === 1 ? (e.name = "Relay on", e.description = "Relay on", e.no_code = 16, s = "on") : i === 0 ? (e.name = "Relay off", e.description = "Relay off", e.no_code = 17, s = "off") : (e.name = "Status unknown", e.description = "Status unknown", e.no_code = 400), this.dispatch("status:relay", { enabled: s === "on" }), e;
-}, ca = function(t, e) {
+}, sa = function(t, e) {
   const i = parseInt(t[2], 16);
-  if (e.no_code = 20 + i, e.name = "Status unknown", e.description = "The status of card reader does not identified correctly", e.no_code = 400, i === 0)
+  if (e.no_code = 20 + i, e.name = "Status unknown", e.description = "The status of card reader does not identified correctly", i === 0)
     e.request += ":disable", e.name = "Card reader disabled", e.description = "Card reader device was disabled successfully";
   else if (i === 1 || i === 2)
     e.request += ":dispense", e.name = "Card reader enabled", e.description = "Card reader device is now enabled";
@@ -8503,8 +8520,9 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     e.request += ":cancel", e.name = "Cancelled", e.description = "Cancellation complete";
   else if (i === 10) {
     const s = parseInt(t[8], 16);
-    s === 0 ? (e.no_code = 30, e.name = "product not dispensed", e.description = "The product requested wasn't delivered") : s === 1 && (e.no_code = 31, e.name = "product dispensed", e.description = "The product requested was delivered");
-  }
+    s === 1 ? (e.no_code = 30, e.name = "product not dispensed", e.description = "The product requested wasn't delivered") : s === 0 ? (e.no_code = 31, e.name = "product dispensed", e.description = "The product requested was delivered") : (e.name = "finished-unknown", e.no_code = 400);
+  } else
+    e.no_code = 400;
   return this.dispatch("card-reader:event", e), e;
 }, at = function(t, e) {
   return this.appendToQueue(o(this, w, Ne).call(this, t), e);
@@ -8512,15 +8530,15 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
   return t[11] = this.serialBoardroidSumHex(t), t.map((e, i) => {
     t[i] = this.hexMaker(e);
   }), t;
-}, la = function({ enable: t = !1, scrow: e = !1 } = {}) {
+}, aa = function({ enable: t = !1, scrow: e = !1 } = {}) {
   const i = t ? "FF" : "00", s = e ? "FF" : "00";
   return ["F1", "C0", i, i, s, s, "00", "00", "00", "00", "F2", "00"];
-}, ha = function({ enable: t = !1, scrow: e = !1 } = {}) {
+}, oa = function({ enable: t = !1, scrow: e = !1 } = {}) {
   return ["F1", "C0", t ? "01" : "00", e ? "01" : "00", "00", "00", "00", "00", "00", "00", "F2", "00"];
-}, ua = function(t = 1) {
+}, ca = function(t = 1) {
   if (t < 1) throw new Error("No banknotes to dispense");
   return t = this.decToHex(t), ["F1", "C5", this.decToHex(this.__banknote_purse.recycler.banknote.toString()), t, "00", "00", "00", "00", "00", "00", "F2", "00"];
-}, da = function({ $_20: t = 0, $_50: e = 0, $_100: i = 0, $_200: s = 0, $_500: a = 0, $_1000: c = 0 } = {}) {
+}, la = function({ $_20: t = 0, $_50: e = 0, $_100: i = 0, $_200: s = 0, $_500: a = 0, $_1000: c = 0 } = {}) {
   if ([t, e, i, s, a, c].some((l) => isNaN(l) || typeof l == "string"))
     throw new Error("One of the values is not a number");
   if (t < 1 && e < 1 && i < 1 && s < 1 && a < 1 && c < 1)
@@ -8533,7 +8551,7 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
     this.decToHex(a),
     this.decToHex(c)
   ], ["F1", "C5", t, e, i, s, a, c, "00", "00", "F2", "00"];
-}, Fn = function() {
+}, Mn = function() {
   M(this, Wt, !1), M(this, Mt, 0), M(this, zt, 0);
 }, /**
  *
@@ -8542,14 +8560,14 @@ Wt = new WeakMap(), Mt = new WeakMap(), zt = new WeakMap(), w = new WeakSet(), L
  */
 Be = function({ dispensed: t = null, limit: e = 80 } = {}) {
   M(this, zt, Math.round(R(this, Mt) * 100 / e)), this.dispatch("percentage:test", { percentage: R(this, zt), dispensed: t });
-}, pa = function(t) {
+}, ha = function(t) {
   const e = ["20", "50", "100", "200", "500"], i = this.__banknote_purse.recycler.banknote, s = "$_" + e[i], a = parseInt(e[i]), c = this.banknotes.recycler[`p${e[i]}`], l = Math.min(Math.floor(t / a), c), h = {
     banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
     pending: t,
     will_dispense: l > 0
   };
   return this.totalInRecycler === 0 || l < 1 || t === 0 || (h.banknotes[s] = l, h.pending = parseFloat((t - l * a).toFixed(2))), h;
-}, _a = function(t) {
+}, ua = function(t) {
   const e = {
     banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
     pending: t,
@@ -8563,15 +8581,19 @@ Be = function({ dispensed: t = null, limit: e = 80 } = {}) {
     }
   };
   return i(1e3, "p1000"), i(500, "p500"), i(200, "p200"), i(100, "p100"), i(50, "p50"), i(20, "p20"), e.will_dispense = Object.values(e.banknotes).some((s) => s > 0), e;
+}, Fn = function(t) {
+  return this.hasRecycler ? o(this, w, Oe).call(this) ? o(this, w, ha).call(this, t) : o(this, w, ua).call(this, t) : {
+    banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
+    pending: t,
+    will_dispense: !1
+  };
 }, Un = function(t) {
-  return o(this, w, Oe).call(this) ? o(this, w, pa).call(this, t) : o(this, w, _a).call(this, t);
-}, Ln = function(t) {
   const e = {
     coins: { $_50c: 0, $_1: 0, $_2: 0, $_5: 0, $_10: 0 },
     pending: t,
     will_dispense: !1
   };
-  if (t <= 0 || this.totalInTubes === 0) return e;
+  if (!this.hasCoinPurse || t <= 0 || this.totalInTubes === 0) return e;
   const i = (s, a, c = null) => {
     if (this.coins.tubes[a] > 0) {
       c === null && (c = "$_" + s);
@@ -8580,23 +8602,28 @@ Be = function({ dispensed: t = null, limit: e = 80 } = {}) {
     }
   };
   return i(10, "p10"), i(5, "p5"), i(2, "p2"), i(1, "p1"), i(0.5, "g50", "$_50c"), e.will_dispense = Object.values(e.coins).some((s) => s > 0), e;
-}, Vn = async function(t = null) {
-  if (!o(this, w, qs).call(this)) throw new Error("Change not available");
+}, Ln = async function(t = null) {
+  if (!o(this, w, Us).call(this)) throw new Error("Change not available");
   let e = this.change, i = this.change;
   if (t !== null && (e = t, i = t), i <= 0) return !1;
-  const s = o(this, w, Un).call(this, i);
+  const s = o(this, w, Fn).call(this, i);
   i = s.pending;
-  const a = o(this, w, Ln).call(this, i);
-  return i = a.pending, i > 0 && this.dispatch("change:pending", { pending: i }), i === e ? !1 : (s.will_dispense && await this.banknotePurseDispense(s.banknotes), a.will_dispense && await this.coinPurseDispense(a.coins), !0);
+  const a = o(this, w, Un).call(this, i);
+  return i = a.pending, i > 0 && this.dispatch("change:pending", { pending: i }), this.dispatch("change:dispense", {
+    recycler: s.banknotes,
+    coins: a.coins,
+    pending: i,
+    delivery: e - i
+  }), i === e ? !1 : (s.will_dispense && await this.banknotePurseDispense(s.banknotes), a.will_dispense && await this.coinPurseDispense(a.coins), !0);
 };
-var Xt, fa, ga;
-class Vc extends Lt {
+var Xt, da, pa;
+class el extends Lt {
   constructor({ filters: t = null, config_port: e = null, no_device: i = 1 } = {}) {
     super({ filters: t, config_port: e, no_device: i });
-    $(this, Xt);
-    if (this.__internal__.device.type = "arduino", G.getCustom(this.typeDevice, i))
+    J(this, Xt);
+    if (this.__internal__.device.type = "arduino", $.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
-    this.__internal__.time.response_connection = 2e3, this.__internal__.time.response_general = 2e3, this.__internal__.serial.delay_first_connection = 1e3, o(this, Xt, ga).call(this), o(this, Xt, fa).call(this), this.getResponseAsString();
+    this.__internal__.time.response_connection = 2e3, this.__internal__.time.response_general = 2e3, this.__internal__.serial.delay_first_connection = 1e3, o(this, Xt, pa).call(this), o(this, Xt, da).call(this), this.getResponseAsString();
   }
   serialMessage(t) {
     const e = this.stringToArrayHex(t), i = this.stringToArrayBuffer(t), s = {
@@ -8652,9 +8679,9 @@ class Vc extends Lt {
     await this.sayCredits(), await this.sayAra(), await this.sayHi();
   }
 }
-Xt = new WeakSet(), fa = function() {
-  G.addCustom("arduino", this);
-}, ga = function() {
+Xt = new WeakSet(), da = function() {
+  $.addCustom("arduino", this);
+}, pa = function() {
 };
 /**
  * @license Webserial
@@ -8665,21 +8692,21 @@ Xt = new WeakSet(), fa = function() {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const qc = {
-  wait: Tt,
-  getSeconds: sn,
-  supportWebSerial: wa
-}, jc = "4.0.0";
+const nl = {
+  wait: Ct,
+  getSeconds: rn,
+  supportWebSerial: ba
+}, il = "4.1.3";
 export {
-  Vc as Arduino,
-  Lc as Boardroid,
-  G as Devices,
-  an as Emulator,
-  Uc as Jofemar,
+  el as Arduino,
+  tl as Boardroid,
+  $ as Devices,
+  sn as Emulator,
+  Yc as Jofemar,
   Lt as Kernel,
-  Mc as Locker,
-  Fc as PinPad,
-  Bc as Relay,
-  qc as utils,
-  jc as version
+  Oc as Locker,
+  Zc as PinPad,
+  Ic as Relay,
+  nl as utils,
+  il as version
 };
