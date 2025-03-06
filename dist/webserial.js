@@ -8696,7 +8696,7 @@ const nl = {
   wait: Ct,
   getSeconds: rn,
   supportWebSerial: ba
-}, il = "4.1.3";
+}, il = "4.1.6";
 export {
   el as Arduino,
   tl as Boardroid,
