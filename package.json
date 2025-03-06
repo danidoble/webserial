@@ -49,6 +49,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "uuid": "^11.1.0",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "webserial-core": "^1.0.1"
   }
 }
