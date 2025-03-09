@@ -2,7 +2,6 @@ import {resolve} from 'path'
 import {defineConfig} from 'vite'
 import {dirname} from 'node:path'
 import {fileURLToPath} from 'node:url'
-import basicSsl from '@vitejs/plugin-basic-ssl'
 
 const _dirname = typeof __dirname !== 'undefined'
     // eslint-disable-next-line no-undef
@@ -11,9 +10,7 @@ const _dirname = typeof __dirname !== 'undefined'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [
-        basicSsl(),
-    ],
+    plugins: [],
     build: {
         lib: {
             // Could also be a dictionary or array of multiple entry points

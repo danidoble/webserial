@@ -1,4 +1,5 @@
 import { Arduino } from '../lib/serial/arduino.js';
+import { Devices } from '../lib/utils/devices.js';
 
 const machine = new Arduino();
 machine.on('serial:message', (data) => {
@@ -54,6 +55,11 @@ machine.on('serial:soft-reload', (event) => {
 // eslint-disable-next-line no-unused-vars
 machine.on('serial:unsupported', (event) => {
   document.getElementById('unsupported').classList.remove('hidden');
+});
+
+window.Devices = Devices;
+Devices.instance.on('change', (data) => {
+  console.log(data.detail);
 });
 
 function tryConnect() {
