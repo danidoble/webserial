@@ -39,4 +39,4 @@ version: 2.9.0
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */const Ac={wait:O,getSeconds:Ye,supportWebSerial:X},Dc="4.0.0";R.Arduino=xc,R.Boardroid=kc,R.Devices=G,R.Emulator=be,R.Jofemar=Sc,R.Kernel=Dt,R.Locker=Da,R.PinPad=Tc,R.Relay=Aa,R.utils=Ac,R.version=Dc,Object.defineProperty(R,Symbol.toStringTag,{value:"Module"})});
+ */const Ac={wait:O,getSeconds:Ye,supportWebSerial:X},Dc="4.1.8";R.Arduino=xc,R.Boardroid=kc,R.Devices=G,R.Emulator=be,R.Jofemar=Sc,R.Kernel=Dt,R.Locker=Da,R.PinPad=Tc,R.Relay=Aa,R.utils=Ac,R.version=Dc,Object.defineProperty(R,Symbol.toStringTag,{value:"Module"})});
