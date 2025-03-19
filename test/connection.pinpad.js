@@ -1,9 +1,9 @@
 import { PinPad } from '../lib/serial/pinpad.js';
 
-const machine = new PinPad({
-  username: 'TEST',
-  password: 'TEST',
-});
+const username = import.meta.env.VITE_PINPAD_USERNAME;
+const password = import.meta.env.VITE_PINPAD_PASSWORD;
+
+const machine = new PinPad({ username, password });
 // machine.environment = 'production';
 // machine.__debug__ = true;
 // machine.timeoutPinPad = 60;

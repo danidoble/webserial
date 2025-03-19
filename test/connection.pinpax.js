@@ -1,8 +1,9 @@
 import { PinPax } from '../lib/serial/pinpax.js';
-const server = import.meta.env.VITE_APP_SERVER;
-const bussinessId = import.meta.env.VITE_APP_BUSSINESS_ID;
-const encriptionKey = import.meta.env.VITE_APP_ENCRYPTION_KEY;
-const apiKey = import.meta.env.VITE_APP_API_KEY;
+
+const server = import.meta.env.VITE_PINPAX_SERVER;
+const bussinessId = import.meta.env.VITE_PINPAX_BUSSINESS_ID;
+const encriptionKey = import.meta.env.VITE_PINPAX_ENCRYPTION_KEY;
+const apiKey = import.meta.env.VITE_PINPAX_API_KEY;
 
 const pinpax = new PinPax();
 pinpax.server = server;
