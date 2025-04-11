@@ -16,11 +16,21 @@ export default defineConfig({
     ],
     build: {
         lib: {
-            // Could also be a dictionary or array of multiple entry points
-            entry: resolve(_dirname, 'lib/main.js'),
-            name: 'WebSerial',
-            // the proper extensions will be added
-            fileName: 'webserial',
+            // entry: resolve(_dirname, 'lib/main.js'),
+            // name: 'WebSerial',
+            // fileName: 'webserial',
+            entry: {
+                webserial: resolve(_dirname, 'lib/main.js'),
+                kernel: resolve(_dirname, 'lib/kernel.js'),
+                arduino: resolve(_dirname, 'lib/serial/arduino.js'),
+                boardroid: resolve(_dirname, 'lib/serial/boardroid.js'),
+                jofemar: resolve(_dirname, 'lib/serial/jofemar.js'),
+                locker: resolve(_dirname, 'lib/serial/locker.js'),
+                pinpad: resolve(_dirname, 'lib/serial/pinpad.js'),
+                pinpax: resolve(_dirname, 'lib/serial/pinpax.js'),
+                relay: resolve(_dirname, 'lib/serial/relay.js'),
+            },
+            name: 'WebSerial'
         },
         rollupOptions: {
             // make sure to externalize deps that shouldn't be bundled

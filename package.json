@@ -1,7 +1,7 @@
 {
   "name": "@danidoble/webserial",
   "description": "WebSerial API wrapper",
-  "version": "4.2.2",
+  "version": "4.2.3",
   "type": "module",
   "license": "MIT",
   "author": "danidoble",
@@ -22,12 +22,44 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/webserial.umd.cjs",
+  "main": "./dist/webserial.cjs",
   "module": "./dist/webserial.js",
   "exports": {
     ".": {
       "import": "./dist/webserial.js",
-      "require": "./dist/webserial.umd.cjs"
+      "require": "./dist/webserial.cjs"
+    },
+    "./kernel": {
+      "import": "./dist/kernel.js",
+      "require": "./dist/kernel.cjs"
+    },
+    "./arduino": {
+      "import": "./dist/arduino.js",
+      "require": "./dist/arduino.cjs"
+    },
+    "./boardroid": {
+      "import": "./dist/boardroid.js",
+      "require": "./dist/boardroid.cjs"
+    },
+    "./jofemar": {
+      "import": "./dist/jofemar.js",
+      "require": "./dist/jofemar.cjs"
+    },
+    "./locker": {
+      "import": "./dist/locker.js",
+      "require": "./dist/locker.cjs"
+    },
+    "./pinpad": {
+      "import": "./dist/pinpad.js",
+      "require": "./dist/pinpad.cjs"
+    },
+    "./pinpax": {
+      "import": "./dist/pinpax.js",
+      "require": "./dist/pinpax.cjs"
+    },
+    "./relay": {
+      "import": "./dist/relay.js",
+      "require": "./dist/relay.cjs"
     }
   },
   "scripts": {
@@ -38,18 +70,18 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.0",
-    "@eslint/js": "^9.22.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.24.0",
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "autoprefixer": "^10.4.21",
     "axios": "^1.8.4",
-    "eslint": "^9.22.0",
+    "eslint": "^9.24.0",
     "globals": "^15.15.0",
     "jsencrypt": "^3.3.2",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "uuid": "^11.1.0",
-    "vite": "^6.2.2",
+    "vite": "^6.2.6",
     "webserial-core": "^1.0.5"
   }
 }
