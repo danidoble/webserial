@@ -1,4 +1,4 @@
-import { c as s, K as c } from "./kernel-B15wfB2x.js";
+import { _ as s, K as n } from "./kernel-BFXQSiNz.js";
 /**
  * @license Webserial
  * webserial
@@ -8,9 +8,9 @@ import { c as s, K as c } from "./kernel-B15wfB2x.js";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const e = "4.1.9";
+const e = "4.1.8";
 export {
   s as Devices,
-  c as Kernel,
+  n as Kernel,
   e as version
 };
