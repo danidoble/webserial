@@ -1,29 +1,28 @@
 {
   "name": "@danidoble/webserial",
-  "description": "WebSerial API wrapper",
   "version": "4.2.4",
-  "type": "module",
-  "license": "MIT",
   "author": "danidoble",
   "repository": {
     "type": "git",
     "url": "https://github.com/danidoble/webserial.git"
   },
-  "bugs": {
-    "url": "https://github.com/danidoble/webserial/issues"
-  },
-  "homepage": "https://webserial-demo.danidoble.com",
-  "keywords": [
-    "webserial",
-    "vending",
-    "machine",
-    "api"
-  ],
-  "files": [
-    "dist"
-  ],
   "main": "./dist/webserial.cjs",
   "module": "./dist/webserial.js",
+  "devDependencies": {
+    "@danidoble/webserial-vending-commands": "file:../parser",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.26.0",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.9.0",
+    "eslint": "^9.26.0",
+    "globals": "^15.15.0",
+    "jsencrypt": "^3.3.2",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "uuid": "^11.1.0",
+    "vite": "^6.3.5",
+    "webserial-core": "file:../webserial-core"
+  },
   "exports": {
     ".": {
       "import": "./dist/webserial.js",
@@ -62,6 +61,21 @@
       "require": "./dist/relay.cjs"
     }
   },
+  "bugs": {
+    "url": "https://github.com/danidoble/webserial/issues"
+  },
+  "description": "WebSerial API wrapper",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://webserial-demo.danidoble.com",
+  "keywords": [
+    "webserial",
+    "vending",
+    "machine",
+    "api"
+  ],
+  "license": "MIT",
   "scripts": {
     "format": "prettier --write ./lib/**/*.js && prettier --write ./test/**/*.js",
     "dev": "vite",
@@ -69,19 +83,5 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.26.0",
-    "@vitejs/plugin-basic-ssl": "^1.2.0",
-    "autoprefixer": "^10.4.21",
-    "axios": "^1.9.0",
-    "eslint": "^9.26.0",
-    "globals": "^15.15.0",
-    "jsencrypt": "^3.3.2",
-    "postcss": "^8.5.3",
-    "prettier": "^3.5.3",
-    "uuid": "^11.1.0",
-    "vite": "^6.3.5",
-    "webserial-core": "^1.0.6"
-  }
+  "type": "module"
 }

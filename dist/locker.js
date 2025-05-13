@@ -1,23 +1,24 @@
-var L = (l) => {
-  throw TypeError(l);
+var w = (a) => {
+  throw TypeError(a);
 };
-var b = (l, d, e) => d.has(l) || L("Cannot " + e);
-var h = (l, d, e) => (b(l, d, "read from private field"), e ? e.call(l) : d.get(l)), m = (l, d, e) => d.has(l) ? L("Cannot add the same private member more than once") : d instanceof WeakSet ? d.add(l) : d.set(l, e), r = (l, d, e, t) => (b(l, d, "write to private field"), t ? t.call(l, e) : d.set(l, e), e), n = (l, d, e) => (b(l, d, "access private method"), e);
-import { K as I, _ as x } from "./kernel-BFXQSiNz.js";
-var c, o, p, i, A, T, E, M, k, H, _, f, g, w, C;
-class G extends I {
-  constructor({ filters: e = null, config_port: t = null, no_device: s = 1, device_listen_on_port: a = 3 } = {}) {
-    super({ filters: e, config_port: t, no_device: s, device_listen_on_port: a });
-    m(this, i);
-    m(this, c, !1);
-    m(this, o, 0);
-    m(this, p, 0);
-    if (this.__internal__.device.type = "locker", x.getCustom(this.typeDevice, s))
-      throw new Error(`Device ${this.typeDevice} ${s} already exists`);
-    this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, n(this, i, T).call(this), n(this, i, A).call(this);
+var m = (a, c, e) => c.has(a) || w("Cannot " + e);
+var r = (a, c, e) => (m(a, c, "read from private field"), e ? e.call(a) : c.get(a)), u = (a, c, e) => c.has(a) ? w("Cannot add the same private member more than once") : c instanceof WeakSet ? c.add(a) : c.set(a, e), i = (a, c, e, s) => (m(a, c, "write to private field"), s ? s.call(a, e) : c.set(a, e), e), l = (a, c, e) => (m(a, c, "access private method"), e);
+import { K as k, _ as v } from "./kernel-Bquzoyqh.js";
+import { u as p } from "./relay-CKxJ6ewy.js";
+var h, n, o, t, y, d, f, g, b;
+class x extends k {
+  constructor({ filters: e = null, config_port: s = null, no_device: _ = 1, device_listen_on_port: C = 3 } = {}) {
+    super({ filters: e, config_port: s, no_device: _, device_listen_on_port: C });
+    u(this, t);
+    u(this, h, !1);
+    u(this, n, 0);
+    u(this, o, 0);
+    if (this.__internal__.device.type = "locker", v.getCustom(this.typeDevice, _))
+      throw new Error(`Device ${this.typeDevice} ${_} already exists`);
+    this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, v.add(this), l(this, t, y).call(this);
   }
   serialMessage(e) {
-    const t = {
+    const s = {
       code: e,
       name: null,
       description: null,
@@ -26,155 +27,116 @@ class G extends I {
     };
     switch (e[1]) {
       case "08":
-        t.name = "Connection with the serial device completed.", t.description = "Your connection with the serial device was successfully completed.", t.request = "connect", t.no_code = 100;
+        s.name = "Connection with the serial device completed.", s.description = "Your connection with the serial device was successfully completed.", s.request = "connect", s.no_code = 100;
         break;
       case "07":
         switch (e[4]) {
           case "00":
-            t.name = "Cell closed.", t.description = "The selected cell is closed.", t.request = "dispense", t.no_code = 1102, this.__internal__.dispense.status = !1, this.dispatch("dispensed", {}), h(this, c) && h(this, o) >= 89 ? (t.finished_test = !0, r(this, c, !1), r(this, o, 0)) : h(this, c) && (t.finished_test = !1);
+            s.name = "Cell closed.", s.description = "The selected cell is closed.", s.request = "dispense", s.no_code = 1102, this.__internal__.dispense.status = !1, this.dispatch("dispensed", {}), r(this, h) && r(this, n) >= 89 ? (s.finished_test = !0, i(this, h, !1), i(this, n, 0)) : r(this, h) && (s.finished_test = !1);
             break;
           case "01":
           // cell open by status
           case "04":
-            t.name = "Cell open.", t.description = "The selected cell was open successfully.", t.request = "dispense", t.no_code = 102, this.__internal__.dispense.status = !0, this.dispatch("dispensed", {}), h(this, c) && h(this, o) >= 89 ? (t.finished_test = !0, r(this, c, !1), r(this, o, 0)) : h(this, c) && (t.finished_test = !1);
+            s.name = "Cell open.", s.description = "The selected cell was open successfully.", s.request = "dispense", s.no_code = 102, this.__internal__.dispense.status = !0, this.dispatch("dispensed", {}), r(this, h) && r(this, n) >= 89 ? (s.finished_test = !0, i(this, h, !1), i(this, n, 0)) : r(this, h) && (s.finished_test = !1);
             break;
           case "05":
-            t.name = "Cell inactive.", t.description = "The selected cell is inactive or doesn't exist.", t.request = "dispense", t.no_code = 101, this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", {}), h(this, c) && h(this, o) >= 89 ? (t.finished_test = !0, r(this, c, !1), r(this, o, 0)) : h(this, c) && (t.finished_test = !1);
+            s.name = "Cell inactive.", s.description = "The selected cell is inactive or doesn't exist.", s.request = "dispense", s.no_code = 101, this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", {}), r(this, h) && r(this, n) >= 89 ? (s.finished_test = !0, i(this, h, !1), i(this, n, 0)) : r(this, h) && (s.finished_test = !1);
             break;
         }
         break;
       case "06":
-        t.name = "Configuration applied.", t.description = "The configuration was successfully applied.", t.request = "configure cell", t.no_code = 103;
+        s.name = "Configuration applied.", s.description = "The configuration was successfully applied.", s.request = "configure cell", s.no_code = 103;
         break;
       default:
-        t.request = "undefined", t.name = "Response unrecognized", t.description = "The response of application was received, but dont identify with any of current parameters", t.no_code = 400;
+        s.request = "undefined", s.name = "Response unrecognized", s.description = "The response of application was received, but dont identify with any of current parameters", s.no_code = 400;
         break;
     }
-    this.dispatch("serial:message", t);
+    this.dispatch("serial:message", s);
   }
   serialSetConnectionConstant(e = 3) {
-    return this.add0x(this.serialLockerGetConnectionCmd(e));
-  }
-  serialLockerCmdMaker(e) {
-    const t = this.__internal__.device.milliseconds;
-    let s = null;
-    try {
-      s = new Uint8Array(e.length + 8), s.set(e, 2), s[0] = 2, s[1] = e.length + 4, s[s.length - 2] = 3;
-      let a = 0;
-      for (let u = 1; u < e.length; u++)
-        a += e[u], a *= parseInt(Math.pow(2, u - 1).toString());
-      s[e.length + 2] = a % 256, s[e.length + 3] = t * 3 % 256, s[e.length + 4] = t * 8 % 256;
-      let v = 0;
-      for (let u = 3; u < e.length + 5; u++)
-        v += s[u];
-      s[e.length + 5] = v % 256;
-      let y = 0;
-      for (let u = 0; u < s.length - 1; u++)
-        y ^= s[u];
-      s[s.length - 1] = y;
-    } catch (a) {
-      this.serialErrors(`Error generating command: ${a.message}`), s = null;
-    }
-    return s;
-  }
-  serialLockerHexCmd(e) {
-    const t = this.serialLockerCmdMaker(e), s = [];
-    for (let a = 0; a < t.length; a++)
-      s.push(this.decToHex(t[a]));
-    return s;
-  }
-  serialLockerGetConnectionCmd(e = 3) {
-    if (e < 1 || e > 255) throw new Error("Invalid port number");
-    return this.serialLockerHexCmd(new Uint8Array([0, e]));
-  }
-  parseCellToColumnRow(e) {
-    const t = Math.floor((e - 1) / 10) + 1;
-    let s = e % 8;
-    return s === 0 && (s = 8), [t, s];
+    return p.connection({ channel: e });
   }
   async dispense({ cell: e = 1 } = {}) {
-    e = n(this, i, _).call(this, e);
-    const t = n(this, i, H).call(this, e);
-    return await this.internalDispense(t);
+    return await this.internalDispense(
+      p.openCell({
+        cell: e,
+        channel: this.__internal__.device.listen_on_port
+      })
+    );
   }
   async status({ cell: e = 1 } = {}) {
-    e = n(this, i, _).call(this, e);
-    const t = n(this, i, E).call(this, e);
-    return await this.appendToQueue(t, "status");
+    return await this.appendToQueue(
+      p.statusCell({
+        cell: e,
+        channel: this.__internal__.device.listen_on_port
+      }),
+      "status"
+    );
   }
-  async lightScan({ since: e = 0, until: t = 10 } = {}) {
-    if (e < 0 || e > 10) throw new Error("Invalid since number");
-    if (t < 0 || t > 10) throw new Error("Invalid until number");
-    const s = n(this, i, M).call(this, e, t);
-    return await this.appendToQueue(s, "light-scan");
+  async lightScan({ since: e = 0, until: s = 10 } = {}) {
+    return await this.appendToQueue(
+      p.lightScan({
+        channel: this.__internal__.device.listen_on_port,
+        since: e,
+        until: s
+      }),
+      "light-scan"
+    );
   }
   async enable({ cell: e = 1 } = {}) {
-    e = n(this, i, _).call(this, e);
-    const [t, s] = this.parseCellToColumnRow(e), a = n(this, i, k).call(this, { enable: !0, column: t, row: s });
-    await this.appendToQueue(a, "activate");
+    return await this.appendToQueue(
+      p.enableCell({
+        cell: e,
+        channel: this.__internal__.device.listen_on_port
+      }),
+      "activate"
+    );
   }
   async disable({ cell: e = 1 } = {}) {
-    e = n(this, i, _).call(this, e);
-    const [t, s] = this.parseCellToColumnRow(e), a = n(this, i, k).call(this, { enable: !1, column: t, row: s });
-    await this.appendToQueue(a, "disable");
+    await this.appendToQueue(
+      p.disableCell({
+        cell: e,
+        channel: this.__internal__.device.listen_on_port
+      }),
+      "disable"
+    );
   }
   async openAll() {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
-    n(this, i, f).call(this), r(this, c, !0), n(this, i, g).call(this);
+    l(this, t, d).call(this), i(this, h, !0), l(this, t, f).call(this);
     const e = [];
-    for (let t = 1; t <= 90; t++) {
-      const s = await this.dispense(t);
-      e.push(s), r(this, o, t), n(this, i, g).call(this);
+    for (let s = 1; s <= 90; s++) {
+      const _ = await this.dispense(s);
+      e.push(_), i(this, n, s), l(this, t, f).call(this);
     }
-    r(this, o, 90), n(this, i, g).call(this, e), n(this, i, f).call(this);
+    i(this, n, 90), l(this, t, f).call(this, e), l(this, t, d).call(this);
   }
   async enableAll() {
-    n(this, i, f).call(this), r(this, c, !0), n(this, i, w).call(this);
+    l(this, t, d).call(this), i(this, h, !0), l(this, t, g).call(this);
     for (let e = 1; e <= 90; e++)
-      await this.enable(e), r(this, o, e), n(this, i, w).call(this);
-    r(this, o, 90), n(this, i, w).call(this), n(this, i, f).call(this);
+      await this.enable(e), i(this, n, e), l(this, t, g).call(this);
+    i(this, n, 90), l(this, t, g).call(this), l(this, t, d).call(this);
   }
   async disableAll() {
-    n(this, i, f).call(this), r(this, c, !0), n(this, i, C).call(this);
+    l(this, t, d).call(this), i(this, h, !0), l(this, t, b).call(this);
     for (let e = 1; e <= 90; e++)
-      await this.enable(e), r(this, o, e), n(this, i, C).call(this);
-    r(this, o, 90), n(this, i, C).call(this), n(this, i, f).call(this);
+      await this.enable(e), i(this, n, e), l(this, t, b).call(this);
+    i(this, n, 90), l(this, t, b).call(this), l(this, t, d).call(this);
   }
 }
-c = new WeakMap(), o = new WeakMap(), p = new WeakMap(), i = new WeakSet(), A = function() {
+h = new WeakMap(), n = new WeakMap(), o = new WeakMap(), t = new WeakSet(), y = function() {
   const e = ["percentage:disable", "percentage:enable", "percentage:open"];
-  for (const t of e)
-    this.serialRegisterAvailableListener(t);
-}, T = function() {
-  x.add(this);
-}, E = function(e = 1) {
-  return e = n(this, i, _).call(this, e), this.serialLockerHexCmd(new Uint8Array([16, this.__internal__.device.listen_on_port, e]));
-}, M = function(e = 0, t = 10) {
-  return this.serialLockerHexCmd(new Uint8Array([32, this.__internal__.device.listen_on_port, e, t]));
-}, k = function({ enable: e = !0, column: t = 0, row: s = 10 } = {}) {
-  if (t < 0 || t > 8) throw new Error("Invalid column number");
-  if (s < 0 || s > 10) throw new Error("Invalid row number");
-  let a = 1;
-  return e || (a = 0), this.serialLockerHexCmd(new Uint8Array([48, this.__internal__.device.listen_on_port, t, s, a]));
-}, H = function(e = 1) {
-  e = n(this, i, _).call(this, e);
-  const t = this.__internal__.device.milliseconds, s = t % 256, a = Math.floor(t / 3) % 256;
-  return this.serialLockerHexCmd(
-    new Uint8Array([64, this.__internal__.device.listen_on_port, e, s, a])
-  );
-}, _ = function(e) {
-  const t = parseInt(e);
-  if (isNaN(t) || t < 1 || t > 90) throw new Error("Invalid cell number");
-  return t;
-}, f = function() {
-  r(this, c, !1), r(this, o, 0), r(this, p, 0);
-}, g = function(e = null) {
-  r(this, p, Math.round(h(this, o) * 100 / 90)), this.dispatch("percentage:open", { percentage: h(this, p), dispensed: e });
-}, w = function() {
-  r(this, p, Math.round(h(this, o) * 100 / 90)), this.dispatch("percentage:enable", { percentage: h(this, p) });
-}, C = function() {
-  r(this, p, Math.round(h(this, o) * 100 / 90)), this.dispatch("percentage:disable", { percentage: h(this, p) });
+  for (const s of e)
+    this.serialRegisterAvailableListener(s);
+}, d = function() {
+  i(this, h, !1), i(this, n, 0), i(this, o, 0);
+}, f = function(e = null) {
+  i(this, o, Math.round(r(this, n) * 100 / 90)), this.dispatch("percentage:open", { percentage: r(this, o), dispensed: e });
+}, g = function() {
+  i(this, o, Math.round(r(this, n) * 100 / 90)), this.dispatch("percentage:enable", { percentage: r(this, o) });
+}, b = function() {
+  i(this, o, Math.round(r(this, n) * 100 / 90)), this.dispatch("percentage:disable", { percentage: r(this, o) });
 };
 export {
-  G as Locker
+  x as Locker
 };
