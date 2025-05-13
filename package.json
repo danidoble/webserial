@@ -1,6 +1,6 @@
 {
   "name": "@danidoble/webserial",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "author": "danidoble",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   "main": "./dist/webserial.cjs",
   "module": "./dist/webserial.js",
   "devDependencies": {
-    "@danidoble/webserial-vending-commands": "file:../parser",
+    "@danidoble/webserial-vending-commands": "^1.0.1",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.26.0",
     "autoprefixer": "^10.4.21",
@@ -21,7 +21,7 @@
     "prettier": "^3.5.3",
     "uuid": "^11.1.0",
     "vite": "^6.3.5",
-    "webserial-core": "file:../webserial-core"
+    "webserial-core": "^1.0.7"
   },
   "exports": {
     ".": {
