@@ -13,7 +13,7 @@ const g = (i) => {
   asString: e = !0
 }) => e ? Array.from(i).map((n) => n.toString(16).padStart(2, "0")).join(" ") : Array.from(i).map((n) => n.toString(16).padStart(2, "0"));
 var F = Object.defineProperty, L = (i, e, n) => e in i ? F(i, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : i[e] = n, S = (i, e, n) => L(i, typeof e != "symbol" ? e + "" : e, n);
-const C = class d {
+const f = class d {
   build(e) {
     return g(e + d.append);
   }
@@ -36,9 +36,9 @@ const C = class d {
     return d.instance.build(e);
   }
 };
-S(C, "append", `
-`), S(C, "instance");
-let k = C;
+S(f, "append", `
+`), S(f, "instance");
+let k = f;
 k.instance = new k();
 var H = Object.defineProperty, B = (i, e, n) => e in i ? H(i, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : i[e] = n, I = (i, e, n) => B(i, typeof e != "symbol" ? e + "" : e, n);
 const b = class c {
@@ -543,7 +543,7 @@ const w = class r {
       2,
       48,
       48,
-      e,
+      128 + e,
       a ? 77 : 86,
       s,
       t
@@ -554,7 +554,7 @@ const w = class r {
       2,
       48,
       48,
-      e,
+      128 + e,
       77,
       128,
       128
@@ -760,7 +760,7 @@ const w = class r {
     const a = { celsius: 67, fahrenheit: 70 };
     if (!a[n])
       throw new Error(
-        "Invalid scale, valid scales are 'c' for celsius and 'f' for fahrenheit"
+        "Invalid scale, valid scales are 'celsius' and 'fahrenheit'"
       );
     return r.program({
       param1: 103,
@@ -1305,7 +1305,7 @@ O(v, "append", `\r
 let U = v;
 U.instance = new U();
 var Y = Object.defineProperty, q = (i, e, n) => e in i ? Y(i, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : i[e] = n, z = (i, e, n) => q(i, e + "", n);
-const R = class f {
+const R = class C {
   build(e) {
     return e[3] = this.withChecksum(e), g(e);
   }
@@ -1316,16 +1316,16 @@ const R = class f {
     }), n;
   }
   static connection(e = 1) {
-    return f.instance.build([160, e, 0, 161]);
+    return C.instance.build([160, e, 0, 161]);
   }
   static deactivate(e = 1) {
-    return f.connection(e);
+    return C.connection(e);
   }
   static activate() {
-    return f.instance.build([160, 1, 1, 162]);
+    return C.instance.build([160, 1, 1, 162]);
   }
   static custom(e) {
-    return f.instance.build(e);
+    return C.instance.build(e);
   }
 };
 z(R, "instance");
