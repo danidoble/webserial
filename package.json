@@ -12,7 +12,6 @@
     "@danidoble/webserial-vending-commands": "file:../parser",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.26.0",
-    "@vitejs/plugin-basic-ssl": "^1.2.0",
     "autoprefixer": "^10.4.21",
     "axios": "^1.9.0",
     "eslint": "^9.26.0",

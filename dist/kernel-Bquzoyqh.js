@@ -20,10 +20,10 @@ function Ce() {
 function De(l = 1) {
   return l * 1e3;
 }
-function Se(l) {
+function Ae(l) {
   return l == null || l === "";
 }
-var v, S, s, Y, Z, c, q, p, d, I, o, $, T;
+var v, A, s, Y, Z, c, O, p, d, I, o, $, T;
 const r = class r {
   static status(e = null) {
     var n, i;
@@ -34,7 +34,7 @@ const r = class r {
         t = ["0", "8"];
         break;
       case "boardroid":
-        t = ["2", (5 + w(r, S)).toString(16).toUpperCase()];
+        t = ["2", (5 + w(r, A)).toString(16).toUpperCase()];
         break;
       case "jofemar":
         t = ["6"];
@@ -84,25 +84,25 @@ const r = class r {
   }
   static gateInactive(e = null) {
     var t;
-    if (!a(t = r, s, c).call(t, e) || !a(this, s, q).call(this)) return !1;
+    if (!a(t = r, s, c).call(t, e) || !a(this, s, O).call(this)) return !1;
     a(this, s, o).call(this, ["0", "7", "5", "5", "5"]);
   }
   static gateConfigured(e = null) {
     var t;
-    if (!a(t = r, s, c).call(t, e) || !a(this, s, q).call(this)) return !1;
+    if (!a(t = r, s, c).call(t, e) || !a(this, s, O).call(this)) return !1;
     a(this, s, o).call(this, ["0", "6"]);
   }
   static keyPressed(e = null) {
     var u, g, f;
     if (!a(u = r, s, c).call(u, e) || !a(g = r, s, d).call(g)) return !1;
-    const t = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "2A", "23", "41", "42", "43", "44"], n = (128 + w(r, S)).toString(16), i = Math.floor(Math.random() * 15);
+    const t = ["30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "2A", "23", "41", "42", "43", "44"], n = (128 + w(r, A)).toString(16), i = Math.floor(Math.random() * 15);
     a(f = r, s, o).call(f, ["2", n, "54", t[i]]);
   }
   static doorOpened(e = null) {
     var i, u;
     if (!a(i = r, s, c).call(i, e) || !a(this, s, I).call(this)) return !1;
     let t = [];
-    const n = (128 + w(r, S)).toString(16);
+    const n = (128 + w(r, A)).toString(16);
     switch (w(r, v)) {
       case "boardroid":
         t = ["2", "D8", "dc"];
@@ -117,7 +117,7 @@ const r = class r {
     var i, u;
     if (!a(i = r, s, c).call(i, e) || !a(this, s, I).call(this)) return !1;
     let t = [];
-    const n = (128 + w(r, S)).toString(16);
+    const n = (128 + w(r, A)).toString(16);
     switch (w(r, v)) {
       case "boardroid":
         t = ["2", "D8", "db"];
@@ -131,32 +131,32 @@ const r = class r {
   static channelDisconnected(e = null) {
     var n, i, u;
     if (!a(n = r, s, c).call(n, e) || !a(i = r, s, d).call(i)) return !1;
-    const t = (128 + w(r, S)).toString(16);
+    const t = (128 + w(r, A)).toString(16);
     a(u = r, s, o).call(u, ["2", t, "43", "43", "43", "FD"]);
   }
   static channelConnected(e = null) {
     var n, i, u;
     if (!a(n = r, s, c).call(n, e) || !a(i = r, s, d).call(i)) return !1;
-    const t = (128 + w(r, S)).toString(16);
+    const t = (128 + w(r, A)).toString(16);
     a(u = r, s, o).call(u, ["2", t, "43", "43", "43", "FC"]);
   }
   static channelEmpty(e = null) {
     var n, i, u;
     if (!a(n = r, s, c).call(n, e) || !a(i = r, s, d).call(i)) return !1;
-    const t = (128 + w(r, S)).toString(16);
+    const t = (128 + w(r, A)).toString(16);
     a(u = r, s, o).call(u, ["2", t, "43", "43", "43", "FF"]);
   }
   static workingTemperature(e = null) {
     var n, i, u;
     if (!a(n = r, s, c).call(n, e) || !a(i = r, s, d).call(i)) return !1;
-    const t = (128 + w(r, S)).toString(16);
+    const t = (128 + w(r, A)).toString(16);
     a(u = r, s, o).call(u, ["2", t, "43", "54", "16"]);
   }
   static currentTemperature(e = null) {
     var i, u, g;
     if (!a(i = r, s, c).call(i, e) || !a(u = r, s, I).call(u)) return !1;
     let t = [];
-    const n = (128 + w(r, S)).toString(16);
+    const n = (128 + w(r, A)).toString(16);
     switch (w(r, v)) {
       case "boardroid":
         t = ["2", "D9", "44", "30"];
@@ -455,7 +455,7 @@ const r = class r {
     ];
     if (e._recycler.ict) {
       const h = n[Math.floor(Math.random() * 31)];
-      let k = "0", C = "0", D = "0", A = "0", M = "0";
+      let k = "0", C = "0", D = "0", S = "0", M = "0";
       if (t !== null && !isNaN(parseInt(t)))
         switch (t.toString()) {
           case "20":
@@ -468,7 +468,7 @@ const r = class r {
             D = h;
             break;
           case "200":
-            A = h;
+            S = h;
             break;
           case "500":
             M = h;
@@ -486,15 +486,15 @@ const r = class r {
             D = h;
             break;
           case 3:
-            A = h;
+            S = h;
             break;
           case 4:
             M = h;
             break;
         }
-      a(g = r, s, o).call(g, ["2", "D3", k, C, D, A, M, "0"]);
+      a(g = r, s, o).call(g, ["2", "D3", k, C, D, S, M, "0"]);
     } else {
-      const [h, k, C, D, A, M] = [
+      const [h, k, C, D, S, M] = [
         n[Math.floor(Math.random() * 30)],
         n[Math.floor(Math.random() * 30)],
         n[Math.floor(Math.random() * 30)],
@@ -502,7 +502,7 @@ const r = class r {
         n[Math.floor(Math.random())],
         n[Math.floor(Math.random())]
       ];
-      a(f = r, s, o).call(f, ["2", "D3", h, k, C, D, A, M]);
+      a(f = r, s, o).call(f, ["2", "D3", h, k, C, D, S, M]);
     }
   }
   static banknoteAccepted(e = null) {
@@ -550,7 +550,7 @@ const r = class r {
     ];
     if (e._recycler.ict) {
       const f = t[Math.floor(Math.random() * 30)];
-      let h = "0", k = "0", C = "0", D = "0", A = "0";
+      let h = "0", k = "0", C = "0", D = "0", S = "0";
       switch (e._recycler.bill) {
         case 0:
           h = f;
@@ -565,12 +565,12 @@ const r = class r {
           D = f;
           break;
         case 4:
-          A = f;
+          S = f;
           break;
       }
-      a(u = r, s, o).call(u, ["2", "D5", h, k, C, D, A, "0"]);
+      a(u = r, s, o).call(u, ["2", "D5", h, k, C, D, S, "0"]);
     } else {
-      const [f, h, k, C, D, A] = [
+      const [f, h, k, C, D, S] = [
         t[Math.floor(Math.random() * 30)],
         t[Math.floor(Math.random() * 30)],
         t[Math.floor(Math.random() * 30)],
@@ -578,7 +578,7 @@ const r = class r {
         t[Math.floor(Math.random())],
         t[Math.floor(Math.random())]
       ];
-      a(g = r, s, o).call(g, ["2", "D5", f, h, k, C, D, A]);
+      a(g = r, s, o).call(g, ["2", "D5", f, h, k, C, D, S]);
     }
   }
   static coinsDispensed(e = null) {
@@ -657,17 +657,17 @@ const r = class r {
     e.__internal__.serial.connected = !0;
   }
 };
-v = new WeakMap(), S = new WeakMap(), s = new WeakSet(), Y = function() {
+v = new WeakMap(), A = new WeakMap(), s = new WeakSet(), Y = function() {
   if (r.enable === !1) throw new Error("Emulator is disabled");
   return r.enable;
 }, Z = function(e) {
-  if (typeof e != "object" || !(e instanceof ye))
+  if (typeof e != "object" || !(e instanceof me))
     throw new Error(`Type ${e.typeDevice} is not supported`);
-  return r.instance = e, j(r, v, e.typeDevice), j(r, S, e.deviceNumber), !0;
+  return r.instance = e, j(r, v, e.typeDevice), j(r, A, e.deviceNumber), !0;
 }, c = function(e = null) {
   var t, n;
   return !a(t = r, s, Y).call(t) || e === null && r.instance === null ? !1 : (r.instance === null && a(n = r, s, Z).call(n, e), !0);
-}, q = function() {
+}, O = function() {
   if (w(r, v) !== "locker") throw new Error("This function is only available for Locker devices");
   return !0;
 }, p = function() {
@@ -724,11 +724,11 @@ v = new WeakMap(), S = new WeakMap(), s = new WeakSet(), Y = function() {
         break;
     }
   return n;
-}, U(r, s), N(r, "enable", !1), N(r, "instance", null), U(r, v, null), U(r, S, 1);
-let O = r;
+}, U(r, s), N(r, "enable", !1), N(r, "instance", null), U(r, v, null), U(r, A, 1);
+let L = r;
 var he = Object.defineProperty, ee = (l) => {
   throw TypeError(l);
-}, de = (l, e, t) => e in l ? he(l, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : l[e] = t, B = (l, e, t) => de(l, typeof e != "symbol" ? e + "" : e, t), fe = (l, e, t) => e.has(l) || ee("Cannot " + t), pe = (l, e, t) => e.has(l) ? ee("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(l) : e.set(l, t), y = (l, e, t) => (fe(l, e, "access private method"), t);
+}, de = (l, e, t) => e in l ? he(l, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : l[e] = t, B = (l, e, t) => de(l, typeof e != "symbol" ? e + "" : e, t), fe = (l, e, t) => e.has(l) || ee("Cannot " + t), pe = (l, e, t) => e.has(l) ? ee("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(l) : e.set(l, t), m = (l, e, t) => (fe(l, e, "access private method"), t);
 class Q extends CustomEvent {
   constructor(e, t) {
     super(e, t);
@@ -766,44 +766,44 @@ class te extends EventTarget {
     }));
   }
 }
-const R = class m extends te {
+const R = class y extends te {
   constructor() {
     super(), ["change"].forEach((e) => {
       this.serialRegisterAvailableListener(e);
     });
   }
   static $dispatchChange(e = null) {
-    e && e.$checkAndDispatchConnection(), m.instance.dispatch("change", { devices: m.devices, dispatcher: e });
+    e && e.$checkAndDispatchConnection(), y.instance.dispatch("change", { devices: y.devices, dispatcher: e });
   }
   static typeError(e) {
     const t = new Error();
     throw t.message = `Type ${e} is not supported`, t.name = "DeviceTypeError", t;
   }
   static registerType(e) {
-    typeof m.devices[e] > "u" && (m.devices[e] = {});
+    typeof y.devices[e] > "u" && (y.devices[e] = {});
   }
   static add(e) {
     const t = e.typeDevice;
-    typeof m.devices[t] > "u" && (m.devices[t] = {});
+    typeof y.devices[t] > "u" && (y.devices[t] = {});
     const n = e.uuid;
-    if (typeof m.devices[t] > "u" && m.typeError(t), m.devices[t][n])
+    if (typeof y.devices[t] > "u" && y.typeError(t), y.devices[t][n])
       throw new Error(`Device with id ${n} already exists`);
-    return m.devices[t][n] = e, m.$dispatchChange(e), Object.keys(m.devices[t]).indexOf(n);
+    return y.devices[t][n] = e, y.$dispatchChange(e), Object.keys(y.devices[t]).indexOf(n);
   }
   static get(e, t) {
-    return typeof m.devices[e] > "u" && (m.devices[e] = {}), typeof m.devices[e] > "u" && m.typeError(e), m.devices[e][t];
+    return typeof y.devices[e] > "u" && (y.devices[e] = {}), typeof y.devices[e] > "u" && y.typeError(e), y.devices[e][t];
   }
   static getAll(e = null) {
-    return e === null ? m.devices : (typeof m.devices[e] > "u" && m.typeError(e), m.devices[e]);
+    return e === null ? y.devices : (typeof y.devices[e] > "u" && y.typeError(e), y.devices[e]);
   }
   static getList() {
-    return Object.values(m.devices).map((e) => Object.values(e)).flat();
+    return Object.values(y.devices).map((e) => Object.values(e)).flat();
   }
   static getByNumber(e, t) {
-    return typeof m.devices[e] > "u" && m.typeError(e), Object.values(m.devices[e]).find((n) => n.deviceNumber === t) ?? null;
+    return typeof y.devices[e] > "u" && y.typeError(e), Object.values(y.devices[e]).find((n) => n.deviceNumber === t) ?? null;
   }
   static getCustom(e, t = 1) {
-    return typeof m.devices[e] > "u" && m.typeError(e), Object.values(m.devices[e]).find((n) => n.deviceNumber === t) ?? null;
+    return typeof y.devices[e] > "u" && y.typeError(e), Object.values(y.devices[e]).find((n) => n.deviceNumber === t) ?? null;
   }
 };
 B(R, "instance"), B(R, "devices", {});
@@ -817,7 +817,7 @@ function J(l = 100) {
 function ge() {
   return "serial" in navigator;
 }
-const L = {
+const q = {
   baudRate: 9600,
   dataBits: 8,
   stopBits: 1,
@@ -825,16 +825,16 @@ const L = {
   bufferSize: 32768,
   flowControl: "none"
 };
-var b, E, P, H, x, ne, V, z, K, re, ie, se, ae, G, X, le, oe;
+var b, x, P, H, E, ne, V, z, K, re, ie, se, ae, G, X, le, oe;
 class be extends te {
   constructor({
     filters: e = null,
-    config_port: t = L,
+    config_port: t = q,
     no_device: n = 1,
     device_listen_on_channel: i = 1
   } = {
     filters: null,
-    config_port: L,
+    config_port: q,
     no_device: 1,
     device_listen_on_channel: 1
   }) {
@@ -855,7 +855,7 @@ class be extends te {
         response: {
           length: null,
           buffer: new Uint8Array([]),
-          as: "hex",
+          as: "uint8",
           replacer: /[\n\r]+/g,
           limiter: null
         },
@@ -869,7 +869,7 @@ class be extends te {
         delay_first_connection: 200,
         bytes_connection: null,
         filters: [],
-        config_port: L,
+        config_port: q,
         queue: [],
         auto_response: ["DD", "DD"]
       },
@@ -890,7 +890,7 @@ class be extends te {
       }
     }), !("serial" in navigator))
       throw new Error("Web Serial not supported");
-    e && (this.serialFilters = e), t && (this.serialConfigPort = t), n && y(this, b, le).call(this, n), i && ["number", "string"].includes(typeof i) && (this.listenOnChannel = i), y(this, b, se).call(this), y(this, b, ae).call(this);
+    e && (this.serialFilters = e), t && (this.serialConfigPort = t), n && m(this, b, le).call(this, n), i && ["number", "string"].includes(typeof i) && (this.listenOnChannel = i), m(this, b, se).call(this), m(this, b, ae).call(this);
   }
   set listenOnChannel(e) {
     if (typeof e == "string" && (e = parseInt(e)), isNaN(e) || e < 1 || e > 255)
@@ -916,11 +916,11 @@ class be extends te {
     return this.__internal__.serial.config_port;
   }
   get isConnected() {
-    const e = this.__internal__.serial.connected, t = y(this, b, E).call(this, this.__internal__.serial.port);
-    return e && !t && y(this, b, P).call(this, { error: "Port is closed, not readable or writable." }), this.__internal__.serial.connected = t, this.__internal__.serial.connected;
+    const e = this.__internal__.serial.connected, t = m(this, b, x).call(this, this.__internal__.serial.port);
+    return e && !t && m(this, b, P).call(this, { error: "Port is closed, not readable or writable." }), this.__internal__.serial.connected = t, this.__internal__.serial.connected;
   }
   get isDisconnected() {
-    const e = this.__internal__.serial.connected, t = y(this, b, E).call(this, this.__internal__.serial.port);
+    const e = this.__internal__.serial.connected, t = m(this, b, x).call(this, this.__internal__.serial.port);
     return !e && t && (this.dispatch("serial:connected"), _.$dispatchChange(this)), this.__internal__.serial.connected = t, !this.__internal__.serial.connected;
   }
   get deviceNumber() {
@@ -943,7 +943,7 @@ class be extends te {
     });
   }
   async disconnect(e = null) {
-    await this.serialDisconnect(), y(this, b, P).call(this, e);
+    await this.serialDisconnect(), m(this, b, P).call(this, e);
   }
   async connect() {
     return new Promise((e, t) => {
@@ -1036,7 +1036,7 @@ class be extends te {
   async serialConnect() {
     try {
       this.dispatch("serial:connecting", {});
-      const e = await y(this, b, ne).call(this);
+      const e = await m(this, b, ne).call(this);
       if (e.length > 0)
         await this.serialPortsSaved(e);
       else {
@@ -1056,16 +1056,16 @@ class be extends te {
         await n.disconnect();
       }, await J(this.__internal__.serial.delay_first_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
         await n.timeout(n.__internal__.serial.bytes_connection ?? [], "connection:start");
-      }, this.__internal__.time.response_connection), this.__internal__.serial.last_action = "connect", await y(this, b, H).call(this, this.__internal__.serial.bytes_connection ?? []), this.dispatch("serial:sent", {
+      }, this.__internal__.time.response_connection), this.__internal__.serial.last_action = "connect", await m(this, b, H).call(this, this.__internal__.serial.bytes_connection ?? []), this.dispatch("serial:sent", {
         action: "connect",
         bytes: this.__internal__.serial.bytes_connection
-      }), this.__internal__.auto_response && y(this, b, x).call(this, this.__internal__.serial.auto_response, null), await y(this, b, re).call(this);
+      }), this.__internal__.auto_response && m(this, b, E).call(this, this.__internal__.serial.auto_response, null), await m(this, b, re).call(this);
     } catch (e) {
       this.serialErrors(e);
     }
   }
   async serialForget() {
-    return await y(this, b, ie).call(this);
+    return await m(this, b, ie).call(this);
   }
   decToHex(e) {
     return typeof e == "string" && (e = parseInt(e, 10)), e.toString(16);
@@ -1085,8 +1085,22 @@ class be extends te {
   bytesToHex(e) {
     return this.add0x(Array.from(e, (t) => this.hexMaker(t)));
   }
+  validateBytes(e) {
+    let t = new Uint8Array(0);
+    if (e instanceof Uint8Array)
+      t = e;
+    else if (typeof e == "string")
+      t = this.parseStringToTextEncoder(e);
+    else if (Array.isArray(e) && typeof e[0] == "string")
+      t = this.stringArrayToUint8Array(e);
+    else if (Array.isArray(e) && typeof e[0] == "number")
+      t = new Uint8Array(e);
+    else
+      throw new Error("Invalid data type");
+    return t;
+  }
   async appendToQueue(e, t) {
-    const n = this.bytesToHex(e);
+    const n = this.validateBytes(e);
     if (["connect", "connection:start"].includes(t)) {
       if (this.__internal__.serial.connected) return;
       await this.serialConnect();
@@ -1122,7 +1136,7 @@ class be extends te {
     });
   }
   softReload() {
-    y(this, b, oe).call(this), this.dispatch("serial:soft-reload", {});
+    m(this, b, oe).call(this), this.dispatch("serial:soft-reload", {});
   }
   async sendConnect() {
     if (!this.__internal__.serial.bytes_connection)
@@ -1166,8 +1180,8 @@ class be extends te {
     }), new Uint8Array(t);
   }
   parseUint8ArrayToString(e) {
-    const t = this.stringArrayToUint8Array(e);
-    e = this.parseUint8ToHex(t);
+    let t = new Uint8Array(0);
+    e instanceof Uint8Array ? t = e : t = this.stringArrayToUint8Array(e), e = this.parseUint8ToHex(t);
     const n = e.map((i) => parseInt(i, 16));
     return this.__internal__.serial.response.replacer ? String.fromCharCode(...n).replace(this.__internal__.serial.response.replacer, "") : String.fromCharCode(...n);
   }
@@ -1190,41 +1204,36 @@ class be extends te {
     return this.isConnected;
   }
 }
-b = /* @__PURE__ */ new WeakSet(), E = function(l) {
+b = /* @__PURE__ */ new WeakSet(), x = function(l) {
   return !!(l && l.readable && l.writable);
 }, P = function(l = null) {
   this.__internal__.serial.connected = !1, this.__internal__.aux_port_connector = 0, this.dispatch("serial:disconnected", l), _.$dispatchChange(this);
 }, H = async function(l) {
   const e = this.__internal__.serial.port;
   if (!e || e && (!e.readable || !e.writable))
-    throw y(this, b, P).call(this, { error: "Port is closed, not readable or writable." }), new Error("The port is closed or is not readable/writable");
-  const t = this.stringArrayToUint8Array(l);
+    throw m(this, b, P).call(this, { error: "Port is closed, not readable or writable." }), new Error("The port is closed or is not readable/writable");
+  const t = this.validateBytes(l);
   if (e.writable === null) return;
   const n = e.writable.getWriter();
   await n.write(t), n.releaseLock();
-}, x = function(l = [], e = null) {
+}, E = function(l = new Uint8Array([]), e = null) {
   if (l && l.length > 0) {
     const t = this.__internal__.serial.connected;
-    this.__internal__.serial.connected = y(this, b, E).call(this, this.__internal__.serial.port), _.$dispatchChange(this), !t && this.__internal__.serial.connected && this.dispatch("serial:connected"), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0);
-    const n = [];
-    for (const i in l)
-      n.push(l[i].toString().padStart(2, "0").toLowerCase());
-    if (this.__internal__.serial.response.as === "hex")
-      this.serialMessage(n);
+    if (this.__internal__.serial.connected = m(this, b, x).call(this, this.__internal__.serial.port), _.$dispatchChange(this), !t && this.__internal__.serial.connected && this.dispatch("serial:connected"), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0), this.__internal__.serial.response.as === "hex")
+      this.serialMessage(this.parseUint8ToHex(l));
     else if (this.__internal__.serial.response.as === "uint8")
-      this.serialMessage(this.parseHexToUint8(this.add0x(n)));
-    else if (this.__internal__.serial.response.as === "string")
+      this.serialMessage(l);
+    else if (this.__internal__.serial.response.as === "string") {
+      const n = this.parseUint8ArrayToString(l);
       if (this.__internal__.serial.response.limiter !== null) {
-        const i = this.parseUint8ArrayToString(this.add0x(n)).split(this.__internal__.serial.response.limiter);
+        const i = n.split(this.__internal__.serial.response.limiter);
         for (const u in i)
           i[u] && this.serialMessage(i[u]);
       } else
-        this.serialMessage(this.parseUint8ArrayToString(this.add0x(n)));
-    else {
-      const i = this.stringToArrayBuffer(
-        this.parseUint8ArrayToString(this.add0x(n))
-      );
-      this.serialMessage(i);
+        this.serialMessage(n);
+    } else {
+      const n = this.stringToArrayBuffer(this.parseUint8ArrayToString(l));
+      this.serialMessage(n);
     }
   } else
     this.serialCorruptMessage(l, e);
@@ -1234,7 +1243,7 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
   return l.length === 0 ? e : e.filter((t) => {
     const n = t.getInfo();
     return l.some((i) => n.usbProductId === i.usbProductId && n.usbVendorId === i.usbVendorId);
-  }).filter((t) => !y(this, b, E).call(this, t));
+  }).filter((t) => !m(this, b, x).call(this, t));
 }, V = function(l) {
   if (l) {
     const e = this.__internal__.serial.response.buffer, t = new Uint8Array(e.length + l.byteLength);
@@ -1242,27 +1251,18 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
   }
 }, z = async function() {
   this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
-    const l = [];
-    for (const e in this.__internal__.serial.response.buffer)
-      l.push(this.__internal__.serial.response.buffer[e].toString(16));
-    this.__internal__.serial.response.buffer && y(this, b, x).call(this, l), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    this.__internal__.serial.response.buffer && m(this, b, E).call(this, this.__internal__.serial.response.buffer), this.__internal__.serial.response.buffer = new Uint8Array(0);
   }, 400);
 }, K = async function() {
   if (this.__internal__.serial.response.length !== null) {
-    if (this.__internal__.serial.response.length === this.__internal__.serial.response.buffer.length) {
-      const l = [];
-      for (const e in this.__internal__.serial.response.buffer)
-        l.push(this.__internal__.serial.response.buffer[e].toString(16));
-      y(this, b, x).call(this, l), this.__internal__.serial.response.buffer = new Uint8Array(0);
-    } else if (this.__internal__.serial.response.length < this.__internal__.serial.response.buffer.length) {
+    if (this.__internal__.serial.response.length === this.__internal__.serial.response.buffer.length)
+      m(this, b, E).call(this, this.__internal__.serial.response.buffer), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    else if (this.__internal__.serial.response.length < this.__internal__.serial.response.buffer.length) {
       let l = new Uint8Array(0);
       for (let t = 0; t < this.__internal__.serial.response.length; t++)
         l[t] = this.__internal__.serial.response.buffer[t];
       if (l.length === this.__internal__.serial.response.length) {
-        const t = [];
-        for (const n in l)
-          t.push(l[n].toString(16));
-        y(this, b, x).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
+        m(this, b, E).call(this, l), this.__internal__.serial.response.buffer = new Uint8Array(0);
         return;
       }
       l = new Uint8Array(0);
@@ -1270,12 +1270,7 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
       if (this.__internal__.serial.response.buffer.length === e) {
         for (let t = 14; t < e; t++)
           l[t - this.__internal__.serial.response.length] = this.__internal__.serial.response.buffer[t];
-        if (l.length === this.__internal__.serial.response.length) {
-          const t = [];
-          for (const n in l)
-            t.push(l[n].toString(16));
-          y(this, b, x).call(this, t), this.__internal__.serial.response.buffer = new Uint8Array(0);
-        }
+        l.length === this.__internal__.serial.response.length && (m(this, b, E).call(this, l), this.__internal__.serial.response.buffer = new Uint8Array(0));
       }
     }
   }
@@ -1293,7 +1288,7 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
           e.releaseLock(), this.__internal__.serial.keep_reading = !1, t = !1;
           break;
         }
-        y(this, b, V).call(this, n), this.__internal__.serial.response.length === null ? await y(this, b, z).call(this) : await y(this, b, K).call(this);
+        m(this, b, V).call(this, n), this.__internal__.serial.response.length === null ? await m(this, b, z).call(this) : await m(this, b, K).call(this);
       }
     } catch (t) {
       this.serialErrors(t);
@@ -1327,8 +1322,8 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
   const l = this;
   this.on("internal:queue", async () => {
     var e;
-    await y(e = l, b, X).call(e);
-  }), y(this, b, G).call(this);
+    await m(e = l, b, X).call(e);
+  }), m(this, b, G).call(this);
 }, G = function() {
   const l = this;
   navigator.serial.addEventListener("connect", async () => {
@@ -1336,19 +1331,27 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
     });
   });
 }, X = async function() {
-  if (!y(this, b, E).call(this, this.__internal__.serial.port)) {
-    y(this, b, P).call(this, { error: "Port is closed, not readable or writable." }), await this.serialConnect();
+  if (!m(this, b, x).call(this, this.__internal__.serial.port)) {
+    m(this, b, P).call(this, { error: "Port is closed, not readable or writable." }), await this.serialConnect();
     return;
   }
   if (this.__internal__.timeout.until_response || this.__internal__.serial.queue.length === 0) return;
   const l = this.__internal__.serial.queue[0];
   let e = this.__internal__.time.response_general;
-  l.action === "connect" && (e = this.__internal__.time.response_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
+  if (l.action === "connect" && (e = this.__internal__.time.response_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
     await this.timeout(l.bytes, l.action);
-  }, e), this.__internal__.serial.last_action = l.action ?? "unknown", await y(this, b, H).call(this, l.bytes), this.dispatch("serial:sent", {
+  }, e), this.__internal__.serial.last_action = l.action ?? "unknown", await m(this, b, H).call(this, l.bytes), this.dispatch("serial:sent", {
     action: l.action,
     bytes: l.bytes
-  }), this.__internal__.auto_response && y(this, b, x).call(this, this.__internal__.serial.auto_response, null);
+  }), this.__internal__.auto_response) {
+    let n = new Uint8Array(0);
+    try {
+      n = this.validateBytes(this.__internal__.serial.auto_response);
+    } catch (i) {
+      this.serialErrors(i);
+    }
+    m(this, b, E).call(this, n, null);
+  }
   const t = [...this.__internal__.serial.queue];
   this.__internal__.serial.queue = t.splice(1);
 }, le = function(l = 1) {
@@ -1362,7 +1365,7 @@ b = /* @__PURE__ */ new WeakSet(), E = function(l) {
   };
 };
 _.instance || (_.instance = new _());
-const me = {
+const ye = {
   relay: [],
   locker: [],
   jofemar: [],
@@ -1371,7 +1374,7 @@ const me = {
   pinpad: [],
   pinpax: []
 };
-_.devices = { ..._.devices, ...me };
+_.devices = { ..._.devices, ...ye };
 _.addCustom = (l, e) => {
   _.registerType(l), _.add(e);
 };
@@ -1390,7 +1393,7 @@ _.getRelay = (l = 1) => _.getByNumber("relay", l);
 _.getArduino = (l = 1) => _.getByNumber("arduino", l);
 _.getPinPad = (l = 1) => _.getByNumber("pinpad", l);
 _.getPinPax = (l = 1) => _.getByNumber("pinpax", l);
-class ye extends be {
+class me extends be {
   constructor(e) {
     super(e), this.__internal__ = structuredClone(this.__internal__), this.getResponseAsArrayHex(), this.__internal__.device.door_open = !1, this.__internal__.time.response_engines = 2e3, this.__internal__.time.sense = 100, this.__internal__.interval.waiting_sense = 0, this.__internal__.dispense = {
       must_response: !1,
@@ -1461,7 +1464,7 @@ class ye extends be {
   }
   async internalDispense(e) {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
-    if (!O.enable && !this.__internal__.serial.connected && (await this.serialConnect(), !this.__internal__.serial.connected))
+    if (!L.enable && !this.__internal__.serial.connected && (await this.serialConnect(), !this.__internal__.serial.connected))
       throw new Error("Serial device not connected");
     return this.__internal__.serial.queue.length === 0 ? (await this.appendToQueue(e, "dispense"), await this.internalDispenseStatus()) : new Promise((t) => {
       const n = setInterval(async () => {
@@ -1498,13 +1501,13 @@ class ye extends be {
   }
 }
 export {
-  O as E,
-  ye as K,
+  L as E,
+  me as K,
   _,
   Ce as a,
   ke as b,
   De as g,
-  Se as i,
+  Ae as i,
   ve as s,
   _e as w
 };

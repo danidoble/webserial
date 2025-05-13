@@ -1,14 +1,15 @@
-var O = Object.defineProperty;
-var d = (n) => {
-  throw TypeError(n);
+var E = Object.defineProperty;
+var d = (r) => {
+  throw TypeError(r);
 };
-var b = (n, a, s) => a in n ? O(n, a, { enumerable: !0, configurable: !0, writable: !0, value: s }) : n[a] = s;
-var y = (n, a, s) => b(n, typeof a != "symbol" ? a + "" : a, s), B = (n, a, s) => a.has(n) || d("Cannot " + s);
-var g = (n, a, s) => a.has(n) ? d("Cannot add the same private member more than once") : a instanceof WeakSet ? a.add(n) : a.set(n, s);
-var r = (n, a, s) => (B(n, a, "access private method"), s);
-import { K as x, _ as f } from "./kernel-BFXQSiNz.js";
-var t, m, w, l, _, T, E, S, N, v, R;
-class A extends x {
+var x = (r, i, s) => i in r ? E(r, i, { enumerable: !0, configurable: !0, writable: !0, value: s }) : r[i] = s;
+var f = (r, i, s) => x(r, typeof i != "symbol" ? i + "" : i, s), C = (r, i, s) => i.has(r) || d("Cannot " + s);
+var m = (r, i, s) => i.has(r) ? d("Cannot add the same private member more than once") : i instanceof WeakSet ? i.add(r) : i.set(r, s);
+var o = (r, i, s) => (C(r, i, "access private method"), s);
+import { K as A, _ as y } from "./kernel-Bquzoyqh.js";
+import { s as n } from "./relay-CKxJ6ewy.js";
+var t, w, l, _, g, v, b, T, R;
+class D extends A {
   constructor({
     filters: s = null,
     config_port: e = {
@@ -19,8 +20,8 @@ class A extends x {
       bufferSize: 32768,
       flowControl: "none"
     },
-    no_device: i = 1,
-    device_listen_on_channel: o = 1
+    no_device: a = 1,
+    device_listen_on_channel: c = 1
   } = {
     filters: null,
     config_port: {
@@ -34,9 +35,9 @@ class A extends x {
     no_device: 1,
     device_listen_on_channel: 1
   }) {
-    super({ filters: s, config_port: e, no_device: i, device_listen_on_channel: o });
-    g(this, t);
-    y(this, "__pinpax__", {
+    super({ filters: s, config_port: e, no_device: a, device_listen_on_channel: c });
+    m(this, t);
+    f(this, "__pinpax__", {
       asyncResponses: {
         voucher: null,
         sale: null
@@ -46,26 +47,26 @@ class A extends x {
         sale: !1
       }
     });
-    if (this.__internal__.device.type = "pinpax", f.getCustom(this.typeDevice, i))
-      throw new Error(`Device ${this.typeDevice} ${i} already exists`);
+    if (this.__internal__.device.type = "pinpax", y.getCustom(this.typeDevice, a))
+      throw new Error(`Device ${this.typeDevice} ${a} already exists`);
     this.__internal__.time.response_connection = 4e3, this.__internal__.time.response_general = 3e3, this.__internal__.serial.delay_first_connection = 1e3, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
-`, r(this, t, w).call(this), r(this, t, m).call(this), this.getResponseAsString();
+`, o(this, t, w).call(this), y.add(this), this.getResponseAsString();
   }
   serialMessage(s) {
     let e = null;
     try {
       e = JSON.parse(s);
-    } catch (i) {
-      console.error("Error parsing response", i, s), this.dispatch("serial:message", s);
+    } catch (a) {
+      console.error("Error parsing response", a, s), this.dispatch("serial:message", s);
       return;
     }
     switch (e.response) {
       case "INITAPP":
-        this.dispatch("init-app", { status: "started" }), r(this, t, S).call(this).then(() => {
+        this.dispatch("init-app", { status: "started" }), o(this, t, b).call(this).then(() => {
         });
         break;
       case "CONNECT":
-        this.dispatch("connectMessage", { status: "connected" }), r(this, t, N).call(this).then(() => {
+        this.dispatch("connectMessage", { status: "connected" }), o(this, t, T).call(this).then(() => {
         });
         break;
       case "LASTVOUCHER":
@@ -127,7 +128,7 @@ class A extends x {
         });
         break;
       case "TRANSACTION_RESULT":
-        r(this, t, v).call(this, {
+        o(this, t, R).call(this, {
           status: "result",
           approved: e.approved,
           acquirer: e.acquirer,
@@ -181,41 +182,31 @@ class A extends x {
     }
     this.dispatch("serial:message", e);
   }
-  // eslint-disable-next-line no-unused-vars
   serialSetConnectionConstant(s = 1) {
-    const e = JSON.stringify({ action: "CONNECT" });
-    return this.add0x(this.parseStringToBytes(e, `\r
-`));
+    return n.connection(s);
   }
   softReload() {
     super.softReload(), this.__pinpax__.waiting.sale = !1, this.__pinpax__.waiting.voucher = !1, this.__pinpax__.asyncResponses.sale = null, this.__pinpax__.asyncResponses.voucher = null;
   }
-  async sendCustomCode({ code: s = "" } = {}) {
-    if (typeof s != "string") throw new Error("Invalid string");
-    const e = this.parseStringToBytes(s, `\r
+  async sendCustomCode(s = {}) {
+    if (typeof s != "object") throw new Error("Invalid object");
+    if (s.constructor !== Object) throw new Error("Invalid object");
+    if (Object.keys(s).length === 0) throw new Error("Empty object");
+    if (s.action === void 0 || s.action === null) throw new Error("Invalid object add action");
+    const e = JSON.stringify(s), a = this.parseStringToBytes(e, `\r
 `);
-    await this.appendToQueue(e, "custom");
+    await this.appendToQueue(this.stringArrayToUint8Array(a), "custom");
   }
   async connectMessage() {
-    const s = JSON.stringify({ action: "CONNECT" }), e = this.parseStringToBytes(s, `\r
-`);
-    await this.appendToQueue(e, "connect:message");
+    await this.appendToQueue(n.connect(), "connect:message");
   }
   async makeSale({ amount: s = 0, reference: e = null } = {}) {
     if (this.isDisconnected) throw new Error("Device is disconnected");
     if (this.__pinpax__.waiting.sale) throw new Error("Already waiting for sale response");
-    if (s <= 0) throw new Error("Invalid amount");
-    if (s = parseFloat(s), isNaN(s)) throw new Error("Invalid amount");
-    if (!e && !r(this, t, R).call(this, e))
-      throw new Error(
-        "Reference must be alphanumeric and the only symbol allowed is midlescore or underscore (- _) or null"
-      );
-    s = s.toFixed(2);
-    const i = JSON.stringify({ action: "PAYMENT", amount: s, reference: e }), o = this.parseStringToBytes(i, `\r
-`);
-    this.__pinpax__.waiting.sale = !0, this.__pinpax__.asyncResponses.sale = null, this.queue.length > 0 && await r(this, t, l).call(this);
+    const a = n.makeSale({ amount: s, reference: e });
+    this.__pinpax__.waiting.sale = !0, this.__pinpax__.asyncResponses.sale = null, this.queue.length > 0 && await o(this, t, l).call(this);
     const c = this;
-    return await this.appendToQueue(o, "make-sale"), new Promise((p) => {
+    return await this.appendToQueue(a, "make-sale"), new Promise((p) => {
       const h = setInterval(() => {
         if (c.__pinpax__.asyncResponses.sale) {
           const u = c.__pinpax__.asyncResponses.sale;
@@ -229,82 +220,65 @@ class A extends x {
     if (this.__pinpax__.waiting.voucher) throw new Error("Already waiting for voucher");
     if (!s) throw new Error("Folio is required");
     this.__pinpax__.waiting.voucher = !0, this.__pinpax__.asyncResponses.voucher = null;
-    const e = JSON.stringify({ action: "GETVOUCHER", folio: s }), i = this.parseStringToBytes(e, `\r
-`);
-    this.queue.length > 0 && await r(this, t, l).call(this), await this.appendToQueue(i, "get-voucher");
-    const o = this;
+    const e = n.getVoucher({ folio: s });
+    this.queue.length > 0 && await o(this, t, l).call(this), await this.appendToQueue(e, "get-voucher");
+    const a = this;
     return new Promise((c, p) => {
       const h = setTimeout(() => {
-        o.__pinpax__.waiting.voucher = !1, p("Timeout");
+        a.__pinpax__.waiting.voucher = !1, p("Timeout");
       }, 1e4), u = setInterval(() => {
-        if (o.__pinpax__.asyncResponses.voucher) {
-          const C = o.__pinpax__.asyncResponses.voucher;
-          o.__pinpax__.asyncResponses.voucher = null, o.__pinpax__.waiting.voucher = !1, clearInterval(u), clearTimeout(h), c(C.voucher);
+        if (a.__pinpax__.asyncResponses.voucher) {
+          const k = a.__pinpax__.asyncResponses.voucher;
+          a.__pinpax__.asyncResponses.voucher = null, a.__pinpax__.waiting.voucher = !1, clearInterval(u), clearTimeout(h), c(k.voucher);
         }
       }, 100);
     });
   }
   async info() {
-    const s = JSON.stringify({ action: "DEVICEINFO" }), e = this.parseStringToBytes(s, `\r
-`);
-    await this.appendToQueue(e, "info");
+    await this.appendToQueue(n.info(), "info");
   }
   async keepAlive() {
-    const s = JSON.stringify({ action: "KEEPALIVE" }), e = this.parseStringToBytes(s, `\r
-`);
-    await this.appendToQueue(e, "keep-alive");
+    await this.appendToQueue(n.keepAlive(), "keep-alive");
   }
   async restartApp() {
-    const s = JSON.stringify({ action: "RESETAPP" }), e = this.parseStringToBytes(s, `\r
-`);
-    await this.appendToQueue(e, "reset-app");
+    await this.appendToQueue(n.restartApp(), "reset-app");
   }
   async getConfig() {
-    const s = JSON.stringify({ action: "GETCONFIG" }), e = this.parseStringToBytes(s, `\r
-`);
-    return await this.appendToQueue(e, "get-config");
+    return await this.appendToQueue(n.getConfig(), "get-config");
   }
   async hideButtons() {
-    const s = JSON.stringify({ action: "HIDEBUTTONS" }), e = this.parseStringToBytes(s, `\r
-`);
-    return await this.appendToQueue(e, "hide-buttons"), await r(this, t, T).call(this);
+    return await this.appendToQueue(n.hideButtons(), "hide-buttons"), await o(this, t, g).call(this);
   }
   async showButtons() {
-    const s = JSON.stringify({ action: "SHOWBUTTONS" }), e = this.parseStringToBytes(s, `\r
-`);
-    return await this.appendToQueue(e, "show-buttons"), await r(this, t, E).call(this);
+    return await this.appendToQueue(n.showButtons(), "show-buttons"), await o(this, t, v).call(this);
   }
   async demo() {
-    console.warn("RUNNING DEMO APP BE CAREFUL");
-    const s = JSON.stringify({ action: "DEMO" }), e = this.parseStringToBytes(s, `\r
-`);
-    return await this.appendToQueue(e, "demo");
+    return console.warn("RUNNING DEMO APP, BE CAREFUL"), await this.appendToQueue(n.demo(), "demo");
   }
-  async refund({ amount: s = 0, folio: e = null, auth: i = null } = {}) {
-    const o = JSON.stringify({ action: "REFUND", amount: s, folio: e, auth: i }), c = this.parseStringToBytes(o, `\r
-`);
-    return await this.appendToQueue(c, "refund");
+  async refund({ amount: s = 0, folio: e = null, auth: a = null } = {}) {
+    return await this.appendToQueue(
+      n.refund({
+        amount: s,
+        folio: e,
+        auth: a
+      }),
+      "refund"
+    );
   }
   async readProductionQR() {
-    return await r(this, t, _).call(this, { type: "production" });
+    return await o(this, t, _).call(this, { type: "production" });
   }
   async readQualityAssuranceQR() {
-    return r(this, t, _).call(this, { type: "QA" });
+    return o(this, t, _).call(this, { type: "QA" });
   }
   async exit() {
-    const s = JSON.stringify({ action: "EXIT" }), e = this.parseStringToBytes(s, `\r
-`);
-    return await this.appendToQueue(e, "exit-app");
+    return await this.appendToQueue(n.exit(), "exit-app");
   }
   async init() {
-    const s = JSON.stringify({ action: "INIT" }), e = this.parseStringToBytes(s, `\r
-`);
-    await this.appendToQueue(e, "init-app");
+    await this.appendToQueue(n.init(), "init-app");
   }
 }
-t = new WeakSet(), m = function() {
-  f.add(this);
-}, w = function() {
+t = new WeakSet(), w = function() {
   const s = [
     "buttons-status",
     "init-app",
@@ -325,31 +299,24 @@ t = new WeakSet(), m = function() {
   if (this.queue.length === 0) return !0;
   const s = this;
   return new Promise((e) => {
-    let i = setInterval(() => {
-      s.queue.length === 0 && (clearInterval(i), e(!0));
+    let a = setInterval(() => {
+      s.queue.length === 0 && (clearInterval(a), e(!0));
     }, 500);
   });
 }, _ = async function({ type: s = "production" } = {}) {
-  const e = JSON.stringify({ action: "READQR", server: s === "production" ? "PROD" : "QA" }), i = this.parseStringToBytes(e, `\r
-`);
-  return await this.appendToQueue(i, "read-qr");
-}, T = async function() {
-  const s = JSON.stringify({ action: "FORCEHIDE" }), e = this.parseStringToBytes(s, `\r
-`);
-  await this.appendToQueue(e, "force-hide");
-}, E = async function() {
-  const s = JSON.stringify({ action: "FORCESHOW" }), e = this.parseStringToBytes(s, `\r
-`);
-  await this.appendToQueue(e, "force-show");
-}, S = async function() {
+  const e = n.readQR({ type: s });
+  return await this.appendToQueue(e, "read-qr");
+}, g = async function() {
+  await this.appendToQueue(n.forceHide(), "force-hide");
+}, v = async function() {
+  await this.appendToQueue(n.forceShow(), "force-show");
+}, b = async function() {
   await this.connectMessage();
-}, N = async function() {
+}, T = async function() {
   await this.hideButtons();
-}, v = function(s) {
-  this.dispatch("payment", s), this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = s);
 }, R = function(s) {
-  return /^[A-Z-a-z0-9_\s]+$/g.test(s);
+  this.dispatch("payment", s), this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = s);
 };
 export {
-  A as PinPax
+  D as PinPax
 };

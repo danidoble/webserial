@@ -1,25 +1,26 @@
-var vt = Object.defineProperty;
-var F = (p) => {
+var se = Object.defineProperty;
+var O = (p) => {
   throw TypeError(p);
 };
-var yt = (p, h, e) => h in p ? vt(p, h, { enumerable: !0, configurable: !0, writable: !0, value: e }) : p[h] = e;
-var N = (p, h, e) => yt(p, typeof h != "symbol" ? h + "" : h, e), wt = (p, h, e) => h.has(p) || F("Cannot " + e);
-var P = (p, h, e) => h.has(p) ? F("Cannot add the same private member more than once") : h instanceof WeakSet ? h.add(p) : h.set(p, e);
-var n = (p, h, e) => (wt(p, h, "access private method"), e);
-import { K as kt, _ as A, w as T, g as B } from "./kernel-BFXQSiNz.js";
-var i, $, W, g, u, E, q, O, j, R, J, L, U, H, V, K, G, z, Q, Y, Z, X, tt, et, it, nt, rt, at, ot, ct, st, ht, _, l, m, d, f, lt, dt, pt, ut, w, S, M, D, I, _t;
-class Tt extends kt {
+var de = (p, h, t) => h in p ? se(p, h, { enumerable: !0, configurable: !0, writable: !0, value: t }) : p[h] = t;
+var M = (p, h, t) => de(p, typeof h != "symbol" ? h + "" : h, t), pe = (p, h, t) => h.has(p) || O("Cannot " + t);
+var I = (p, h, t) => h.has(p) ? O("Cannot add the same private member more than once") : h instanceof WeakSet ? h.add(p) : h.set(p, t);
+var i = (p, h, t) => (pe(p, h, "access private method"), t);
+import { K as ue, _ as P, w, g as Q } from "./kernel-Bquzoyqh.js";
+import { o as a } from "./relay-CKxJ6ewy.js";
+var n, S, g, A, B, W, F, q, R, $, N, j, L, V, J, U, K, H, z, G, Y, Z, X, ee, te, ne, ie, re, ae, u, s, b, d, _, oe, ce, he, C, E, D;
+class ve extends ue {
   constructor({
-    filters: e = null,
-    config_port: t = null,
+    filters: t = null,
+    config_port: e = null,
     no_device: r = 1,
-    device_listen_on_port: a = 1,
-    type: o = "esplus",
-    support_cart: c = !0
+    device_listen_on_port: o = 1,
+    type: c = "esplus",
+    support_cart: l = !0
   } = {}) {
-    super({ filters: e, config_port: t, no_device: r, device_listen_on_port: a });
-    P(this, i);
-    N(this, "__device", {
+    super({ filters: t, config_port: e, no_device: r, device_listen_on_port: o });
+    I(this, n);
+    M(this, "__device", {
       type: "esplus",
       support_cart: !1,
       withdraw: {
@@ -44,65 +45,51 @@ class Tt extends kt {
         }
       }
     });
-    if (this.__internal__.device.type = "jofemar", A.getCustom(this.typeDevice, r))
+    if (this.__internal__.device.type = "jofemar", P.getCustom(this.typeDevice, r))
       throw new Error(`Device ${this.typeDevice} ${r} already exists`);
     this.__internal__.dispense.must_response = !0, this.__internal__.time.response_general = 800, this.__internal__.time.response_engines = 800, this.__internal__.dispense.limit_counter = 40, this.__internal__.dispense.timeout = 0, this.__internal__.dispense.timeout_time = 4e3, this.__internal__.dispense.interval = 0, this.__internal__.dispense.interval_time = 1e3, this.__internal__.device.hex_number = (128 + this.listenOnChannel).toString(16), this.__internal__.device.door_open = !1, this.__internal__.dispense.elevator = {
       locking_time: 60,
       locking_interval: 0,
       need_reset: !1
-    }, this.deviceType = o, this.supportCart = c, n(this, i, $).call(this), n(this, i, g).call(this), n(this, i, W).call(this);
+    }, this.deviceType = c, this.supportCart = l, i(this, n, S).call(this), P.add(this), i(this, n, g).call(this);
   }
-  set startChannelVerification(e) {
-    const t = parseInt(e);
-    if (isNaN(t)) throw new Error("Invalid start channel verification, must be a number");
-    if (t < 1 || t > 126) throw new Error("Invalid start channel verification, valid range is 1 to 126");
-    this.__device.channels.verification.start = t;
+  set startChannelVerification(t) {
+    const e = parseInt(t);
+    if (isNaN(e)) throw new Error("Invalid start channel verification, must be a number");
+    if (e < 1 || e > 126) throw new Error("Invalid start channel verification, valid range is 1 to 126");
+    this.__device.channels.verification.start = e;
   }
-  set endChannelVerification(e) {
-    const t = parseInt(e);
-    if (isNaN(t)) throw new Error("Invalid end channel verification, must be a number");
-    if (t < 1 || t > 126) throw new Error("Invalid end channel verification, valid range is 1 to 126");
-    this.__device.channels.verification.end = t;
+  set endChannelVerification(t) {
+    const e = parseInt(t);
+    if (isNaN(e)) throw new Error("Invalid end channel verification, must be a number");
+    if (e < 1 || e > 126) throw new Error("Invalid end channel verification, valid range is 1 to 126");
+    this.__device.channels.verification.end = e;
   }
-  set listenOnChannel(e) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 31) throw new Error("Invalid port number, valid range is 1 to 31");
-    this.__internal__.device.listen_on_port = e, this.__internal__.serial.bytes_connection = this.serialSetConnectionConstant(e), this.__internal__.device.hex_number = (128 + e).toString(16);
+  set listenOnChannel(t) {
+    if (t = parseInt(t), isNaN(t) || t < 1 || t > 31) throw new Error("Invalid port number, valid range is 1 to 31");
+    this.__internal__.device.listen_on_port = t, this.__internal__.serial.bytes_connection = this.serialSetConnectionConstant(t), this.__internal__.device.hex_number = (128 + t).toString(16);
   }
   /**
    * @deperecated
    * @param {string|number} channel
    */
-  set listenOnPort(e) {
-    this.listenOnChannel = e;
+  set listenOnPort(t) {
+    this.listenOnChannel = t;
   }
-  set deviceType(e) {
-    if (typeof e != "string") throw new Error("Invalid device type, must be a string");
-    this.__device.type = e;
+  set deviceType(t) {
+    if (typeof t != "string") throw new Error("Invalid device type, must be a string");
+    this.__device.type = t;
   }
-  set supportCart(e) {
-    if (typeof e != "boolean") throw new Error("Invalid support cart, must be a boolean");
-    this.__device.support_cart = e;
+  set supportCart(t) {
+    if (typeof t != "boolean") throw new Error("Invalid support cart, must be a boolean");
+    this.__device.support_cart = t;
   }
-  serialJofemarMakeBytes(e) {
-    let t = this.hexToDec(this.sumHex(e)), r = this.calcCheckSums(t.toString());
-    for (let a = 0; a < 2; a++)
-      e.push(this.hexMaker(r[a]));
-    return e.push("03"), this.add0x(e);
+  serialSetConnectionConstant(t = 1) {
+    return a.connection({ channel: t });
   }
-  calcCheckSums(e) {
-    e = this.add0x([this.decToHex(parseInt(e).toString())]);
-    let t = [];
-    return t.push((e & 255 | 240).toString(16).toUpperCase()), t.push((e & 255 | 15).toString(16).toUpperCase()), t;
-  }
-  serialSetConnectionConstant(e = 1) {
-    let t = ["02", "30", "30", (128 + e).toString(16), "53", "FF", "FF"], r = [];
-    return t.forEach((a) => {
-      r.push(this.hexMaker(a));
-    }), this.serialJofemarMakeBytes(r);
-  }
-  serialMessage(e) {
+  serialMessage(t) {
     let r = {
-      code: e,
+      code: t,
       name: null,
       description: null,
       request: "unknown",
@@ -114,15 +101,15 @@ class Tt extends kt {
         }
       }
     };
-    switch (e[0]) {
+    switch (t[0]) {
       case "02":
-        r = n(this, i, ht).call(this, e, r, 128);
+        r = i(this, n, ae).call(this, t, r, 128);
         break;
       case "06":
-        r = n(this, i, lt).call(this, e, r);
+        r = i(this, n, oe).call(this, t, r);
         break;
       case "15":
-        r.name = "Checksum error", r.description = "The calculated checksum does not match the received checksum", r.no_code = 38, n(this, i, l).call(this);
+        r.name = "Checksum error", r.description = "The calculated checksum does not match the received checksum", r.no_code = 38, i(this, n, s).call(this);
         break;
       default:
         r.name = "unknown", r.description = "The message received is unknown", r.no_code = 404;
@@ -139,128 +126,171 @@ class Tt extends kt {
    * @param {boolean} cart
    * @return {Promise<unknown>}
    */
-  async dispense({ selection: e = 1, cart: t = !1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 130) throw new Error("Invalid selection");
-    const { channel: r, tray: a } = n(this, i, dt).call(this, e);
+  async dispense({ selection: t = 1, cart: e = !1 } = {}) {
+    const r = a.dispense({ selection: t, cart: e, machineChannel: this.listenOnChannel }), o = r[5], c = r[6];
     this.__internal__.dispense.backup_dispense = {
-      selection: e,
-      cart: t,
-      channel: r,
-      tray: a
+      selection: t,
+      cart: e,
+      channel: c,
+      tray: o
     };
-    let c = ["02", "30", "30", this.__internal__.device.hex_number, "56", a, r];
-    t && (c[4] = "4D"), c = n(this, i, E).call(this, c);
-    let s;
+    let l;
     do
-      s = await this.internalDispense(c), n(this, i, pt).call(this), s.error === "elevator-locked" ? await n(this, i, q).call(this) : s.error === "no-response" && await T(1e3);
-    while (["elevator-locked", "no-response"].includes(s.error));
-    return this.__internal__.dispense.backup_dispense = {}, s;
+      l = await this.internalDispense(r), i(this, n, ce).call(this), l.error === "elevator-locked" ? await i(this, n, A).call(this) : l.error === "no-response" && await w(1e3);
+    while (["elevator-locked", "no-response"].includes(l.error));
+    return this.__internal__.dispense.backup_dispense = {}, l;
   }
   internalClearSensing() {
-    super.internalClearSensing(), this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.serial.queue.length > 0 && (this.__internal__.serial.queue = this.__internal__.serial.queue.filter((e) => e.type !== "status"));
+    super.internalClearSensing(), this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.serial.queue.length > 0 && (this.__internal__.serial.queue = this.__internal__.serial.queue.filter((t) => t.type !== "status"));
   }
   async endDispense() {
-    let t = ["02", "30", "30", this.__internal__.device.hex_number, "4D", "80", "80"];
-    return t = n(this, i, E).call(this, t), await this.internalDispense(t);
+    const t = a.endCartDispense({ machineChannel: this.listenOnChannel });
+    return await this.internalDispense(t);
   }
   async collect() {
-    const e = ["02", "30", "30", "81", "4E", "FF", "FF"];
-    return await n(this, i, u).call(this, e, "collect");
+    return await this.appendToQueue(a.collect({ machineChannel: this.listenOnChannel }), "collect");
   }
   async resetSoldOutErrors() {
-    return await n(this, i, w).call(this, "80");
+    return await i(this, n, C).call(this, "soldOut");
   }
   async resetWaitingProductRemovedError() {
-    return await n(this, i, w).call(this, "81");
+    return await i(this, n, C).call(this, "waiting");
   }
   async resetMachineErrors() {
-    return this.__internal__.serial.queue.length === 0 ? (n(this, i, S).call(this), await n(this, i, w).call(this, "FF")) : new Promise((e) => {
-      const t = setInterval(async () => {
-        this.__internal__.serial.queue.length > 0 || (clearInterval(t), await n(this, i, w).call(this, "FF"), n(this, i, S).call(this), e(!0));
+    return this.__internal__.serial.queue.length === 0 ? (i(this, n, E).call(this), await i(this, n, C).call(this, "machine")) : new Promise((t) => {
+      const e = setInterval(async () => {
+        this.__internal__.serial.queue.length > 0 || (clearInterval(e), await i(this, n, C).call(this, "machine"), i(this, n, E).call(this), t(!0));
       }, 100);
     });
   }
   async resetAllErrors() {
-    return await this.resetSoldOutErrors(), await T(100), await this.resetWaitingProductRemovedError(), await T(100), await this.resetMachineErrors();
+    return await this.resetSoldOutErrors(), await w(100), await this.resetWaitingProductRemovedError(), await w(100), await this.resetMachineErrors();
   }
   async status() {
-    const e = ["02", "30", "30", "81", "53", "FF", "FF"];
-    return await n(this, i, u).call(this, e, "status");
+    return await this.appendToQueue(a.status({ machineChannel: this.listenOnChannel }), "status");
   }
   async lightsOn() {
-    return await n(this, i, M).call(this, "81");
+    return await i(this, n, D).call(this, "on");
   }
   async lightsOff() {
-    return await n(this, i, M).call(this, "80");
+    return await i(this, n, D).call(this, "off");
   }
-  async program(e, t) {
-    const r = ["02", "30", "30", "81", "50", e, t];
-    return await n(this, i, u).call(this, r, "program");
+  async program(t, e) {
+    return await this.appendToQueue(
+      a.program({
+        machineChannel: this.listenOnChannel,
+        param1: t,
+        param2: e
+      }),
+      "program"
+    );
   }
-  async programDisplayLanguage({ language: e = "spanish" } = {}) {
-    const t = { spanish: "30", english: "31", french: "32" };
-    if (!t[e]) throw new Error("Invalid language");
-    return await this.program("49", t[e]);
+  async programDisplayLanguage({ language: t = "spanish" } = {}) {
+    return await this.appendToQueue(
+      a.programDisplayLanguage({
+        machineChannel: this.listenOnChannel,
+        language: t
+      }),
+      "program"
+    );
   }
-  async programBeeper({ enable: e = !0 } = {}) {
-    const t = e ? "31" : "30";
-    return await this.program("5A", t);
+  async programBeeper({ enable: t = !0 } = {}) {
+    return await this.appendToQueue(
+      a.programBeeper({
+        machineChannel: this.listenOnChannel,
+        enable: t
+      }),
+      "program"
+    );
   }
   async programDisableWorkingTemperature() {
     if (this.__device.type === "iceplus") throw new Error("IcePlus does not support disable working temperature");
-    return await this.program("54", "80");
+    return await this.appendToQueue(
+      a.programDisableWorkingTemperature({
+        machineChannel: this.listenOnChannel
+      }),
+      "program"
+    );
   }
   async programDisableThermometer() {
-    return await this.programDisableWorkingTemperature();
+    return await this.appendToQueue(
+      a.programDisableThermometer({
+        machineChannel: this.listenOnChannel
+      }),
+      "program"
+    );
   }
   /**
    * Program the machine to work with a specific temperature
    * @param {number|string} degrees
    * @return {Promise<void>}
    */
-  async programWorkingTemperature({ degrees: e = 0.5 } = {}) {
-    e = parseFloat(e);
-    const t = this.__device.type === "iceplus" ? 6.5 : 32, r = this.__device.type === "iceplus" ? -25 : 0.5;
-    if (isNaN(e) || e < r || e > t || e % 0.5 !== 0)
-      throw new Error("Invalid degrees, must be a multiple of 0.5 and between 0.5 and 32");
-    let a = e * 2 + 128;
-    return this.__device.type === "iceplus" && (a += 51), a = Math.ceil(a), await this.program("54", a.toString(16));
+  async programWorkingTemperature({ degrees: t = 0.5 } = {}) {
+    return await this.appendToQueue(
+      a.programWorkingTemperature({
+        machineChannel: this.listenOnChannel,
+        degrees: t,
+        machineType: this.__device.type
+      }),
+      "program"
+    );
   }
   /**
    * @param {number|string} tray
    * @return {Promise<void>}
    */
-  async programIsolationTray({ tray: e = 0 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 0 || e > 12) throw new Error("Invalid tray, valid range is 0 to 12");
-    const t = e === 0 ? "80" : (e + 139).toString(16);
-    return this.program("42", t);
+  async programIsolationTray({ tray: t = 0 } = {}) {
+    return await this.appendToQueue(
+      a.programIsolationTray({
+        machineChannel: this.listenOnChannel,
+        tray: t
+      }),
+      "program"
+    );
   }
   /**
    * @param {number|string} seconds
    * @return {Promise<*>}
    */
-  async programTimeToStandbyAfterCollect({ seconds: e = 15 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 15 || e > 120) throw new Error("Invalid seconds, valid range is 15 to 120");
-    const t = (128 + e).toString(16);
-    return await this.program("46", t);
+  async programTimeToStandbyAfterCollect({ seconds: t = 15 } = {}) {
+    return await this.appendToQueue(
+      a.programTimeToStandbyAfterCollect({
+        machineChannel: this.listenOnChannel,
+        seconds: t
+      }),
+      "program"
+    );
   }
   /**
    * @param {number|string} seconds
    * @return {Promise<*>}
    */
-  async programTimeToStandbyWithoutCollect({ minutes: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 10) throw new Error("Invalid minutes, valid range is 1 to 10");
-    const t = (128 + e).toString(16);
-    return await this.program("48", t);
+  async programTimeToStandbyWithoutCollect({ minutes: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.programTimeToStandbyWithoutCollect({
+        machineChannel: this.listenOnChannel,
+        minutes: t
+      }),
+      "program"
+    );
   }
-  async programElevatorSpeed({ speed: e = "high" } = {}) {
-    const t = { high: "31", low: "30" };
-    if (!t[e]) throw new Error("Invalid speed, valid speeds are 'high' and 'low'");
-    return await this.program("76", t[e]);
+  async programElevatorSpeed({ speed: t = "high" } = {}) {
+    return await this.appendToQueue(
+      a.programElevatorSpeed({
+        machineChannel: this.listenOnChannel,
+        speed: t
+      }),
+      "program"
+    );
   }
-  async programTemperatureExpiration({ enable: e = !1 } = {}) {
-    const t = e ? "31" : "30";
-    return await this.program("63", t);
+  async programTemperatureExpiration({ enable: t = !1 } = {}) {
+    return await this.appendToQueue(
+      a.programTemperatureExpiration({
+        machineChannel: this.listenOnChannel,
+        enable: t
+      }),
+      "program"
+    );
   }
   async programEnableTemperatureExpiration() {
     return await this.programTemperatureExpiration({ enable: !0 });
@@ -272,239 +302,356 @@ class Tt extends kt {
    * @param {number|string} address
    * @return {Promise<*>}
    */
-  async programMachineAddress({ address: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 31) throw new Error("Invalid address, valid range is 1 to 31");
-    const t = (128 + e).toString(16);
-    return await this.program("64", t);
+  async programMachineAddress({ address: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.programMachineAddress({
+        machineChannel: this.listenOnChannel,
+        address: t
+      }),
+      "program"
+    );
   }
   /**
    * @param {number|string} degrees
    * @return {Promise<*>}
    */
-  async programTemperatureBeforeExpiration({ degrees: e = 0.5 } = {}) {
-    if (e = parseFloat(e), isNaN(e) || e < 0.5 || e > 30 || e % 0.5 !== 0)
-      throw new Error("Invalid degrees, must be a multiple of 0.5 and valid range is 0.5 to 30");
-    const t = (128 + e * 2).toString(16);
-    return await this.program("65", t);
+  async programTemperatureBeforeExpiration({ degrees: t = 0.5 } = {}) {
+    return await this.appendToQueue(
+      a.programTemperatureBeforeExpiration({
+        machineChannel: this.listenOnChannel,
+        degrees: t
+      }),
+      "program"
+    );
   }
   /**
    * @param {number|string} minutes
    * @return {Promise<*>}
    */
-  async programTimeBeforeExpirationByTemperature({ minutes: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 120) throw new Error("Invalid minutes, valid range is 1 to 120");
-    const t = (128 + e).toString(16);
-    return await this.program("66", t);
+  async programTimeBeforeExpirationByTemperature({ minutes: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.programTimeBeforeExpirationByTemperature({
+        machineChannel: this.listenOnChannel,
+        minutes: t
+      }),
+      "program"
+    );
   }
-  async programTemperatureScale({ scale: e = "c" } = {}) {
-    const t = { c: "43", f: "46" };
-    if (!t[e]) throw new Error("Invalid scale, valid scales are 'c' for celsius and 'f' for fahrenheit");
-    return await this.program("67", t[e]);
+  async programTemperatureScale({ scale: t = "celsius" } = {}) {
+    return await this.appendToQueue(
+      a.programTemperatureScale({
+        machineChannel: this.listenOnChannel,
+        scale: t
+      }),
+      "program"
+    );
   }
   /**
    * @param {number|string} selection
    * @param {number|string} voltage
    * @return {Promise<void>}
    */
-  async programVoltageEngine({ selection: e = 1, voltage: t = 5 } = {}) {
-    if (t = parseFloat(t), e = parseInt(e), isNaN(e) || e < 1 || e > this.__device.channels.verification.end)
-      throw new Error(`Invalid selection, valid range is 1 to ${this.__device.channels.verification.end}`);
-    if (isNaN(t) || t < 5 || t > 9.5 || t % 0.5 !== 0)
-      throw new Error("Invalid voltage, valid range is 5 to 9.5");
-    const r = 109 + e, o = (128 + (t - 5) * 2).toString(16), c = ["02", "30", "30", "81", "47", r, o];
-    return await n(this, i, u).call(this, c, "voltage-engine");
+  async programVoltageEngine({ selection: t = 1, voltage: e = 5 } = {}) {
+    return await this.appendToQueue(
+      a.programVoltageEngine({
+        machineChannel: this.listenOnChannel,
+        selection: t,
+        voltage: e
+      }),
+      "voltage-engine"
+    );
   }
   /**
    * @param {number|string} selection
    * @param {boolean} enable
    * @return {Promise<void>}
    */
-  async programPushOverProducts({ selection: e = 1, enable: t = !0 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > this.__device.channels.verification.end)
-      throw new Error(`Invalid selection, valid range is 1 to ${this.__device.channels.verification.end}`);
-    const o = ["02", "30", "30", "81", "4F", 109 + e, t ? "31" : "30"];
-    return await n(this, i, u).call(this, o, "push-over-products");
+  async programPushOverProducts({ selection: t = 1, enable: e = !0 } = {}) {
+    return await this.appendToQueue(
+      a.programPushOverProducts({
+        machineChannel: this.listenOnChannel,
+        selection: t,
+        enable: e
+      }),
+      "push-over-products"
+    );
   }
   /**
    * @param {number|string} selection
    * @param {number|string} seconds
    * @return {Promise<void>}
    */
-  async programChannelRunningAfterDispense({ selection: e = 1, seconds: t = 0 } = {}) {
-    if (e = parseInt(e), t = parseFloat(t), isNaN(e) || e < 1 || e > this.__device.channels.verification.end)
-      throw new Error(`Invalid selection, valid range is 1 to ${this.__device.channels.verification.end}`);
-    if (isNaN(t) || t < 0 || t > 10 || t % 0.1 !== 0)
-      throw new Error("Invalid seconds, valid range is 0.0 to 10.0 with a step of 0.1");
-    const r = 109 + e;
-    t = t.toFixed(1);
-    const a = 128 + t * 10, o = ["02", "30", "30", "81", "45", r, a];
-    return await n(this, i, u).call(this, o, "channel-running-after-dispense");
+  async programChannelRunningAfterDispense({ selection: t = 1, seconds: e = 0 } = {}) {
+    return await this.appendToQueue(
+      a.programChannelRunningAfterDispense({
+        machineChannel: this.listenOnChannel,
+        selection: t,
+        seconds: e
+      }),
+      "channel-running-after-dispense"
+    );
   }
-  async checkData(e, t = "FF") {
-    const r = ["02", "30", "30", "81", "43", e, t];
-    return await n(this, i, u).call(this, r, "check-data");
+  async checkData(t, e = "FF") {
+    return await this.appendToQueue(
+      a.checkData({
+        machineChannel: this.listenOnChannel,
+        type: t,
+        aux: e
+      }),
+      "check-data"
+    );
   }
   async getDisplayLanguage() {
-    return await this.checkData("49");
+    return await this.appendToQueue(
+      a.getDisplayLanguage({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getBeeper() {
-    return await this.checkData("5A");
+    return await this.appendToQueue(a.getBeeper({ machineChannel: this.listenOnChannel }), "check-data");
   }
   async getWorkingTemperature() {
-    return await this.checkData("54");
+    return await this.appendToQueue(
+      a.getWorkingTemperature({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getIsolationTray() {
-    return await this.checkData("42");
+    return await this.appendToQueue(
+      a.getIsolationTray({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getProgramVersion() {
-    return await this.checkData("50");
+    return await this.appendToQueue(
+      a.getProgramVersion({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getFaults() {
-    return await this.checkData("53");
+    return await this.appendToQueue(a.getFaults({ machineChannel: this.listenOnChannel }), "check-data");
   }
   async getMachineId() {
-    return await this.checkData("4E");
+    return await this.appendToQueue(
+      a.getMachineId({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getCurrentTemperature() {
-    return await this.checkData("74");
+    return await this.appendToQueue(
+      a.getCurrentTemperature({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getTimeToStandbyAfterCollect() {
-    return await this.checkData("46");
+    return await this.appendToQueue(
+      a.getTimeToStandbyAfterCollect({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getTimeToStandbyWithoutCollect() {
-    return await this.checkData("48");
+    return await this.appendToQueue(
+      a.getTimeToStandbyWithoutCollect({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getElevatorSpeed() {
-    return await this.checkData("76");
+    return await this.appendToQueue(
+      a.getElevatorSpeed({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getTemperatureExpiration() {
-    return await this.checkData("63");
+    return await this.appendToQueue(
+      a.getTemperatureExpiration({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getTemperatureBeforeExpiration() {
-    return await this.checkData("65");
+    return await this.appendToQueue(
+      a.getTemperatureBeforeExpiration({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getTimeBeforeExpirationByTemperature() {
-    return await this.checkData("66");
+    return await this.appendToQueue(
+      a.getTimeBeforeExpirationByTemperature({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getTemperatureScale() {
-    return await this.checkData("67");
+    return await this.appendToQueue(
+      a.getTemperatureScale({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getClockRegisters() {
-    return await this.checkData("72");
+    return await this.appendToQueue(
+      a.getClockRegisters({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   async getMachineActivity() {
-    return await this.checkData("41");
+    return await this.appendToQueue(
+      a.getMachineActivity({ machineChannel: this.listenOnChannel }),
+      "check-data"
+    );
   }
   /**
    * @param {number|string} selection
    * @return {Promise<*>}
    */
-  async getVoltageEngine({ selection: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 126)
-      throw new Error("Invalid selection, valid range is 1 to 126");
-    const t = (109 + e).toString(16);
-    return await this.checkData("47", t);
+  async getVoltageEngine({ selection: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.getVoltageEngine({
+        machineChannel: this.listenOnChannel,
+        selection: t
+      }),
+      "check-data"
+    );
   }
   /**
    * @param {number|string} selection
    * @return {Promise<*>}
    */
-  async getChannelPresence({ selection: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 126)
-      throw new Error("Invalid selection, valid range is 1 to 126");
-    const t = (109 + e).toString(16);
-    return await this.checkData("43", t);
+  async getChannelPresence({ selection: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.getChannelPresence({
+        machineChannel: this.listenOnChannel,
+        selection: t
+      }),
+      "check-data"
+    );
   }
   /**
    * @param {number|string} selection
    * @return {Promise<*>}
    */
-  async getPushOverProducts({ selection: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 126)
-      throw new Error("Invalid selection, valid range is 1 to 126");
-    const t = (109 + e).toString(16);
-    return await this.checkData("4F", t);
+  async getPushOverProducts({ selection: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.getPushOverProducts({
+        machineChannel: this.listenOnChannel,
+        selection: t
+      }),
+      "check-data"
+    );
   }
   /**
    * @param {number|string} selection
    * @return {Promise<*>}
    */
-  async getChannelRunningAfterDispense({ selection: e = 1 } = {}) {
-    if (e = parseInt(e), isNaN(e) || e < 1 || e > 126)
-      throw new Error("Invalid selection, valid range is 1 to 126");
-    const t = (109 + e).toString(16);
-    return await this.checkData("45", t);
+  async getChannelRunningAfterDispense({ selection: t = 1 } = {}) {
+    return await this.appendToQueue(
+      a.getChannelRunningAfterDispense({
+        machineChannel: this.listenOnChannel,
+        selection: t
+      }),
+      "check-data"
+    );
   }
-  async setDisplayStandbyMessage({ message: e = "" } = {}) {
-    e = e.substring(0, 32);
-    const t = n(this, i, I).call(this, e);
-    return await n(this, i, D).call(this, "80", t);
+  async setDisplayStandbyMessage({ message: t = "" } = {}) {
+    return await this.appendToQueue(
+      a.setDisplayStandbyMessage({
+        machineChannel: this.listenOnChannel,
+        message: t
+      }),
+      "display"
+    );
   }
   /**
    * @param {string} message
    * @param {number|string} seconds
    * @return {Promise<void>}
    */
-  async setDisplayMessageTemporarily({ message: e = "", seconds: t = 1 }) {
-    if (e = e.substring(0, 32), t = parseInt(t), isNaN(t) || t < 1 || t > 125) throw new Error("Invalid seconds, valid range is 1 to 125");
-    const r = n(this, i, I).call(this, e), a = (128 + t).toString(16);
-    return await n(this, i, D).call(this, a, r);
+  async setDisplayMessageTemporarily({ message: t = "", seconds: e = 1 }) {
+    return this.appendToQueue(
+      a.setDisplayMessageTemporarily({
+        machineChannel: this.listenOnChannel,
+        message: t,
+        seconds: e
+      }),
+      "display"
+    );
   }
   /**
    * @param {string} message
    * @return {Promise<void>}
    */
-  async setDisplayMessageUnlimited({ message: e = "" }) {
-    e = e.substring(0, 32);
-    const t = n(this, i, I).call(this, e);
-    return await n(this, i, D).call(this, "FF", t);
+  async setDisplayMessageUnlimited({ message: t = "" }) {
+    return await this.appendToQueue(
+      a.setDisplayMessageUnlimited({
+        machineChannel: this.listenOnChannel,
+        message: t
+      }),
+      "display"
+    );
   }
-  async programClock({ date: e = /* @__PURE__ */ new Date() } = {}) {
-    if (!(e instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
-    const t = ["02", "30", "30", "81", "72", ...n(this, i, _t).call(this, e)];
-    return await n(this, i, u).call(this, t, "clock");
+  async programClock({ date: t = /* @__PURE__ */ new Date() } = {}) {
+    return await this.appendToQueue(
+      a.programClock({
+        machineChannel: this.listenOnChannel,
+        date: t
+      }),
+      "clock"
+    );
   }
   /**
    * @param {null|string} event
    * @param {boolean} enable
    * @return {Promise<void>}
    */
-  async eventsConfig({ event: e = null, enable: t = !0 } = {}) {
-    if (e === null) throw new Error("Invalid event");
-    const a = ["02", "30", "30", "81", "41", e, t ? "31" : "30"];
-    return await n(this, i, u).call(this, a, "events-config");
+  async eventsConfig({ event: t = null, enable: e = !0 } = {}) {
+    return await this.appendToQueue(
+      a.eventsConfig({
+        machineChannel: this.listenOnChannel,
+        event: t,
+        enable: e
+      }),
+      "events-config"
+    );
   }
-  async eventEnable({ event: e = null } = {}) {
-    if (e === null) throw new Error("Invalid event");
-    const t = parseInt(e, 16);
-    if (isNaN(t) || t < 38 || t > 100) throw new Error("Invalid event");
-    return await this.eventsConfig({ event: e, enable: !0 });
+  async eventEnable({ event: t = null } = {}) {
+    return await this.appendToQueue(
+      a.eventEnable({
+        machineChannel: this.listenOnChannel,
+        event: t
+      }),
+      "events-config"
+    );
   }
-  async eventDisable({ event: e = null } = {}) {
-    if (e === null) throw new Error("Invalid event");
-    const t = parseInt(e, 16);
-    if (isNaN(t) || t < 38 || t > 100) throw new Error("Invalid event");
-    return await this.eventsConfig({ event: e, enable: !1 });
+  async eventDisable({ event: t = null } = {}) {
+    return await this.appendToQueue(
+      a.eventEnable({
+        machineChannel: this.listenOnChannel,
+        event: t
+      }),
+      "events-config"
+    );
   }
-  async sendCustomCode({ code: e = [] } = {}) {
-    if (e.length < 5) throw new Error("Invalid code, minimum length is 5");
-    return await n(this, i, u).call(this, e, "custom");
+  async sendCustomCode({ code: t = [] } = {}) {
+    return await this.appendToQueue(
+      a.sendCustomCode({
+        machineChannel: this.listenOnChannel,
+        code: t
+      }),
+      "custom"
+    );
   }
   async assignChannels() {
-    const e = this.__device.channels.verification.start, t = this.__device.channels.verification.end;
-    if (e > t) throw new Error("Invalid range, start must be less than end");
+    const t = this.__device.channels.verification.start, e = this.__device.channels.verification.end;
+    if (t > e) throw new Error("Invalid range, start must be less than end");
     this.__device.channels.verification.clear(), this.__device.channels.verification.running = !0;
-    for (let r = e; r <= t; r++)
+    for (let r = t; r <= e; r++)
       this.__device.channels.verification.current = r, await this.getChannelPresence({ selection: r });
     return new Promise((r) => {
-      let a = setInterval(() => {
-        this.__device.channels.verification.channels.length === t - e + 1 && (clearInterval(a), this.dispatch("channels", { channels: this.__device.channels.verification.channels }), this.__device.channels.verification.clear(), r(!0));
+      let o = setInterval(() => {
+        this.__device.channels.verification.channels.length === e - t + 1 && (clearInterval(o), this.dispatch("channels", { channels: this.__device.channels.verification.channels }), this.__device.channels.verification.clear(), r(!0));
       }, 500);
     });
   }
 }
-i = new WeakSet(), $ = function() {
-  const e = [
+n = new WeakSet(), S = function() {
+  const t = [
     "dispensing:withdrawal",
     "command-executed",
     "keyboard:pressed",
@@ -537,38 +684,29 @@ i = new WeakSet(), $ = function() {
     "channel:status",
     "machine:status"
   ];
-  for (const t of e)
-    this.serialRegisterAvailableListener(t);
-}, W = function() {
-  this.on("internal:dispense:running", n(this, i, ut).bind(this));
+  for (const e of t)
+    this.serialRegisterAvailableListener(e);
 }, g = function() {
-  A.add(this);
-}, u = function(e, t) {
-  return e[3] = this.__internal__.device.hex_number, this.appendToQueue(n(this, i, E).call(this, e), t);
-}, E = function(e) {
-  let t = this.hexToDec(this.sumHex(e)), r = this.calcCheckSums(t.toString());
-  for (let a = 0; a < 2; a++)
-    e.push(this.hexMaker(r[a]));
-  return e.push("03"), e;
-}, q = async function() {
+  this.on("internal:dispense:running", i(this, n, he).bind(this));
+}, A = async function() {
   if (this.__internal__.dispense.elevator.locking_interval) return;
-  this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await T(500));
-  const e = this;
-  return this.__internal__.dispense.status = "elevator-locked", this.__internal__.dispense.elevator.locking_time = 60, new Promise((t) => {
-    e.__internal__.dispense.elevator.locking_interval = setInterval(() => {
-      e.dispatch("dispensing:withdrawal", {
+  this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await w(500));
+  const t = this;
+  return this.__internal__.dispense.status = "elevator-locked", this.__internal__.dispense.elevator.locking_time = 60, new Promise((e) => {
+    t.__internal__.dispense.elevator.locking_interval = setInterval(() => {
+      t.dispatch("dispensing:withdrawal", {
         elevator: !0,
-        seconds: e.__internal__.dispense.elevator.locking_time,
+        seconds: t.__internal__.dispense.elevator.locking_time,
         description: "Please recall products from the elevator"
-      }), e.__internal__.dispense.elevator.locking_time -= 1, e.__internal__.dispense.elevator.locking_time <= 0 && (clearInterval(e.__internal__.dispense.elevator.locking_interval), e.__internal__.dispense.elevator.locking_interval = 0, t(!0));
+      }), t.__internal__.dispense.elevator.locking_time -= 1, t.__internal__.dispense.elevator.locking_time <= 0 && (clearInterval(t.__internal__.dispense.elevator.locking_interval), t.__internal__.dispense.elevator.locking_interval = 0, e(!0));
     }, 1e3);
   });
-}, O = function(e, t) {
-  return t.name = "ok", t.description = "The last command was executed successfully", t.no_code = 1, this.dispatch("command-executed", t), t;
-}, j = function(e, t) {
-  t.additional = {
-    hex: e,
-    dec: this.hexToDec(e),
+}, B = function(t, e) {
+  return e.name = "ok", e.description = "The last command was executed successfully", e.no_code = 1, this.dispatch("command-executed", e), e;
+}, W = function(t, e) {
+  e.additional = {
+    hex: t,
+    dec: this.hexToDec(t),
     ascii: null
   };
   const r = {
@@ -589,26 +727,26 @@ i = new WeakSet(), $ = function() {
     43: "C",
     44: "D"
   };
-  return t.additional.ascii = r[e] ?? null, t.name = "Key pressed", t.description = `The key ${t.additional.ascii} was pressed`, t.no_code = 2, this.dispatch("keyboard:pressed", t.additional), t;
-}, R = function(e, t) {
-  return t.additional = { open: !1 }, t.no_code = 3, e === "4f" ? (t.name = "door open", t.description = "The door was opened", t.additional.open = !0, this.__internal__.device.door_open = !0, this.dispatch("door:event", t.additional)) : e === "43" ? (t.name = "door close", t.description = "The door was closed", t.additional.open = !1, this.__internal__.device.door_open = !1, this.dispatch("door:event", t.additional)) : (t.name = "door event", t.description = "The door event received is unknown", this.dispatch("door:event", { open: t.additional.open, message: t })), t;
-}, J = function(e, t) {
-  t.no_code = 404;
-  let r = e[5] ?? null;
-  return r && this.listenOnChannel > 1 && (r = this.hexToDec(r) - this.listenOnChannel + 1, r = this.decToHex(r)), r && (r === "FD" ? (t.no_code = 4, t.name = "channel disconnected", t.description = "The channel is disconnected", t.additional = { active: !1 }) : r === "FC" ? (t.no_code = 5, t.name = "channel connected", t.description = "The channel is connected", t.additional = { active: !0 }) : (t.no_code = 6, t.name = "channel sold out", t.description = "The channel is empty", t.additional = { active: !0 }), this.__device.channels.verification.running && (this.__device.channels.verification.channels.push({
+  return e.additional.ascii = r[t] ?? null, e.name = "Key pressed", e.description = `The key ${e.additional.ascii} was pressed`, e.no_code = 2, this.dispatch("keyboard:pressed", e.additional), e;
+}, F = function(t, e) {
+  return e.additional = { open: !1 }, e.no_code = 3, t === "4f" ? (e.name = "door open", e.description = "The door was opened", e.additional.open = !0, this.__internal__.device.door_open = !0, this.dispatch("door:event", e.additional)) : t === "43" ? (e.name = "door close", e.description = "The door was closed", e.additional.open = !1, this.__internal__.device.door_open = !1, this.dispatch("door:event", e.additional)) : (e.name = "door event", e.description = "The door event received is unknown", this.dispatch("door:event", { open: e.additional.open, message: e })), e;
+}, q = function(t, e) {
+  e.no_code = 404;
+  let r = t[5] ?? null;
+  return r && this.listenOnChannel > 1 && (r = this.hexToDec(r) - this.listenOnChannel + 1, r = this.decToHex(r)), r && (r === "FD" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : r === "FC" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running && (this.__device.channels.verification.channels.push({
     selection: this.__device.channels.verification.current,
-    active: t.additional.active
-  }), t.additional.selection = this.__device.channels.verification.current), this.dispatch("channel:status", t.additional)), t;
-}, L = function(e, t) {
-  t.no_code = 39, t.name = "Program version";
-  const r = e.slice(4, 12), a = r.map((o) => String.fromCharCode(this.hexToDec(o))).join("");
-  return t.additional = { version: a, hex: r }, t.description = `The program version is ${a}`, this.dispatch("program:version", t.additional), t;
-}, U = function(e, t) {
-  t.no_code = 39, t.name = "Machine faults", t.description = "No faults detected", t.additional = { no_faults: 0, faults: [] };
-  const r = e.slice(4, -3);
+    active: e.additional.active
+  }), e.additional.selection = this.__device.channels.verification.current), this.dispatch("channel:status", e.additional)), e;
+}, R = function(t, e) {
+  e.no_code = 39, e.name = "Program version";
+  const r = t.slice(4, 12), o = r.map((c) => String.fromCharCode(this.hexToDec(c))).join("");
+  return e.additional = { version: o, hex: r }, e.description = `The program version is ${o}`, this.dispatch("program:version", e.additional), e;
+}, $ = function(t, e) {
+  e.no_code = 39, e.name = "Machine faults", e.description = "No faults detected", e.additional = { no_faults: 0, faults: [] };
+  const r = t.slice(4, -3);
   if (r.length > 1 && r[0] !== "30") {
-    t.description = "Machine has faults";
-    const a = {
+    e.description = "Machine has faults";
+    const o = {
       31: "Busy",
       32: "Invalid tray",
       33: "Invalid channel",
@@ -642,65 +780,65 @@ i = new WeakSet(), $ = function() {
       63: "Product is expired",
       64: "Product detector didn't change during its verification test"
     };
-    for (const o of r)
-      a[o] && (t.additional.faults.push(a[o]), t.additional.no_faults++);
+    for (const c of r)
+      o[c] && (e.additional.faults.push(o[c]), e.additional.no_faults++);
   }
-  return this.dispatch("machine:faults", t.additional), t;
-}, H = function(e, t) {
-  t.no_code = 40, t.name = "Clock registers", t.description = "Clock registers";
-  const r = e.slice(4, -3), a = r.map((C) => String.fromCharCode(this.hexToDec(C))).join(""), [o, c] = a.split(" "), [s, v] = o.split(":"), [y, k, b] = c.split("-"), x = new Date(
-    2e3 + parseInt(b),
-    parseInt(k) - 1,
-    parseInt(y),
-    parseInt(s),
-    parseInt(v)
+  return this.dispatch("machine:faults", e.additional), e;
+}, N = function(t, e) {
+  e.no_code = 40, e.name = "Clock registers", e.description = "Clock registers";
+  const r = t.slice(4, -3), o = r.map((x) => String.fromCharCode(this.hexToDec(x))).join(""), [c, l] = o.split(" "), [f, y] = c.split(":"), [v, T, k] = l.split("-"), m = new Date(
+    2e3 + parseInt(k),
+    parseInt(T) - 1,
+    parseInt(v),
+    parseInt(f),
+    parseInt(y)
   );
-  return t.additional = {
-    day: y,
-    month: k,
-    year: b,
-    hours: s,
-    minutes: v,
-    formatted: a,
-    date: x,
+  return e.additional = {
+    day: v,
+    month: T,
+    year: k,
+    hours: f,
+    minutes: y,
+    formatted: o,
+    date: m,
     hex: r
-  }, this.dispatch("clock:registers", t.additional), t;
-}, V = function(e, t) {
-  t.no_code = 41, t.name = "Machine activity", t.description = "Events from read machine activity";
-  const r = String.fromCharCode(this.hexToDec(e[4]));
+  }, this.dispatch("clock:registers", e.additional), e;
+}, j = function(t, e) {
+  e.no_code = 41, e.name = "Machine activity", e.description = "Events from read machine activity";
+  const r = String.fromCharCode(this.hexToDec(t[4]));
   if (r !== "0") {
-    const a = e.slice(5, -3);
-    if (r === "T" && a.length === 4) {
-      const o = String.fromCharCode(this.hexToDec(a[0])), c = String.fromCharCode(this.hexToDec(a[1])), s = String.fromCharCode(this.hexToDec(a[3]));
-      t.additional = {
+    const o = t.slice(5, -3);
+    if (r === "T" && o.length === 4) {
+      const c = String.fromCharCode(this.hexToDec(o[0])), l = String.fromCharCode(this.hexToDec(o[1])), f = String.fromCharCode(this.hexToDec(o[3]));
+      e.additional = {
         ascii: r,
         type: "DU.d",
-        dozens: o,
-        units: c,
-        decimals: s,
-        time: parseFloat(`${o}${c}.${s}`),
+        dozens: c,
+        units: l,
+        decimals: f,
+        time: parseFloat(`${c}${l}.${f}`),
         meaning: "Extraction time (in seconds)"
       };
-    } else if (["B", "D", "E", "F", "G"].includes(r) && a.length === 3) {
-      const o = String.fromCharCode(this.hexToDec(a[0])), c = String.fromCharCode(this.hexToDec(a[1])), s = String.fromCharCode(this.hexToDec(a[2])), v = parseInt(`${o}${c}${s}`), y = {
+    } else if (["B", "D", "E", "F", "G"].includes(r) && o.length === 3) {
+      const c = String.fromCharCode(this.hexToDec(o[0])), l = String.fromCharCode(this.hexToDec(o[1])), f = String.fromCharCode(this.hexToDec(o[2])), y = parseInt(`${c}${l}${f}`), v = {
         B: "Error on going to tray channel",
         D: "Error on product detector",
         E: "Extraction of channel ok",
         F: "Error on engine intensity detection",
         G: "Error on product exit door"
       };
-      t.additional = {
+      e.additional = {
         type: "HDU",
-        hundreds: o,
-        dozens: c,
-        decimals: s,
-        channel: v,
-        selection: v - 109,
+        hundreds: c,
+        dozens: l,
+        decimals: f,
+        channel: y,
+        selection: y - 109,
         ascii: r,
-        meaning: y[r] ?? "Unknown"
+        meaning: v[r] ?? "Unknown"
       };
-    } else if (a.length === 13) {
-      const o = a.map((ft) => String.fromCharCode(this.hexToDec(ft))).join(""), c = parseInt(o.slice(0, 2)), s = parseInt(o.slice(2, 4)), v = parseInt(o.slice(4, 6)), y = parseInt(o.slice(7, 9)), k = parseInt(o.slice(9, 11)) - 1, b = 2e3 + parseInt(o.slice(11, 13)), x = new Date(b, k, y, c, s, v), C = {
+    } else if (o.length === 13) {
+      const c = o.map((le) => String.fromCharCode(this.hexToDec(le))).join(""), l = parseInt(c.slice(0, 2)), f = parseInt(c.slice(2, 4)), y = parseInt(c.slice(4, 6)), v = parseInt(c.slice(7, 9)), T = parseInt(c.slice(9, 11)) - 1, k = 2e3 + parseInt(c.slice(11, 13)), m = new Date(k, T, v, l, f, y), x = {
         A: "Attempt to close product exit door",
         C: "Closing of exterior door",
         H: "Error on opening of product exit door",
@@ -718,390 +856,380 @@ i = new WeakSet(), $ = function() {
         e: "New attempt to extract from channel due no product detection when elevator arrived to product exit position",
         o: "Opening of inner door"
       };
-      t.additional = {
+      e.additional = {
         type: "hhmmssWddMMAA",
-        date: x,
-        hex: a,
-        formatted: x.toLocaleString(),
+        date: m,
+        hex: o,
+        formatted: m.toLocaleString(),
         ascii: r,
-        meaning: C[r] ?? "Unknown"
+        meaning: x[r] ?? "Unknown"
       };
     }
   }
-  return this.dispatch("machine:activity", t.additional), t;
-}, K = function(e, t) {
+  return this.dispatch("machine:activity", e.additional), e;
+}, L = function(t, e) {
   const r = {
     30: "Spanish",
     31: "English",
     32: "French"
   };
-  return t.no_code = 42, t.name = "Language", t.description = `The language is ${r[e] ?? "unknown"}`, t.additional = {
-    hex: e,
-    language: r[e] ?? "unknown"
-  }, this.dispatch("check:language", t.additional), t;
-}, G = function(e, t) {
-  return t.no_code = 43, t.name = "Beeper", t.description = `The beeper is ${e === "30" ? "on" : "off"}`, t.additional = {
-    hex: e,
-    beeper: e === "30"
-  }, this.dispatch("check:beeper", t.additional), t;
-}, z = function(e, t) {
-  t.no_code = 44, t.name = "Isolation tray", t.description = "Isolation tray";
-  const r = this.hexToDec(e) - 139;
-  return t.additional = {
-    hex: e,
+  return e.no_code = 42, e.name = "Language", e.description = `The language is ${r[t] ?? "unknown"}`, e.additional = {
+    hex: t,
+    language: r[t] ?? "unknown"
+  }, this.dispatch("check:language", e.additional), e;
+}, V = function(t, e) {
+  return e.no_code = 43, e.name = "Beeper", e.description = `The beeper is ${t === "30" ? "on" : "off"}`, e.additional = {
+    hex: t,
+    beeper: t === "30"
+  }, this.dispatch("check:beeper", e.additional), e;
+}, J = function(t, e) {
+  e.no_code = 44, e.name = "Isolation tray", e.description = "Isolation tray";
+  const r = this.hexToDec(t) - 139;
+  return e.additional = {
+    hex: t,
     tray: r
-  }, this.dispatch("check:isolation-tray", t.additional), t;
-}, Q = function(e, t) {
-  t.no_code = 45, t.name = "Engine voltage", t.description = "Engine voltage";
-  const r = (this.hexToDec(e) - 128) / 2 + 5;
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:isolation-tray", e.additional), e;
+}, U = function(t, e) {
+  e.no_code = 45, e.name = "Engine voltage", e.description = "Engine voltage";
+  const r = (this.hexToDec(t) - 128) / 2 + 5;
+  return e.additional = {
+    hex: t,
     voltage: r
-  }, this.dispatch("check:engine-voltage", t.additional), t;
-}, Y = function(e, t) {
-  t.no_code = 46, t.name = "Push over", t.description = "Push over";
-  const r = e === "30";
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:engine-voltage", e.additional), e;
+}, K = function(t, e) {
+  e.no_code = 46, e.name = "Push over", e.description = "Push over";
+  const r = t === "30";
+  return e.additional = {
+    hex: t,
     push: r
-  }, this.dispatch("check:push-over", t.additional), t;
-}, Z = function(e, t) {
-  t.no_code = 47, t.name = "Extractor after dispense", t.description = "Extractor after dispense";
-  const r = (this.hexToDec(e) - 128) / 10;
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:push-over", e.additional), e;
+}, H = function(t, e) {
+  e.no_code = 47, e.name = "Extractor after dispense", e.description = "Extractor after dispense";
+  const r = (this.hexToDec(t) - 128) / 10;
+  return e.additional = {
+    hex: t,
     seconds: r
-  }, this.dispatch("check:extractor-after-dispense", t.additional), t;
-}, X = function(e, t) {
-  t.no_code = 48, t.name = "Standby after collect", t.description = "Time to standby after collect product";
-  const r = this.hexToDec(e) - 128;
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:extractor-after-dispense", e.additional), e;
+}, z = function(t, e) {
+  e.no_code = 48, e.name = "Standby after collect", e.description = "Time to standby after collect product";
+  const r = this.hexToDec(t) - 128;
+  return e.additional = {
+    hex: t,
     seconds: r
-  }, this.dispatch("check:standby-after-collect", t.additional), t;
-}, tt = function(e, t) {
-  t.no_code = 49, t.name = "Standby without collect", t.description = "Time to standby when product delivery is not collected";
-  const r = this.hexToDec(e) - 128;
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:standby-after-collect", e.additional), e;
+}, G = function(t, e) {
+  e.no_code = 49, e.name = "Standby without collect", e.description = "Time to standby when product delivery is not collected";
+  const r = this.hexToDec(t) - 128;
+  return e.additional = {
+    hex: t,
     minutes: r
-  }, this.dispatch("check:standby-without-collect", t.additional), t;
-}, et = function(e, t) {
-  t.no_code = 50, t.name = "Elevator speed", t.description = "Elevator speed";
-  const r = e === "30" ? "low" : "high";
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:standby-without-collect", e.additional), e;
+}, Y = function(t, e) {
+  e.no_code = 50, e.name = "Elevator speed", e.description = "Elevator speed";
+  const r = t === "30" ? "low" : "high";
+  return e.additional = {
+    hex: t,
     speed: r
-  }, this.dispatch("check:elevator-speed", t.additional), t;
-}, it = function(e, t) {
-  t.no_code = 51, t.name = "Temperature expiration", t.description = "Temperature expiration";
-  const r = e === "31";
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:elevator-speed", e.additional), e;
+}, Z = function(t, e) {
+  e.no_code = 51, e.name = "Temperature expiration", e.description = "Temperature expiration";
+  const r = t === "31";
+  return e.additional = {
+    hex: t,
     enabled: r
-  }, this.dispatch("check:expiration-by-temperature", t.additional), t;
-}, nt = function(e, t) {
-  t.no_code = 52, t.name = "Temperature before expiration", t.description = "Temperature before expiration";
-  const r = (this.hexToDec(e) - 128) / 2;
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:expiration-by-temperature", e.additional), e;
+}, X = function(t, e) {
+  e.no_code = 52, e.name = "Temperature before expiration", e.description = "Temperature before expiration";
+  const r = (this.hexToDec(t) - 128) / 2;
+  return e.additional = {
+    hex: t,
     temperature: r
-  }, this.dispatch("check:temperature-before-expiration", t.additional), t;
-}, rt = function(e, t) {
-  t.no_code = 53, t.name = "Time before expiration", t.description = "Time before expiration";
-  const r = this.hexToDec(e) - 128;
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:temperature-before-expiration", e.additional), e;
+}, ee = function(t, e) {
+  e.no_code = 53, e.name = "Time before expiration", e.description = "Time before expiration";
+  const r = this.hexToDec(t) - 128;
+  return e.additional = {
+    hex: t,
     minutes: r
-  }, this.dispatch("check:expiration-after", t.additional), t;
-}, at = function(e, t) {
-  t.no_code = 54, t.name = "Temperature scale", t.description = "Temperature scale";
-  const r = e === "43" ? "Celsius" : "Fahrenheit";
-  return t.additional = {
-    hex: e,
+  }, this.dispatch("check:expiration-after", e.additional), e;
+}, te = function(t, e) {
+  e.no_code = 54, e.name = "Temperature scale", e.description = "Temperature scale";
+  const r = t === "43" ? "Celsius" : "Fahrenheit";
+  return e.additional = {
+    hex: t,
     scale: r
-  }, this.dispatch("check:temperature-scale", t.additional), t;
-}, ot = function(e, t) {
-  return t.no_code = 54, t.name = "Machine ID", t.description = "Machine ID", t.additional = { hex: e[4], full_hex: e }, this.dispatch("check:machine-id", t.additional), t;
-}, ct = function(e, t) {
-  return t.no_code = 7, t.name = "working temperature", t.description = `The working temperature is ${e}`, t.additional = {
-    hex: e,
+  }, this.dispatch("check:temperature-scale", e.additional), e;
+}, ne = function(t, e) {
+  return e.no_code = 54, e.name = "Machine ID", e.description = "Machine ID", e.additional = { hex: t[4], full_hex: t }, this.dispatch("check:machine-id", e.additional), e;
+}, ie = function(t, e) {
+  return e.no_code = 7, e.name = "working temperature", e.description = `The working temperature is ${t}`, e.additional = {
+    hex: t,
     temperature: {
-      traditional: (this.hexToDec(e) - this.hexToDec("80")) / 2,
-      ice_plus: (this.hexToDec(e) - this.hexToDec("80")) / 2 - 25.5
+      traditional: (this.hexToDec(t) - this.hexToDec("80")) / 2,
+      ice_plus: (this.hexToDec(t) - this.hexToDec("80")) / 2 - 25.5
     }
-  }, this.dispatch("temperature:working", t.additional), t;
-}, st = function(e, t) {
-  return t.no_code = 8, t.name = "current temperature", t.additional = {
+  }, this.dispatch("temperature:working", e.additional), e;
+}, re = function(t, e) {
+  return e.no_code = 8, e.name = "current temperature", e.additional = {
     sign: null,
     tens: null,
     units: null,
     decimals: null,
     type_degrees: null,
     formatted: null,
-    decimal_point: e[7] === "2e" ? "." : null,
-    degrees: e[9] === "7f" ? "°" : null,
+    decimal_point: t[7] === "2e" ? "." : null,
+    degrees: t[9] === "7f" ? "°" : null,
     error: null
-  }, e[4] === "2b" ? t.additional.sign = e[4] = "+" : ["2e", "2d"].includes(e[4]) ? t.additional.sign = e[4] = "-" : e[4] === "20" && (t.additional.error = "Error in thermometer"), this.hexToDec(e[5]) >= 48 && this.hexToDec(e[5]) <= 57 ? t.additional.tens = this.hexToDec(e[5]) - 48 : e[5] === "2a" && (t.additional.error = "Error in thermometer"), this.hexToDec(e[6]) >= 48 && this.hexToDec(e[6]) <= 57 ? t.additional.units = this.hexToDec(e[6]) - 48 : e[6] === "2a" && (t.additional.error = "Error in thermometer"), this.hexToDec(e[8]) >= 48 && this.hexToDec(e[8]) <= 57 ? t.additional.decimals = this.hexToDec(e[8]) - 48 : e[8] === "2a" && (t.additional.error = "Error in thermometer"), e[10] === "43" ? t.additional.type_degrees = "C" : e[10] === "46" && (t.additional.type_degrees = "F"), t.additional.error === "Error in thermometer" ? (t.additional.formatted = "Error in thermometer", t.description = "The current temperature cannot be read because there is an error in the thermometer") : (t.additional.formatted = (t.additional.sign ?? "") + (t.additional.tens ?? "") + (t.additional.units ?? "") + (t.additional.decimal_point ?? "") + (t.additional.decimals ?? "") + (t.additional.degrees ?? "") + (t.additional.type_degrees ?? ""), t.description = `The current temperature is ${t.additional.formatted}`), this.dispatch("temperature:current", t.additional), t;
-}, ht = function(e, t, r = 128) {
-  if (e[1] && (t.additional.machine.hex = e[1], t.additional.machine.dec = this.hexToDec(e[1]) - r), !(e[1] && e[2]))
-    t = n(this, i, O).call(this, e, t);
+  }, t[4] === "2b" ? e.additional.sign = t[4] = "+" : ["2e", "2d"].includes(t[4]) ? e.additional.sign = t[4] = "-" : t[4] === "20" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[5]) >= 48 && this.hexToDec(t[5]) <= 57 ? e.additional.tens = this.hexToDec(t[5]) - 48 : t[5] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[6]) >= 48 && this.hexToDec(t[6]) <= 57 ? e.additional.units = this.hexToDec(t[6]) - 48 : t[6] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[8]) >= 48 && this.hexToDec(t[8]) <= 57 ? e.additional.decimals = this.hexToDec(t[8]) - 48 : t[8] === "2a" && (e.additional.error = "Error in thermometer"), t[10] === "43" ? e.additional.type_degrees = "C" : t[10] === "46" && (e.additional.type_degrees = "F"), e.additional.error === "Error in thermometer" ? (e.additional.formatted = "Error in thermometer", e.description = "The current temperature cannot be read because there is an error in the thermometer") : (e.additional.formatted = (e.additional.sign ?? "") + (e.additional.tens ?? "") + (e.additional.units ?? "") + (e.additional.decimal_point ?? "") + (e.additional.decimals ?? "") + (e.additional.degrees ?? "") + (e.additional.type_degrees ?? ""), e.description = `The current temperature is ${e.additional.formatted}`), this.dispatch("temperature:current", e.additional), e;
+}, ae = function(t, e, r = 128) {
+  if (t[1] && (e.additional.machine.hex = t[1], e.additional.machine.dec = this.hexToDec(t[1]) - r), !(t[1] && t[2]))
+    e = i(this, n, B).call(this, t, e);
   else
-    switch (e[2]) {
+    switch (t[2]) {
       case "54":
-        t.request = "--automatic", t = n(this, i, j).call(this, e[3], t);
+        e.request = "--automatic", e = i(this, n, W).call(this, t[3], e);
         break;
       case "50":
-        t.request = "--automatic", t = n(this, i, R).call(this, e[3], t);
+        e.request = "--automatic", e = i(this, n, F).call(this, t[3], e);
         break;
       case "43":
-        switch (t.request = "check-data", e[3]) {
+        switch (e.request = "check-data", t[3]) {
           case "41":
-            t = n(this, i, V).call(this, e, t);
+            e = i(this, n, j).call(this, t, e);
             break;
           case "43":
-            t.request = "channel-status", t = n(this, i, J).call(this, e, t);
+            e.request = "channel-status", e = i(this, n, q).call(this, t, e);
             break;
           case "50":
-            t = n(this, i, L).call(this, e, t);
+            e = i(this, n, R).call(this, t, e);
             break;
           case "53":
-            t = n(this, i, U).call(this, e, t);
+            e = i(this, n, $).call(this, t, e);
             break;
           case "54":
-            t.request = "working-temperature", t = n(this, i, ct).call(this, e[4], t);
+            e.request = "working-temperature", e = i(this, n, ie).call(this, t[4], e);
             break;
           case "72":
-            t = n(this, i, H).call(this, e, t);
+            e = i(this, n, N).call(this, t, e);
             break;
           case "74":
-            t.request = "current-temperature", t = n(this, i, st).call(this, e, t);
+            e.request = "current-temperature", e = i(this, n, re).call(this, t, e);
             break;
           case "49":
-            t = n(this, i, K).call(this, e[4], t);
+            e = i(this, n, L).call(this, t[4], e);
             break;
           case "5a":
-            t = n(this, i, G).call(this, e[4], t);
+            e = i(this, n, V).call(this, t[4], e);
             break;
           case "42":
-            t = n(this, i, z).call(this, e[4], t);
+            e = i(this, n, J).call(this, t[4], e);
             break;
           case "47":
-            t = n(this, i, Q).call(this, e[4], t);
+            e = i(this, n, U).call(this, t[4], e);
             break;
           case "4e":
-            t = n(this, i, ot).call(this, e, t);
+            e = i(this, n, ne).call(this, t, e);
             break;
           case "4f":
-            t = n(this, i, Y).call(this, e[4], t);
+            e = i(this, n, K).call(this, t[4], e);
             break;
           case "45":
-            t = n(this, i, Z).call(this, e[4], t);
+            e = i(this, n, H).call(this, t[4], e);
             break;
           case "46":
-            t = n(this, i, X).call(this, e[4], t);
+            e = i(this, n, z).call(this, t[4], e);
             break;
           case "48":
-            t = n(this, i, tt).call(this, e[4], t);
+            e = i(this, n, G).call(this, t[4], e);
             break;
           case "76":
-            t = n(this, i, et).call(this, e[4], t);
+            e = i(this, n, Y).call(this, t[4], e);
             break;
           case "63":
-            t = n(this, i, it).call(this, e[4], t);
+            e = i(this, n, Z).call(this, t[4], e);
             break;
           case "65":
-            t = n(this, i, nt).call(this, e[4], t);
+            e = i(this, n, X).call(this, t[4], e);
             break;
           case "66":
-            t = n(this, i, rt).call(this, e[4], t);
+            e = i(this, n, ee).call(this, t[4], e);
             break;
           case "67":
-            t = n(this, i, at).call(this, e[4], t);
+            e = i(this, n, te).call(this, t[4], e);
             break;
         }
         break;
     }
-  return t;
-}, _ = function() {
+  return e;
+}, u = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
-}, l = function() {
+}, s = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !1);
-}, m = function() {
+}, b = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = "elevator-locked");
 }, /**
  * Dispatch a warning message
  * @param {null|string} type
  * @param {string} severity
  */
-d = function({ type: e = null, severity: t = "low" } = {}) {
-  this.dispatch("jofemar:warning", { type: e, severity: t });
+d = function({ type: t = null, severity: e = "low" } = {}) {
+  this.dispatch("jofemar:warning", { type: t, severity: e });
 }, /**
  * Dispatch an error message
  * @param {null|string} type
  * @param {string} severity
  */
-f = function({ type: e = null, severity: t = "high" } = {}) {
-  this.dispatch("jofemar:error", { type: e, severity: t });
-}, lt = function(e, t) {
-  if (t.request = "status", e[1] && !e[2]) {
-    switch (e[1]) {
+_ = function({ type: t = null, severity: e = "high" } = {}) {
+  this.dispatch("jofemar:error", { type: t, severity: e });
+}, oe = function(t, e) {
+  if (e.request = "status", t[1] && !t[2]) {
+    switch (t[1]) {
       case "30":
-        t.name = "Machine ready", t.description = "The machine is ready for instructions", t.no_code = 9, n(this, i, _).call(this);
+        e.name = "Machine ready", e.description = "The machine is ready for instructions", e.no_code = 9, i(this, n, u).call(this);
         break;
       case "31":
-        t.name = "Machine busy", t.description = "The machine is busy right now", t.no_code = 10;
+        e.name = "Machine busy", e.description = "The machine is busy right now", e.no_code = 10;
         break;
       case "32":
-        t.name = "Invalid tray", t.description = "The tray requested is invalid", t.no_code = 11, n(this, i, l).call(this), n(this, i, d).call(this, { type: "invalid-tray" });
+        e.name = "Invalid tray", e.description = "The tray requested is invalid", e.no_code = 11, i(this, n, s).call(this), i(this, n, d).call(this, { type: "invalid-tray" });
         break;
       case "33":
-        t.name = "Invalid channel", t.description = "The channel requested is invalid", t.no_code = 12, n(this, i, l).call(this), n(this, i, d).call(this, { type: "invalid-channel" });
+        e.name = "Invalid channel", e.description = "The channel requested is invalid", e.no_code = 12, i(this, n, s).call(this), i(this, n, d).call(this, { type: "invalid-channel" });
         break;
       case "34":
-        t.name = "Empty channel", t.description = "The channel requested is empty", t.no_code = 13, n(this, i, l).call(this), n(this, i, d).call(this, { type: "empty-channel" });
+        e.name = "Empty channel", e.description = "The channel requested is empty", e.no_code = 13, i(this, n, s).call(this), i(this, n, d).call(this, { type: "empty-channel" });
         break;
       case "35":
-        t.name = "Jam", t.description = "Jam in elevator engine", t.no_code = 14, n(this, i, l).call(this), n(this, i, f).call(this, { type: "jam" });
+        e.name = "Jam", e.description = "Jam in elevator engine", e.no_code = 14, i(this, n, s).call(this), i(this, n, _).call(this, { type: "jam" });
         break;
       case "36":
-        t.name = "Malfunction", t.description = "Malfunction in the elevator belt or product detector", t.no_code = 15, n(this, i, l).call(this), n(this, i, f).call(this, { type: "malfunction" });
+        e.name = "Malfunction", e.description = "Malfunction in the elevator belt or product detector", e.no_code = 15, i(this, n, s).call(this), i(this, n, _).call(this, { type: "malfunction" });
         break;
       case "37":
-        t.name = "Photo transistors", t.description = "Failure in one of the photo transistors in the cabinet", t.no_code = 16, n(this, i, l).call(this), n(this, i, f).call(this, { type: "photo-transistors" });
+        e.name = "Photo transistors", e.description = "Failure in one of the photo transistors in the cabinet", e.no_code = 16, i(this, n, s).call(this), i(this, n, _).call(this, { type: "photo-transistors" });
         break;
       case "38":
-        t.name = "Without channels", t.description = "No channels detected", t.no_code = 17, n(this, i, l).call(this), n(this, i, f).call(this, { type: "without-channels" });
+        e.name = "Without channels", e.description = "No channels detected", e.no_code = 17, i(this, n, s).call(this), i(this, n, _).call(this, { type: "without-channels" });
         break;
       case "39":
-        t.name = "Product detector fault", t.description = "Product detector fault", t.no_code = 18, n(this, i, m).call(this), n(this, i, d).call(this, { type: "fault-product-detector" });
+        e.name = "Product detector fault", e.description = "Product detector fault", e.no_code = 18, i(this, n, b).call(this), i(this, n, d).call(this, { type: "fault-product-detector" });
         break;
       case "41":
-        t.name = "Fault in 485 BUS", t.description = "Machine display is disconnected", t.no_code = 19, n(this, i, _).call(this), n(this, i, d).call(this, { type: "display-disconnected" });
+        e.name = "Fault in 485 BUS", e.description = "Machine display is disconnected", e.no_code = 19, i(this, n, u).call(this), i(this, n, d).call(this, { type: "display-disconnected" });
         break;
       case "42":
-        t.name = "Product under elevator", t.description = "Product alarm under elevator", t.no_code = 20, n(this, i, l).call(this), n(this, i, d).call(this, { type: "product-under-elevator" });
+        e.name = "Product under elevator", e.description = "Product alarm under elevator", e.no_code = 20, i(this, n, s).call(this), i(this, n, d).call(this, { type: "product-under-elevator" });
         break;
       case "43":
-        t.name = "Error when elevator approaching to a position", t.description = "Error when elevator approaching to a position", t.no_code = 21, n(this, i, _).call(this), n(this, i, d).call(this, { type: "error-approaching-position", severity: "high" });
+        e.name = "Error when elevator approaching to a position", e.description = "Error when elevator approaching to a position", e.no_code = 21, i(this, n, u).call(this), i(this, n, d).call(this, { type: "error-approaching-position", severity: "high" });
         break;
       case "44":
-        t.name = "Fault in keyboard", t.description = "Fault in keyboard", t.no_code = 22, n(this, i, l).call(this), n(this, i, f).call(this, { type: "fault-keyboard" });
+        e.name = "Fault in keyboard", e.description = "Fault in keyboard", e.no_code = 22, i(this, n, s).call(this), i(this, n, _).call(this, { type: "fault-keyboard" });
         break;
       case "45":
-        t.name = "Eeprom writing error", t.description = "Eeprom writing error", t.no_code = 23, n(this, i, l).call(this), n(this, i, f).call(this, { type: "eeprom-writing-error", severity: "critical" });
+        e.name = "Eeprom writing error", e.description = "Eeprom writing error", e.no_code = 23, i(this, n, s).call(this), i(this, n, _).call(this, { type: "eeprom-writing-error", severity: "critical" });
         break;
       case "46":
-        t.name = "Fault communicating with temperature control", t.description = "Fault communicating with temperature control", t.no_code = 24, n(this, i, _).call(this), n(this, i, d).call(this, { type: "fault-temperature-control" });
+        e.name = "Fault communicating with temperature control", e.description = "Fault communicating with temperature control", e.no_code = 24, i(this, n, u).call(this), i(this, n, d).call(this, { type: "fault-temperature-control" });
         break;
       case "47":
-        t.name = "Thermometer disconnected", t.description = "The thermometer is disconnected", t.no_code = 25, n(this, i, _).call(this), n(this, i, d).call(this, { type: "thermometer-disconnected" });
+        e.name = "Thermometer disconnected", e.description = "The thermometer is disconnected", e.no_code = 25, i(this, n, u).call(this), i(this, n, d).call(this, { type: "thermometer-disconnected" });
         break;
       case "48":
-        t.name = "Thermometer programming lost", t.description = "Thermometer programming lost", t.no_code = 26, n(this, i, _).call(this), n(this, i, d).call(this, { type: "thermometer-programming-lost" });
+        e.name = "Thermometer programming lost", e.description = "Thermometer programming lost", e.no_code = 26, i(this, n, u).call(this), i(this, n, d).call(this, { type: "thermometer-programming-lost" });
         break;
       case "49":
-        t.name = "Thermometer faulty", t.description = "Thermometer faulty", t.no_code = 27, n(this, i, _).call(this), n(this, i, d).call(this, { type: "thermometer-faulty" });
+        e.name = "Thermometer faulty", e.description = "Thermometer faulty", e.no_code = 27, i(this, n, u).call(this), i(this, n, d).call(this, { type: "thermometer-faulty" });
         break;
       case "4a":
-        t.name = "Channels power consumption detector faulty", t.description = "Channels power consumption detector faulty", t.no_code = 28, n(this, i, l).call(this), n(this, i, f).call(this, { type: "channels-power-consumption-detector-faulty", severity: "critical" });
+        e.name = "Channels power consumption detector faulty", e.description = "Channels power consumption detector faulty", e.no_code = 28, i(this, n, s).call(this), i(this, n, _).call(this, { type: "channels-power-consumption-detector-faulty", severity: "critical" });
         break;
       case "4b":
-        t.name = "Elevator does not find channel or tray", t.description = "Elevator does not find channel or tray", t.no_code = 29, n(this, i, l).call(this), n(this, i, d).call(this, { type: "elevator-not-find-channel-tray" });
+        e.name = "Elevator does not find channel or tray", e.description = "Elevator does not find channel or tray", e.no_code = 29, i(this, n, s).call(this), i(this, n, d).call(this, { type: "elevator-not-find-channel-tray" });
         break;
       case "4c":
-        t.name = "Elevator does not find delivery product position", t.description = "Elevator does not find delivery product position", t.no_code = 30, n(this, i, l).call(this), n(this, i, f).call(this, { type: "elevator-not-find-delivery-position" });
+        e.name = "Elevator does not find delivery product position", e.description = "Elevator does not find delivery product position", e.no_code = 30, i(this, n, s).call(this), i(this, n, _).call(this, { type: "elevator-not-find-delivery-position" });
         break;
       case "4d":
-        t.name = "Interior of elevator blocked", t.description = "Interior of elevator blocked", t.no_code = 31, n(this, i, m).call(this), this.__internal__.dispense.elevator.need_reset || (this.__internal__.dispense.elevator.need_reset = !0), n(this, i, f).call(this, { type: "interior-elevator-blocked", severity: "low" });
+        e.name = "Interior of elevator blocked", e.description = "Interior of elevator blocked", e.no_code = 31, i(this, n, b).call(this), this.__internal__.dispense.elevator.need_reset || (this.__internal__.dispense.elevator.need_reset = !0), i(this, n, _).call(this, { type: "interior-elevator-blocked", severity: "low" });
         break;
       case "4e":
-        t.name = "Error in tester of product detector", t.description = "Error in tester of product detector", t.no_code = 32, n(this, i, l).call(this), n(this, i, f).call(this, { type: "error-tester-product-detector" });
+        e.name = "Error in tester of product detector", e.description = "Error in tester of product detector", e.no_code = 32, i(this, n, s).call(this), i(this, n, _).call(this, { type: "error-tester-product-detector" });
         break;
       case "4f":
-        t.name = "Waiting for product to be removed", t.description = "Waiting for product to be removed", t.no_code = 33, n(this, i, m).call(this);
+        e.name = "Waiting for product to be removed", e.description = "Waiting for product to be removed", e.no_code = 33, i(this, n, b).call(this);
         break;
       case "50":
-        t.name = "Product expired by temperature reasons", t.description = "Product expired by temperature reasons", t.no_code = 34, n(this, i, _).call(this), n(this, i, d).call(this, { type: "product-expired-temperature" });
+        e.name = "Product expired by temperature reasons", e.description = "Product expired by temperature reasons", e.no_code = 34, i(this, n, u).call(this), i(this, n, d).call(this, { type: "product-expired-temperature" });
         break;
       case "51":
-        t.name = "Automatic door faulty", t.description = "Automatic door faulty", t.no_code = 35, n(this, i, _).call(this), n(this, i, d).call(this, { type: "automatic-door-faulty" });
+        e.name = "Automatic door faulty", e.description = "Automatic door faulty", e.no_code = 35, i(this, n, u).call(this), i(this, n, d).call(this, { type: "automatic-door-faulty" });
         break;
       case "59":
       case "5a":
       case "61":
       case "62":
       case "63":
-        switch (t.name = "Product is expired", t.description = "Product is expired", t.additional = { nsf_alarm: 1 }, e[1]) {
+        switch (e.name = "Product is expired", e.description = "Product is expired", e.additional = { nsf_alarm: 1 }, t[1]) {
           case "5a":
-            t.additional.nsf_alarm = 2;
+            e.additional.nsf_alarm = 2;
             break;
           case "61":
-            t.additional.nsf_alarm = 3;
+            e.additional.nsf_alarm = 3;
             break;
           case "62":
-            t.additional.nsf_alarm = 4;
+            e.additional.nsf_alarm = 4;
             break;
           case "63":
-            t.additional.nsf_alarm = 5;
+            e.additional.nsf_alarm = 5;
             break;
         }
-        t.no_code = 36, n(this, i, _).call(this), n(this, i, d).call(this, { type: "product-expired" });
+        e.no_code = 36, i(this, n, u).call(this), i(this, n, d).call(this, { type: "product-expired" });
         break;
       case "64":
-        t.name = "Product detector didn't change during its verification test", t.description = "Product detector didn't change during its verification test", t.no_code = 37, n(this, i, _).call(this), n(this, i, d).call(this, { type: "automatic-door-faulty" });
+        e.name = "Product detector didn't change during its verification test", e.description = "Product detector didn't change during its verification test", e.no_code = 37, i(this, n, u).call(this), i(this, n, d).call(this, { type: "automatic-door-faulty" });
         break;
     }
-    this.dispatch("machine:status", t);
+    this.dispatch("machine:status", e);
   } else
-    t.name = "executed", t.description = "The last command was executed successfully", t.no_code = 8, !e[1] && this.__internal__.dispense.dispensing && n(this, i, l).call(this);
-  return t;
-}, dt = function(e) {
-  if (e = parseInt(e) + 109, e = e.toString(), e.length !== 3)
-    throw new Error("Invalid selection");
-  const t = (parseInt(e.substring(0, 2)) + 128).toString(16).padStart(2, "0");
-  return { channel: (parseInt(e.substring(2, 3)) + 128).toString(16).padStart(2, "0"), tray: t };
-}, pt = function() {
+    e.name = "executed", e.description = "The last command was executed successfully", e.no_code = 8, !t[1] && this.__internal__.dispense.dispensing && i(this, n, s).call(this);
+  return e;
+}, ce = function() {
   this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.dispense.timeout = 0, this.__internal__.dispense.interval = 0;
-}, ut = function() {
+}, he = function() {
   this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval);
-  const e = this;
-  e.__internal__.dispense.timeout = setTimeout(() => {
-    e.__internal__.dispense.interval = setInterval(() => {
-      e.status().then(() => {
+  const t = this;
+  t.__internal__.dispense.timeout = setTimeout(() => {
+    t.__internal__.dispense.interval = setInterval(() => {
+      t.status().then(() => {
       });
-    }, e.__internal__.dispense.interval_time);
-  }, e.__internal__.dispense.timeout_time);
-}, w = async function(e) {
-  const t = ["02", "30", "30", "81", "52", e, "FF"];
-  return await n(this, i, u).call(this, t, "reset");
-}, S = function() {
-  const e = this.__device.type === "iceplus" ? B(40) : B(25), t = /* @__PURE__ */ new Date(), r = 1e3 * e + t.getTime(), a = new Date(r);
+    }, t.__internal__.dispense.interval_time);
+  }, t.__internal__.dispense.timeout_time);
+}, C = async function(t) {
+  return await this.appendToQueue(
+    a.reset({
+      machineChannel: this.listenOnChannel,
+      type: t
+    }),
+    "reset"
+  );
+}, E = function() {
+  const t = this.__device.type === "iceplus" ? Q(40) : Q(25), e = /* @__PURE__ */ new Date(), r = 1e3 * t + e.getTime(), o = new Date(r);
   this.dispatch("reset:errors", {
     description: "Resetting machine errors",
-    duration: e,
-    started_at: t,
-    finished_at: a
+    duration: t,
+    started_at: e,
+    finished_at: o
   });
-}, M = async function(e) {
-  const t = ["02", "30", "30", "81", "4C", e, "FF"];
-  return await n(this, i, u).call(this, t, "lights");
-}, D = async function(e = "80", t = []) {
-  const r = ["02", "30", "30", "81", "44", e, ...t];
-  return await n(this, i, u).call(this, r, "display");
-}, I = function(e = "") {
-  e = e.padEnd(32, " ");
-  const t = [];
-  for (let r = 0; r < 32; r++)
-    t.push(e.charCodeAt(r).toString(16));
-  return t;
-}, _t = function(e) {
-  if (!(e instanceof Date)) throw new Error("Invalid date, must be an instance of Date");
-  const t = e.getHours().toString().padStart(2, "0"), r = e.getMinutes().toString().padStart(2, "0"), a = e.getDate().toString().padStart(2, "0"), o = (e.getMonth() + 1).toString().padStart(2, "0"), c = e.getFullYear().toString().substring(2, 4), s = `${t}:${r} ${a}-${o}-${c}`, v = [];
-  for (let y = 0; y < 14; y++)
-    v.push(s.charCodeAt(y).toString(16));
-  return v;
+}, D = async function(t) {
+  return await this.appendToQueue(
+    a.lights({
+      machineChannel: this.listenOnChannel,
+      type: t
+    }),
+    "lights"
+  );
 };
 export {
-  Tt as Jofemar
+  ve as Jofemar
 };
