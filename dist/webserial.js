@@ -20,7 +20,7 @@ const a = {
   wait: e,
   getSeconds: r,
   supportWebSerial: o
-}, s = "4.1.8";
+}, s = "4.1.9";
 export {
   k as Arduino,
   S as Boardroid,

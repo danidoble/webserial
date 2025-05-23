@@ -1,6 +1,6 @@
 {
   "name": "@danidoble/webserial",
-  "version": "4.2.6",
+  "version": "4.2.7",
   "author": "danidoble",
   "repository": {
     "type": "git",
@@ -11,10 +11,10 @@
   "devDependencies": {
     "@danidoble/webserial-vending-commands": "^1.0.1",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.26.0",
+    "@eslint/js": "^9.27.0",
     "autoprefixer": "^10.4.21",
     "axios": "^1.9.0",
-    "eslint": "^9.26.0",
+    "eslint": "^9.27.0",
     "globals": "^15.15.0",
     "jsencrypt": "^3.3.2",
     "postcss": "^8.5.3",

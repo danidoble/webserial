@@ -6,4 +6,4 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */const u={wait:e.wait,getSeconds:e.getSeconds,supportWebSerial:e.supportWebSerial},c="4.1.8";exports.Devices=e._;exports.Emulator=e.Emulator;exports.Kernel=e.Kernel;exports.Relay=r.Relay;exports.Locker=o.Locker;exports.PinPad=i.PinPad;exports.PinPax=n.PinPax;exports.Jofemar=t.Jofemar;exports.Boardroid=a.Boardroid;exports.Arduino=s.Arduino;exports.utils=u;exports.version=c;
+ */const u={wait:e.wait,getSeconds:e.getSeconds,supportWebSerial:e.supportWebSerial},c="4.1.9";exports.Devices=e._;exports.Emulator=e.Emulator;exports.Kernel=e.Kernel;exports.Relay=r.Relay;exports.Locker=o.Locker;exports.PinPad=i.PinPad;exports.PinPax=n.PinPax;exports.Jofemar=t.Jofemar;exports.Boardroid=a.Boardroid;exports.Arduino=s.Arduino;exports.utils=u;exports.version=c;
