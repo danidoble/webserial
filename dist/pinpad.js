@@ -6,7 +6,7 @@ var bn = (n, i, t) => i in n ? yn(n, i, { enumerable: !0, configurable: !0, writ
 var Ce = (n, i, t) => bn(n, typeof i != "symbol" ? i + "" : i, t), Pn = (n, i, t) => i.has(n) || Te("Cannot " + t);
 var Ae = (n, i, t) => i.has(n) ? Te("Cannot add the same private member more than once") : i instanceof WeakSet ? i.add(n) : i.set(n, t);
 var p = (n, i, t) => (Pn(n, i, "access private method"), t);
-import { K as vn, a as wn, _ as Re, i as G, b as Oe, w as xe } from "./kernel-Bquzoyqh.js";
+import { K as vn, a as wn, h as Re, i as G, b as Oe, w as xe } from "./kernel-BLbpgXHp.js";
 var En = "0123456789abcdefghijklmnopqrstuvwxyz";
 function $(n) {
   return En.charAt(n);
@@ -2295,6 +2295,8 @@ function Kt(n, i, t) {
     if (m === null) return "";
     if (d.isDate(m))
       return m.toISOString();
+    if (d.isBoolean(m))
+      return m.toString();
     if (!c && d.isBlob(m))
       throw new w("Blob is not supported. Use a Buffer instead.");
     return d.isArrayBuffer(m) || d.isTypedArray(m) ? c && typeof Blob == "function" ? new Blob([m]) : Buffer.from(m) : m;
@@ -3215,7 +3217,7 @@ const _s = async (n) => {
       duplex: "half",
       credentials: C ? f : void 0
     });
-    let T = await fetch(m);
+    let T = await fetch(m, g);
     const R = re && (u === "stream" || u === "response");
     if (re && (o || R && b)) {
       const I = {};
@@ -3320,7 +3322,7 @@ function Ze(n) {
     ), e.response.headers = L.from(e.response.headers))), Promise.reject(e);
   });
 }
-const Ti = "1.9.0", Wt = {};
+const Ti = "1.10.0", Wt = {};
 ["object", "boolean", "number", "function", "string", "symbol"].forEach((n, i) => {
   Wt[n] = function(e) {
     return typeof e === n || "a" + (i < 1 ? "n " : " ") + n;

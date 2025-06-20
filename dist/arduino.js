@@ -4,7 +4,7 @@ var c = (n) => {
 var p = (n, s, t) => s.has(n) || c("Cannot " + t);
 var d = (n, s, t) => s.has(n) ? c("Cannot add the same private member more than once") : s instanceof WeakSet ? s.add(n) : s.set(n, t);
 var h = (n, s, t) => (p(n, s, "access private method"), t);
-import { K as _, _ as l } from "./kernel-Bquzoyqh.js";
+import { K as _, h as l } from "./kernel-BLbpgXHp.js";
 import { i } from "./relay-Dop4mFk-.js";
 var r, u;
 class w extends _ {
