@@ -116,13 +116,13 @@ class M extends A {
   async enableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, g).call(this);
     for (let e = 1; e <= 90; e++)
-      await this.enable(e), i(this, a, e), n(this, t, g).call(this);
+      await this.enable({ cell: e }), i(this, a, e), n(this, t, g).call(this);
     i(this, a, 90), n(this, t, g).call(this), n(this, t, _).call(this);
   }
   async disableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, b).call(this);
     for (let e = 1; e <= 90; e++)
-      await this.enable(e), i(this, a, e), n(this, t, b).call(this);
+      await this.disable({ cell: e }), i(this, a, e), n(this, t, b).call(this);
     i(this, a, 90), n(this, t, b).call(this), n(this, t, _).call(this);
   }
 }
