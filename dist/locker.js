@@ -108,7 +108,7 @@ class M extends A {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, f).call(this);
     const e = [];
     for (let s = 1; s <= 90; s++) {
-      const d = await this.dispense(s);
+      const d = await this.dispense({ cell: s, status: !0 });
       e.push(d), i(this, a, s), n(this, t, f).call(this);
     }
     i(this, a, 90), n(this, t, f).call(this, e), n(this, t, _).call(this);
