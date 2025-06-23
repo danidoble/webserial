@@ -3,19 +3,19 @@ var w = (l) => {
 };
 var m = (l, c, e) => c.has(l) || w("Cannot " + e);
 var r = (l, c, e) => (m(l, c, "read from private field"), e ? e.call(l) : c.get(l)), u = (l, c, e) => c.has(l) ? w("Cannot add the same private member more than once") : c instanceof WeakSet ? c.add(l) : c.set(l, e), i = (l, c, e, s) => (m(l, c, "write to private field"), s ? s.call(l, e) : c.set(l, e), e), n = (l, c, e) => (m(l, c, "access private method"), e);
-import { K as A, h as v } from "./kernel-BLbpgXHp.js";
+import { K as D, h as v, w as y } from "./kernel-BLbpgXHp.js";
 import { u as p } from "./relay-Dop4mFk-.js";
-var h, a, o, t, y, _, f, g, b, C, T;
-class M extends A {
-  constructor({ filters: e = null, config_port: s = null, no_device: d = 1, device_listen_on_port: k = 3 } = {}) {
-    super({ filters: e, config_port: s, no_device: d, device_listen_on_port: k });
+var h, a, o, t, C, _, f, g, b, T, k;
+class L extends D {
+  constructor({ filters: e = null, config_port: s = null, no_device: d = 1, device_listen_on_port: A = 3 } = {}) {
+    super({ filters: e, config_port: s, no_device: d, device_listen_on_port: A });
     u(this, t);
     u(this, h, !1);
     u(this, a, 0);
     u(this, o, 0);
     if (this.__internal__.device.type = "locker", v.getCustom(this.typeDevice, d))
       throw new Error(`Device ${this.typeDevice} ${d} already exists`);
-    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, v.add(this), n(this, t, y).call(this);
+    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, v.add(this), n(this, t, C).call(this);
   }
   serialMessage(e) {
     const s = {
@@ -58,7 +58,7 @@ class M extends A {
   }
   async dispense({ cell: e = 1, status: s = !0 } = {}) {
     return setTimeout(() => {
-      s === !0 ? n(this, t, C).call(this) : n(this, t, T).call(this);
+      s === !0 ? n(this, t, T).call(this) : n(this, t, k).call(this);
     }, this.__internal__.time.response_engines / 2), await this.internalDispense(
       p.openCell({
         cell: e,
@@ -116,17 +116,17 @@ class M extends A {
   async enableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, g).call(this);
     for (let e = 1; e <= 90; e++)
-      await this.enable({ cell: e }), i(this, a, e), n(this, t, g).call(this);
+      await this.enable({ cell: e }), await y(100), i(this, a, e), n(this, t, g).call(this);
     i(this, a, 90), n(this, t, g).call(this), n(this, t, _).call(this);
   }
   async disableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, b).call(this);
     for (let e = 1; e <= 90; e++)
-      await this.disable({ cell: e }), i(this, a, e), n(this, t, b).call(this);
+      await this.disable({ cell: e }), await y(100), i(this, a, e), n(this, t, b).call(this);
     i(this, a, 90), n(this, t, b).call(this), n(this, t, _).call(this);
   }
 }
-h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), y = function() {
+h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = function() {
   const e = ["percentage:disable", "percentage:enable", "percentage:open"];
   for (const s of e)
     this.serialRegisterAvailableListener(s);
@@ -138,11 +138,11 @@ h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), y = 
   i(this, o, Math.round(r(this, a) * 100 / 90)), this.dispatch("percentage:enable", { percentage: r(this, o) });
 }, b = function() {
   i(this, o, Math.round(r(this, a) * 100 / 90)), this.dispatch("percentage:disable", { percentage: r(this, o) });
-}, C = function() {
-  this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
 }, T = function() {
+  this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
+}, k = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !1);
 };
 export {
-  M as Locker
+  L as Locker
 };
