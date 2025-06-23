@@ -347,7 +347,7 @@ class _e extends ue {
     });
     t || (i || (i = 1.5), this.__internal__.dispense.custom_limit_counter = i + 0.2);
     let l = await this.internalDispense(o);
-    return !l.dispensed && r && (l = await this.internalDispense(o)), this.__internal__.dispense.custom_limit_counter = null, l;
+    return !l.status && r && (l = await this.internalDispense(o)), this.__internal__.dispense.custom_limit_counter = null, l;
   }
   async testEngines({ singleEngine: n = !1 } = {}) {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
