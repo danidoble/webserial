@@ -107,23 +107,23 @@ class L extends D {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
     n(this, t, _).call(this), i(this, h, !0), n(this, t, f).call(this);
     const e = [];
-    for (let s = 1; s <= 90; s++) {
+    for (let s = 1; s <= 80; s++) {
       const d = await this.dispense({ cell: s, status: !0 });
       e.push(d), i(this, a, s), n(this, t, f).call(this);
     }
-    i(this, a, 90), n(this, t, f).call(this, e), n(this, t, _).call(this);
+    i(this, a, 80), n(this, t, f).call(this, e), n(this, t, _).call(this);
   }
   async enableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, g).call(this);
-    for (let e = 1; e <= 90; e++)
+    for (let e = 1; e <= 80; e++)
       await this.enable({ cell: e }), await y(100), i(this, a, e), n(this, t, g).call(this);
-    i(this, a, 90), n(this, t, g).call(this), n(this, t, _).call(this);
+    i(this, a, 80), n(this, t, g).call(this), n(this, t, _).call(this);
   }
   async disableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, b).call(this);
-    for (let e = 1; e <= 90; e++)
+    for (let e = 1; e <= 80; e++)
       await this.disable({ cell: e }), await y(100), i(this, a, e), n(this, t, b).call(this);
-    i(this, a, 90), n(this, t, b).call(this), n(this, t, _).call(this);
+    i(this, a, 80), n(this, t, b).call(this), n(this, t, _).call(this);
   }
 }
 h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = function() {
@@ -133,11 +133,11 @@ h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = 
 }, _ = function() {
   i(this, h, !1), i(this, a, 0), i(this, o, 0);
 }, f = function(e = null) {
-  i(this, o, Math.round(r(this, a) * 100 / 90)), this.dispatch("percentage:open", { percentage: r(this, o), dispensed: e });
+  i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:open", { percentage: r(this, o), dispensed: e });
 }, g = function() {
-  i(this, o, Math.round(r(this, a) * 100 / 90)), this.dispatch("percentage:enable", { percentage: r(this, o) });
+  i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:enable", { percentage: r(this, o) });
 }, b = function() {
-  i(this, o, Math.round(r(this, a) * 100 / 90)), this.dispatch("percentage:disable", { percentage: r(this, o) });
+  i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:disable", { percentage: r(this, o) });
 }, T = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
 }, k = function() {
