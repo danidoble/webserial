@@ -1,6 +1,14 @@
 import { Locker } from './../lib/serial/locker.js';
 
-const machine = new Locker();
+const machine = new Locker({ device_listen_on_port: 1 });
+
+/*machine.__debug__ = true;
+machine.on('debug', (event) => {
+  // @ts-expect-error detail is defined
+  const detail = event.detail;
+  console.log('debug', detail);
+});*/
+
 machine.on('serial:message', (data) => {
   console.log(data);
 });
@@ -19,7 +27,7 @@ machine.on('serial:disconnected', (event) => {
 
 // eslint-disable-next-line no-unused-vars
 machine.on('serial:connecting', (event) => {
-  document.getElementById('log').innerText += 'Connecting\n\n';
+  document.getElementById('log').innerText += `Connecting ${event.detail.active ? 'active' : 'finished'} \n\n`;
 });
 
 // eslint-disable-next-line no-unused-vars
