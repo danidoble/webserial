@@ -6,7 +6,8 @@ var bn = (n, i, t) => i in n ? yn(n, i, { enumerable: !0, configurable: !0, writ
 var Ce = (n, i, t) => bn(n, typeof i != "symbol" ? i + "" : i, t), Pn = (n, i, t) => i.has(n) || Te("Cannot " + t);
 var Ae = (n, i, t) => i.has(n) ? Te("Cannot add the same private member more than once") : i instanceof WeakSet ? i.add(n) : i.set(n, t);
 var p = (n, i, t) => (Pn(n, i, "access private method"), t);
-import { K as vn, a as wn, h as Re, i as G, b as Oe, w as xe } from "./kernel-C4PiwwCb.js";
+import { K as vn, a as wn, i as G, b as Re, w as Oe } from "./kernel-XY8jLkNB.js";
+import { h as xe } from "./webserial-core-DGKQCs5a.js";
 var En = "0123456789abcdefghijklmnopqrstuvwxyz";
 function $(n) {
   return En.charAt(n);
@@ -3671,25 +3672,25 @@ A.getAdapter = Si.getAdapter;
 A.HttpStatusCode = ae;
 A.default = A;
 const {
-  Axios: As,
-  AxiosError: Rs,
-  CanceledError: Os,
-  isCancel: xs,
-  CancelToken: Ds,
-  VERSION: Is,
-  all: Bs,
-  Cancel: Ns,
-  isAxiosError: Vs,
-  spread: Us,
-  toFormData: Ls,
-  AxiosHeaders: Ms,
-  HttpStatusCode: ks,
-  formToJSON: Fs,
-  getAdapter: js,
-  mergeConfig: qs
+  Axios: Rs,
+  AxiosError: Os,
+  CanceledError: xs,
+  isCancel: Ds,
+  CancelToken: Is,
+  VERSION: Bs,
+  all: Ns,
+  Cancel: Vs,
+  isAxiosError: Us,
+  spread: Ls,
+  toFormData: Ms,
+  AxiosHeaders: ks,
+  HttpStatusCode: Fs,
+  formToJSON: js,
+  getAdapter: qs,
+  mergeConfig: Ks
 } = A;
 var h, Ri, Oi, xi, oe, Di, Ii, Bi, Ni, Vi, Ui, Li, Mi, ki, Fi, dt, _t, ji, gt, qi, tt, Ki, D, Hi, Wi, ce, Xi, zi, Gi, ue, he, mt, le, $i, j, q, Bt, fe, yt, pe, de, Ji, _e, ge, Qi, Zi, ot, me, Yi, tn, en, Nt, nn, rn, ye, sn, an, on, cn, un, hn, ln, fn, pn, be, Pe, dn, _n, gn;
-class Ks extends vn {
+class Hs extends vn {
   constructor({
     filters: t = null,
     config_port: e = {
@@ -3870,7 +3871,7 @@ class Ks extends vn {
     });
     if (this.__internal__.device.type = "pinpad", !wn())
       throw new Error("Crypto not supported in this browser");
-    if (Re.getCustom(this.typeDevice, r))
+    if (xe.getCustom(this.typeDevice, r))
       throw new Error(`Device ${this.typeDevice} ${r} already exists`);
     this.__internal__.time.response_connection = 3e3, this.__internal__.time.response_general = 5e3, this.__internal__.serial.delay_first_connection = 1e3, this.environment = c, a && (this.username = a), o && (this.password = o), p(this, h, Oi).call(this), p(this, h, Ri).call(this);
   }
@@ -4023,7 +4024,7 @@ class Ks extends vn {
     localStorage.removeItem("ppLoginResponse"), localStorage.removeItem("ppRSAKey"), localStorage.removeItem("ppPublicIP");
   }
   async checkPositionPermission() {
-    if (!Oe())
+    if (!Re())
       throw new Error("Geolocation not supported");
     return new Promise((t, e) => {
       navigator.permissions.query({ name: "geolocation" }).then((r) => {
@@ -4183,7 +4184,7 @@ class Ks extends vn {
   }
 }
 h = new WeakSet(), Ri = function() {
-  Re.add(this);
+  xe.add(this);
 }, Oi = function() {
   const t = [
     "pp:processing-card",
@@ -4547,7 +4548,7 @@ qi = function(t, e, r = !1) {
   const t = /* @__PURE__ */ new Date(), e = t.getHours().toString().padStart(2, "0"), r = t.getMinutes().toString().padStart(2, "0");
   return e + r;
 }, Qi = async function() {
-  return this.__pinPad__.config.latitude && this.__pinPad__.config.longitude ? this.latitudeLongitude : (this.__pinPad__.config.latitude = null, this.__pinPad__.config.longitude = null, Oe() ? new Promise((t) => {
+  return this.__pinPad__.config.latitude && this.__pinPad__.config.longitude ? this.latitudeLongitude : (this.__pinPad__.config.latitude = null, this.__pinPad__.config.longitude = null, Re() ? new Promise((t) => {
     navigator.geolocation.getCurrentPosition(
       (e) => {
         this.__pinPad__.config.latitude = e.coords.latitude, this.__pinPad__.config.longitude = e.coords.longitude, t(this.latitudeLongitude);
@@ -4738,7 +4739,7 @@ qi = function(t, e, r = !1) {
     }, 500);
   });
 }, an = async function(t) {
-  return await xe(t * 1e3);
+  return await Oe(t * 1e3);
 }, on = async function(t) {
   let e = this.url + this.__pinPad__.constants.uris.consult;
   return t > 1 && this.environment === "production" && (e = e.replace(
@@ -4994,7 +4995,7 @@ hn = function(t) {
     this.dispatch("pp:response", this.__pinPad__.operation.ignore.responseGlobal);
   else {
     const t = this.parseStringToBytes(this.__pinPad__.operation.ignore.C93Global, "");
-    await this.appendToQueue(t, "code93"), await xe(1400), this.dispatch("pp:response", this.__pinPad__.operation.ignore.responseGlobal);
+    await this.appendToQueue(t, "code93"), await Oe(1400), this.dispatch("pp:response", this.__pinPad__.operation.ignore.responseGlobal);
   }
 }, Pe = function(t) {
   const e = {
@@ -5073,5 +5074,5 @@ hn = function(t) {
   this.__pinPad__.config.read.AppId = "", this.__pinPad__.config.read.AppIdLabel = "", this.__pinPad__.config.read.Arqc = "", this.__pinPad__.config.read.ChipName = "", this.__pinPad__.config.read.ReadCTLS = "", this.__pinPad__.config.read.NB_Data = "", this.__pinPad__.config.read.NB_ksn = "", this.__pinPad__.config.read.PIN = "", this.__pinPad__.config.read.POSEM = "", this.__pinPad__.config.read.Tags = "", this.__pinPad__.config.read.Type = "", this.__pinPad__.config.read.Chip = "", this.__pinPad__.config.read.ChipNameEnc = "", this.__pinPad__.operation.ignore.error = "", this.__pinPad__.operation.ignore.C93Global = "", this.__pinPad__.operation.folio = "", this.__pinPad__.operation.authorization = "", this.__pinPad__.config.tokenizeTRX = !1;
 };
 export {
-  Ks as PinPad
+  Hs as PinPad
 };

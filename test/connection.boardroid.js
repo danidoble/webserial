@@ -15,6 +15,7 @@ machine.on('serial:disconnected', (event) => {
 
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
+  document.getElementById('disconnect').classList.add('hidden');
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -29,6 +30,7 @@ machine.on('serial:connected', (event) => {
   document.getElementById('disconnected').classList.add('hidden');
   document.getElementById('need-permission').classList.add('hidden');
   document.getElementById('connect').classList.add('hidden');
+  document.getElementById('disconnect').classList.remove('hidden');
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -36,6 +38,7 @@ machine.on('serial:need-permission', (event) => {
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('need-permission').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
+  document.getElementById('disconnect').classList.add('hidden');
 });
 
 // eslint-disable-next-line no-unused-vars

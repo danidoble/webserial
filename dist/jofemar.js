@@ -6,10 +6,11 @@ var de = (p, h, t) => h in p ? se(p, h, { enumerable: !0, configurable: !0, writ
 var M = (p, h, t) => de(p, typeof h != "symbol" ? h + "" : h, t), pe = (p, h, t) => h.has(p) || O("Cannot " + t);
 var I = (p, h, t) => h.has(p) ? O("Cannot add the same private member more than once") : h instanceof WeakSet ? h.add(p) : h.set(p, t);
 var i = (p, h, t) => (pe(p, h, "access private method"), t);
-import { K as ue, h as P, w, g as Q } from "./kernel-C4PiwwCb.js";
+import { K as ue, w, g as P } from "./kernel-XY8jLkNB.js";
 import { o as a } from "./relay-Dop4mFk-.js";
+import { h as Q } from "./webserial-core-DGKQCs5a.js";
 var n, S, g, A, B, W, F, q, R, $, N, j, L, V, J, U, K, H, z, G, Y, Z, X, ee, te, ne, ie, re, ae, u, s, b, d, _, oe, ce, he, C, E, D;
-class ve extends ue {
+class Ce extends ue {
   constructor({
     filters: t = null,
     config_port: e = null,
@@ -45,13 +46,13 @@ class ve extends ue {
         }
       }
     });
-    if (this.__internal__.device.type = "jofemar", P.getCustom(this.typeDevice, r))
+    if (this.__internal__.device.type = "jofemar", Q.getCustom(this.typeDevice, r))
       throw new Error(`Device ${this.typeDevice} ${r} already exists`);
     this.__internal__.dispense.must_response = !0, this.__internal__.time.response_general = 800, this.__internal__.time.response_engines = 800, this.__internal__.dispense.limit_counter = 40, this.__internal__.dispense.timeout = 0, this.__internal__.dispense.timeout_time = 4e3, this.__internal__.dispense.interval = 0, this.__internal__.dispense.interval_time = 1e3, this.__internal__.device.hex_number = (128 + this.listenOnChannel).toString(16), this.__internal__.device.door_open = !1, this.__internal__.dispense.elevator = {
       locking_time: 60,
       locking_interval: 0,
       need_reset: !1
-    }, this.deviceType = c, this.supportCart = l, i(this, n, S).call(this), P.add(this), i(this, n, g).call(this);
+    }, this.deviceType = c, this.supportCart = l, i(this, n, S).call(this), Q.add(this), i(this, n, g).call(this);
   }
   set startChannelVerification(t) {
     const e = parseInt(t);
@@ -1214,7 +1215,7 @@ _ = function({ type: t = null, severity: e = "high" } = {}) {
     "reset"
   );
 }, E = function() {
-  const t = this.__device.type === "iceplus" ? Q(40) : Q(25), e = /* @__PURE__ */ new Date(), r = 1e3 * t + e.getTime(), o = new Date(r);
+  const t = this.__device.type === "iceplus" ? P(40) : P(25), e = /* @__PURE__ */ new Date(), r = 1e3 * t + e.getTime(), o = new Date(r);
   this.dispatch("reset:errors", {
     description: "Resetting machine errors",
     duration: t,
@@ -1231,5 +1232,5 @@ _ = function({ type: t = null, severity: e = "high" } = {}) {
   );
 };
 export {
-  ve as Jofemar
+  Ce as Jofemar
 };

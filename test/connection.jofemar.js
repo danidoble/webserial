@@ -80,6 +80,7 @@ machine.on('serial:disconnected', (event) => {
 
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
+  document.getElementById('disconnect').classList.add('hidden');
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -94,6 +95,7 @@ machine.on('serial:connected', (event) => {
   document.getElementById('disconnected').classList.add('hidden');
   document.getElementById('need-permission').classList.add('hidden');
   document.getElementById('connect').classList.add('hidden');
+  document.getElementById('disconnect').classList.remove('hidden');
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -101,6 +103,7 @@ machine.on('serial:need-permission', (event) => {
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('need-permission').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
+  document.getElementById('disconnect').classList.add('hidden');
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -133,14 +136,14 @@ function addView() {
         <button id="continueNow" class="bg-sky-950 px-2 py-0.5 rounded-lg">click here</button>
         to continue now
     </div>
-    
+
     <div id="error" class="hidden p-4 bg-red-900 w-full absolute bottom-0 left-0">
         <p class="text-lg">Error</p>
         <p>
         Some error occurred. Please, check the machine.
         </p>
     </div>
-    
+
     <div class="absolute top-0 right-0 p-4 bg-neutral-700/50 rounded-l-lg">
         The temperature is: <span id="temperature">0</span>
     </div>`;
@@ -151,6 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   tryConnect();
   document.getElementById('connect').addEventListener('click', tryConnect);
+  document.getElementById('disconnect').addEventListener('click', () => {
+    machine
+      .disconnect()
+      .then(() => {
+        console.log('Disconnected');
+      })
+      .catch(console.error);
+  });
 });
 
 window.machine = machine;

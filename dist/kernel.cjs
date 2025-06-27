@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("./kernel-BxvweHTG.cjs");/**
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("./kernel-Bd3IuxSw.cjs"),r=require("./webserial-core-DlH0cFSH.cjs");/**
  * @license Webserial
  * webserial
  *
@@ -6,4 +6,4 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */const r="4.1.9";exports.Devices=e.h;exports.Kernel=e.Kernel;exports.version=r;
+ */const n="4.1.9";exports.Kernel=e.Kernel;exports.Devices=r.h;exports.version=n;

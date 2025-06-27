@@ -6,10 +6,11 @@ var E = (r, i, s) => i in r ? R(r, i, { enumerable: !0, configurable: !0, writab
 var y = (r, i, s) => E(r, typeof i != "symbol" ? i + "" : i, s), I = (r, i, s) => i.has(r) || d("Cannot " + s);
 var f = (r, i, s) => i.has(r) ? d("Cannot add the same private member more than once") : i instanceof WeakSet ? i.add(r) : i.set(r, s);
 var o = (r, i, s) => (I(r, i, "access private method"), s);
-import { K as C, h as m } from "./kernel-C4PiwwCb.js";
+import { K as C } from "./kernel-XY8jLkNB.js";
 import { s as n } from "./relay-Dop4mFk-.js";
+import { h as m } from "./webserial-core-DGKQCs5a.js";
 var t, w, _, l, g, v, b, x, T;
-class D extends C {
+class S extends C {
   constructor({
     filters: s = null,
     config_port: e = {
@@ -363,5 +364,5 @@ t = new WeakSet(), w = function() {
   this.dispatch("payment", s), this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = s);
 };
 export {
-  D as PinPax
+  S as PinPax
 };

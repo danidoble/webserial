@@ -1,12 +1,14 @@
-import { s as o, g as r, w as e } from "./kernel-C4PiwwCb.js";
-import { h as f, E as i, K as x } from "./kernel-C4PiwwCb.js";
-import { Relay as c } from "./relay.js";
-import { Locker as l } from "./locker.js";
-import { PinPad as P } from "./pinpad.js";
-import { PinPax as v } from "./pinpax.js";
-import { Jofemar as E } from "./jofemar.js";
-import { Boardroid as S } from "./boardroid.js";
-import { Arduino as h } from "./arduino.js";
+import { s as o, g as r, w as e } from "./kernel-XY8jLkNB.js";
+import { E as f, K as x } from "./kernel-XY8jLkNB.js";
+import { Relay as n } from "./relay.js";
+import { Locker as d } from "./locker.js";
+import { PinPad as u } from "./pinpad.js";
+import { PinPax as g } from "./pinpax.js";
+import { Jofemar as w } from "./jofemar.js";
+import { Boardroid as K } from "./boardroid.js";
+import { Arduino as b } from "./arduino.js";
+import { Hopper as k } from "./hopper.js";
+import { h as A } from "./webserial-core-DGKQCs5a.js";
 /**
  * @license Webserial
  * webserial
@@ -16,22 +18,23 @@ import { Arduino as h } from "./arduino.js";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const a = {
+const p = {
   wait: e,
   getSeconds: r,
   supportWebSerial: o
-}, s = "4.1.9";
+}, a = "4.1.9";
 export {
-  h as Arduino,
-  S as Boardroid,
-  f as Devices,
-  i as Emulator,
-  E as Jofemar,
+  b as Arduino,
+  K as Boardroid,
+  A as Devices,
+  f as Emulator,
+  k as Hopper,
+  w as Jofemar,
   x as Kernel,
-  l as Locker,
-  P as PinPad,
-  v as PinPax,
-  c as Relay,
-  a as utils,
-  s as version
+  d as Locker,
+  u as PinPad,
+  g as PinPax,
+  n as Relay,
+  p as utils,
+  a as version
 };

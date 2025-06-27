@@ -1,10 +1,11 @@
-import { K as o, h as i, w as s } from "./kernel-C4PiwwCb.js";
+import { K as o, w as i } from "./kernel-XY8jLkNB.js";
 import { e as a } from "./relay-Dop4mFk-.js";
-class d extends o {
+import { h as s } from "./webserial-core-DGKQCs5a.js";
+class p extends o {
   constructor({ filters: t = null, config_port: e = null, no_device: n = 1 } = {}) {
-    if (super({ filters: t, config_port: e, no_device: n }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !0, i.getCustom(this.typeDevice, n))
+    if (super({ filters: t, config_port: e, no_device: n }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !0, s.getCustom(this.typeDevice, n))
       throw new Error(`Device ${this.typeDevice} ${n} already exists`);
-    i.add(this);
+    s.add(this);
   }
   serialMessage(t) {
     const e = {
@@ -45,12 +46,12 @@ class d extends o {
   }
   async toggle({ inverse: t = !1, ms: e = 300 } = {}) {
     if (!t) {
-      await this.turnOn(), await s(e), await this.turnOff();
+      await this.turnOn(), await i(e), await this.turnOff();
       return;
     }
-    await this.turnOff(), await s(e), await this.turnOn();
+    await this.turnOff(), await i(e), await this.turnOn();
   }
 }
 export {
-  d as Relay
+  p as Relay
 };

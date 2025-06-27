@@ -1,21 +1,22 @@
 var w = (l) => {
   throw TypeError(l);
 };
-var m = (l, c, e) => c.has(l) || w("Cannot " + e);
-var r = (l, c, e) => (m(l, c, "read from private field"), e ? e.call(l) : c.get(l)), u = (l, c, e) => c.has(l) ? w("Cannot add the same private member more than once") : c instanceof WeakSet ? c.add(l) : c.set(l, e), i = (l, c, e, s) => (m(l, c, "write to private field"), s ? s.call(l, e) : c.set(l, e), e), n = (l, c, e) => (m(l, c, "access private method"), e);
-import { K as D, h as v, w as y } from "./kernel-C4PiwwCb.js";
+var b = (l, c, e) => c.has(l) || w("Cannot " + e);
+var r = (l, c, e) => (b(l, c, "read from private field"), e ? e.call(l) : c.get(l)), u = (l, c, e) => c.has(l) ? w("Cannot add the same private member more than once") : c instanceof WeakSet ? c.add(l) : c.set(l, e), i = (l, c, e, s) => (b(l, c, "write to private field"), s ? s.call(l, e) : c.set(l, e), e), n = (l, c, e) => (b(l, c, "access private method"), e);
+import { K as D, w as v } from "./kernel-XY8jLkNB.js";
 import { u as p } from "./relay-Dop4mFk-.js";
-var h, a, o, t, C, _, f, g, b, T, k;
-class L extends D {
+import { h as y } from "./webserial-core-DGKQCs5a.js";
+var h, a, o, t, C, _, f, g, m, T, k;
+class Q extends D {
   constructor({ filters: e = null, config_port: s = null, no_device: d = 1, device_listen_on_port: A = 3 } = {}) {
     super({ filters: e, config_port: s, no_device: d, device_listen_on_port: A });
     u(this, t);
     u(this, h, !1);
     u(this, a, 0);
     u(this, o, 0);
-    if (this.__internal__.device.type = "locker", v.getCustom(this.typeDevice, d))
+    if (this.__internal__.device.type = "locker", y.getCustom(this.typeDevice, d))
       throw new Error(`Device ${this.typeDevice} ${d} already exists`);
-    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, v.add(this), n(this, t, C).call(this);
+    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, y.add(this), n(this, t, C).call(this);
   }
   serialMessage(e) {
     const s = {
@@ -116,14 +117,14 @@ class L extends D {
   async enableAll() {
     n(this, t, _).call(this), i(this, h, !0), n(this, t, g).call(this);
     for (let e = 1; e <= 80; e++)
-      await this.enable({ cell: e }), await y(100), i(this, a, e), n(this, t, g).call(this);
+      await this.enable({ cell: e }), await v(100), i(this, a, e), n(this, t, g).call(this);
     i(this, a, 80), n(this, t, g).call(this), n(this, t, _).call(this);
   }
   async disableAll() {
-    n(this, t, _).call(this), i(this, h, !0), n(this, t, b).call(this);
+    n(this, t, _).call(this), i(this, h, !0), n(this, t, m).call(this);
     for (let e = 1; e <= 80; e++)
-      await this.disable({ cell: e }), await y(100), i(this, a, e), n(this, t, b).call(this);
-    i(this, a, 80), n(this, t, b).call(this), n(this, t, _).call(this);
+      await this.disable({ cell: e }), await v(100), i(this, a, e), n(this, t, m).call(this);
+    i(this, a, 80), n(this, t, m).call(this), n(this, t, _).call(this);
   }
 }
 h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = function() {
@@ -136,7 +137,7 @@ h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = 
   i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:open", { percentage: r(this, o), dispensed: e });
 }, g = function() {
   i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:enable", { percentage: r(this, o) });
-}, b = function() {
+}, m = function() {
   i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:disable", { percentage: r(this, o) });
 }, T = function() {
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
@@ -144,5 +145,5 @@ h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = 
   this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !1);
 };
 export {
-  L as Locker
+  Q as Locker
 };

@@ -18,6 +18,7 @@ export default defineConfig({
                 pinpad: resolve(_dirname, 'lib/serial/pinpad.js'),
                 pinpax: resolve(_dirname, 'lib/serial/pinpax.js'),
                 relay: resolve(_dirname, 'lib/serial/relay.js'),
+                hopper: resolve(_dirname, 'lib/serial/hopper.js'),
             },
             name: 'WebSerial'
         },
