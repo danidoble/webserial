@@ -1,13 +1,13 @@
-var N = Object.defineProperty;
-var w = (p) => {
+var R = Object.defineProperty;
+var y = (p) => {
   throw TypeError(p);
 };
-var R = (p, a, e) => a in p ? N(p, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : p[a] = e;
-var x = (p, a, e) => R(p, typeof a != "symbol" ? a + "" : a, e), P = (p, a, e) => a.has(p) || w("Cannot " + e);
-var E = (p, a, e) => a.has(p) ? w("Cannot add the same private member more than once") : a instanceof WeakSet ? a.add(p) : a.set(p, e);
+var N = (p, a, e) => a in p ? R(p, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : p[a] = e;
+var w = (p, a, e) => N(p, typeof a != "symbol" ? a + "" : a, e), P = (p, a, e) => a.has(p) || y("Cannot " + e);
+var x = (p, a, e) => a.has(p) ? y("Cannot add the same private member more than once") : a instanceof WeakSet ? a.add(p) : a.set(p, e);
 var n = (p, a, e) => (P(p, a, "access private method"), e);
-import { K as I, h as d } from "./webserial-core-DGKQCs5a.js";
-var t, H, u, f, c, _, b, A, v, s;
+import { K as I, h as E } from "./webserial-core-DGKQCs5a.js";
+var t, H, d, u, c, h, f, A, v, s;
 class O extends I {
   constructor({
     filters: e = null,
@@ -33,8 +33,8 @@ class O extends I {
     no_device: 1
   }) {
     super({ filters: e, config_port: r, no_device: i });
-    E(this, t);
-    x(this, "__hoppers__", {
+    x(this, t);
+    w(this, "__hoppers__", {
       levels: [
         { id: 1, currency: 10, key: "Hopper 1", name: "10 Pesos", amount: 0, capacity: 1e3 },
         { id: 2, currency: 5, key: "Hopper 2", name: "5 Pesos", amount: 0, capacity: 1e3 },
@@ -44,10 +44,10 @@ class O extends I {
       balance: 0,
       current: null
     });
-    if (this.__internal__.device.type = "hopper", d.registerType(this.__internal__.device.type), d.getByNumber(this.typeDevice, i))
+    if (this.__internal__.device.type = "hopper", E.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
     this.__internal__.time.response_connection = 7e3, this.__internal__.time.response_general = 7e3, this.__internal__.serial.delay_first_connection = 500, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
-`, d.add(this), n(this, t, H).call(this);
+`, E.add(this), n(this, t, H).call(this);
   }
   get balance() {
     return this.__hoppers__.balance;
@@ -59,20 +59,20 @@ class O extends I {
     return this.__hoppers__.levels;
   }
   setMaxCapacity({ hopper: e = null, capacity: r = 1e3 } = { hopper: null, capacity: 1e3 }) {
-    return n(this, t, _).call(this, e), this.__hoppers__.levels[e - 1].capacity = r, this;
+    return n(this, t, h).call(this, e), this.__hoppers__.levels[e - 1].capacity = r, this;
   }
   setHopperName({ hopper: e = null, name: r = "" } = { hopper: null, name: "" }) {
-    if (n(this, t, _).call(this, e), typeof r != "string" || r.length === 0)
+    if (n(this, t, h).call(this, e), typeof r != "string" || r.length === 0)
       throw new TypeError("Name must be a non-empty string");
     return this.__hoppers__.levels[e - 1].name = r, this;
   }
   setHopperKey({ hopper: e = null, key: r = "" } = { hopper: null, key: "" }) {
-    if (n(this, t, _).call(this, e), typeof r != "string" || r.length === 0)
+    if (n(this, t, h).call(this, e), typeof r != "string" || r.length === 0)
       throw new TypeError("Key must be a non-empty string");
     return this.__hoppers__.levels[e - 1].key = r, this;
   }
   setHopperCurrency({ hopper: e = null, currency: r = 1 } = { hopper: null, currency: 1 }) {
-    if (n(this, t, _).call(this, e), typeof r != "number" || r <= 0)
+    if (n(this, t, h).call(this, e), typeof r != "number" || r <= 0)
       throw new RangeError("Currency must be a positive number");
     return this.__hoppers__.levels[e - 1].currency = r, this;
   }
@@ -89,18 +89,18 @@ class O extends I {
       data: null
     };
     if (e.length === 3) {
-      n(this, t, u).call(this, o);
+      n(this, t, d).call(this, o);
       return;
     }
     if (e.length !== 13) {
-      const h = n(this, t, v).call(this, { array: e, chunkSize: 13 });
-      for (const l of h) {
-        const y = this.parseUint8ArrayToString(new Uint8Array(l)), T = this.asciiToHex(y), C = this.stringToArrayHex(y);
-        o.code = l, o.hex = C, o.ascii = T, l.length !== 13 ? n(this, t, u).call(this, o) : n(this, t, f).call(this, o);
+      const _ = n(this, t, v).call(this, { array: e, chunkSize: 13 });
+      for (const l of _) {
+        const b = this.parseUint8ArrayToString(new Uint8Array(l)), T = this.asciiToHex(b), C = this.stringToArrayHex(b);
+        o.code = l, o.hex = C, o.ascii = T, l.length !== 13 ? n(this, t, d).call(this, o) : n(this, t, u).call(this, o);
       }
       return;
     }
-    n(this, t, f).call(this, o);
+    n(this, t, u).call(this, o);
   }
   serialSetConnectionConstant() {
     return [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15];
@@ -126,17 +126,17 @@ class O extends I {
     return await this.appendToQueue(e, "ForceInvalid");
   }
   async readHopper({ hopper: e = null } = { hopper: null }) {
-    n(this, t, _).call(this, e), this.__hoppers__.current = e;
+    n(this, t, h).call(this, e), this.__hoppers__.current = e;
     const r = n(this, t, s).call(this, [10, e, e]);
     return await this.appendToQueue(r, "readHopper");
   }
   async writeHopper({ hopper: e = null, quantity: r = 0 } = { hopper: null, quantity: 0 }) {
-    n(this, t, _).call(this, e), n(this, t, b).call(this, r), this.__hoppers__.current = e;
-    const [i, o] = n(this, t, A).call(this, r), h = n(this, t, s).call(this, [10, 240, e, 0, 0, 0, 0, 0, 0, i, o]);
-    return await this.appendToQueue(h, "writeHopper");
+    n(this, t, h).call(this, e), n(this, t, f).call(this, r), this.__hoppers__.current = e;
+    const [i, o] = n(this, t, A).call(this, r), _ = n(this, t, s).call(this, [10, 240, e, 0, 0, 0, 0, 0, 0, i, o]);
+    return await this.appendToQueue(_, "writeHopper");
   }
   async dispenseHopper({ hopper: e = null } = { hopper: null }) {
-    n(this, t, _).call(this, e), this.__hoppers__.current = e;
+    n(this, t, h).call(this, e), this.__hoppers__.current = e;
     const r = n(this, t, s).call(this, [10, 2, e]);
     return await this.appendToQueue(r, "dispenseHopper");
   }
@@ -161,7 +161,7 @@ class O extends I {
     return await this.configValidator({ enable: !0 });
   }
   async change1x1({ hopper: e = null } = { hopper: null }) {
-    n(this, t, _).call(this, e), this.__hoppers__.current = e;
+    n(this, t, h).call(this, e), this.__hoppers__.current = e;
     const r = n(this, t, s).call(this, [10, 224, e]);
     return await this.appendToQueue(r, "change1x1Hopper-" + e);
   }
@@ -176,9 +176,9 @@ t = new WeakSet(), H = function() {
   const e = ["levels", "hopper:updated", "dispense-change", "balance:updated", "validator:status", "change:1x1"];
   for (const r of e)
     this.serialRegisterAvailableListener(r);
-}, u = function(e) {
+}, d = function(e) {
   e.error = !0, e.ascii.includes("ffffff") ? (e.name = "SINTAX", e.description = "Error de Sintaxis", e.no_code = 400) : e.ascii.includes("ffaaaa") ? (e.name = "LOWLEVEL", e.description = "Bajo nivel de monedas en Hopper (99)", e.no_code = 401) : e.ascii.includes("ffbbbb") ? (e.name = "TIMEOUT_DISPENSE", e.description = "Error de dispensado, timeout", e.no_code = 402) : (e.name = "UNKNOWN_ERROR", e.description = "Unknown error occurred", e.no_code = 999), this.dispatch("serial:message", e);
-}, f = function(e) {
+}, u = function(e) {
   if (this.lastAction === "status")
     e.name = "STATUS", e.description = "Hoppers status", e.no_code = 1, this.__hoppers__.levels[0].amount = n(this, t, c).call(this, e.code[9], e.code[10]), this.__hoppers__.levels[1].amount = n(this, t, c).call(this, e.code[7], e.code[8]), this.__hoppers__.levels[2].amount = n(this, t, c).call(this, e.code[5], e.code[6]), this.__hoppers__.levels[3].amount = n(this, t, c).call(this, e.code[3], e.code[4]), e.data = this.__hoppers__.levels, this.dispatch("levels", e.data);
   else if (this.lastAction === "readHopper") {
@@ -189,18 +189,18 @@ t = new WeakSet(), H = function() {
   this.dispatch("serial:message", e);
 }, c = function(e, r) {
   return (e << 8 | r) << 16 >> 16;
-}, _ = function(e) {
+}, h = function(e) {
   if (typeof e != "number" || e < 1 || e > 4)
     throw new RangeError("Hopper ID must be a number between 1 and 4");
   if (typeof e != "number" || !Number.isInteger(e))
     throw new TypeError("Hopper ID must be an integer");
-}, b = function(e) {
+}, f = function(e) {
   if (typeof e != "number" || e < -32768 || e > 32767)
     throw new RangeError("Quantity must be a number between -32768 and 32767");
   if (typeof e != "number" || !Number.isInteger(e))
     throw new TypeError("Quantity must be an integer");
 }, A = function(e) {
-  n(this, t, b).call(this, e);
+  n(this, t, f).call(this, e);
   const r = e & 65535, i = r >> 8 & 255, o = r & 255;
   return [i, o];
 }, v = function({ array: e, chunkSize: r = 13 } = {}) {
@@ -214,10 +214,10 @@ t = new WeakSet(), H = function() {
   return i;
 }, s = function(e) {
   e.length < 11 && (e = [...e, ...Array(11 - e.length).fill(0)]);
-  const i = e.slice(1, 11).reduce((o, h) => {
-    if (typeof h != "number")
+  const i = e.slice(1, 11).reduce((o, _) => {
+    if (typeof _ != "number")
       throw new TypeError("Array must contain only numbers");
-    return o + h;
+    return o + _;
   }, 0) & 255;
   return e[11] = i, e[12] = 15, e;
 };

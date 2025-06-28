@@ -735,7 +735,8 @@ const q = {
   boardroid: [],
   arduino: [],
   pinpad: [],
-  pinpax: []
+  pinpax: [],
+  hopper: []
 };
 f.devices = { ...f.devices, ...q };
 f.addCustom = (u, n) => {
