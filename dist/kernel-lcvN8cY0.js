@@ -1,24 +1,24 @@
-var O = Object.defineProperty;
+var U = Object.defineProperty;
 var I = (u) => {
   throw TypeError(u);
 };
-var U = (u, n, e) => n in u ? O(u, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : u[n] = e;
-var x = (u, n, e) => U(u, typeof n != "symbol" ? n + "" : n, e), A = (u, n, e) => n.has(u) || I("Cannot " + e);
+var O = (u, n, e) => n in u ? U(u, n, { enumerable: !0, configurable: !0, writable: !0, value: e }) : u[n] = e;
+var x = (u, n, e) => O(u, typeof n != "symbol" ? n + "" : n, e), A = (u, n, e) => n.has(u) || I("Cannot " + e);
 var g = (u, n, e) => (A(u, n, "read from private field"), e ? e.call(u) : n.get(u)), B = (u, n, e) => n.has(u) ? I("Cannot add the same private member more than once") : n instanceof WeakSet ? n.add(u) : n.set(u, e), P = (u, n, e, a) => (A(u, n, "write to private field"), a ? a.call(u, e) : n.set(u, e), e), s = (u, n, e) => (A(u, n, "access private method"), e);
 import { h as f, K as L } from "./webserial-core-DGKQCs5a.js";
 function R(u = 100) {
   return new Promise((n) => setTimeout(() => n(), u));
 }
-function W() {
+function Q() {
   return "serial" in navigator;
 }
-function z() {
+function W() {
   return "geolocation" in navigator;
 }
-function G() {
+function z() {
   return "crypto" in window;
 }
-function H(u = 1) {
+function G(u = 1) {
   return u * 1e3;
 }
 function V(u) {
@@ -749,6 +749,7 @@ f.getBoardroidByUuid = (u) => f.get("boardroid", u);
 f.getArduinoByUuid = (u) => f.get("arduino", u);
 f.getPinPadByUuid = (u) => f.get("pinpad", u);
 f.getPinPaxByUuid = (u) => f.get("pinpax", u);
+f.getHopperByUuid = (u) => f.get("hopper", u);
 f.getJofemar = (u = 1) => f.getByNumber("jofemar", u);
 f.getBoardroid = (u = 1) => f.getByNumber("boardroid", u);
 f.getLocker = (u = 1) => f.getByNumber("locker", u);
@@ -756,6 +757,7 @@ f.getRelay = (u = 1) => f.getByNumber("relay", u);
 f.getArduino = (u = 1) => f.getByNumber("arduino", u);
 f.getPinPad = (u = 1) => f.getByNumber("pinpad", u);
 f.getPinPax = (u = 1) => f.getByNumber("pinpax", u);
+f.getHopper = (u = 1) => f.getByNumber("hopper", u);
 class J extends L {
   constructor(n) {
     super(n), this.__internal__ = structuredClone(this.__internal__), this.getResponseAsArrayHex(), this.__internal__.device.door_open = !1, this.__internal__.time.response_engines = 2e3, this.__internal__.time.sense = 100, this.__internal__.interval.waiting_sense = 0, this.__internal__.dispense = {
@@ -866,10 +868,10 @@ class J extends L {
 export {
   E,
   J as K,
-  G as a,
-  z as b,
-  H as g,
+  z as a,
+  W as b,
+  G as g,
   V as i,
-  W as s,
+  Q as s,
   R as w
 };
