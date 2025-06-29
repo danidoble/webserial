@@ -18,9 +18,22 @@ machine.on('serial:disconnected', (event) => {
   document.getElementById('disconnect').classList.add('hidden');
 });
 
-// eslint-disable-next-line no-unused-vars
 machine.on('serial:connecting', (event) => {
-  document.getElementById('log').innerText += 'Connecting\n\n';
+  const connect = document.getElementById('connect');
+  if (connect && event.detail.active) {
+    connect.setAttribute('disabled', 'disabled');
+  } else {
+    connect.removeAttribute('disabled');
+  }
+  const disconnect = document.getElementById('disconnect');
+  if (disconnect && event.detail.active) {
+    disconnect.setAttribute('disabled', 'disabled');
+  } else {
+    disconnect.removeAttribute('disabled');
+  }
+
+  if (event.detail.active) return;
+  document.getElementById('log').innerText += 'Connecting finished\n\n';
 });
 
 // eslint-disable-next-line no-unused-vars

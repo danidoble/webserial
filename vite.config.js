@@ -11,7 +11,6 @@ export default defineConfig({
             entry: {
                 webserial: resolve(_dirname, 'lib/main.js'),
                 kernel: resolve(_dirname, 'lib/kernel.js'),
-                arduino: resolve(_dirname, 'lib/serial/arduino.js'),
                 boardroid: resolve(_dirname, 'lib/serial/boardroid.js'),
                 jofemar: resolve(_dirname, 'lib/serial/jofemar.js'),
                 locker: resolve(_dirname, 'lib/serial/locker.js'),

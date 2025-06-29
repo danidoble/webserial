@@ -1,13 +1,14 @@
 'use strict';
 
-import { Kernel } from './kernel.js';
-import { Devices } from '../utils/devices.js';
+import { Kernel } from '../lib/serial/kernel.js';
+import { Devices } from '../lib/utils/devices.js';
 import { Arduino as ArduinoCommands } from '@danidoble/webserial-vending-commands';
 
 export class Arduino extends Kernel {
   constructor({ filters = null, config_port = null, no_device = 1 } = {}) {
     super({ filters, config_port, no_device });
     this.__internal__.device.type = 'arduino';
+    Devices.registerType(this.__internal__.device.type);
     if (Devices.getCustom(this.typeDevice, no_device))
       throw new Error(`Device ${this.typeDevice} ${no_device} already exists`);
     this.__internal__.time.response_connection = 2e3;

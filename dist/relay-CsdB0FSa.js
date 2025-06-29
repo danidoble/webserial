@@ -1333,7 +1333,6 @@ let x = R;
 x.instance = new x();
 export {
   x as e,
-  k as i,
   N as l,
   D as o,
   U as s,

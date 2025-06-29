@@ -1,5 +1,5 @@
-import { K as s } from "./kernel-IUeiZp8d.js";
-import { h as n } from "./webserial-core-DGKQCs5a.js";
+import { K as s } from "./kernel-BblykfpT.js";
+import { h as n } from "./webserial-core-ByrJ7tlu.js";
 /**
  * @license Webserial
  * webserial
@@ -9,7 +9,7 @@ import { h as n } from "./webserial-core-DGKQCs5a.js";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const e = "4.1.9";
+const e = "4.1.8";
 export {
   n as Devices,
   s as Kernel,

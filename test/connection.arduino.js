@@ -1,4 +1,15 @@
-import { Arduino } from '../lib/serial/arduino.js';
+import { Arduino } from './arduino.js';
+import { Devices } from '../lib/utils/devices.js';
+
+Devices.registerType('arduino');
+
+Devices.getArduinoByUuid = (id) => {
+  return Devices.get('arduino', id);
+};
+
+Devices.getArduino = (device_number = 1) => {
+  return Devices.getByNumber('arduino', device_number);
+};
 
 const machine = new Arduino();
 machine.on('serial:message', (data) => {
@@ -26,9 +37,22 @@ machine.on('serial:disconnected', (event) => {
   document.getElementById('disconnect').classList.add('hidden');
 });
 
-// eslint-disable-next-line no-unused-vars
 machine.on('serial:connecting', (event) => {
-  document.getElementById('log').innerText += 'Connecting\n\n';
+  const connect = document.getElementById('connect');
+  if (connect && event.detail.active) {
+    connect.setAttribute('disabled', 'disabled');
+  } else {
+    connect.removeAttribute('disabled');
+  }
+  const disconnect = document.getElementById('disconnect');
+  if (disconnect && event.detail.active) {
+    disconnect.setAttribute('disabled', 'disabled');
+  } else {
+    disconnect.removeAttribute('disabled');
+  }
+
+  if (event.detail.active) return;
+  document.getElementById('log').innerText += 'Connecting finished\n\n';
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -59,7 +83,8 @@ machine.on('serial:unsupported', (event) => {
   document.getElementById('unsupported').classList.remove('hidden');
 });
 
-function tryConnect() {
+async function tryConnect() {
+  //await Devices.connectToAll()
   machine
     .connect()
     .then(() => {})
