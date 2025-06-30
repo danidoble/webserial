@@ -1,4 +1,4 @@
-"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("./kernel-CzkmE_OW.cjs"),r=require("./webserial-core-5B5nYtyR.cjs");/**
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("./kernel-DAPuJ1JC.cjs"),r=require("./webserial-core-BNrAxsMe.cjs");/**
  * @license Webserial
  * webserial
  *

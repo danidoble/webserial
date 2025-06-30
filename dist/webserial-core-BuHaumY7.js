@@ -39,7 +39,7 @@ class P extends EventTarget {
   }
   removeAllListeners() {
     for (const e of this.__listenersCallbacks__)
-      this.removeEventListener(e.key, e.callback);
+      ["internal:queue", "internal:connecting"].includes(e.key) || this.removeEventListener(e.key, e.callback);
     this.__listenersCallbacks__ = [], this.__listeners__ = {
       debug: !1
     };
@@ -339,9 +339,9 @@ class z extends P {
     return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", new Promise((e, t) => {
       V() || t("Web Serial not supported");
       const n = l(this, r, $).bind(this);
-      this.on("serial:connecting", n);
+      this.on("internal:connecting", n);
       const s = setInterval(() => {
-        this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(s), this.__internal__.serial.aux_connecting = "idle", this.off("serial:connecting", n), this.isConnected ? e(!0) : t(`${this.typeDevice} device ${this.deviceNumber} not connected`)) : this.__internal__.serial.aux_connecting === "connecting" && (this.__internal__.serial.aux_connecting = "idle", this.dispatch("serial:connecting", { active: !0 }));
+        this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(s), this.__internal__.serial.aux_connecting = "idle", this.off("internal:connecting", n), this.isConnected ? e(!0) : t(`${this.typeDevice} device ${this.deviceNumber} not connected`)) : this.__internal__.serial.aux_connecting === "connecting" && (this.__internal__.serial.aux_connecting = "idle", this.dispatch("internal:connecting", { active: !0 }), this.dispatch("serial:connecting", { active: !0 }));
       }, 100);
       this.serialConnect();
     }));
@@ -740,7 +740,7 @@ r = /* @__PURE__ */ new WeakSet(), p = function(i) {
     e.releaseLock(), this.__internal__.serial.keep_reading = !0, this.__internal__.serial.port && await this.__internal__.serial.port.close();
   }
 }, f = function(i) {
-  i !== this.__internal__.serial.connecting && (this.__internal__.serial.connecting = i, i ? this.dispatch("serial:connecting", { active: !0 }) : this.dispatch("serial:connecting", { active: !1 }));
+  i !== this.__internal__.serial.connecting && (this.__internal__.serial.connecting = i, this.dispatch("serial:connecting", { active: i }));
 }, M = async function() {
   return typeof window > "u" ? !1 : "serial" in navigator && "forget" in SerialPort.prototype && this.__internal__.serial.port ? (await this.__internal__.serial.port.forget(), !0) : !1;
 }, q = function() {
