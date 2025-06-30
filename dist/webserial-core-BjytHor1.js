@@ -135,7 +135,7 @@ const v = {
   bufferSize: 32768,
   flowControl: "none"
 };
-var u, r, f, m, q, x, k, d, N, L, D, B, P, O, g, H, j, F, $, U, W, Q;
+var p, r, f, m, q, x, k, u, N, L, D, B, P, O, g, H, j, F, U, $, W, Q;
 class K extends I {
   constructor({
     filters: e = null,
@@ -210,7 +210,7 @@ class K extends I {
       interval: {
         reconnection: 0
       }
-    }), S(this, u, null), !("serial" in navigator))
+    }), S(this, p, null), !("serial" in navigator))
       throw new Error("Web Serial not supported");
     e && (this.serialFilters = e), t && (this.serialConfigPort = t), o && (this.__internal__.bypassSerialBytesConnection = o), i && l(this, r, W).call(this, i), s && ["number", "string"].includes(typeof s) && (this.listenOnChannel = s), l(this, r, j).call(this), l(this, r, F).call(this);
   }
@@ -335,14 +335,10 @@ class K extends I {
     await this.serialDisconnect(), l(this, r, m).call(this, e);
   }
   async connect() {
-    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", console.warn(`this.__internal__.serial.aux_connecting ${this.__internal__.serial.aux_connecting}`), new Promise((e, t) => {
-      G() || t("Web Serial not supported"), b(this, u) || J(this, u, l(this, r, q).bind(this)), this.on("internal:connecting", b(this, u));
+    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", new Promise((e, t) => {
+      G() || t("Web Serial not supported"), b(this, p) || J(this, p, l(this, r, q).bind(this)), this.on("internal:connecting", b(this, p));
       const i = setInterval(() => {
-        console.warn(`connecting this.__internal__.serial.aux_connecting ${this.__internal__.serial.aux_connecting}`), this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(i), this.__internal__.serial.aux_connecting = "idle", b(this, u) !== null ? (console.warn(
-          this.__listenersCallbacks__.filter(
-            (s) => s.key === "internal:connecting" && s.callback === b(this, u)
-          )
-        ), this.off("internal:connecting", b(this, u))) : console.warn("#boundFinishConnecting is null?"), this.isConnected ? e(!0) : t(`${this.typeDevice} device ${this.deviceNumber} not connected`)) : this.__internal__.serial.aux_connecting === "connecting" && (this.__internal__.serial.aux_connecting = "idle", this.dispatch("internal:connecting", { active: !0 }), this.dispatch("serial:connecting", { active: !0 }));
+        this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(i), this.__internal__.serial.aux_connecting = "idle", b(this, p) !== null && this.off("internal:connecting", b(this, p)), this.isConnected ? e(!0) : t(`${this.typeDevice} device ${this.deviceNumber} not connected`)) : this.__internal__.serial.aux_connecting === "connecting" && (this.__internal__.serial.aux_connecting = "idle", this.dispatch("internal:connecting", { active: !0 }), this.dispatch("serial:connecting", { active: !0 }));
       }, 100);
       this.serialConnect();
     }));
@@ -455,7 +451,7 @@ class K extends I {
       }, this.__internal__.time.response_connection), this.__internal__.serial.last_action = "connect", await l(this, r, x).call(this, this.__internal__.serial.bytes_connection ?? []), this.dispatch("serial:sent", {
         action: "connect",
         bytes: this.__internal__.serial.bytes_connection
-      }), this.__internal__.auto_response && l(this, r, d).call(this, this.__internal__.serial.auto_response), await l(this, r, O).call(this);
+      }), this.__internal__.auto_response && l(this, r, u).call(this, this.__internal__.serial.auto_response), await l(this, r, O).call(this);
     } catch (e) {
       l(this, r, g).call(this, !1), this.serialErrors(e);
     }
@@ -600,7 +596,7 @@ class K extends I {
     return this.isConnected;
   }
 }
-u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = function(n) {
+p = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = function(n) {
   return !!(n && n.readable && n.writable);
 }, m = function(n = null) {
   this.__internal__.serial.connected = !1, this.__internal__.aux_port_connector = 0, this.dispatch("serial:disconnected", n), c.$dispatchChange(this);
@@ -623,7 +619,7 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
     if (i) return;
     await M(100);
   }
-}, d = function(n = new Uint8Array([]), e = !1) {
+}, u = function(n = new Uint8Array([]), e = !1) {
   if (n && n.length > 0) {
     const t = this.__internal__.serial.connected;
     if (this.__internal__.serial.connected = l(this, r, f).call(this, this.__internal__.serial.port), c.$dispatchChange(this), !t && this.__internal__.serial.connected && (this.dispatch("serial:connected"), l(this, r, g).call(this, !1)), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0), this.__internal__.serial.response.as === "hex")
@@ -657,7 +653,7 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
   }
 }, D = async function() {
   this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
-    this.__internal__.serial.response.buffer && l(this, r, d).call(this, this.__internal__.serial.response.buffer), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    this.__internal__.serial.response.buffer && l(this, r, u).call(this, this.__internal__.serial.response.buffer), this.__internal__.serial.response.buffer = new Uint8Array(0);
   }, this.__internal__.serial.free_timeout_ms || 50);
 }, B = async function() {
   const n = this.__internal__.serial.response.length;
@@ -665,10 +661,10 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
   if (this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), !(n === null || !e || e.length === 0)) {
     for (; e.length >= n; ) {
       const t = e.slice(0, n);
-      l(this, r, d).call(this, t), e = e.slice(n);
+      l(this, r, u).call(this, t), e = e.slice(n);
     }
     this.__internal__.serial.response.buffer = e, e.length > 0 && (this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
-      l(this, r, d).call(this, this.__internal__.serial.response.buffer, !0);
+      l(this, r, u).call(this, this.__internal__.serial.response.buffer, !0);
     }, this.__internal__.serial.free_timeout_ms || 50));
   }
 }, P = async function() {
@@ -694,20 +690,20 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
       _ = new RegExp(`([^${n}]+)${n}`, "g");
     else
       return;
-    let p, h = 0;
-    for (; (p = _.exec(s)) !== null; )
-      o.push(new TextEncoder().encode(p[1])), h = _.lastIndex;
+    let d, h = 0;
+    for (; (d = _.exec(s)) !== null; )
+      o.push(new TextEncoder().encode(d[1])), h = _.lastIndex;
     s = s.slice(h);
   } else if (n instanceof RegExp) {
-    let _, p = 0;
+    let _, d = 0;
     if (e && t) {
       const h = new RegExp(`${n.source}(.*?)${n.source}`, "g");
       for (; (_ = h.exec(s)) !== null; )
-        o.push(new TextEncoder().encode(_[1])), p = h.lastIndex;
+        o.push(new TextEncoder().encode(_[1])), d = h.lastIndex;
     } else if (t)
       for (; (_ = n.exec(s)) !== null; ) {
-        const h = _.index, w = s.slice(p, h);
-        o.push(new TextEncoder().encode(w)), p = n.lastIndex;
+        const h = _.index, w = s.slice(d, h);
+        o.push(new TextEncoder().encode(w)), d = n.lastIndex;
       }
     else if (e) {
       const h = s.split(n);
@@ -716,13 +712,13 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
         o.push(new TextEncoder().encode(w));
       s = "";
     }
-    s = s.slice(p);
+    s = s.slice(d);
   }
   for (const _ of o)
-    l(this, r, d).call(this, _);
+    l(this, r, u).call(this, _);
   const E = new TextEncoder().encode(s);
   this.__internal__.serial.response.buffer = E, E.length > 0 && (this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
-    l(this, r, d).call(this, this.__internal__.serial.response.buffer, !0), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    l(this, r, u).call(this, this.__internal__.serial.response.buffer, !0), this.__internal__.serial.response.buffer = new Uint8Array(0);
   }, this.__internal__.serial.free_timeout_ms ?? 50));
 }, O = async function() {
   const n = this.__internal__.serial.port;
@@ -768,15 +764,15 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
   const n = this;
   this.on("internal:queue", async () => {
     var e;
-    await l(e = n, r, U).call(e);
-  }), l(this, r, $).call(this);
-}, $ = function() {
+    await l(e = n, r, $).call(e);
+  }), l(this, r, U).call(this);
+}, U = function() {
   const n = this;
   navigator.serial.addEventListener("connect", async () => {
     n.isDisconnected && await n.serialConnect().catch(() => {
     });
   });
-}, U = async function() {
+}, $ = async function() {
   if (!l(this, r, f).call(this, this.__internal__.serial.port)) {
     l(this, r, m).call(this, { error: "Port is closed, not readable or writable." }), await this.serialConnect();
     return;
@@ -796,7 +792,7 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
     } catch (s) {
       this.serialErrors(s);
     }
-    l(this, r, d).call(this, i);
+    l(this, r, u).call(this, i);
   }
   const t = [...this.__internal__.serial.queue];
   this.__internal__.serial.queue = t.splice(1);
