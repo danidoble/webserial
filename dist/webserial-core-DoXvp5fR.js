@@ -135,7 +135,7 @@ const v = {
   bufferSize: 32768,
   flowControl: "none"
 };
-var u, r, f, m, q, x, k, d, N, L, D, B, P, O, g, H, j, F, U, $, W, Q;
+var u, r, f, m, q, x, k, d, N, L, D, B, P, O, g, H, j, F, $, U, W, Q;
 class K extends I {
   constructor({
     filters: e = null,
@@ -335,10 +335,10 @@ class K extends I {
     await this.serialDisconnect(), l(this, r, m).call(this, e);
   }
   async connect() {
-    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", new Promise((e, t) => {
-      G() || t("Web Serial not supported"), b(this, u) || J(this, u, l(this, r, q).bind(this)), this.on("internal:connecting", b(this, u));
+    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", console.warn(`Connecting to ${this.typeDevice} device ${this.deviceNumber}...`), new Promise((e, t) => {
+      G() || t("Web Serial not supported"), b(this, u) || J(this, u, l(this, r, q).bind(this)), this.on("internal:connecting", b(this, u)), console.warn("internal:connecting");
       const i = setInterval(() => {
-        this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(i), this.__internal__.serial.aux_connecting = "idle", b(this, u) !== null ? (console.warn(
+        console.warn("interval internal:connecting"), this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(i), this.__internal__.serial.aux_connecting = "idle", b(this, u) !== null ? (console.warn(
           this.__listenersCallbacks__.filter(
             (s) => s.key === "internal:connecting" && s.callback === b(this, u)
           )
@@ -768,15 +768,15 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
   const n = this;
   this.on("internal:queue", async () => {
     var e;
-    await l(e = n, r, $).call(e);
-  }), l(this, r, U).call(this);
-}, U = function() {
+    await l(e = n, r, U).call(e);
+  }), l(this, r, $).call(this);
+}, $ = function() {
   const n = this;
   navigator.serial.addEventListener("connect", async () => {
     n.isDisconnected && await n.serialConnect().catch(() => {
     });
   });
-}, $ = async function() {
+}, U = async function() {
   if (!l(this, r, f).call(this, this.__internal__.serial.port)) {
     l(this, r, m).call(this, { error: "Port is closed, not readable or writable." }), await this.serialConnect();
     return;
