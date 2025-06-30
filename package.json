@@ -21,7 +21,7 @@
     "prettier": "^3.6.2",
     "uuid": "^11.1.0",
     "vite": "^6.3.5",
-    "webserial-core": "github:danidoble/webserial-core#main"
+    "webserial-core": "github:danidoble/webserial-core#d95e6bb"
   },
   "exports": {
     ".": {
