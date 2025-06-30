@@ -3,15 +3,15 @@ var y = (p) => {
   throw TypeError(p);
 };
 var N = (p, a, e) => a in p ? R(p, a, { enumerable: !0, configurable: !0, writable: !0, value: e }) : p[a] = e;
-var w = (p, a, e) => N(p, typeof a != "symbol" ? a + "" : a, e), P = (p, a, e) => a.has(p) || y("Cannot " + e);
-var x = (p, a, e) => a.has(p) ? y("Cannot add the same private member more than once") : a instanceof WeakSet ? a.add(p) : a.set(p, e);
+var x = (p, a, e) => N(p, typeof a != "symbol" ? a + "" : a, e), P = (p, a, e) => a.has(p) || y("Cannot " + e);
+var w = (p, a, e) => a.has(p) ? y("Cannot add the same private member more than once") : a instanceof WeakSet ? a.add(p) : a.set(p, e);
 var n = (p, a, e) => (P(p, a, "access private method"), e);
 import { K as I, h as E } from "./webserial-core-ByrJ7tlu.js";
-var t, H, d, u, c, h, f, A, v, s;
+var r, H, d, u, c, h, f, A, v, s;
 class O extends I {
   constructor({
     filters: e = null,
-    config_port: r = {
+    config_port: t = {
       baudRate: 115200,
       dataBits: 8,
       stopBits: 1,
@@ -32,9 +32,9 @@ class O extends I {
     },
     no_device: 1
   }) {
-    super({ filters: e, config_port: r, no_device: i });
-    x(this, t);
-    w(this, "__hoppers__", {
+    super({ filters: e, config_port: t, no_device: i });
+    w(this, r);
+    x(this, "__hoppers__", {
       levels: [
         { id: 1, currency: 10, key: "Hopper 1", name: "10 Pesos", amount: 0, capacity: 1e3 },
         { id: 2, currency: 5, key: "Hopper 2", name: "5 Pesos", amount: 0, capacity: 1e3 },
@@ -47,7 +47,7 @@ class O extends I {
     if (this.__internal__.device.type = "hopper", E.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
     this.__internal__.time.response_connection = 7e3, this.__internal__.time.response_general = 7e3, this.__internal__.serial.delay_first_connection = 500, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
-`, E.add(this), n(this, t, H).call(this);
+`, E.add(this), n(this, r, H).call(this);
   }
   get balance() {
     return this.__hoppers__.balance;
@@ -58,28 +58,28 @@ class O extends I {
   get levels() {
     return this.__hoppers__.levels;
   }
-  setMaxCapacity({ hopper: e = null, capacity: r = 1e3 } = { hopper: null, capacity: 1e3 }) {
-    return n(this, t, h).call(this, e), this.__hoppers__.levels[e - 1].capacity = r, this;
+  setMaxCapacity({ hopper: e = null, capacity: t = 1e3 } = { hopper: null, capacity: 1e3 }) {
+    return n(this, r, h).call(this, e), this.__hoppers__.levels[e - 1].capacity = t, this;
   }
-  setHopperName({ hopper: e = null, name: r = "" } = { hopper: null, name: "" }) {
-    if (n(this, t, h).call(this, e), typeof r != "string" || r.length === 0)
+  setHopperName({ hopper: e = null, name: t = "" } = { hopper: null, name: "" }) {
+    if (n(this, r, h).call(this, e), typeof t != "string" || t.length === 0)
       throw new TypeError("Name must be a non-empty string");
-    return this.__hoppers__.levels[e - 1].name = r, this;
+    return this.__hoppers__.levels[e - 1].name = t, this;
   }
-  setHopperKey({ hopper: e = null, key: r = "" } = { hopper: null, key: "" }) {
-    if (n(this, t, h).call(this, e), typeof r != "string" || r.length === 0)
+  setHopperKey({ hopper: e = null, key: t = "" } = { hopper: null, key: "" }) {
+    if (n(this, r, h).call(this, e), typeof t != "string" || t.length === 0)
       throw new TypeError("Key must be a non-empty string");
-    return this.__hoppers__.levels[e - 1].key = r, this;
+    return this.__hoppers__.levels[e - 1].key = t, this;
   }
-  setHopperCurrency({ hopper: e = null, currency: r = 1 } = { hopper: null, currency: 1 }) {
-    if (n(this, t, h).call(this, e), typeof r != "number" || r <= 0)
+  setHopperCurrency({ hopper: e = null, currency: t = 1 } = { hopper: null, currency: 1 }) {
+    if (n(this, r, h).call(this, e), typeof t != "number" || t <= 0)
       throw new RangeError("Currency must be a positive number");
-    return this.__hoppers__.levels[e - 1].currency = r, this;
+    return this.__hoppers__.levels[e - 1].currency = t, this;
   }
   serialMessage(e) {
-    const r = this.parseUint8ArrayToString(e), o = {
+    const t = this.parseUint8ArrayToString(e), o = {
       //hex,
-      ascii: this.asciiToHex(r),
+      ascii: this.asciiToHex(t),
       code: e,
       name: "",
       description: "",
@@ -89,36 +89,36 @@ class O extends I {
       data: null
     };
     if (e.length === 3) {
-      n(this, t, d).call(this, o);
+      n(this, r, d).call(this, o);
       return;
     }
     if (e.length !== 13) {
-      const _ = n(this, t, v).call(this, { array: e, chunkSize: 13 });
+      const _ = n(this, r, v).call(this, { array: e, chunkSize: 13 });
       for (const l of _) {
         const b = this.parseUint8ArrayToString(new Uint8Array(l)), T = this.asciiToHex(b), C = this.stringToArrayHex(b);
-        o.code = l, o.hex = C, o.ascii = T, l.length !== 13 ? n(this, t, d).call(this, o) : n(this, t, u).call(this, o);
+        o.code = l, o.hex = C, o.ascii = T, l.length !== 13 ? n(this, r, d).call(this, o) : n(this, r, u).call(this, o);
       }
       return;
     }
-    n(this, t, u).call(this, o);
+    n(this, r, u).call(this, o);
   }
   serialSetConnectionConstant() {
     return [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15];
   }
   async sendConnect() {
-    const e = n(this, t, s).call(this, [10]);
+    const e = n(this, r, s).call(this, [10]);
     return await this.appendToQueue(e, "connect");
   }
   async requestStatus() {
-    const e = n(this, t, s).call(this, [10, 10, 11, 12]);
+    const e = n(this, r, s).call(this, [10, 10, 11, 12]);
     return await this.appendToQueue(e, "status");
   }
   async readBalance() {
-    const e = n(this, t, s).call(this, [10, 192, 1]);
+    const e = n(this, r, s).call(this, [10, 192, 1]);
     return await this.appendToQueue(e, "readBalance");
   }
   async clearBalance() {
-    const e = n(this, t, s).call(this, [10, 192, 2]);
+    const e = n(this, r, s).call(this, [10, 192, 2]);
     return await this.appendToQueue(e, "clearBalance");
   }
   async forceInvalid() {
@@ -126,33 +126,33 @@ class O extends I {
     return await this.appendToQueue(e, "ForceInvalid");
   }
   async readHopper({ hopper: e = null } = { hopper: null }) {
-    n(this, t, h).call(this, e), this.__hoppers__.current = e;
-    const r = n(this, t, s).call(this, [10, e, e]);
-    return await this.appendToQueue(r, "readHopper");
+    n(this, r, h).call(this, e), this.__hoppers__.current = e;
+    const t = n(this, r, s).call(this, [10, e, e]);
+    return await this.appendToQueue(t, "readHopper");
   }
-  async writeHopper({ hopper: e = null, quantity: r = 0 } = { hopper: null, quantity: 0 }) {
-    n(this, t, h).call(this, e), n(this, t, f).call(this, r), this.__hoppers__.current = e;
-    const [i, o] = n(this, t, A).call(this, r), _ = n(this, t, s).call(this, [10, 240, e, 0, 0, 0, 0, 0, 0, i, o]);
+  async writeHopper({ hopper: e = null, quantity: t = 0 } = { hopper: null, quantity: 0 }) {
+    n(this, r, h).call(this, e), n(this, r, f).call(this, t), this.__hoppers__.current = e;
+    const [i, o] = n(this, r, A).call(this, t), _ = n(this, r, s).call(this, [10, 240, e, 0, 0, 0, 0, 0, 0, i, o]);
     return await this.appendToQueue(_, "writeHopper");
   }
   async dispenseHopper({ hopper: e = null } = { hopper: null }) {
-    n(this, t, h).call(this, e), this.__hoppers__.current = e;
-    const r = n(this, t, s).call(this, [10, 2, e]);
-    return await this.appendToQueue(r, "dispenseHopper");
+    n(this, r, h).call(this, e), this.__hoppers__.current = e;
+    const t = n(this, r, s).call(this, [10, 2, e]);
+    return await this.appendToQueue(t, "dispenseHopper");
   }
   async dispenseChange({ change: e = 0 } = { change: 0 }) {
     if (typeof e != "number" || e < 0 || e > 32767)
       throw new RangeError("Change must be a number between 0 and 32767");
     if (typeof e != "number" || !Number.isInteger(e))
       throw new TypeError("Change must be an integer");
-    const r = e & 255, i = e >> 8 & 255, o = n(this, t, s).call(this, [10, 204, 170, 0, 0, 0, 0, 0, 0, i, r]);
+    const t = e & 255, i = e >> 8 & 255, o = n(this, r, s).call(this, [10, 204, 170, 0, 0, 0, 0, 0, 0, i, t]);
     return await this.appendToQueue(o, "dispenseChange");
   }
   async configValidator({ enable: e = !1 } = { enable: !1 }) {
     if (typeof e != "boolean")
       throw new TypeError("Enable must be a boolean");
-    const r = n(this, t, s).call(this, [10, 176, e ? 1 : 0]);
-    return await this.appendToQueue(r, "configValidator");
+    const t = n(this, r, s).call(this, [10, 176, e ? 1 : 0]);
+    return await this.appendToQueue(t, "configValidator");
   }
   async disableValidator() {
     return await this.configValidator({ enable: !1 });
@@ -161,34 +161,42 @@ class O extends I {
     return await this.configValidator({ enable: !0 });
   }
   async change1x1({ hopper: e = null } = { hopper: null }) {
-    n(this, t, h).call(this, e), this.__hoppers__.current = e;
-    const r = n(this, t, s).call(this, [10, 224, e]);
-    return await this.appendToQueue(r, "change1x1Hopper-" + e);
+    n(this, r, h).call(this, e), this.__hoppers__.current = e;
+    const t = n(this, r, s).call(this, [10, 224, e]);
+    return await this.appendToQueue(t, "change1x1Hopper-" + e);
   }
   async sendCustomCode({ code: e = [] } = { code: [] }) {
     if (!Array.isArray(e) || !e.every((i) => typeof i == "number" && i >= 0 && i <= 255))
       throw new TypeError("Code must be an array of numbers between 0 and 255");
-    const r = n(this, t, s).call(this, e);
-    await this.appendToQueue(r, "custom");
+    const t = n(this, r, s).call(this, e);
+    await this.appendToQueue(t, "custom");
   }
 }
-t = new WeakSet(), H = function() {
+r = new WeakSet(), H = function() {
   const e = ["levels", "hopper:updated", "dispense-change", "balance:updated", "validator:status", "change:1x1"];
-  for (const r of e)
-    this.serialRegisterAvailableListener(r);
+  for (const t of e)
+    this.serialRegisterAvailableListener(t);
 }, d = function(e) {
   e.error = !0, e.ascii.includes("ffffff") ? (e.name = "SINTAX", e.description = "Error de Sintaxis", e.no_code = 400) : e.ascii.includes("ffaaaa") ? (e.name = "LOWLEVEL", e.description = "Bajo nivel de monedas en Hopper (99)", e.no_code = 401) : e.ascii.includes("ffbbbb") ? (e.name = "TIMEOUT_DISPENSE", e.description = "Error de dispensado, timeout", e.no_code = 402) : (e.name = "UNKNOWN_ERROR", e.description = "Unknown error occurred", e.no_code = 999), this.dispatch("serial:message", e);
 }, u = function(e) {
   if (this.lastAction === "status")
-    e.name = "STATUS", e.description = "Hoppers status", e.no_code = 1, this.__hoppers__.levels[0].amount = n(this, t, c).call(this, e.code[9], e.code[10]), this.__hoppers__.levels[1].amount = n(this, t, c).call(this, e.code[7], e.code[8]), this.__hoppers__.levels[2].amount = n(this, t, c).call(this, e.code[5], e.code[6]), this.__hoppers__.levels[3].amount = n(this, t, c).call(this, e.code[3], e.code[4]), e.data = this.__hoppers__.levels, this.dispatch("levels", e.data);
+    e.name = "STATUS", e.description = "Hoppers status", e.no_code = 1, this.__hoppers__.levels[0].amount = n(this, r, c).call(this, e.code[9], e.code[10]), this.__hoppers__.levels[1].amount = n(this, r, c).call(this, e.code[7], e.code[8]), this.__hoppers__.levels[2].amount = n(this, r, c).call(this, e.code[5], e.code[6]), this.__hoppers__.levels[3].amount = n(this, r, c).call(this, e.code[3], e.code[4]), e.data = this.__hoppers__.levels, this.dispatch("levels", e.data);
   else if (this.lastAction === "readHopper") {
     e.name = "READ_HOPPER", e.description = `Hopper ${this.__hoppers__.current} level`, e.no_code = 2;
-    const r = this.__hoppers__.current - 1;
-    this.__hoppers__.levels[r].amount = n(this, t, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current, this.dispatch("hopper:updated", this.__hoppers__.levels[r]);
-  } else this.lastAction === "writeHopper" ? (e.name = "WRITE_HOPPER", e.description = "Hopper " + this.__hoppers__.current + " write", e.no_code = 3, this.__hoppers__.levels[this.__hoppers__.current - 1].amount = n(this, t, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current, this.dispatch("hopper:updated", this.__hoppers__.levels[this.__hoppers__.current = -1])) : this.lastAction === "dispenseHopper" ? (e.name = "DISPENSEHOPPER", e.description = "Hopper " + this.__hoppers__.current + " dispense", e.no_code = 4, this.__hoppers__.levels[this.__hoppers__.current - 1].amount = n(this, t, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current, this.dispatch("hopper:updated", this.__hoppers__.levels[this.__hoppers__.current = -1])) : this.lastAction === "dispenseChange" ? (e.name = "DISPENSE_CHANGE", e.description = "Change dispensed", e.no_code = 5, e.data = n(this, t, c).call(this, e.code[9], e.code[10]), this.dispatch("dispense-change", { amount: e.data })) : this.lastAction === "readBalance" ? (e.name = "READ_BALANCE", e.description = "Read Balance", e.no_code = 6, this.__hoppers__.balance = n(this, t, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "clearBalance" ? (e.name = "CLEAR_BALANCE", e.description = "Clared hoppers balance", e.no_code = 7, this.__hoppers__.balance = n(this, t, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "configValidator" ? (e.code[2] === 1 ? (e.name = "ENABLE_VALIDATOR", e.description = "Validator enabled", e.no_code = 8, this.dispatch("validator:status", { enabled: !0 })) : (e.name = "DISABLE_VALIDATOR", e.description = "Validator disabled", e.no_code = 9, this.dispatch("validator:status", { enabled: !1 })), e.no_code = 400, e.data = e.code[2] === 1 ? "enabled" : "disabled") : this.lastAction.includes("change1x1Hopper") && (e.code[2] === 1 ? (e.name = "CHANGE_1X1_HOPPER_1", e.description = "Change 1x1 Hopper 1", e.no_code = 10) : e.code[2] === 2 ? (e.name = "CHANGE_1X1_HOPPER_2", e.description = "Change 1x1 Hopper 2", e.no_code = 11) : e.code[2] === 3 ? (e.name = "CHANGE_1X1_HOPPER_3", e.description = "Change 1x1 Hopper 3", e.no_code = 12) : e.code[2] === 4 ? (e.name = "CHANGE_1X1_HOPPER_4", e.description = "Change 1x1 Hopper 4", e.no_code = 13) : (e.name = "CHANGE_1X1_HOPPER_UNKNOWN", e.description = "Change 1x1 Hopper Unknown", e.no_code = 14), this.dispatch("change:1x1", { hopperId: e.code[2] }));
+    const t = this.__hoppers__.current - 1;
+    this.__hoppers__.levels[t].amount = n(this, r, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current, this.dispatch("hopper:updated", this.__hoppers__.levels[t]);
+  } else if (this.lastAction === "writeHopper") {
+    e.name = "WRITE_HOPPER", e.description = "Hopper " + this.__hoppers__.current + " write", e.no_code = 3, this.__hoppers__.levels[this.__hoppers__.current - 1].amount = n(this, r, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current;
+    const t = this.__hoppers__.current - 1;
+    this.dispatch("hopper:updated", this.__hoppers__.levels[t]);
+  } else if (this.lastAction === "dispenseHopper") {
+    e.name = "DISPENSEHOPPER", e.description = "Hopper " + this.__hoppers__.current + " dispense", e.no_code = 4, this.__hoppers__.levels[this.__hoppers__.current - 1].amount = n(this, r, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current;
+    const t = this.__hoppers__.current - 1;
+    this.dispatch("hopper:updated", this.__hoppers__.levels[t]);
+  } else this.lastAction === "dispenseChange" ? (e.name = "DISPENSE_CHANGE", e.description = "Change dispensed", e.no_code = 5, e.data = n(this, r, c).call(this, e.code[9], e.code[10]), this.dispatch("dispense-change", { amount: e.data })) : this.lastAction === "readBalance" ? (e.name = "READ_BALANCE", e.description = "Read Balance", e.no_code = 6, this.__hoppers__.balance = n(this, r, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "clearBalance" ? (e.name = "CLEAR_BALANCE", e.description = "Clared hoppers balance", e.no_code = 7, this.__hoppers__.balance = n(this, r, c).call(this, e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "configValidator" ? (e.code[2] === 1 ? (e.name = "ENABLE_VALIDATOR", e.description = "Validator enabled", e.no_code = 8, this.dispatch("validator:status", { enabled: !0 })) : (e.name = "DISABLE_VALIDATOR", e.description = "Validator disabled", e.no_code = 9, this.dispatch("validator:status", { enabled: !1 })), e.no_code = 400, e.data = e.code[2] === 1 ? "enabled" : "disabled") : this.lastAction.includes("change1x1Hopper") && (e.code[2] === 1 ? (e.name = "CHANGE_1X1_HOPPER_1", e.description = "Change 1x1 Hopper 1", e.no_code = 10) : e.code[2] === 2 ? (e.name = "CHANGE_1X1_HOPPER_2", e.description = "Change 1x1 Hopper 2", e.no_code = 11) : e.code[2] === 3 ? (e.name = "CHANGE_1X1_HOPPER_3", e.description = "Change 1x1 Hopper 3", e.no_code = 12) : e.code[2] === 4 ? (e.name = "CHANGE_1X1_HOPPER_4", e.description = "Change 1x1 Hopper 4", e.no_code = 13) : (e.name = "CHANGE_1X1_HOPPER_UNKNOWN", e.description = "Change 1x1 Hopper Unknown", e.no_code = 14), this.dispatch("change:1x1", { hopperId: e.code[2] }));
   this.dispatch("serial:message", e);
-}, c = function(e, r) {
-  return (e << 8 | r) << 16 >> 16;
+}, c = function(e, t) {
+  return (e << 8 | t) << 16 >> 16;
 }, h = function(e) {
   if (typeof e != "number" || e < 1 || e > 4)
     throw new RangeError("Hopper ID must be a number between 1 and 4");
@@ -200,17 +208,17 @@ t = new WeakSet(), H = function() {
   if (typeof e != "number" || !Number.isInteger(e))
     throw new TypeError("Quantity must be an integer");
 }, A = function(e) {
-  n(this, t, f).call(this, e);
-  const r = e & 65535, i = r >> 8 & 255, o = r & 255;
+  n(this, r, f).call(this, e);
+  const t = e & 65535, i = t >> 8 & 255, o = t & 255;
   return [i, o];
-}, v = function({ array: e, chunkSize: r = 13 } = {}) {
+}, v = function({ array: e, chunkSize: t = 13 } = {}) {
   if (!Array.isArray(e))
     throw new TypeError("Expected an array");
-  if (typeof r != "number" || r <= 0)
+  if (typeof t != "number" || t <= 0)
     throw new RangeError("Chunk size must be a positive number");
   const i = [];
-  for (let o = 0; o < e.length; o += r)
-    i.push(e.slice(o, o + r));
+  for (let o = 0; o < e.length; o += t)
+    i.push(e.slice(o, o + t));
   return i;
 }, s = function(e) {
   e.length < 11 && (e = [...e, ...Array(11 - e.length).fill(0)]);

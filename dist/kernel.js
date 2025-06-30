@@ -9,7 +9,7 @@ import { h as n } from "./webserial-core-ByrJ7tlu.js";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const e = "4.1.8";
+const e = "4.1.9";
 export {
   n as Devices,
   s as Kernel,

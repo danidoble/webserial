@@ -21,7 +21,7 @@ const p = {
   wait: e,
   getSeconds: r,
   supportWebSerial: o
-}, a = "4.1.8";
+}, a = "4.1.9";
 export {
   K as Boardroid,
   k as Devices,
