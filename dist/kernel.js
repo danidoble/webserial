@@ -1,5 +1,5 @@
-import { K as s } from "./kernel-CkdAehfH.js";
-import { h as n } from "./webserial-core-DoXvp5fR.js";
+import { K as s } from "./kernel-Ce24yu-2.js";
+import { h as n } from "./webserial-core-DsDIR_cl.js";
 /**
  * @license Webserial
  * webserial

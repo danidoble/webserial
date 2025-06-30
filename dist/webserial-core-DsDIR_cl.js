@@ -335,10 +335,10 @@ class K extends I {
     await this.serialDisconnect(), l(this, r, m).call(this, e);
   }
   async connect() {
-    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", console.warn(`Connecting to ${this.typeDevice} device ${this.deviceNumber}...`), new Promise((e, t) => {
-      G() || t("Web Serial not supported"), b(this, u) || J(this, u, l(this, r, q).bind(this)), this.on("internal:connecting", b(this, u)), console.warn("internal:connecting");
+    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", console.warn(`this.__internal__.serial.aux_connecting ${this.__internal__.serial.aux_connecting}`), new Promise((e, t) => {
+      G() || t("Web Serial not supported"), b(this, u) || J(this, u, l(this, r, q).bind(this)), this.on("internal:connecting", b(this, u));
       const i = setInterval(() => {
-        console.warn("interval internal:connecting"), this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(i), this.__internal__.serial.aux_connecting = "idle", b(this, u) !== null ? (console.warn(
+        console.warn(`connecting this.__internal__.serial.aux_connecting ${this.__internal__.serial.aux_connecting}`), this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(i), this.__internal__.serial.aux_connecting = "idle", b(this, u) !== null ? (console.warn(
           this.__listenersCallbacks__.filter(
             (s) => s.key === "internal:connecting" && s.callback === b(this, u)
           )
