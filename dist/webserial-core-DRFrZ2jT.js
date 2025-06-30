@@ -741,7 +741,7 @@ u = /* @__PURE__ */ new WeakMap(), r = /* @__PURE__ */ new WeakSet(), f = functi
     e.releaseLock(), this.__internal__.serial.keep_reading = !0, this.__internal__.serial.port && await this.__internal__.serial.port.close();
   }
 }, g = function(n) {
-  n !== this.__internal__.serial.connecting && (this.__internal__.serial.connecting = n, this.dispatch("serial:connecting", { active: n }));
+  n !== this.__internal__.serial.connecting && (this.__internal__.serial.connecting = n, this.dispatch("serial:connecting", { active: n }), this.dispatch("internal:connecting", { active: n }));
 }, H = async function() {
   return typeof window > "u" ? !1 : "serial" in navigator && "forget" in SerialPort.prototype && this.__internal__.serial.port ? (await this.__internal__.serial.port.forget(), !0) : !1;
 }, j = function() {

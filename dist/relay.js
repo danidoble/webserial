@@ -1,6 +1,6 @@
-import { K as o, w as i } from "./kernel-Ce24yu-2.js";
+import { K as o, w as i } from "./kernel-BkXnP7cz.js";
 import { e as a } from "./relay-CsdB0FSa.js";
-import { h as s } from "./webserial-core-DsDIR_cl.js";
+import { h as s } from "./webserial-core-DRFrZ2jT.js";
 class p extends o {
   constructor({ filters: t = null, config_port: e = null, no_device: n = 1 } = {}) {
     if (super({ filters: t, config_port: e, no_device: n }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !0, s.getCustom(this.typeDevice, n))

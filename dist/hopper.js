@@ -6,7 +6,7 @@ var N = (p, a, e) => a in p ? R(p, a, { enumerable: !0, configurable: !0, writab
 var x = (p, a, e) => N(p, typeof a != "symbol" ? a + "" : a, e), P = (p, a, e) => a.has(p) || y("Cannot " + e);
 var w = (p, a, e) => a.has(p) ? y("Cannot add the same private member more than once") : a instanceof WeakSet ? a.add(p) : a.set(p, e);
 var n = (p, a, e) => (P(p, a, "access private method"), e);
-import { Z as I, h as E } from "./webserial-core-DsDIR_cl.js";
+import { Z as I, h as E } from "./webserial-core-DRFrZ2jT.js";
 var r, H, d, u, c, h, f, A, v, s;
 class O extends I {
   constructor({
