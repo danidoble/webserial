@@ -1,6 +1,6 @@
 {
   "name": "@danidoble/webserial",
-  "version": "4.3.4",
+  "version": "4.3.5",
   "author": "danidoble",
   "repository": {
     "type": "git",
@@ -20,8 +20,8 @@
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
     "uuid": "^11.1.0",
-    "vite": "^6.3.5",
-    "webserial-core": "file:../webserial-core"
+    "vite": "^7.0.0",
+    "webserial-core": "1.0.11"
   },
   "exports": {
     ".": {

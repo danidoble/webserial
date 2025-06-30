@@ -1,104 +1,119 @@
-var w = (l) => {
-  throw TypeError(l);
-};
-var b = (l, c, e) => c.has(l) || w("Cannot " + e);
-var r = (l, c, e) => (b(l, c, "read from private field"), e ? e.call(l) : c.get(l)), u = (l, c, e) => c.has(l) ? w("Cannot add the same private member more than once") : c instanceof WeakSet ? c.add(l) : c.set(l, e), i = (l, c, e, s) => (b(l, c, "write to private field"), s ? s.call(l, e) : c.set(l, e), e), n = (l, c, e) => (b(l, c, "access private method"), e);
-import { K as D, w as v } from "./kernel-DdE8cnKE.js";
-import { u as p } from "./relay-CsdB0FSa.js";
-import { h as y } from "./webserial-core-BjytHor1.js";
-var h, a, o, t, C, _, f, g, m, T, k;
-class Q extends D {
-  constructor({ filters: e = null, config_port: s = null, no_device: d = 1, device_listen_on_port: A = 3 } = {}) {
-    super({ filters: e, config_port: s, no_device: d, device_listen_on_port: A });
-    u(this, t);
-    u(this, h, !1);
-    u(this, a, 0);
-    u(this, o, 0);
-    if (this.__internal__.device.type = "locker", y.getCustom(this.typeDevice, d))
-      throw new Error(`Device ${this.typeDevice} ${d} already exists`);
-    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, y.add(this), n(this, t, C).call(this);
+import { K as r, w as n } from "./kernel-DAtdBEi3.js";
+import { u as t } from "./relay-CsdB0FSa.js";
+import { h as a } from "./webserial-core-BjytHor1.js";
+class p extends r {
+  #s = !1;
+  #e = 0;
+  #t = 0;
+  constructor({ filters: s = null, config_port: e = null, no_device: i = 1, device_listen_on_port: l = 3 } = {}) {
+    if (super({ filters: s, config_port: e, no_device: i, device_listen_on_port: l }), this.__internal__.device.type = "locker", a.getCustom(this.typeDevice, i))
+      throw new Error(`Device ${this.typeDevice} ${i} already exists`);
+    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, a.add(this), this.#r();
   }
-  serialMessage(e) {
-    const s = {
-      code: e,
+  #r() {
+    const s = ["percentage:disable", "percentage:enable", "percentage:open"];
+    for (const e of s)
+      this.serialRegisterAvailableListener(e);
+  }
+  serialMessage(s) {
+    const e = {
+      code: s,
       name: null,
       description: null,
       request: null,
       no_code: 0
     };
-    switch (e[1]) {
+    switch (s[1]) {
       case "08":
-        s.name = "Connection with the serial device completed.", s.description = "Your connection with the serial device was successfully completed.", s.request = "connect", s.no_code = 100;
+        e.name = "Connection with the serial device completed.", e.description = "Your connection with the serial device was successfully completed.", e.request = "connect", e.no_code = 100;
         break;
       case "07":
-        switch (e[4]) {
+        switch (s[4]) {
           case "00":
-            s.name = "Cell closed.", s.description = "The selected cell is closed.", s.request = "dispense", s.no_code = 1102, this.__internal__.dispense.status = !1, this.dispatch("dispensed", {}), r(this, h) && r(this, a) >= 89 ? (s.finished_test = !0, i(this, h, !1), i(this, a, 0)) : r(this, h) && (s.finished_test = !1);
+            e.name = "Cell closed.", e.description = "The selected cell is closed.", e.request = "dispense", e.no_code = 1102, this.__internal__.dispense.status = !1, this.dispatch("dispensed", {}), this.#s && this.#e >= 89 ? (e.finished_test = !0, this.#s = !1, this.#e = 0) : this.#s && (e.finished_test = !1);
             break;
           case "01":
           // cell open by status
           case "04":
-            s.name = "Cell open.", s.description = "The selected cell was open successfully.", s.request = "dispense", s.no_code = 102, this.__internal__.dispense.status = !0, this.dispatch("dispensed", {}), r(this, h) && r(this, a) >= 89 ? (s.finished_test = !0, i(this, h, !1), i(this, a, 0)) : r(this, h) && (s.finished_test = !1);
+            e.name = "Cell open.", e.description = "The selected cell was open successfully.", e.request = "dispense", e.no_code = 102, this.__internal__.dispense.status = !0, this.dispatch("dispensed", {}), this.#s && this.#e >= 89 ? (e.finished_test = !0, this.#s = !1, this.#e = 0) : this.#s && (e.finished_test = !1);
             break;
           case "05":
-            s.name = "Cell inactive.", s.description = "The selected cell is inactive or doesn't exist.", s.request = "dispense", s.no_code = 101, this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", {}), r(this, h) && r(this, a) >= 89 ? (s.finished_test = !0, i(this, h, !1), i(this, a, 0)) : r(this, h) && (s.finished_test = !1);
+            e.name = "Cell inactive.", e.description = "The selected cell is inactive or doesn't exist.", e.request = "dispense", e.no_code = 101, this.__internal__.dispense.status = !1, this.dispatch("not-dispensed", {}), this.#s && this.#e >= 89 ? (e.finished_test = !0, this.#s = !1, this.#e = 0) : this.#s && (e.finished_test = !1);
             break;
         }
         break;
       case "06":
-        s.name = "Configuration applied.", s.description = "The configuration was successfully applied.", s.request = "configure cell", s.no_code = 103;
+        e.name = "Configuration applied.", e.description = "The configuration was successfully applied.", e.request = "configure cell", e.no_code = 103;
         break;
       default:
-        s.request = "undefined", s.name = "Response unrecognized", s.description = "The response of application was received, but dont identify with any of current parameters", s.no_code = 400;
+        e.request = "undefined", e.name = "Response unrecognized", e.description = "The response of application was received, but dont identify with any of current parameters", e.no_code = 400;
         break;
     }
-    this.dispatch("serial:message", s);
+    this.dispatch("serial:message", e);
   }
-  serialSetConnectionConstant(e = 3) {
-    return p.connection({ channel: e });
+  serialSetConnectionConstant(s = 3) {
+    return t.connection({ channel: s });
   }
-  async dispense({ cell: e = 1, status: s = !0 } = {}) {
+  #i() {
+    this.#s = !1, this.#e = 0, this.#t = 0;
+  }
+  #n(s = null) {
+    this.#t = Math.round(this.#e * 100 / 80), this.dispatch("percentage:open", { percentage: this.#t, dispensed: s });
+  }
+  #a() {
+    this.#t = Math.round(this.#e * 100 / 80), this.dispatch("percentage:enable", { percentage: this.#t });
+  }
+  #l() {
+    this.#t = Math.round(this.#e * 100 / 80), this.dispatch("percentage:disable", { percentage: this.#t });
+  }
+  async dispense({ cell: s = 1, status: e = !0 } = {}) {
     return setTimeout(() => {
-      s === !0 ? n(this, t, T).call(this) : n(this, t, k).call(this);
+      e === !0 ? this.#h() : this.#c();
     }, this.__internal__.time.response_engines / 2), await this.internalDispense(
-      p.openCell({
-        cell: e,
+      t.openCell({
+        cell: s,
         channel: this.__internal__.device.listen_on_port
       })
     );
   }
-  async status({ cell: e = 1 } = {}) {
+  #h() {
+    this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
+  }
+  #c() {
+    this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !1);
+  }
+  async status({ cell: s = 1 } = {}) {
     return await this.appendToQueue(
-      p.statusCell({
-        cell: e,
+      t.statusCell({
+        cell: s,
         channel: this.__internal__.device.listen_on_port
       }),
       "status"
     );
   }
-  async lightScan({ since: e = 0, until: s = 10 } = {}) {
+  async lightScan({ since: s = 0, until: e = 10 } = {}) {
     return await this.appendToQueue(
-      p.lightScan({
+      t.lightScan({
         channel: this.__internal__.device.listen_on_port,
-        since: e,
-        until: s
+        since: s,
+        until: e
       }),
       "light-scan"
     );
   }
-  async enable({ cell: e = 1 } = {}) {
+  async enable({ cell: s = 1 } = {}) {
     return await this.appendToQueue(
-      p.enableCell({
-        cell: e,
+      t.enableCell({
+        cell: s,
         channel: this.__internal__.device.listen_on_port
       }),
       "activate"
     );
   }
-  async disable({ cell: e = 1 } = {}) {
+  async disable({ cell: s = 1 } = {}) {
     await this.appendToQueue(
-      p.disableCell({
-        cell: e,
+      t.disableCell({
+        cell: s,
         channel: this.__internal__.device.listen_on_port
       }),
       "disable"
@@ -106,44 +121,27 @@ class Q extends D {
   }
   async openAll() {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
-    n(this, t, _).call(this), i(this, h, !0), n(this, t, f).call(this);
-    const e = [];
-    for (let s = 1; s <= 80; s++) {
-      const d = await this.dispense({ cell: s, status: !0 });
-      e.push(d), i(this, a, s), n(this, t, f).call(this);
+    this.#i(), this.#s = !0, this.#n();
+    const s = [];
+    for (let e = 1; e <= 80; e++) {
+      const i = await this.dispense({ cell: e, status: !0 });
+      s.push(i), this.#e = e, this.#n();
     }
-    i(this, a, 80), n(this, t, f).call(this, e), n(this, t, _).call(this);
+    this.#e = 80, this.#n(s), this.#i();
   }
   async enableAll() {
-    n(this, t, _).call(this), i(this, h, !0), n(this, t, g).call(this);
-    for (let e = 1; e <= 80; e++)
-      await this.enable({ cell: e }), await v(100), i(this, a, e), n(this, t, g).call(this);
-    i(this, a, 80), n(this, t, g).call(this), n(this, t, _).call(this);
+    this.#i(), this.#s = !0, this.#a();
+    for (let s = 1; s <= 80; s++)
+      await this.enable({ cell: s }), await n(100), this.#e = s, this.#a();
+    this.#e = 80, this.#a(), this.#i();
   }
   async disableAll() {
-    n(this, t, _).call(this), i(this, h, !0), n(this, t, m).call(this);
-    for (let e = 1; e <= 80; e++)
-      await this.disable({ cell: e }), await v(100), i(this, a, e), n(this, t, m).call(this);
-    i(this, a, 80), n(this, t, m).call(this), n(this, t, _).call(this);
+    this.#i(), this.#s = !0, this.#l();
+    for (let s = 1; s <= 80; s++)
+      await this.disable({ cell: s }), await n(100), this.#e = s, this.#l();
+    this.#e = 80, this.#l(), this.#i();
   }
 }
-h = new WeakMap(), a = new WeakMap(), o = new WeakMap(), t = new WeakSet(), C = function() {
-  const e = ["percentage:disable", "percentage:enable", "percentage:open"];
-  for (const s of e)
-    this.serialRegisterAvailableListener(s);
-}, _ = function() {
-  i(this, h, !1), i(this, a, 0), i(this, o, 0);
-}, f = function(e = null) {
-  i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:open", { percentage: r(this, o), dispensed: e });
-}, g = function() {
-  i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:enable", { percentage: r(this, o) });
-}, m = function() {
-  i(this, o, Math.round(r(this, a) * 100 / 80)), this.dispatch("percentage:disable", { percentage: r(this, o) });
-}, T = function() {
-  this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
-}, k = function() {
-  this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !1);
-};
 export {
-  Q as Locker
+  p as Locker
 };
