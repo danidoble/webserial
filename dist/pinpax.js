@@ -1,7 +1,7 @@
 import { K as h } from "./kernel-DAtdBEi3.js";
 import { s as a } from "./relay-CsdB0FSa.js";
 import { h as c } from "./webserial-core-BjytHor1.js";
-class y extends h {
+class m extends h {
   __pinpax__ = {
     server: "DEV",
     bussinessId: null,
@@ -91,56 +91,60 @@ class y extends h {
   serialMessage(s) {
     let e = null;
     try {
-      e = JSON.parse(s);
+      e = JSON.parse(s), e.request || (e.request = this.lastAction), e.name || (e.name = this.lastAction);
     } catch (t) {
       console.error("Error parsing response", t, s), this.dispatch("serial:message", s);
       return;
     }
     switch (e.response) {
       case "INITAPP":
-        this.dispatch("init-app", { status: "started" }), this.#n().then(() => {
+        this.dispatch("init-app", { name: "INITAPP", request: this.lastAction, status: "started" }), this.#n().then(() => {
         });
         break;
       case "CONNECT":
-        this.dispatch("connectMessage", { status: "connected" }), this.#r().then(() => {
+        this.dispatch("connectMessage", { name: "CONNECT", request: this.lastAction, status: "connected" }), this.#r().then(() => {
         });
         break;
       case "LOGIN":
-        this.dispatch("login", e);
+        e.name || (e.name = "LOGIN"), this.dispatch("login", e);
         break;
       case "LASTVOUCHER":
-        this.dispatch("voucher", e), this.__pinpax__.waiting.voucher && (this.__pinpax__.asyncResponses.voucher = e, this.__pinpax__.waiting.voucher = !1);
+        e.name || (e.name = "LASTVOUCHER"), this.dispatch("voucher", e), this.__pinpax__.waiting.voucher && (this.__pinpax__.asyncResponses.voucher = e, this.__pinpax__.waiting.voucher = !1);
         break;
       case "DEVICEINFO":
-        this.dispatch("info", e);
+        e.name || (e.name = "DEVICEINFO"), this.dispatch("info", e);
         break;
       case "KEEPALIVE":
-        this.dispatch("keep-alive", { status: "alive" });
+        this.dispatch("keep-alive", { name: "KEEPALIVE", request: this.lastAction, status: "alive" });
         break;
       case "RESETAPP":
-        this.dispatch("reset-app", { status: "accepted" });
+        this.dispatch("reset-app", { name: "RESETAPP", request: this.lastAction, status: "accepted" });
         break;
       case "GETCONFIG":
-        this.dispatch("get-config", e);
+        e.name || (e.name = "GETCONFIG"), this.dispatch("get-config", e);
         break;
       case "HIDEBUTTONS":
-        this.dispatch("buttons-status", { hidden: !0 });
+        this.dispatch("buttons-status", { name: "HIDEBUTTONS", request: this.lastAction, hidden: !0 });
         break;
       case "SHOWBUTTONS":
-        this.dispatch("buttons-status", { hidden: !1 });
+        this.dispatch("buttons-status", { name: "SHOWBUTTONS", request: this.lastAction, hidden: !1 });
         break;
       case "PAYMENT_PROCESS":
-        this.dispatch("payment", {
+        e.name || (e.name = "PAYMENT_PROCESS"), this.dispatch("payment", {
+          name: "PAYMENT_PROCESS",
+          request: this.lastAction,
           status: "starting",
           amount: e.amount,
           reference: e.referecence
         });
         break;
       case "INSERT_CARD":
-        this.dispatch("payment", { status: "insert card" });
+        this.dispatch("payment", { name: "INSERT_CARD", request: this.lastAction, status: "insert card" });
         break;
       case "CARD_DATA":
-        this.dispatch("payment", {
+        e.name || (e.name = "CARD_DATA"), this.dispatch("payment", {
+          name: "CARD_DATA",
+          request: this.lastAction,
           status: "card data",
           amount: e.amount,
           cardHolderName: e.cardHolderName,
@@ -152,7 +156,8 @@ class y extends h {
         });
         break;
       case "MERCHANT":
-        this.dispatch("payment", {
+        e.name || (e.name = "MERCHANT"), this.dispatch("payment", {
+          request: this.lastAction,
           status: "merchant",
           afiliation: e.afiliation,
           alias: e.alias,
@@ -167,7 +172,7 @@ class y extends h {
         });
         break;
       case "TRANSACTION_RESULT":
-        this.#o({
+        e.name || (e.name = "TRANSACTION_RESULT"), this.#o({
           status: "result",
           approved: e.approved,
           acquirer: e.acquirer,
@@ -203,20 +208,14 @@ class y extends h {
         });
         break;
       case "ERROR":
-        this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = {
+        e.name || (e.name = "ERROR"), this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = {
           status: "error",
           approved: !1,
           response: e
-        }), this.dispatch("error", {
-          status: "error",
-          response: e
-        }), this.dispatch("payment", {
-          status: "error",
-          response: e
-        });
+        }), this.dispatch("error", { name: "ERROR", request: this.lastAction, status: "error", response: e }), this.dispatch("payment", { name: "ERROR", request: this.lastAction, status: "error", response: e });
         break;
       case "REFUND":
-        this.dispatch("refund", { status: "refund", response: e });
+        this.dispatch("refund", { name: "ERROR", request: this.lastAction, status: "refund", response: e });
         break;
     }
     this.dispatch("serial:message", e);
@@ -360,5 +359,5 @@ class y extends h {
   }
 }
 export {
-  y as PinPax
+  m as PinPax
 };
