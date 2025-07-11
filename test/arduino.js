@@ -5,8 +5,8 @@ import { Devices } from '../lib/utils/devices.js';
 import { Arduino as ArduinoCommands } from '@danidoble/webserial-vending-commands';
 
 export class Arduino extends Kernel {
-  constructor({ filters = null, config_port = null, no_device = 1 } = {}) {
-    super({ filters, config_port, no_device });
+  constructor({ filters = null, config_port = null, no_device = 1, socket = false } = {}) {
+    super({ filters, config_port, no_device, socket });
     this.__internal__.device.type = 'arduino';
     Devices.registerType(this.__internal__.device.type);
     if (Devices.getCustom(this.typeDevice, no_device))

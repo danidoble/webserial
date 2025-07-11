@@ -1,5 +1,5 @@
-import { Z as h, h as p } from "./webserial-core-BjytHor1.js";
-class d extends h {
+import { u as _, a as p } from "./webserial-core-C0ZbaNYy.js";
+class d extends _ {
   __hoppers__ = {
     levels: [
       { id: 1, currency: 10, key: "Hopper 1", name: "10 Pesos", amount: 0, capacity: 1e3 },
@@ -20,7 +20,8 @@ class d extends h {
       bufferSize: 32768,
       flowControl: "none"
     },
-    no_device: r = 1
+    no_device: n = 1,
+    socket: r = !1
   } = {
     filters: null,
     config_port: {
@@ -31,10 +32,11 @@ class d extends h {
       bufferSize: 32768,
       flowControl: "none"
     },
-    no_device: 1
+    no_device: 1,
+    socket: !1
   }) {
-    if (super({ filters: e, config_port: t, no_device: r }), this.__internal__.device.type = "hopper", p.getCustom(this.typeDevice, r))
-      throw new Error(`Device ${this.typeDevice} ${r} already exists`);
+    if (super({ filters: e, config_port: t, no_device: n, socket: r }), this.__internal__.device.type = "hopper", p.getCustom(this.typeDevice, n))
+      throw new Error(`Device ${this.typeDevice} ${n} already exists`);
     this.__internal__.time.response_connection = 7e3, this.__internal__.time.response_general = 7e3, this.__internal__.serial.delay_first_connection = 500, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
 `, p.add(this), this.#a();
   }
@@ -98,7 +100,7 @@ class d extends h {
     this.dispatch("serial:message", e);
   }
   serialMessage(e) {
-    const t = this.parseUint8ArrayToString(e), n = {
+    const t = this.parseUint8ArrayToString(e), r = {
       //hex,
       ascii: this.asciiToHex(t),
       code: e,
@@ -110,18 +112,18 @@ class d extends h {
       data: null
     };
     if (e.length === 3) {
-      this.#n(n);
+      this.#n(r);
       return;
     }
     if (e.length !== 13) {
       const i = this.#s({ array: e, chunkSize: 13 });
       for (const o of i) {
         const a = this.parseUint8ArrayToString(new Uint8Array(o)), s = this.asciiToHex(a), c = this.stringToArrayHex(a);
-        n.code = o, n.hex = c, n.ascii = s, o.length !== 13 ? this.#n(n) : this.#i(n);
+        r.code = o, r.hex = c, r.ascii = s, o.length !== 13 ? this.#n(r) : this.#i(r);
       }
       return;
     }
-    this.#i(n);
+    this.#i(r);
   }
   #t(e, t) {
     return (e << 8 | t) << 16 >> 16;
@@ -140,27 +142,27 @@ class d extends h {
   }
   #p(e) {
     this.#o(e);
-    const t = e & 65535, r = t >> 8 & 255, n = t & 255;
-    return [r, n];
+    const t = e & 65535, n = t >> 8 & 255, r = t & 255;
+    return [n, r];
   }
   #s({ array: e, chunkSize: t = 13 } = {}) {
     if (!Array.isArray(e))
       throw new TypeError("Expected an array");
     if (typeof t != "number" || t <= 0)
       throw new RangeError("Chunk size must be a positive number");
-    const r = [];
-    for (let n = 0; n < e.length; n += t)
-      r.push(e.slice(n, n + t));
-    return r;
+    const n = [];
+    for (let r = 0; r < e.length; r += t)
+      n.push(e.slice(r, r + t));
+    return n;
   }
   #e(e) {
     e.length < 11 && (e = [...e, ...Array(11 - e.length).fill(0)]);
-    const r = e.slice(1, 11).reduce((n, i) => {
+    const n = e.slice(1, 11).reduce((r, i) => {
       if (typeof i != "number")
         throw new TypeError("Array must contain only numbers");
-      return n + i;
+      return r + i;
     }, 0) & 255;
-    return e[11] = r, e[12] = 15, e;
+    return e[11] = n, e[12] = 15, e;
   }
   serialSetConnectionConstant() {
     return [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15];
@@ -192,7 +194,7 @@ class d extends h {
   }
   async writeHopper({ hopper: e = null, quantity: t = 0 } = { hopper: null, quantity: 0 }) {
     this.#r(e), this.#o(t), this.__hoppers__.current = e;
-    const [r, n] = this.#p(t), i = this.#e([10, 240, e, 0, 0, 0, 0, 0, 0, r, n]);
+    const [n, r] = this.#p(t), i = this.#e([10, 240, e, 0, 0, 0, 0, 0, 0, n, r]);
     return await this.appendToQueue(i, "writeHopper");
   }
   async dispenseHopper({ hopper: e = null } = { hopper: null }) {
@@ -205,8 +207,8 @@ class d extends h {
       throw new RangeError("Change must be a number between 0 and 32767");
     if (typeof e != "number" || !Number.isInteger(e))
       throw new TypeError("Change must be an integer");
-    const t = e & 255, r = e >> 8 & 255, n = this.#e([10, 204, 170, 0, 0, 0, 0, 0, 0, r, t]);
-    return await this.appendToQueue(n, "dispenseChange");
+    const t = e & 255, n = e >> 8 & 255, r = this.#e([10, 204, 170, 0, 0, 0, 0, 0, 0, n, t]);
+    return await this.appendToQueue(r, "dispenseChange");
   }
   async configValidator({ enable: e = !1 } = { enable: !1 }) {
     if (typeof e != "boolean")
@@ -226,7 +228,7 @@ class d extends h {
     return await this.appendToQueue(t, "change1x1Hopper-" + e);
   }
   async sendCustomCode({ code: e = [] } = { code: [] }) {
-    if (!Array.isArray(e) || !e.every((r) => typeof r == "number" && r >= 0 && r <= 255))
+    if (!Array.isArray(e) || !e.every((n) => typeof n == "number" && n >= 0 && n <= 255))
       throw new TypeError("Code must be an array of numbers between 0 and 255");
     const t = this.#e(e);
     await this.appendToQueue(t, "custom");

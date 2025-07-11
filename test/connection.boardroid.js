@@ -1,16 +1,29 @@
 import { Boardroid } from './../lib/serial/boardroid.js';
 
-const machine = new Boardroid();
-machine.on('serial:message', (data) => {
+const device = new Boardroid({
+  socket: true,
+});
+device.__debug__ = true;
+device.portPath = '/dev/tty-ch340';
+
+// device.on('debug', (event) => {
+//   console.log(event.detail);
+// });
+
+device.on('serial:message', (data) => {
   console.log(data);
 });
 
-machine.on('serial:error', (event) => {
+device.on('serial:timeout', (data) => {
+  console.warn(data.detail);
+});
+
+device.on('serial:error', (event) => {
   document.getElementById('log').innerText += event.detail.message + '\n\n';
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:disconnected', (event) => {
+device.on('serial:disconnected', (event) => {
   document.getElementById('log').innerText += 'Disconnected\n\n';
 
   document.getElementById('disconnected').classList.remove('hidden');
@@ -18,7 +31,7 @@ machine.on('serial:disconnected', (event) => {
   document.getElementById('disconnect').classList.add('hidden');
 });
 
-machine.on('serial:connecting', (event) => {
+device.on('serial:connecting', (event) => {
   const connect = document.getElementById('connect');
   if (connect && event.detail.active) {
     connect.setAttribute('disabled', 'disabled');
@@ -37,7 +50,7 @@ machine.on('serial:connecting', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:connected', (event) => {
+device.on('serial:connected', (event) => {
   document.getElementById('log').innerText += 'Connected\n\n';
 
   document.getElementById('disconnected').classList.add('hidden');
@@ -47,7 +60,7 @@ machine.on('serial:connected', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:need-permission', (event) => {
+device.on('serial:need-permission', (event) => {
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('need-permission').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
@@ -55,25 +68,37 @@ machine.on('serial:need-permission', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:soft-reload', (event) => {
+device.on('serial:soft-reload', (event) => {
   // reset your variables
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:unsupported', (event) => {
+device.on('serial:unsupported', (event) => {
   document.getElementById('unsupported').classList.remove('hidden');
 });
 
-function tryConnect() {
-  machine
+const tryConnect = () => {
+  if (device.isConnected) return;
+
+  device
     .connect()
     .then(() => {})
     .catch(console.error);
-}
+};
+
+const tryDisconnect = () => {
+  if (device.isDisconnected) return;
+
+  device
+    .disconnect()
+    .then(() => {})
+    .catch(console.error);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   tryConnect();
   document.getElementById('connect').addEventListener('click', tryConnect);
+  document.getElementById('disconnect').addEventListener('click', tryDisconnect);
 });
 
-window.machine = machine;
+window.device = device;

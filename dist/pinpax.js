@@ -1,6 +1,6 @@
-import { K as h } from "./kernel-DAtdBEi3.js";
+import { K as h } from "./kernel-505KqpPU.js";
 import { s as a } from "./relay-CsdB0FSa.js";
-import { h as c } from "./webserial-core-BjytHor1.js";
+import { a as c } from "./webserial-core-C0ZbaNYy.js";
 class m extends h {
   __pinpax__ = {
     server: "DEV",
@@ -27,7 +27,8 @@ class m extends h {
       flowControl: "none"
     },
     no_device: t = 1,
-    device_listen_on_channel: i = 1
+    device_listen_on_channel: i = 1,
+    socket: n = !1
   } = {
     filters: null,
     config_port: {
@@ -39,9 +40,10 @@ class m extends h {
       flowControl: "none"
     },
     no_device: 1,
-    device_listen_on_channel: 1
+    device_listen_on_channel: 1,
+    socket: !1
   }) {
-    if (super({ filters: s, config_port: e, no_device: t, device_listen_on_channel: i }), this.__internal__.device.type = "pinpax", c.getCustom(this.typeDevice, t))
+    if (super({ filters: s, config_port: e, no_device: t, device_listen_on_channel: i, socket: n }), this.__internal__.device.type = "pinpax", c.getCustom(this.typeDevice, t))
       throw new Error(`Device ${this.typeDevice} ${t} already exists`);
     this.__internal__.time.response_connection = 4e3, this.__internal__.time.response_general = 3e3, this.__internal__.serial.delay_first_connection = 1e3, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
 `, this.#t(), c.add(this), this.getResponseAsString();

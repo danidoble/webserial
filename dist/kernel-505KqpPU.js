@@ -1,4 +1,4 @@
-import { h as r, Z as h } from "./webserial-core-BjytHor1.js";
+import { a as r, u as h } from "./webserial-core-C0ZbaNYy.js";
 function p(i = 100) {
   return new Promise((n) => setTimeout(() => n(), i));
 }

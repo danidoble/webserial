@@ -79,24 +79,28 @@ device.on('serial:unsupported', (event) => {
   document.getElementById('unsupported').classList.remove('hidden');
 });
 
-function tryConnect() {
+const tryConnect = () => {
+  if (device.isConnected) return;
+
   device
     .connect()
     .then(() => {})
     .catch(console.error);
-}
+};
+
+const tryDisconnect = () => {
+  if (device.isDisconnected) return;
+
+  device
+    .disconnect()
+    .then(() => {})
+    .catch(console.error);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   tryConnect();
   document.getElementById('connect').addEventListener('click', tryConnect);
-  document.getElementById('disconnect').addEventListener('click', () => {
-    device
-      .disconnect()
-      .then(() => {
-        console.log('Disconnected');
-      })
-      .catch(console.error);
-  });
+  document.getElementById('disconnect').addEventListener('click', tryDisconnect);
 });
 
 window.device = device;

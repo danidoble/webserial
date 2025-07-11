@@ -1,5 +1,5 @@
-import { K as Ze, a as Ye, i as K, b as Qt, w as Zt } from "./kernel-DAtdBEi3.js";
-import { h as Yt } from "./webserial-core-BjytHor1.js";
+import { K as Ze, a as Ye, i as K, b as Qt, w as Zt } from "./kernel-505KqpPU.js";
+import { a as Yt } from "./webserial-core-C0ZbaNYy.js";
 var ti = "0123456789abcdefghijklmnopqrstuvwxyz";
 function H(n) {
   return ti.charAt(n);
@@ -3841,7 +3841,8 @@ class vr extends Ze {
     device_listen_on_channel: r = 1,
     username: s = null,
     password: a = null,
-    environment: o = "production"
+    environment: o = "production",
+    socket: c = !1
   } = {
     filters: null,
     config_port: {
@@ -3856,9 +3857,10 @@ class vr extends Ze {
     device_listen_on_channel: 1,
     username: null,
     password: null,
-    environment: "production"
+    environment: "production",
+    socket: !1
   }) {
-    if (super({ filters: t, config_port: e, no_device: i, device_listen_on_channel: r }), this.__internal__.device.type = "pinpad", !Ye())
+    if (super({ filters: t, config_port: e, no_device: i, device_listen_on_channel: r, socket: c }), this.__internal__.device.type = "pinpad", !Ye())
       throw new Error("Crypto not supported in this browser");
     if (Yt.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);

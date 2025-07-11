@@ -1,6 +1,6 @@
-import { K as u } from "./kernel-DAtdBEi3.js";
+import { K as u } from "./kernel-505KqpPU.js";
 import { l } from "./relay-CsdB0FSa.js";
-import { h as p } from "./webserial-core-BjytHor1.js";
+import { a as p } from "./webserial-core-C0ZbaNYy.js";
 class f extends u {
   __coin_purse = {
     available: !0
@@ -51,8 +51,8 @@ class f extends u {
   #n = !1;
   #e = 0;
   #t = 0;
-  constructor({ filters: n = null, config_port: e = null, no_device: t = 1 } = {}) {
-    if (super({ filters: n, config_port: e, no_device: t }), this.__internal__.device.type = "boardroid", p.getCustom(this.typeDevice, t))
+  constructor({ filters: n = null, config_port: e = null, no_device: t = 1, socket: s = !1 } = {}) {
+    if (super({ filters: n, config_port: e, no_device: t, socket: s }), this.__internal__.device.type = "boardroid", p.getCustom(this.typeDevice, t))
       throw new Error(`Device ${this.typeDevice} ${t} already exists`);
     this.__internal__.serial.config_port.baudRate = 115200, this.__internal__.serial.response.length = 14, this.__internal__.time.response_connection = 600, this.__internal__.time.response_general = 4e3, this.__internal__.time.response_engines = 15e3, this.__internal__.dispense.limit_counter = 15, this.__internal__.dispense.custom_limit_counter = null, this.__internal__.dispense.backup_dispense = {
       channel: 1,

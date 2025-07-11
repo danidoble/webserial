@@ -1,13 +1,13 @@
-import { s as o, g as r, w as e } from "./kernel-DAtdBEi3.js";
-import { E as f, K as x } from "./kernel-DAtdBEi3.js";
+import { s as o, g as r, w as e } from "./kernel-505KqpPU.js";
+import { E as f, K as x } from "./kernel-505KqpPU.js";
 import { Relay as n } from "./relay.js";
 import { Locker as l } from "./locker.js";
 import { PinPad as P } from "./pinpad.js";
-import { PinPax as g } from "./pinpax.js";
-import { Jofemar as w } from "./jofemar.js";
-import { Boardroid as K } from "./boardroid.js";
-import { Hopper as b } from "./hopper.js";
-import { h as k } from "./webserial-core-BjytHor1.js";
+import { PinPax as S } from "./pinpax.js";
+import { Jofemar as k } from "./jofemar.js";
+import { Boardroid as w } from "./boardroid.js";
+import { Hopper as K } from "./hopper.js";
+import { a as y, A } from "./webserial-core-C0ZbaNYy.js";
 /**
  * @license Webserial
  * webserial
@@ -17,22 +17,23 @@ import { h as k } from "./webserial-core-BjytHor1.js";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const p = {
+const a = {
   wait: e,
   getSeconds: r,
   supportWebSerial: o
-}, a = "4.1.9";
+}, p = "4.1.9";
 export {
-  K as Boardroid,
-  k as Devices,
+  w as Boardroid,
+  y as Devices,
   f as Emulator,
-  b as Hopper,
-  w as Jofemar,
+  K as Hopper,
+  k as Jofemar,
   x as Kernel,
   l as Locker,
   P as PinPad,
-  g as PinPax,
+  S as PinPax,
   n as Relay,
-  p as utils,
-  a as version
+  A as Socket,
+  a as utils,
+  p as version
 };

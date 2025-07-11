@@ -1,5 +1,5 @@
-import { K as s } from "./kernel-DAtdBEi3.js";
-import { h as n } from "./webserial-core-BjytHor1.js";
+import { K as s } from "./kernel-505KqpPU.js";
+import { a } from "./webserial-core-C0ZbaNYy.js";
 /**
  * @license Webserial
  * webserial
@@ -11,7 +11,7 @@ import { h as n } from "./webserial-core-BjytHor1.js";
  */
 const e = "4.1.9";
 export {
-  n as Devices,
+  a as Devices,
   s as Kernel,
   e as version
 };

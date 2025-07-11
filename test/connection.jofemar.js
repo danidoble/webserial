@@ -2,13 +2,13 @@ import { Jofemar } from './../lib/serial/jofemar.js';
 // import {Emulator} from './../lib/utils/emulator.js';
 // window.Emulator = Emulator;
 
-const machine = new Jofemar();
+const device = new Jofemar();
 
-// machine.on('machine:status', event => {
+// device.on('device:status', event => {
 //     console.log(event)
 // });
 
-machine.on('channels', (event) => {
+device.on('channels', (event) => {
   const active_channels = event.detail.channels.filter((channel) => channel.active);
 
   // eslint-disable-next-line no-undef
@@ -17,7 +17,7 @@ machine.on('channels', (event) => {
   });
 });
 
-machine.on('dispensing:withdrawal', (event) => {
+device.on('dispensing:withdrawal', (event) => {
   const seconds = event.detail.seconds;
   if (seconds > 0) {
     document.getElementById('withdrawal').classList.remove('hidden');
@@ -28,7 +28,7 @@ machine.on('dispensing:withdrawal', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('jofemar:error', (event) => {
+device.on('jofemar:error', (event) => {
   // switch (event.detail.type) {
   //     case 'jam':break;
   //     case 'malfunction':break;
@@ -44,7 +44,7 @@ machine.on('jofemar:error', (event) => {
   document.getElementById('error').classList.remove('hidden');
 });
 
-machine.on('reset:errors', (event) => {
+device.on('reset:errors', (event) => {
   let timerInterval;
   // eslint-disable-next-line no-undef
   Swal.fire({
@@ -70,12 +70,12 @@ machine.on('reset:errors', (event) => {
   });
 });
 
-machine.on('serial:error', (event) => {
+device.on('serial:error', (event) => {
   document.getElementById('log').innerText += event.detail.message + '\n\n';
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:disconnected', (event) => {
+device.on('serial:disconnected', (event) => {
   document.getElementById('log').innerText += 'Disconnected\n\n';
 
   document.getElementById('disconnected').classList.remove('hidden');
@@ -83,7 +83,7 @@ machine.on('serial:disconnected', (event) => {
   document.getElementById('disconnect').classList.add('hidden');
 });
 
-machine.on('serial:connecting', (event) => {
+device.on('serial:connecting', (event) => {
   const connect = document.getElementById('connect');
   if (connect && event.detail.active) {
     connect.setAttribute('disabled', 'disabled');
@@ -102,7 +102,7 @@ machine.on('serial:connecting', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:connected', (event) => {
+device.on('serial:connected', (event) => {
   document.getElementById('log').innerText += 'Connected\n\n';
 
   document.getElementById('disconnected').classList.add('hidden');
@@ -112,7 +112,7 @@ machine.on('serial:connected', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:need-permission', (event) => {
+device.on('serial:need-permission', (event) => {
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('need-permission').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
@@ -120,25 +120,36 @@ machine.on('serial:need-permission', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:soft-reload', (event) => {
+device.on('serial:soft-reload', (event) => {
   // reset your variables
 });
 
 // eslint-disable-next-line no-unused-vars
-machine.on('serial:unsupported', (event) => {
+device.on('serial:unsupported', (event) => {
   document.getElementById('unsupported').classList.remove('hidden');
 });
 
-machine.on('temperature:current', (event) => {
+device.on('temperature:current', (event) => {
   document.getElementById('temperature').innerText = event.detail.formatted;
 });
 
-function tryConnect() {
-  machine
+const tryConnect = () => {
+  if (device.isConnected) return;
+
+  device
     .connect()
     .then(() => {})
     .catch(console.error);
-}
+};
+
+const tryDisconnect = () => {
+  if (device.isDisconnected) return;
+
+  device
+    .disconnect()
+    .then(() => {})
+    .catch(console.error);
+};
 
 function addView() {
   document.querySelector('.webserial').innerHTML += `<div id="withdrawal" class="hidden p-4 bg-sky-900 rounded-lg">
@@ -167,14 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   tryConnect();
   document.getElementById('connect').addEventListener('click', tryConnect);
-  document.getElementById('disconnect').addEventListener('click', () => {
-    machine
-      .disconnect()
-      .then(() => {
-        console.log('Disconnected');
-      })
-      .catch(console.error);
-  });
+  document.getElementById('disconnect').addEventListener('click', tryDisconnect);
 });
 
-window.machine = machine;
+window.device = device;

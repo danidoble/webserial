@@ -5,30 +5,30 @@ const bussinessId = import.meta.env.VITE_PINPAX_BUSSINESS_ID;
 const encriptionKey = import.meta.env.VITE_PINPAX_ENCRYPTION_KEY;
 const apiKey = import.meta.env.VITE_PINPAX_API_KEY;
 
-const pinpax = new PinPax();
-pinpax.server = server;
-pinpax.bussinessId = bussinessId;
-pinpax.encriptionKey = encriptionKey;
-pinpax.apiKey = apiKey;
+const device = new PinPax();
+device.server = server;
+device.bussinessId = bussinessId;
+device.encriptionKey = encriptionKey;
+device.apiKey = apiKey;
 
-pinpax.on('serial:message', (data) => {
+device.on('serial:message', (data) => {
   console.log(data.detail);
 });
 
-pinpax.on('serial:timeout', (data) => {
+device.on('serial:timeout', (data) => {
   console.log('serial:timeout', data.detail);
 });
 
-// pinpax.on('serial:sent', data => {
+// device.on('serial:sent', data => {
 //     console.log('serial:sent',data.detail);
 // });
 
-pinpax.on('serial:error', (event) => {
+device.on('serial:error', (event) => {
   document.getElementById('log').innerText += event.detail.message + '\n\n';
 });
 
 // eslint-disable-next-line no-unused-vars
-pinpax.on('serial:disconnected', (event) => {
+device.on('serial:disconnected', (event) => {
   document.getElementById('log').innerText += 'Disconnected\n\n';
 
   document.getElementById('disconnected').classList.remove('hidden');
@@ -36,7 +36,7 @@ pinpax.on('serial:disconnected', (event) => {
   document.getElementById('disconnect').classList.add('hidden');
 });
 
-pinpax.on('serial:connecting', (event) => {
+device.on('serial:connecting', (event) => {
   const connect = document.getElementById('connect');
   if (connect && event.detail.active) {
     connect.setAttribute('disabled', 'disabled');
@@ -55,7 +55,7 @@ pinpax.on('serial:connecting', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-pinpax.on('serial:connected', (event) => {
+device.on('serial:connected', (event) => {
   document.getElementById('log').innerText += 'Connected\n\n';
 
   document.getElementById('disconnected').classList.add('hidden');
@@ -65,7 +65,7 @@ pinpax.on('serial:connected', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-pinpax.on('serial:need-permission', (event) => {
+device.on('serial:need-permission', (event) => {
   document.getElementById('disconnected').classList.remove('hidden');
   document.getElementById('need-permission').classList.remove('hidden');
   document.getElementById('connect').classList.remove('hidden');
@@ -73,33 +73,37 @@ pinpax.on('serial:need-permission', (event) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-pinpax.on('serial:soft-reload', (event) => {
+device.on('serial:soft-reload', (event) => {
   // reset your variables
 });
 
 // eslint-disable-next-line no-unused-vars
-pinpax.on('serial:unsupported', (event) => {
+device.on('serial:unsupported', (event) => {
   document.getElementById('unsupported').classList.remove('hidden');
 });
 
-function tryConnect() {
-  pinpax
+const tryConnect = () => {
+  if (device.isConnected) return;
+
+  device
     .connect()
     .then(() => {})
     .catch(console.error);
-}
+};
+
+const tryDisconnect = () => {
+  if (device.isDisconnected) return;
+
+  device
+    .disconnect()
+    .then(() => {})
+    .catch(console.error);
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   tryConnect();
   document.getElementById('connect').addEventListener('click', tryConnect);
-  document.getElementById('disconnect').addEventListener('click', () => {
-    pinpax
-      .disconnect()
-      .then(() => {
-        console.log('Disconnected');
-      })
-      .catch(console.error);
-  });
+  document.getElementById('disconnect').addEventListener('click', tryDisconnect);
 });
 
-window.pinpax = pinpax;
+window.device = device;

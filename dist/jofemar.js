@@ -1,6 +1,6 @@
-import { K as C, w as u, g as f } from "./kernel-DAtdBEi3.js";
+import { K as C, w as u, g as f } from "./kernel-505KqpPU.js";
 import { o as i } from "./relay-CsdB0FSa.js";
-import { h as y } from "./webserial-core-BjytHor1.js";
+import { a as y } from "./webserial-core-C0ZbaNYy.js";
 class b extends C {
   __device = {
     type: "esplus",
@@ -33,9 +33,10 @@ class b extends C {
     no_device: n = 1,
     device_listen_on_port: r = 1,
     type: a = "esplus",
-    support_cart: o = !0
+    support_cart: o = !0,
+    socket: c = !1
   } = {}) {
-    if (super({ filters: t, config_port: e, no_device: n, device_listen_on_port: r }), this.__internal__.device.type = "jofemar", y.getCustom(this.typeDevice, n))
+    if (super({ filters: t, config_port: e, no_device: n, device_listen_on_port: r, socket: c }), this.__internal__.device.type = "jofemar", y.getCustom(this.typeDevice, n))
       throw new Error(`Device ${this.typeDevice} ${n} already exists`);
     this.__internal__.dispense.must_response = !0, this.__internal__.time.response_general = 800, this.__internal__.time.response_engines = 800, this.__internal__.dispense.limit_counter = 40, this.__internal__.dispense.timeout = 0, this.__internal__.dispense.timeout_time = 4e3, this.__internal__.dispense.interval = 0, this.__internal__.dispense.interval_time = 1e3, this.__internal__.device.hex_number = (128 + this.listenOnChannel).toString(16), this.__internal__.device.door_open = !1, this.__internal__.dispense.elevator = {
       locking_time: 60,

@@ -1,12 +1,12 @@
-import { K as r, w as n } from "./kernel-DAtdBEi3.js";
+import { K as h, w as n } from "./kernel-505KqpPU.js";
 import { u as t } from "./relay-CsdB0FSa.js";
-import { h as a } from "./webserial-core-BjytHor1.js";
-class p extends r {
+import { a } from "./webserial-core-C0ZbaNYy.js";
+class d extends h {
   #s = !1;
   #e = 0;
   #t = 0;
-  constructor({ filters: s = null, config_port: e = null, no_device: i = 1, device_listen_on_port: l = 3 } = {}) {
-    if (super({ filters: s, config_port: e, no_device: i, device_listen_on_port: l }), this.__internal__.device.type = "locker", a.getCustom(this.typeDevice, i))
+  constructor({ filters: s = null, config_port: e = null, no_device: i = 1, device_listen_on_port: l = 3, socket: r = !1 } = {}) {
+    if (super({ filters: s, config_port: e, no_device: i, device_listen_on_port: l, socket: r }), this.__internal__.device.type = "locker", a.getCustom(this.typeDevice, i))
       throw new Error(`Device ${this.typeDevice} ${i} already exists`);
     this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, a.add(this), this.#r();
   }
@@ -143,5 +143,5 @@ class p extends r {
   }
 }
 export {
-  p as Locker
+  d as Locker
 };
