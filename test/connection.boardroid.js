@@ -1,11 +1,11 @@
 import { Boardroid } from './../lib/serial/boardroid.js';
 
 const device = new Boardroid({
-  socket: true,
+  // socket: true,
 });
-device.__debug__ = true;
-device.portPath = '/dev/tty-ch340';
+// device.portPath = '/dev/ttyUSB0';
 
+// device.__debug__ = true;
 // device.on('debug', (event) => {
 //   console.log(event.detail);
 // });
