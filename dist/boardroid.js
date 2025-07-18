@@ -1,4 +1,4 @@
-import { K as u } from "./kernel-DAtdBEi3.js";
+import { K as u } from "./kernel-Dk_J4ThU.js";
 import { l } from "./relay-CsdB0FSa.js";
 import { h as p } from "./webserial-core-BjytHor1.js";
 class f extends u {
@@ -395,6 +395,7 @@ class f extends u {
     return this.dispatch("card-reader:event", e), e;
   }
   serialMessage(n) {
+    n = this.fixHexArray(n);
     let e = {
       code: n,
       name: null,
@@ -509,7 +510,7 @@ class f extends u {
     const e = [20, 50, 100, 200, 500][this.__banknote_purse.recycler.banknote];
     return l.banknotePurseICTDispense({ quantity: n, denomination: e });
   }
-  #O({ $_20: n = 0, $_50: e = 0, $_100: t = 0, $_200: s = 0, $_500: i = 0, $_1000: r = 0 } = {}) {
+  #A({ $_20: n = 0, $_50: e = 0, $_100: t = 0, $_200: s = 0, $_500: i = 0, $_1000: r = 0 } = {}) {
     return l.banknotePurseOtherDispense({
       $20: n,
       $50: e,
@@ -527,7 +528,7 @@ class f extends u {
       const o = [n, e, t, s, i];
       a = this.#j(o[this.__banknote_purse.recycler.banknote]);
     } else
-      a = this.#O({ $_20: n, $_50: e, $_100: t, $_200: s, $_500: i, $_1000: r });
+      a = this.#A({ $_20: n, $_50: e, $_100: t, $_200: s, $_500: i, $_1000: r });
     await this.appendToQueue(a, "banknote-purse:dispense");
   }
   async banknotePurseEnable({ scrow: n = !1 }) {
@@ -681,7 +682,7 @@ class f extends u {
     if (n.length === 0) throw new Error("Invalid code");
     return await this.appendToQueue(l.customCode(n), "custom");
   }
-  #U(n) {
+  #O(n) {
     const e = ["20", "50", "100", "200", "500"], t = this.__banknote_purse.recycler.banknote, s = "$_" + e[t], i = parseInt(e[t]), r = this.banknotes.recycler[`p${e[t]}`], a = Math.min(Math.floor(n / i), r), o = {
       banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
       pending: n,
@@ -689,7 +690,7 @@ class f extends u {
     };
     return this.totalInRecycler === 0 || a < 1 || n === 0 || (o.banknotes[s] = a, o.pending = parseFloat((n - a * i).toFixed(2))), o;
   }
-  #A(n) {
+  #U(n) {
     const e = {
       banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
       pending: n,
@@ -705,7 +706,7 @@ class f extends u {
     return t(1e3, "p1000"), t(500, "p500"), t(200, "p200"), t(100, "p100"), t(50, "p50"), t(20, "p20"), e.will_dispense = Object.values(e.banknotes).some((s) => s > 0), e;
   }
   #o(n) {
-    return this.hasRecycler ? this.#s() ? this.#U(n) : this.#A(n) : {
+    return this.hasRecycler ? this.#s() ? this.#O(n) : this.#U(n) : {
       banknotes: { $_20: 0, $_50: 0, $_100: 0, $_200: 0, $_500: 0, $_1000: 0 },
       pending: n,
       will_dispense: !1

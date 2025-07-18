@@ -802,6 +802,9 @@ class b extends h {
   get listenOnPort() {
     return this.__internal__.device.listen_on_port ?? 1;
   }
+  fixHexArray(n) {
+    return n.map((s) => typeof s == "string" ? s.padStart(2, "0").toLowerCase() : s.toString(16).padStart(2, "0").toLowerCase());
+  }
 }
 export {
   e as E,

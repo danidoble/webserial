@@ -1,4 +1,4 @@
-import { K as C, w as u, g as f } from "./kernel-DAtdBEi3.js";
+import { K as C, w as u, g as f } from "./kernel-Dk_J4ThU.js";
 import { o as i } from "./relay-CsdB0FSa.js";
 import { h as y } from "./webserial-core-BjytHor1.js";
 class b extends C {
@@ -656,6 +656,8 @@ class b extends C {
     return e;
   }
   serialMessage(t) {
+    t = this.fixHexArray(t);
+    const e = 128;
     let n = {
       code: t,
       name: null,
@@ -671,7 +673,7 @@ class b extends C {
     };
     switch (t[0]) {
       case "02":
-        n = this.#B(t, n, 128);
+        n = this.#B(t, n, e);
         break;
       case "06":
         n = this.#W(t, n);
