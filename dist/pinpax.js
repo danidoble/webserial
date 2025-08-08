@@ -4,8 +4,8 @@ import { h as c } from "./webserial-core-BjytHor1.js";
 class m extends h {
   __pinpax__ = {
     server: "DEV",
-    bussinessId: null,
-    encriptionKey: null,
+    businessId: null,
+    encryptionKey: null,
     apiKey: null,
     asyncResponses: {
       voucher: null,
@@ -64,17 +64,17 @@ class m extends h {
     for (const e of s)
       this.serialRegisterAvailableListener(e);
   }
-  set bussinessId(s) {
-    this.__pinpax__.bussinessId = s;
+  set businessId(s) {
+    this.__pinpax__.businessId = s;
   }
-  get bussinessId() {
-    return this.__pinpax__.bussinessId;
+  get businessId() {
+    return this.__pinpax__.businessId;
   }
-  set encriptionKey(s) {
-    this.__pinpax__.encriptionKey = s;
+  set encryptionKey(s) {
+    this.__pinpax__.encryptionKey = s;
   }
-  get encriptionKey() {
-    return this.__pinpax__.encriptionKey;
+  get encryptionKey() {
+    return this.__pinpax__.encryptionKey;
   }
   set apiKey(s) {
     this.__pinpax__.apiKey = s;
@@ -345,13 +345,13 @@ class m extends h {
     await this.appendToQueue(a.init(), "init-app");
   }
   async login() {
-    if (!this.apiKey || !this.bussinessId || !this.encriptionKey || !this.server)
-      throw new Error("Invalid data to login check apiKey, bussinessId, encriptionKey, server");
+    if (!this.apiKey || !this.businessId || !this.encryptionKey || !this.server)
+      throw new Error("Invalid data to login check apiKey, businessId, encryptionKey, server");
     const s = JSON.stringify({
       action: "LOGIN_MIT",
       server: this.__pinpax__.server,
-      bussiness_id: this.__pinpax__.bussinessId,
-      encription_key: this.__pinpax__.encriptionKey,
+      business_id: this.__pinpax__.businessId,
+      encryption_key: this.__pinpax__.encryptionKey,
       api_key: this.__pinpax__.apiKey
     }), e = this.parseStringToBytes(s, `\r
 `);
