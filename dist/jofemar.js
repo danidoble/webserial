@@ -765,7 +765,7 @@ class b extends C {
     });
   }
   async resetAllErrors() {
-    return await this.resetWaitingProductRemovedError(), await u(100), await this.resetSoldOutErrors(), await u(100), await this.resetMachineErrors();
+    return await this.resetWaitingProductRemovedError(), await u(200), await this.resetSoldOutErrors(), await u(400), await this.resetMachineErrors();
   }
   async status() {
     return await this.appendToQueue(i.status({ machineChannel: this.listenOnChannel }), "status");
