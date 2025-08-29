@@ -1,5 +1,5 @@
-import { s as o, g as r, w as e } from "./kernel-Dk_J4ThU.js";
-import { E as f, K as x } from "./kernel-Dk_J4ThU.js";
+import { s as o, g as r, w as e } from "./kernel-D2dlpMca.js";
+import { E as f, K as x } from "./kernel-D2dlpMca.js";
 import { Relay as n } from "./relay.js";
 import { Locker as l } from "./locker.js";
 import { PinPad as P } from "./pinpad.js";
@@ -7,7 +7,7 @@ import { PinPax as g } from "./pinpax.js";
 import { Jofemar as w } from "./jofemar.js";
 import { Boardroid as K } from "./boardroid.js";
 import { Hopper as b } from "./hopper.js";
-import { h as k } from "./webserial-core-BjytHor1.js";
+import { s as y } from "./webserial-core-l5v2UEyv.js";
 /**
  * @license Webserial
  * webserial
@@ -21,10 +21,10 @@ const p = {
   wait: e,
   getSeconds: r,
   supportWebSerial: o
-}, a = "4.1.9";
+}, s = "4.1.9";
 export {
   K as Boardroid,
-  k as Devices,
+  y as Devices,
   f as Emulator,
   b as Hopper,
   w as Jofemar,
@@ -34,5 +34,5 @@ export {
   g as PinPax,
   n as Relay,
   p as utils,
-  a as version
+  s as version
 };

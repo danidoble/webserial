@@ -1,6 +1,6 @@
-import { K as C, w as u, g as f } from "./kernel-Dk_J4ThU.js";
-import { o as i } from "./relay-CsdB0FSa.js";
-import { h as y } from "./webserial-core-BjytHor1.js";
+import { K as C, w as u, g as f } from "./kernel-D2dlpMca.js";
+import { o as i } from "./relay-DP8PLsDP.js";
+import { s as y } from "./webserial-core-l5v2UEyv.js";
 class b extends C {
   __device = {
     type: "esplus",
@@ -765,7 +765,7 @@ class b extends C {
     });
   }
   async resetAllErrors() {
-    return await this.resetSoldOutErrors(), await u(100), await this.resetWaitingProductRemovedError(), await u(100), await this.resetMachineErrors();
+    return await this.resetWaitingProductRemovedError(), await u(100), await this.resetSoldOutErrors(), await u(100), await this.resetMachineErrors();
   }
   async status() {
     return await this.appendToQueue(i.status({ machineChannel: this.listenOnChannel }), "status");

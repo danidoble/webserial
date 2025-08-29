@@ -1,5 +1,5 @@
-import { Z as h, h as p } from "./webserial-core-BjytHor1.js";
-class d extends h {
+import { b as _, s as p } from "./webserial-core-l5v2UEyv.js";
+class d extends _ {
   __hoppers__ = {
     levels: [
       { id: 1, currency: 10, key: "Hopper 1", name: "10 Pesos", amount: 0, capacity: 1e3 },
