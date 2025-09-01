@@ -14,7 +14,7 @@ function D() {
 function w(i = 1) {
   return i * 1e3;
 }
-function M(i) {
+function _(i) {
   return i == null || i === "";
 }
 class e {
@@ -767,8 +767,8 @@ class b extends h {
   }
   async internalDispense(n) {
     if (this.isDispensing) throw new Error("Another dispensing process is running");
-    if (!e.enable && !this.__internal__.serial.connected && (await this.serialConnect(), !this.__internal__.serial.connected))
-      throw new Error("Serial device not connected");
+    if (this.__internal__.dispense.dispensing = !0, !e.enable && !this.__internal__.serial.connected && (await this.serialConnect(), !this.__internal__.serial.connected))
+      throw this.__internal__.dispense.dispensing = !1, new Error("Serial device not connected");
     return this.__internal__.serial.queue.length === 0 ? (await this.appendToQueue(n, "dispense"), await this.internalDispenseStatus()) : new Promise((s) => {
       const t = setInterval(async () => {
         if (this.__internal__.serial.queue.length > 0) return;
@@ -812,7 +812,7 @@ export {
   D as a,
   y as b,
   w as g,
-  M as i,
+  _ as i,
   k as s,
   p as w
 };
