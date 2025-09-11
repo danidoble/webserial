@@ -1,5 +1,5 @@
 import { K as s } from "./kernel-CxSXwsm6.js";
-import { s as n } from "./webserial-core-l5v2UEyv.js";
+import { s as t } from "./webserial-core-l5v2UEyv.js";
 /**
  * @license Webserial
  * webserial
@@ -9,9 +9,9 @@ import { s as n } from "./webserial-core-l5v2UEyv.js";
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const e = "4.1.9";
+const e = void 0;
 export {
-  n as Devices,
+  t as Devices,
   s as Kernel,
   e as version
 };
