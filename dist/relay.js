@@ -1,13 +1,14 @@
-import { K as o, w as i } from "./kernel-505KqpPU.js";
-import { e as s } from "./relay-CsdB0FSa.js";
-import { a as r } from "./webserial-core-C0ZbaNYy.js";
-class f extends o {
-  constructor({ filters: t = null, config_port: e = null, no_device: a = 1, socket: n = !1 } = {}) {
-    if (super({ filters: t, config_port: e, no_device: a, socket: n }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !0, this.__internal__.serial.auto_response = [2, 6, 221, 221, 240, 207, 3], r.getCustom(this.typeDevice, a))
-      throw new Error(`Device ${this.typeDevice} ${a} already exists`);
+import { K as o, w as i } from "./kernel-CXM5xoJD.js";
+import { e as s } from "./relay-DP8PLsDP.js";
+import { a as r } from "./webserial-core-D3luFguv.js";
+class d extends o {
+  constructor({ filters: t = null, config_port: e = null, no_device: n = 1, socket: a = !1 } = {}) {
+    if (super({ filters: t, config_port: e, no_device: n, socket: a }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !1, this.__internal__.serial.auto_response = [2, 6, 221, 221, 240, 207, 3], r.getCustom(this.typeDevice, n))
+      throw new Error(`Device ${this.typeDevice} ${n} already exists`);
     r.add(this);
   }
   serialMessage(t) {
+    t = this.fixHexArray(t);
     const e = {
       code: t,
       name: null,
@@ -15,24 +16,12 @@ class f extends o {
       request: null,
       no_code: 0
     };
-    switch (t[1].toString()) {
-      case "dd":
-      // old status
-      case "06":
-        e.name = "Connection with the serial device completed.", e.description = "Your connection with the serial device was successfully completed.", e.request = "connect", e.no_code = 100;
-        break;
-      case "de":
-        break;
-      default:
-        e.name = "Unrecognized response", e.description = "The response of application was received, but dont identify with any of current parameters", e.request = "undefined", e.no_code = 400;
-        break;
-    }
-    this.dispatch("serial:message", e);
+    t[0] === "a0" && t[2] == "00" ? (e.name = "Relay turned off", e.description = "The relay has been turned off successfully.", e.request = this.lastAction, e.no_code = 101) : t[0] === "a0" && t[2] == "01" ? (e.name = "Relay turned on", e.description = "The relay has been turned on successfully.", e.request = this.lastAction, e.no_code = 102) : (e.name = "Unrecognized response", e.description = "The response of application was received, but dont identify with any of current parameters", e.request = "undefined", e.no_code = 400), this.dispatch("serial:message", e);
   }
   serialRelaySumHex(t) {
     let e = 0;
-    return t.forEach((a, n) => {
-      n !== 3 && (e += a);
+    return t.forEach((n, a) => {
+      a !== 3 && (e += n);
     }), e;
   }
   serialSetConnectionConstant(t = 1) {
@@ -55,5 +44,5 @@ class f extends o {
   }
 }
 export {
-  f as Relay
+  d as Relay
 };

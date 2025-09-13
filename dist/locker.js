@@ -1,6 +1,6 @@
-import { K as h, w as n } from "./kernel-505KqpPU.js";
-import { u as t } from "./relay-CsdB0FSa.js";
-import { a } from "./webserial-core-C0ZbaNYy.js";
+import { K as h, w as n } from "./kernel-CXM5xoJD.js";
+import { u as t } from "./relay-DP8PLsDP.js";
+import { a } from "./webserial-core-D3luFguv.js";
 class d extends h {
   #s = !1;
   #e = 0;
@@ -16,6 +16,7 @@ class d extends h {
       this.serialRegisterAvailableListener(e);
   }
   serialMessage(s) {
+    s = this.fixHexArray(s);
     const e = {
       code: s,
       name: null,

@@ -1,6 +1,6 @@
-import { K as C, w as u, g as f } from "./kernel-505KqpPU.js";
-import { o as i } from "./relay-CsdB0FSa.js";
-import { a as y } from "./webserial-core-C0ZbaNYy.js";
+import { K as C, w as u, g as f } from "./kernel-CXM5xoJD.js";
+import { o as i } from "./relay-DP8PLsDP.js";
+import { a as y } from "./webserial-core-D3luFguv.js";
 class b extends C {
   __device = {
     type: "esplus",
@@ -657,6 +657,8 @@ class b extends C {
     return e;
   }
   serialMessage(t) {
+    t = this.fixHexArray(t);
+    const e = 128;
     let n = {
       code: t,
       name: null,
@@ -672,7 +674,7 @@ class b extends C {
     };
     switch (t[0]) {
       case "02":
-        n = this.#B(t, n, 128);
+        n = this.#B(t, n, e);
         break;
       case "06":
         n = this.#W(t, n);
@@ -764,7 +766,7 @@ class b extends C {
     });
   }
   async resetAllErrors() {
-    return await this.resetSoldOutErrors(), await u(100), await this.resetWaitingProductRemovedError(), await u(100), await this.resetMachineErrors();
+    return await this.resetWaitingProductRemovedError(), await u(200), await this.resetSoldOutErrors(), await u(400), await this.resetMachineErrors();
   }
   async status() {
     return await this.appendToQueue(i.status({ machineChannel: this.listenOnChannel }), "status");

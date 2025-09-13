@@ -1321,8 +1321,8 @@ const R = class C {
   static deactivate(e = 1) {
     return C.connection(e);
   }
-  static activate() {
-    return C.instance.build([160, 1, 1, 162]);
+  static activate(e = 1) {
+    return C.instance.build([160, e, 1, 162]);
   }
   static custom(e) {
     return C.instance.build(e);
