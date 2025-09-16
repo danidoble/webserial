@@ -7,17 +7,18 @@ const _dirname = dirname(fileURLToPath(import.meta.url));
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
+        emptyOutDir: false,
         lib: {
             entry: {
-                webserial: resolve(_dirname, 'lib/main.js'),
-                kernel: resolve(_dirname, 'lib/kernel.js'),
-                boardroid: resolve(_dirname, 'lib/serial/boardroid.js'),
-                jofemar: resolve(_dirname, 'lib/serial/jofemar.js'),
-                locker: resolve(_dirname, 'lib/serial/locker.js'),
-                pinpad: resolve(_dirname, 'lib/serial/pinpad.js'),
-                pinpax: resolve(_dirname, 'lib/serial/pinpax.js'),
-                relay: resolve(_dirname, 'lib/serial/relay.js'),
-                hopper: resolve(_dirname, 'lib/serial/hopper.js'),
+                webserial: resolve(_dirname, 'lib/main.ts'),
+                kernel: resolve(_dirname, 'lib/kernel.ts'),
+                boardroid: resolve(_dirname, 'lib/serial/boardroid.ts'),
+                jofemar: resolve(_dirname, 'lib/serial/jofemar.ts'),
+                locker: resolve(_dirname, 'lib/serial/locker.ts'),
+                pinpad: resolve(_dirname, 'lib/serial/pinpad.ts'),
+                pinpax: resolve(_dirname, 'lib/serial/pinpax.ts'),
+                relay: resolve(_dirname, 'lib/serial/relay.ts'),
+                hopper: resolve(_dirname, 'lib/serial/hopper.ts'),
             },
             name: 'WebSerial'
         },

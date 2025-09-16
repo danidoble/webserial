@@ -1,11 +1,10 @@
-import { K as o, w as i } from "./kernel-CXM5xoJD.js";
-import { e as s } from "./relay-DP8PLsDP.js";
-import { a as r } from "./webserial-core-D3luFguv.js";
-class d extends o {
-  constructor({ filters: t = null, config_port: e = null, no_device: n = 1, socket: a = !1 } = {}) {
-    if (super({ filters: t, config_port: e, no_device: n, socket: a }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !1, this.__internal__.serial.auto_response = [2, 6, 221, 221, 240, 207, 3], r.getCustom(this.typeDevice, n))
-      throw new Error(`Device ${this.typeDevice} ${n} already exists`);
-    r.add(this);
+import { K as o, D as a, w as i } from "./kernel-DkC7Kj3m.js";
+import { e as n } from "./relay-DP8PLsDP.js";
+class f extends o {
+  constructor({ filters: t = null, config_port: e, no_device: s = 1, socket: r = !1 } = {}) {
+    if (super({ filters: t, config_port: e, no_device: s, socket: r }), this.__internal__.device.type = "relay", this.__internal__.auto_response = !1, this.__internal__.serial.auto_response = [2, 6, 221, 221, 240, 207, 3], a.getCustom(this.typeDevice, s))
+      throw new Error(`Device ${this.typeDevice} ${s} already exists`);
+    a.add(this);
   }
   serialMessage(t) {
     t = this.fixHexArray(t);
@@ -18,21 +17,15 @@ class d extends o {
     };
     t[0] === "a0" && t[2] == "00" ? (e.name = "Relay turned off", e.description = "The relay has been turned off successfully.", e.request = this.lastAction, e.no_code = 101) : t[0] === "a0" && t[2] == "01" ? (e.name = "Relay turned on", e.description = "The relay has been turned on successfully.", e.request = this.lastAction, e.no_code = 102) : (e.name = "Unrecognized response", e.description = "The response of application was received, but dont identify with any of current parameters", e.request = "undefined", e.no_code = 400), this.dispatch("serial:message", e);
   }
-  serialRelaySumHex(t) {
-    let e = 0;
-    return t.forEach((n, a) => {
-      a !== 3 && (e += n);
-    }), e;
-  }
   serialSetConnectionConstant(t = 1) {
-    return s.connection(t);
+    return n.connection(t);
   }
   async turnOn() {
-    const t = s.activate();
+    const t = n.activate();
     await this.appendToQueue(t, "relay:turn-on");
   }
   async turnOff() {
-    const t = s.deactivate();
+    const t = n.deactivate();
     await this.appendToQueue(t, "relay:turn-off");
   }
   async toggle({ inverse: t = !1, ms: e = 300 } = {}) {
@@ -44,5 +37,5 @@ class d extends o {
   }
 }
 export {
-  d as Relay
+  f as Relay
 };

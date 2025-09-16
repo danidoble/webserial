@@ -1,7 +1,6 @@
-import { K as C, w as u, g as f } from "./kernel-CXM5xoJD.js";
+import { K as C, D as f, w as u, g as y } from "./kernel-DkC7Kj3m.js";
 import { o as i } from "./relay-DP8PLsDP.js";
-import { a as y } from "./webserial-core-D3luFguv.js";
-class b extends C {
+class w extends C {
   __device = {
     type: "esplus",
     support_cart: !1,
@@ -29,20 +28,20 @@ class b extends C {
   };
   constructor({
     filters: t = null,
-    config_port: e = null,
+    config_port: e,
     no_device: n = 1,
-    device_listen_on_port: r = 1,
+    device_listen_on_channel: r = 1,
     type: a = "esplus",
     support_cart: o = !0,
     socket: c = !1
   } = {}) {
-    if (super({ filters: t, config_port: e, no_device: n, device_listen_on_port: r, socket: c }), this.__internal__.device.type = "jofemar", y.getCustom(this.typeDevice, n))
+    if (super({ filters: t, config_port: e, no_device: n, device_listen_on_channel: r, socket: c }), this.__internal__.device.type = "jofemar", f.getCustom(this.typeDevice, n))
       throw new Error(`Device ${this.typeDevice} ${n} already exists`);
     this.__internal__.dispense.must_response = !0, this.__internal__.time.response_general = 800, this.__internal__.time.response_engines = 800, this.__internal__.dispense.limit_counter = 40, this.__internal__.dispense.timeout = 0, this.__internal__.dispense.timeout_time = 4e3, this.__internal__.dispense.interval = 0, this.__internal__.dispense.interval_time = 1e3, this.__internal__.device.hex_number = (128 + this.listenOnChannel).toString(16), this.__internal__.device.door_open = !1, this.__internal__.dispense.elevator = {
       locking_time: 60,
       locking_interval: 0,
       need_reset: !1
-    }, this.deviceType = a, this.supportCart = o, this.#h(), y.add(this), this.#l();
+    }, this.deviceType = a, this.supportCart = o, this.#h(), f.add(this), this.#l();
   }
   set startChannelVerification(t) {
     const e = parseInt(t);
@@ -119,21 +118,19 @@ class b extends C {
     return i.connection({ channel: t });
   }
   async #s() {
-    if (this.__internal__.dispense.elevator.locking_interval) return;
-    this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await u(500));
-    const t = this;
-    return this.__internal__.dispense.status = "elevator-locked", this.__internal__.dispense.elevator.locking_time = 60, new Promise((e) => {
-      t.__internal__.dispense.elevator.locking_interval = setInterval(() => {
-        t.dispatch("dispensing:withdrawal", {
-          elevator: !0,
-          seconds: t.__internal__.dispense.elevator.locking_time,
-          description: "Please recall products from the elevator"
-        }), t.__internal__.dispense.elevator.locking_time -= 1, t.__internal__.dispense.elevator.locking_time <= 0 && (clearInterval(t.__internal__.dispense.elevator.locking_interval), t.__internal__.dispense.elevator.locking_interval = 0, e(!0));
-      }, 1e3);
-    });
+    if (!this.__internal__.dispense.elevator.locking_interval)
+      return this.__internal__.dispense.elevator.need_reset && (this.__internal__.dispense.elevator.need_reset = !1, await this.resetWaitingProductRemovedError(), await u(500)), this.__internal__.dispense.status = "elevator-locked", this.__internal__.dispense.elevator.locking_time = 60, new Promise((t) => {
+        this.__internal__.dispense.elevator.locking_interval = setInterval(() => {
+          this.dispatch("dispensing:withdrawal", {
+            elevator: !0,
+            seconds: this.__internal__.dispense.elevator.locking_time,
+            description: "Please recall products from the elevator"
+          }), this.__internal__.dispense.elevator.locking_time -= 1, this.__internal__.dispense.elevator.locking_time <= 0 && (clearInterval(this.__internal__.dispense.elevator.locking_interval), this.__internal__.dispense.elevator.locking_interval = 0, t(!0));
+        }, 1e3);
+      });
   }
-  #d(t, e) {
-    return e.name = "ok", e.description = "The last command was executed successfully", e.no_code = 1, this.dispatch("command-executed", e), e;
+  #d(t) {
+    return t.name = "ok", t.description = "The last command was executed successfully", t.no_code = 1, this.dispatch("command-executed", t), t;
   }
   #p(t, e) {
     e.additional = {
@@ -158,8 +155,8 @@ class b extends C {
       42: "B",
       43: "C",
       44: "D"
-    };
-    return e.additional.ascii = n[t] ?? null, e.name = "Key pressed", e.description = `The key ${e.additional.ascii} was pressed`, e.no_code = 2, this.dispatch("keyboard:pressed", e.additional), e;
+    }, r = t.toString().toLowerCase();
+    return e.additional.ascii = n[r] ?? null, e.name = "Key pressed", e.description = `The key ${e.additional.ascii} was pressed`, e.no_code = 2, this.dispatch("keyboard:pressed", e.additional), e;
   }
   #u(t, e) {
     return e.additional = { open: !1 }, e.no_code = 3, t === "4f" ? (e.name = "door open", e.description = "The door was opened", e.additional.open = !0, this.__internal__.device.door_open = !0, this.dispatch("door:event", e.additional)) : t === "43" ? (e.name = "door close", e.description = "The door was closed", e.additional.open = !1, this.__internal__.device.door_open = !1, this.dispatch("door:event", e.additional)) : (e.name = "door event", e.description = "The door event received is unknown", this.dispatch("door:event", { open: e.additional.open, message: e })), e;
@@ -217,7 +214,7 @@ class b extends C {
         64: "Product detector didn't change during its verification test"
       };
       for (const a of n)
-        r[a] && (e.additional.faults.push(r[a]), e.additional.no_faults++);
+        r[a] && e.additional.faults && typeof e.additional.no_faults < "u" && (e.additional.faults.push(r[a] || "Unknown fault"), e.additional.no_faults++);
     }
     return this.dispatch("machine:faults", e.additional), e;
   }
@@ -273,7 +270,7 @@ class b extends C {
           channel: h,
           selection: h - 109,
           ascii: n,
-          meaning: l[n] ?? "Unknown"
+          meaning: l[n] || "Unknown"
         };
       } else if (r.length === 13) {
         const a = r.map((v) => String.fromCharCode(this.hexToDec(v))).join(""), o = parseInt(a.slice(0, 2)), c = parseInt(a.slice(2, 4)), h = parseInt(a.slice(4, 6)), l = parseInt(a.slice(7, 9)), s = parseInt(a.slice(9, 11)) - 1, d = 2e3 + parseInt(a.slice(11, 13)), p = new Date(d, s, l, o, c, h), _ = {
@@ -300,7 +297,7 @@ class b extends C {
           hex: r,
           formatted: p.toLocaleString(),
           ascii: n,
-          meaning: _[n] ?? "Unknown"
+          meaning: _[n] || "Unknown"
         };
       }
     }
@@ -312,9 +309,9 @@ class b extends C {
       31: "English",
       32: "French"
     };
-    return e.no_code = 42, e.name = "Language", e.description = `The language is ${n[t] ?? "unknown"}`, e.additional = {
+    return e.no_code = 42, e.name = "Language", e.description = `The language is ${n[t] || "unknown"}`, e.additional = {
       hex: t,
-      language: n[t] ?? "unknown"
+      language: n[t] || "unknown"
     }, this.dispatch("check:language", e.additional), e;
   }
   #k(t, e) {
@@ -437,8 +434,8 @@ class b extends C {
     }, t[4] === "2b" ? e.additional.sign = t[4] = "+" : ["2e", "2d"].includes(t[4]) ? e.additional.sign = t[4] = "-" : t[4] === "20" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[5]) >= 48 && this.hexToDec(t[5]) <= 57 ? e.additional.tens = this.hexToDec(t[5]) - 48 : t[5] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[6]) >= 48 && this.hexToDec(t[6]) <= 57 ? e.additional.units = this.hexToDec(t[6]) - 48 : t[6] === "2a" && (e.additional.error = "Error in thermometer"), this.hexToDec(t[8]) >= 48 && this.hexToDec(t[8]) <= 57 ? e.additional.decimals = this.hexToDec(t[8]) - 48 : t[8] === "2a" && (e.additional.error = "Error in thermometer"), t[10] === "43" ? e.additional.type_degrees = "C" : t[10] === "46" && (e.additional.type_degrees = "F"), e.additional.error === "Error in thermometer" ? (e.additional.formatted = "Error in thermometer", e.description = "The current temperature cannot be read because there is an error in the thermometer") : (e.additional.formatted = (e.additional.sign ?? "") + (e.additional.tens ?? "") + (e.additional.units ?? "") + (e.additional.decimal_point ?? "") + (e.additional.decimals ?? "") + (e.additional.degrees ?? "") + (e.additional.type_degrees ?? ""), e.description = `The current temperature is ${e.additional.formatted}`), this.dispatch("temperature:current", e.additional), e;
   }
   #B(t, e, n = 128) {
-    if (t[1] && (e.additional.machine.hex = t[1], e.additional.machine.dec = this.hexToDec(t[1]) - n), !(t[1] && t[2]))
-      e = this.#d(t, e);
+    if (t[1] && (e.additional.machine || (e.additional.machine = { hex: null, dec: null }), e.additional.machine.hex = t[1], e.additional.machine.dec = this.hexToDec(t[1]) - n), !(t[1] && t[2]))
+      e = this.#d(e);
     else
       switch (t[2]) {
         case "54":
@@ -526,20 +523,16 @@ class b extends C {
   #a() {
     this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = "elevator-locked");
   }
-  /**
-   * Dispatch a warning message
-   * @param {null|string} type
-   * @param {string} severity
-   */
-  #t({ type: t = null, severity: e = "low" } = {}) {
+  #t({
+    type: t = null,
+    severity: e = "low"
+  } = {}) {
     this.dispatch("jofemar:warning", { type: t, severity: e });
   }
-  /**
-   * Dispatch an error message
-   * @param {null|string} type
-   * @param {string} severity
-   */
-  #i({ type: t = null, severity: e = "high" } = {}) {
+  #i({
+    type: t = null,
+    severity: e = "high"
+  } = {}) {
     this.dispatch("jofemar:error", { type: t, severity: e });
   }
   #W(t, e) {
@@ -691,12 +684,6 @@ class b extends C {
   productRemovedContinueDispensing() {
     this.__internal__.dispense.elevator.locking_interval && (this.__internal__.dispense.elevator.locking_time = 0);
   }
-  /**
-   * Dispense a product from the machine
-   * @param {null|number|string} selection
-   * @param {boolean} cart
-   * @return {Promise<unknown>}
-   */
   async dispense({ selection: t = 1, cart: e = !1 } = {}) {
     const n = i.dispense({ selection: t, cart: e, machineChannel: this.listenOnChannel }), r = n[5], a = n[6];
     this.__internal__.dispense.backup_dispense = {
@@ -708,24 +695,22 @@ class b extends C {
     let o;
     do
       o = await this.internalDispense(n), this.#F(), o.error === "elevator-locked" ? await this.#s() : o.error === "no-response" && await u(1e3);
-    while (["elevator-locked", "no-response"].includes(o.error));
+    while (["elevator-locked", "no-response"].includes(o.error || ""));
     return this.__internal__.dispense.backup_dispense = {}, o;
   }
   #F() {
     this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.dispense.timeout = 0, this.__internal__.dispense.interval = 0;
   }
   #q() {
-    this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval);
-    const t = this;
-    t.__internal__.dispense.timeout = setTimeout(() => {
-      t.__internal__.dispense.interval = setInterval(() => {
-        t.status().then(() => {
+    this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.dispense.timeout = setTimeout(() => {
+      this.__internal__.dispense.interval = setInterval(() => {
+        this.status().then(() => {
         });
-      }, t.__internal__.dispense.interval_time);
-    }, t.__internal__.dispense.timeout_time);
+      }, this.__internal__.dispense.interval_time);
+    }, this.__internal__.dispense.timeout_time);
   }
   internalClearSensing() {
-    super.internalClearSensing(), this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.serial.queue.length > 0 && (this.__internal__.serial.queue = this.__internal__.serial.queue.filter((t) => t.type !== "status"));
+    super.internalClearSensing(), this.__internal__.dispense.timeout && clearTimeout(this.__internal__.dispense.timeout), this.__internal__.dispense.interval && clearInterval(this.__internal__.dispense.interval), this.__internal__.serial.queue.length > 0 && (this.__internal__.serial.queue = this.__internal__.serial.queue.filter((t) => t.action !== "status"));
   }
   async endDispense() {
     const t = i.endCartDispense({ machineChannel: this.listenOnChannel });
@@ -757,7 +742,7 @@ class b extends C {
     });
   }
   #o() {
-    const t = this.__device.type === "iceplus" ? f(40) : f(25), e = /* @__PURE__ */ new Date(), n = 1e3 * t + e.getTime(), r = new Date(n);
+    const t = this.__device.type === "iceplus" ? y(40) : y(25), e = /* @__PURE__ */ new Date(), n = 1e3 * t + e.getTime(), r = new Date(n);
     this.dispatch("reset:errors", {
       description: "Resetting machine errors",
       duration: t,
@@ -796,7 +781,9 @@ class b extends C {
       "program"
     );
   }
-  async programDisplayLanguage({ language: t = "spanish" } = {}) {
+  async programDisplayLanguage({
+    language: t = "spanish"
+  } = {}) {
     return await this.appendToQueue(
       i.programDisplayLanguage({
         machineChannel: this.listenOnChannel,
@@ -831,11 +818,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * Program the machine to work with a specific temperature
-   * @param {number|string} degrees
-   * @return {Promise<void>}
-   */
   async programWorkingTemperature({ degrees: t = 0.5 } = {}) {
     return await this.appendToQueue(
       i.programWorkingTemperature({
@@ -846,10 +828,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * @param {number|string} tray
-   * @return {Promise<void>}
-   */
   async programIsolationTray({ tray: t = 0 } = {}) {
     return await this.appendToQueue(
       i.programIsolationTray({
@@ -859,10 +837,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * @param {number|string} seconds
-   * @return {Promise<*>}
-   */
   async programTimeToStandbyAfterCollect({ seconds: t = 15 } = {}) {
     return await this.appendToQueue(
       i.programTimeToStandbyAfterCollect({
@@ -872,10 +846,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * @param {number|string} seconds
-   * @return {Promise<*>}
-   */
   async programTimeToStandbyWithoutCollect({ minutes: t = 1 } = {}) {
     return await this.appendToQueue(
       i.programTimeToStandbyWithoutCollect({
@@ -885,7 +855,9 @@ class b extends C {
       "program"
     );
   }
-  async programElevatorSpeed({ speed: t = "high" } = {}) {
+  async programElevatorSpeed({
+    speed: t = "high"
+  } = {}) {
     return await this.appendToQueue(
       i.programElevatorSpeed({
         machineChannel: this.listenOnChannel,
@@ -909,10 +881,6 @@ class b extends C {
   async programDisableTemperatureExpiration() {
     return await this.programTemperatureExpiration({ enable: !1 });
   }
-  /**
-   * @param {number|string} address
-   * @return {Promise<*>}
-   */
   async programMachineAddress({ address: t = 1 } = {}) {
     return await this.appendToQueue(
       i.programMachineAddress({
@@ -922,10 +890,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * @param {number|string} degrees
-   * @return {Promise<*>}
-   */
   async programTemperatureBeforeExpiration({ degrees: t = 0.5 } = {}) {
     return await this.appendToQueue(
       i.programTemperatureBeforeExpiration({
@@ -935,10 +899,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * @param {number|string} minutes
-   * @return {Promise<*>}
-   */
   async programTimeBeforeExpirationByTemperature({ minutes: t = 1 } = {}) {
     return await this.appendToQueue(
       i.programTimeBeforeExpirationByTemperature({
@@ -948,7 +908,9 @@ class b extends C {
       "program"
     );
   }
-  async programTemperatureScale({ scale: t = "celsius" } = {}) {
+  async programTemperatureScale({
+    scale: t = "celsius"
+  } = {}) {
     return await this.appendToQueue(
       i.programTemperatureScale({
         machineChannel: this.listenOnChannel,
@@ -957,11 +919,6 @@ class b extends C {
       "program"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @param {number|string} voltage
-   * @return {Promise<void>}
-   */
   async programVoltageEngine({ selection: t = 1, voltage: e = 5 } = {}) {
     return await this.appendToQueue(
       i.programVoltageEngine({
@@ -972,11 +929,6 @@ class b extends C {
       "voltage-engine"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @param {boolean} enable
-   * @return {Promise<void>}
-   */
   async programPushOverProducts({ selection: t = 1, enable: e = !0 } = {}) {
     return await this.appendToQueue(
       i.programPushOverProducts({
@@ -987,11 +939,6 @@ class b extends C {
       "push-over-products"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @param {number|string} seconds
-   * @return {Promise<void>}
-   */
   async programChannelRunningAfterDispense({ selection: t = 1, seconds: e = 0 } = {}) {
     return await this.appendToQueue(
       i.programChannelRunningAfterDispense({
@@ -1002,7 +949,7 @@ class b extends C {
       "channel-running-after-dispense"
     );
   }
-  async checkData(t, e = "FF") {
+  async checkData(t, e = 255) {
     return await this.appendToQueue(
       i.checkData({
         machineChannel: this.listenOnChannel,
@@ -1108,10 +1055,6 @@ class b extends C {
       "check-data"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @return {Promise<*>}
-   */
   async getVoltageEngine({ selection: t = 1 } = {}) {
     return await this.appendToQueue(
       i.getVoltageEngine({
@@ -1121,10 +1064,6 @@ class b extends C {
       "check-data"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @return {Promise<*>}
-   */
   async getChannelPresence({ selection: t = 1 } = {}) {
     return await this.appendToQueue(
       i.getChannelPresence({
@@ -1134,10 +1073,6 @@ class b extends C {
       "check-data"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @return {Promise<*>}
-   */
   async getPushOverProducts({ selection: t = 1 } = {}) {
     return await this.appendToQueue(
       i.getPushOverProducts({
@@ -1147,10 +1082,6 @@ class b extends C {
       "check-data"
     );
   }
-  /**
-   * @param {number|string} selection
-   * @return {Promise<*>}
-   */
   async getChannelRunningAfterDispense({ selection: t = 1 } = {}) {
     return await this.appendToQueue(
       i.getChannelRunningAfterDispense({
@@ -1169,11 +1100,6 @@ class b extends C {
       "display"
     );
   }
-  /**
-   * @param {string} message
-   * @param {number|string} seconds
-   * @return {Promise<void>}
-   */
   async setDisplayMessageTemporarily({ message: t = "", seconds: e = 1 }) {
     return this.appendToQueue(
       i.setDisplayMessageTemporarily({
@@ -1184,10 +1110,6 @@ class b extends C {
       "display"
     );
   }
-  /**
-   * @param {string} message
-   * @return {Promise<void>}
-   */
   async setDisplayMessageUnlimited({ message: t = "" }) {
     return await this.appendToQueue(
       i.setDisplayMessageUnlimited({
@@ -1206,11 +1128,6 @@ class b extends C {
       "clock"
     );
   }
-  /**
-   * @param {null|string} event
-   * @param {boolean} enable
-   * @return {Promise<void>}
-   */
   async eventsConfig({ event: t = null, enable: e = !0 } = {}) {
     return await this.appendToQueue(
       i.eventsConfig({
@@ -1239,10 +1156,9 @@ class b extends C {
       "events-config"
     );
   }
-  async sendCustomCode({ code: t = [] } = {}) {
+  async sendCustomCode({ code: t = [] } = { code: [] }) {
     return await this.appendToQueue(
       i.sendCustomCode({
-        machineChannel: this.listenOnChannel,
         code: t
       }),
       "custom"
@@ -1255,12 +1171,12 @@ class b extends C {
     for (let n = t; n <= e; n++)
       this.__device.channels.verification.current = n, await this.getChannelPresence({ selection: n });
     return new Promise((n) => {
-      let r = setInterval(() => {
+      const r = setInterval(() => {
         this.__device.channels.verification.channels.length === e - t + 1 && (clearInterval(r), this.dispatch("channels", { channels: this.__device.channels.verification.channels }), this.__device.channels.verification.clear(), n(!0));
       }, 500);
     });
   }
 }
 export {
-  b as Jofemar
+  w as Jofemar
 };

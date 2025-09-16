@@ -1,7 +1,6 @@
-import { K as u } from "./kernel-CXM5xoJD.js";
+import { K as u, D as p } from "./kernel-DkC7Kj3m.js";
 import { l } from "./relay-DP8PLsDP.js";
-import { a as p } from "./webserial-core-D3luFguv.js";
-class f extends u {
+class _ extends u {
   __coin_purse = {
     available: !0
   };
@@ -51,7 +50,7 @@ class f extends u {
   #n = !1;
   #e = 0;
   #t = 0;
-  constructor({ filters: n = null, config_port: e = null, no_device: t = 1, socket: s = !1 } = {}) {
+  constructor({ filters: n = null, config_port: e, no_device: t = 1, socket: s = !1 } = {}) {
     if (super({ filters: n, config_port: e, no_device: t, socket: s }), this.__internal__.device.type = "boardroid", p.getCustom(this.typeDevice, t))
       throw new Error(`Device ${this.typeDevice} ${t} already exists`);
     this.__internal__.serial.config_port.baudRate = 115200, this.__internal__.serial.response.length = 14, this.__internal__.time.response_connection = 600, this.__internal__.time.response_general = 4e3, this.__internal__.time.response_engines = 15e3, this.__internal__.dispense.limit_counter = 15, this.__internal__.dispense.custom_limit_counter = null, this.__internal__.dispense.backup_dispense = {
@@ -59,7 +58,7 @@ class f extends u {
       second_channel: null,
       sensor: !0,
       seconds: null
-    }, this.#p(), this.#u();
+    }, this.#p(), p.add(this);
   }
   #p() {
     const n = [
@@ -133,22 +132,19 @@ class f extends u {
   get change() {
     return this.__sale.price <= 0 || this.__money_session.inserted <= this.__sale.price ? 0 : this.__money_session.inserted - this.__sale.price;
   }
-  #u() {
-    p.add(this);
-  }
   #s() {
     return this.__banknote_purse.isRecycler && this.__banknote_purse.recycler.ict;
   }
-  #d() {
+  #u() {
     return this.hasCoinPurse || this.hasRecycler;
   }
   softReload() {
     super.softReload(), this.__sale.clear(), this.__money_session.clear();
   }
-  #h(n) {
+  #d(n) {
     return n.name = "Connection with the serial device completed.", n.description = "Your connection with the serial device was successfully completed.", n.no_code = 1, this.dispatch("run:default-load", {}), n;
   }
-  #b(n) {
+  #h(n) {
     const e = {
       g50: { value: 0.5, name: "50 pennies (the big one)" },
       c0: { value: 0.5, name: "50 pennies (the little one)" },
@@ -160,7 +156,7 @@ class f extends u {
     };
     return e[n] ? e[n] : !1;
   }
-  #_(n) {
+  #b(n) {
     const e = {
       g50: ["40", "50", "60", "70", "90"],
       c50: ["41", "51", "61", "71", "91"],
@@ -171,7 +167,7 @@ class f extends u {
       p20: ["47", "57", "67", "77", "97"]
     };
     let t = null;
-    for (let i in e)
+    for (const i in e)
       if (e[i].includes(n)) {
         t = i;
         break;
@@ -186,10 +182,10 @@ class f extends u {
       p20: "20 pesos"
     }[t], t] : [`Undefined value: ¿${n}?`, null];
   }
-  #f(n) {
+  #_(n) {
     return ["g50", "c50", "p1", "p2", "p5", "p10", "p20"].includes(n);
   }
-  #k(n) {
+  #f(n) {
     const e = {
       p20: ["80", "90", "a0", "b0"],
       p50: ["81", "91", "a1", "b1"],
@@ -199,7 +195,7 @@ class f extends u {
       p1000: ["85", "95", "a5", "b5"]
     };
     let t = null;
-    for (let i in e)
+    for (const i in e)
       if (e[i].includes(n)) {
         t = i;
         break;
@@ -213,7 +209,7 @@ class f extends u {
       p1000: "1000 pesos"
     }[t], t] : [`Undefined value: ¿${n}?`, null];
   }
-  #y(n) {
+  #k(n) {
     const e = {
       p20: { value: 20, name: "20 pesos" },
       p50: { value: 50, name: "50 pesos" },
@@ -224,67 +220,68 @@ class f extends u {
     };
     return e[n] ? e[n] : !1;
   }
-  #w(n) {
+  #y(n) {
     return ["p20", "p50", "p100", "p200", "p500", "p1000"].includes(n);
   }
-  #v(n) {
+  #w(n) {
     return ["r20", "r50", "r100"].includes(n);
   }
-  #C() {
+  #v() {
     return ["r20", "r50", "r100", "r200", "r500"][this.__banknote_purse.recycler.banknote];
   }
   #r(n, e, t) {
     if (!n) return;
     let s = !0;
-    if (this.#f(n) && t === "coin") {
+    if (this.#_(n) && t === "coin") {
       if (typeof this.coins.tubes[n] > "u") return;
       e === "tube" ? this.coins.tubes[n] += 1 : e === "box" && (this.coins.box[n] += 1);
       let i = 0;
       ["g50", "c50"].includes(n) ? i = 0.5 : i += parseInt(n.slice(1)), this.coins.totals[n] += i, this.__money_session.inserted += i, this.coins.total += i;
-      const r = this.#b(n);
+      const r = this.#h(n);
       r && this.dispatch("money:inserted", {
         type: "coin",
         money: r,
         // {value:number,name:string}
         where: e
       });
-    } else if (this.#w(n) && t === "banknote") {
+    } else if (this.#y(n) && t === "banknote") {
       if (typeof this.banknotes.recycler[n] > "u") return;
       e === "recycler" ? this.banknotes.recycler[n] += 1 : e === "stacker" && (this.banknotes.stacker[n] += 1);
-      let i = parseInt(n.slice(1));
+      const i = parseInt(n.slice(1));
       this.banknotes.totals[n] += i, this.__money_session.inserted += i, this.banknotes.total += i;
-      const r = this.#y(n);
+      const r = this.#k(n);
       r && this.dispatch("money:inserted", {
         type: "banknote",
         money: r,
         // {value:number,name:string}
         where: e
       });
-    } else if (this.#v(n) && e === "out" && t === "banknote") {
-      if (typeof this.banknotes.out[n.replace("r", "p")] > "u") return;
+    } else if (this.#w(n) && e === "out" && t === "banknote") {
+      if (typeof this.banknotes.out[n.replace("r", "p")] > "u")
+        return;
       this.banknotes.out[n.replace("r", "p")] += 1;
-      let i = parseInt(n.slice(1));
+      const i = parseInt(n.slice(1));
       this.__money_session.retired += i, this.banknotes.recycler[n.replace("r", "p")] -= 1, this.banknotes.total -= i, s = !1, this.dispatch("session:money-dispensed", { type_money: n, retired: i, finish: !1, type: "banknotes" });
     }
     s && this.dispatch("session:money-request", {});
   }
+  #C(n, e) {
+    const t = parseInt(n[2], 16);
+    return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, t === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : t === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : t >= 64 && t <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : t >= 80 && t <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : t >= 96 && t <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : t >= 112 && t <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : t >= 144 && t <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${n[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), t === 1 || t === 2 || t >= 160 || t >= 128 && t <= 143 || ([e.description, e.additional.coin] = this.#b(n[2]), e.no_code = 38 + t, this.#r(e.additional.coin, e.additional.where, "coin"), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
+  }
   #I(n, e) {
     const t = parseInt(n[2], 16);
-    return e.name = "Coin Inserted", e.no_code = 2, e.additional = { where: null, coin: null }, t === 1 ? (e.name = "Lever pressed", e.description = "Reject lever", e.no_code = 100, this.dispatch("coin-purse:reject-lever", {})) : t === 2 ? (e.name = "Reset coin purse", e.description = "The configuration of coin purse was reset", e.no_code = 101, this.dispatch("coin-purse:reset", {})) : t >= 64 && t <= 79 ? (e.name = "Coin inserted in profit box", e.additional.where = "box") : t >= 80 && t <= 95 ? (e.name = "Coin inserted in tube", e.additional.where = "tube") : t >= 96 && t <= 111 ? (e.name = "Unused coin", e.description = "Something come from coin changer but in MDB Docs is unused", e.additional.where = "unused") : t >= 112 && t <= 127 ? (e.name = "Coin rejected", e.additional.where = "rejected") : t >= 144 && t <= 159 ? (e.name = "Coin dispensed", e.additional.where = "out", e.description = `Undefined value: ¿${n[2]}?`) : (e.name = "Coin inserted", e.description = "Undefined status. Without information of this", e.no_code = 400), t === 1 || t === 2 || t >= 160 || t >= 128 && t <= 143 || ([e.description, e.additional.coin] = this.#_(n[2]), e.no_code = 38 + t, this.#r(e.additional.coin, e.additional.where, "coin"), ["tube", "out"].includes(e.additional.where) && this.dispatch("coin-purse:tubes", this.coins.tubes), this.dispatch("coin-purse:coin-event", this.coins)), e;
+    return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, t === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = this.#v(), e.additional.where = "out", e.no_code = 200) : t >= 128 && t <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : t >= 144 && t <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : t >= 160 && t <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : t >= 176 && t <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), t >= 128 && t <= 191 && ([e.description, e.additional.banknote] = this.#f(n[2]), e.no_code = 74 + t), this.#r(e.additional.banknote, e.additional.where, "banknote"), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
   }
   #T(n, e) {
-    const t = parseInt(n[2], 16);
-    return e.name = "Banknote Inserted", e.no_code = 2, e.additional = { where: null, banknote: null }, t === 42 ? (e.name = "Banknote dispensed", e.description = "Banknote dispensed by request.", e.additional.banknote = this.#C(), e.additional.where = "out", e.no_code = 200) : t >= 128 && t <= 143 ? (e.name = "Banknote inserted", e.additional.where = "stacker") : t >= 144 && t <= 159 ? (e.name = "Banknote inserted in pre stacker", e.additional.where = "tmp") : t >= 160 && t <= 175 ? (e.name = "Banknote rejected", e.additional.where = "nothing") : t >= 176 && t <= 191 && (e.name = "Banknote inserted", e.additional.where = "recycler"), t >= 128 && t <= 191 && ([e.description, e.additional.banknote] = this.#k(n[2]), e.no_code = 74 + t), this.#r(e.additional.banknote, e.additional.where, "banknote"), this.dispatch("banknote-purse:event-banknote", this.banknotes), e;
-  }
-  #R(n, e) {
     const t = parseInt(n, 16);
     return t === 1 ? (e.name = "Coin purse enabled", e.description = "Configuration complete, enabled", e.no_code = 3) : t === 0 ? (e.name = "Coin purse disabled", e.description = "Disabled by system request", e.no_code = 4) : (e.name = "Status unknown", e.description = "The response of coin purse doesn't identify successfully", e.no_code = 400), this.dispatch("coin-purse:config", { enabled: t === 1 }), e;
   }
-  #P(n, e) {
+  #R(n, e) {
     const t = parseInt(n[2], 16), s = parseInt(n[3], 16);
     return t === 0 ? (e.name = "Bill purse disabled", e.description = "Configuration complete, disabled") : t === 1 && (e.name = "Bill purse enabled", e.description = "Configuration complete, enabled"), s === 0 ? e.additional.scrow = "Scrow disabled, banknote received automatic" : s === 1 && (e.additional.scrow = "Scrow enabled, require manual action"), e.no_code = 5, this.dispatch("banknote-purse:config", { enabled: t === 1, scrow: s === 1 }), e;
   }
-  #$(n, e) {
+  #P(n, e) {
     e.no_code = 6;
     const [t, s, i, r, a, o] = [
       parseInt(n[2], 16),
@@ -298,7 +295,7 @@ class f extends u {
       coins: { g50: t, c50: s, p1: i, p2: r, p5: a, p10: o }
     }, this.coins.tubes.g50 = t, this.coins.tubes.c50 = s, this.coins.tubes.p1 = i, this.coins.tubes.p2 = r, this.coins.tubes.p5 = a, this.coins.tubes.p10 = o, this.coins.totals.g50 = (this.coins.box.g50 + t) * 0.5, this.coins.totals.c50 = (this.coins.box.c50 + s) * 0.5, this.coins.totals.p1 = this.coins.box.p1 + i, this.coins.totals.p2 = (this.coins.box.p2 + r) * 2, this.coins.totals.p5 = (this.coins.box.p5 + a) * 5, this.coins.totals.p10 = (this.coins.box.p10 + o) * 10, this.coins.total = this.coins.totals.g50 + this.coins.totals.c50 + this.coins.totals.p1 + this.coins.totals.p2 + this.coins.totals.p5 + this.coins.totals.p10, e.name = "Read tubes", e.description = "Quantity of coins approximated", this.dispatch("coin-purse:tubes", this.coins.tubes), e;
   }
-  #B(n, e) {
+  #$(n, e) {
     e.no_code = 7;
     const [t, s, i, r, a, o] = [
       parseInt(n[2], 16),
@@ -312,11 +309,11 @@ class f extends u {
       banknotes: { b20: t, b50: s, b100: i, b200: r, b500: a, b1000: o }
     }, this.banknotes.recycler.p20 = t, this.banknotes.recycler.p50 = s, this.banknotes.recycler.p100 = i, this.banknotes.recycler.p200 = r, this.banknotes.recycler.p500 = a, this.banknotes.recycler.p1000 = o, this.banknotes.totals.p20 = (this.banknotes.stacker.p20 + t) * 20, this.banknotes.totals.p50 = (this.banknotes.stacker.p50 + s) * 50, this.banknotes.totals.p100 = (this.banknotes.stacker.p100 + i) * 100, this.banknotes.totals.p200 = (this.banknotes.stacker.p200 + r) * 200, this.banknotes.totals.p500 = (this.banknotes.stacker.p500 + a) * 500, this.banknotes.totals.p1000 = (this.banknotes.stacker.p1000 + o) * 1e3, this.banknotes.total = this.banknotes.totals.p20 + this.banknotes.totals.p50 + this.banknotes.totals.p100 + this.banknotes.totals.p200 + this.banknotes.totals.p500 + this.banknotes.totals.p1000, e.name = "Read recycler", e.description = "Quantity of banknotes approximated", this.dispatch("banknote-purse:recycler", this.banknotes.recycler), e;
   }
-  #q(n, e) {
+  #B(n, e) {
     const t = parseInt(n, 16);
     return t === 1 ? e.name = "Banknote accepted" : t === 0 ? e.name = "Banknote rejected" : e.name = "Unknown status banknote", e.no_code = 8, this.dispatch("banknote-purse:banknote-scrow-status", { status: t === 1 }), e;
   }
-  #D(n, e) {
+  #q(n, e) {
     const [t, s, i, r, a, o] = [
       parseInt(n[2], 16),
       parseInt(n[3], 16),
@@ -336,27 +333,25 @@ class f extends u {
       data: e
     }), e;
   }
-  #x(n, e) {
-    return e.name = "Coins dispensed", e.no_code = 10, e.description = "Coins dispensed by request", isNaN(this.__sale.last_change) && (this.__sale.last_change = 0), this.__money_session.retired += this.__sale.last_change, this.dispatchAsync(
-      "session:money-dispensed",
-      {
-        type_money: null,
-        retired: null,
-        finish: !1,
-        type: "coins"
-      },
-      500
-    ), e;
+  #D(n) {
+    n.name = "Coins dispensed", n.no_code = 10, n.description = "Coins dispensed by request", isNaN(this.__sale.last_change) && (this.__sale.last_change = 0), this.__money_session.retired += this.__sale.last_change;
+    const e = {
+      type_money: null,
+      retired: null,
+      finish: !1,
+      type: "coins"
+    };
+    return this.dispatchAsync("session:money-dispensed", e, 500), n;
   }
-  #E(n, e) {
+  #x(n, e) {
     const t = parseInt(n, 16);
     return t === 1 ? (e.name = "Product not delivered", e.description = "The product requested wasn't delivered", e.no_code = 11, this.__internal__.dispense.status = !1) : t === 0 ? (e.name = "Product delivered", e.description = "The product requested was delivered", e.no_code = 12, this.__internal__.dispense.status = !0) : (e.name = "Unknown status product", e.description = "The response of product doesn't identify successfully", e.no_code = 400, this.__internal__.dispense.status = !1), this.dispatch("dispensed", {}), e;
   }
-  #M(n, e) {
+  #E(n, e) {
     let t = "closed";
     return n === "db" ? (e.name = "Door closed", e.no_code = 13) : n === "dc" ? (e.name = "Door open", e.no_code = 14, t = "open") : (e.name = "Unknown status door", e.description = "The response of door doesn't identify successfully", e.no_code = 400, t = "unknown"), this.__internal__.device.door_open = t === "open", this.dispatch("event:door", { open: t === "open" }), this.dispatch("door:event", { open: t === "open" }), e;
   }
-  #S(n, e) {
+  #M(n, e) {
     const t = parseInt(n[2], 16) * 255, s = parseInt(n[3], 16), i = (t + s) * 0.1;
     return e.no_code = 15, e.name = "Temperature status", e.description = `Temperature: ${i}`, e.additional = {
       high: t,
@@ -364,12 +359,12 @@ class f extends u {
       temperature: parseFloat(i.toString())
     }, this.dispatch("status:temperature", e.additional), e;
   }
-  #m(n, e) {
+  #S(n, e) {
     const t = parseInt(n, 16);
     let s = "unknown";
     return t === 1 ? (e.name = "Relay on", e.description = "Relay on", e.no_code = 16, s = "on") : t === 0 ? (e.name = "Relay off", e.description = "Relay off", e.no_code = 17, s = "off") : (e.name = "Status unknown", e.description = "Status unknown", e.no_code = 400), this.dispatch("status:relay", { enabled: s === "on" }), e;
   }
-  #Q(n, e) {
+  #m(n, e) {
     const t = parseInt(n[2], 16);
     if (e.no_code = 20 + t, e.name = "Status unknown", e.description = "The status of card reader does not identified correctly", t === 0)
       e.request += ":disable", e.name = "Card reader disabled", e.description = "Card reader device was disabled successfully";
@@ -406,46 +401,46 @@ class f extends u {
     const t = (5 + this.deviceNumber).toString(16).padStart(2, "0").toLowerCase();
     switch (n[1]) {
       case t:
-        e.request = "connect", e = this.#h(e);
+        e.request = "connect", e = this.#d(e);
         break;
       case "a0":
-        e.request = "--automatic", e = this.#I(n, e);
+        e.request = "--automatic", e = this.#C(n, e);
         break;
       case "b0":
-        e.request = "--automatic", e = this.#T(n, e);
+        e.request = "--automatic", e = this.#I(n, e);
         break;
       case "d0":
-        e.request = "coin-purse:config", e = this.#R(n[2], e);
+        e.request = "coin-purse:config", e = this.#T(n[2], e);
         break;
       case "d1":
-        e.request = "banknote-purse:config", e.additional = { scrow: null }, e = this.#P(n, e);
+        e.request = "banknote-purse:config", e.additional = { scrow: null }, e = this.#R(n, e);
         break;
       case "d2":
-        e.request = "coin-purse:read-tubes", e = this.#$(n, e);
+        e.request = "coin-purse:read-tubes", e = this.#P(n, e);
         break;
       case "d3":
-        e.request = "banknote-purse:read-recycler", e = this.#B(n, e);
+        e.request = "banknote-purse:read-recycler", e = this.#$(n, e);
         break;
       case "d4":
-        e.request = "banknote-purse:banknote-scrow-status", e = this.#q(n[2], e);
+        e.request = "banknote-purse:banknote-scrow-status", e = this.#B(n[2], e);
         break;
       case "d5":
-        e.request = "banknote-purse:dispense", e = this.#D(n, e);
+        e.request = "banknote-purse:dispense", e = this.#q(n, e);
         break;
       case "d6":
-        e.request = "coin-purse:dispense", e = this.#x(n, e);
+        e.request = "coin-purse:dispense", e = this.#D(e);
         break;
       case "d7":
-        e.request = "dispense", e = this.#E(n[5], e);
+        e.request = "dispense", e = this.#x(n[5], e);
         break;
       case "d8":
-        e.request = "--automatic", e = this.#M(n[13], e);
+        e.request = "--automatic", e = this.#E(n[13], e);
         break;
       case "d9":
-        e.request = "status:temperature", e = this.#S(n, e);
+        e.request = "status:temperature", e = this.#M(n, e);
         break;
       case "da":
-        e.request = "status:relay", e = this.#m(n[2], e);
+        e.request = "status:relay", e = this.#S(n[2], e);
         break;
       case "db":
         e.request = "banknote-purse:save-memory", e.no_code = 18, e.name = "Bill purse memory saved?", e.description = "The memory of bill purse was saved successfully?", this.dispatch("banknote-purse:save-memory", { message: e });
@@ -454,7 +449,7 @@ class f extends u {
         e.request = "coin-purse:read-memory", e.no_code = 19, e.name = "Coin purse memory read?", e.description = "The memory of coin purse was read successfully?", this.dispatch("banknote-purse:read-memory", { message: e });
         break;
       case "dd":
-        e.request = "card-reader", this.#Q(n, e);
+        e.request = "card-reader", this.#m(n, e);
         break;
       default:
         e.request = "--unknown", e.name = "Response unrecognized", e.description = "The response of application was received, but dont identify with any of current parameters", e.no_code = 400, this.dispatch("unknown", e);
@@ -465,9 +460,9 @@ class f extends u {
   serialSetConnectionConstant(n = 1) {
     return l.connection({ channel: n });
   }
-  async coinPurseConfigure({ enable: n = !1, high: e = "FF", low: t = "FF" } = {}) {
+  async coinPurseConfigure({ enable: n = !1, high: e = 255, low: t = 255 } = {}) {
     if (!this.__coin_purse.available) throw new Error("Coin purse not available");
-    return e = this.hexToDec(e), t = this.hexToDec(t), await this.appendToQueue(
+    return await this.appendToQueue(
       l.coinPurseConfiguration({ enable: n, high: e, low: t }),
       "coin-purse:config"
     );
@@ -494,16 +489,16 @@ class f extends u {
   async coinPurseReadTubes() {
     return await this.appendToQueue(l.coinPurseReadTubes(), "coin-purse:read-tubes");
   }
-  #N({ enable: n = !1, scrow: e = !1 } = {}) {
+  #Q({ enable: n = !1, scrow: e = !1 } = {}) {
     return l.banknotePurseICTConfigure({ enable: n, scrow: e });
   }
-  #F({ enable: n = !1, scrow: e = !1 } = {}) {
+  #N({ enable: n = !1, scrow: e = !1 } = {}) {
     return l.banknotePurseOtherConfigure({ enable: n, scrow: e });
   }
   async banknotePurseConfigure({ enable: n = !1, scrow: e = !1 } = {}) {
     if (!this.__banknote_purse.available) throw new Error("Banknote purse not available");
     let t;
-    return this.#s() ? t = this.#N({ enable: n, scrow: e }) : t = this.#F({ enable: n, scrow: e }), await this.appendToQueue(t, "banknote-purse:config");
+    return this.#s() ? t = this.#Q({ enable: n, scrow: e }) : t = this.#N({ enable: n, scrow: e }), await this.appendToQueue(t, "banknote-purse:config");
   }
   #j(n = 1) {
     if (n < 1) throw new Error("No banknotes to dispense");
@@ -618,17 +613,20 @@ class f extends u {
   async readTemperature() {
     return await this.appendToQueue(l.readTemperature(), "status:temperature");
   }
-  /**
-   * Dispense a product from the machine
-   * @param {number|string} selection
-   * @param {null|number|string} second_selection
-   * @param {boolean} sensor
-   * @param {null|number} seconds
-   * @param {boolean} retry
-   * @return {Promise<unknown>}
-   */
-  async dispense({ selection: n = 1, second_selection: e = null, sensor: t = !0, seconds: s = null, retry: i = !0 } = {}) {
-    if (n = parseInt(n), isNaN(n) || n < 1 || n > 80) throw new Error("Invalid channel number");
+  async dispense({
+    selection: n = 1,
+    second_selection: e = null,
+    sensor: t = !0,
+    seconds: s = null,
+    retry: i = !0
+  } = {
+    selection: 1,
+    second_selection: null,
+    sensor: !0,
+    seconds: null,
+    retry: !0
+  }) {
+    if (n = parseInt(n, 10), isNaN(n) || n < 1 || n > 80) throw new Error("Invalid channel number");
     if (e !== null && (e < 1 || e > 80 || e === n))
       throw new Error("Invalid second channel number");
     if (!t && (s === null || s <= 0 || s > 40))
@@ -652,12 +650,10 @@ class f extends u {
   #a() {
     this.#n = !1, this.#e = 0, this.#t = 0;
   }
-  /**
-   *
-   * @param {null|object} dispensed
-   * @param {number} limit
-   */
-  #i({ dispensed: n = null, limit: e = 80 } = {}) {
+  #i({
+    dispensed: n = null,
+    limit: e = 80
+  } = {}) {
     this.#t = Math.round(this.#e * 100 / e), this.dispatch("percentage:test", { percentage: this.#t, dispensed: n });
   }
   async testEngines({ singleEngine: n = !1 } = {}) {
@@ -678,7 +674,11 @@ class f extends u {
     }
     this.#e = 80, this.#i({ dispensed: e }), this.#a();
   }
-  async sendCustomCode({ code: n = [] } = {}) {
+  async sendCustomCode({
+    code: n = []
+  } = {
+    code: []
+  }) {
     if (n.length === 0) throw new Error("Invalid code");
     return await this.appendToQueue(l.customCode(n), "custom");
   }
@@ -699,7 +699,10 @@ class f extends u {
     if (this.totalInRecycler === 0 || n === 0) return e;
     const t = (s, i) => {
       if (this.banknotes.recycler[i] > 0) {
-        const r = Math.floor(e.pending / s), a = Math.min(r, this.banknotes.recycler[i]);
+        const r = Math.floor(e.pending / s), a = Math.min(
+          r,
+          this.banknotes.recycler[i]
+        );
         e.banknotes[`$_${s}`] = a, e.pending = parseFloat((e.pending - a * s).toFixed(2));
       }
     };
@@ -733,7 +736,7 @@ class f extends u {
     return e <= 0 ? !0 : (e = this.#o(e).pending, e = this.#l(e).pending, !(e > 0));
   }
   async #c(n = null) {
-    if (!this.#d()) throw new Error("Change not available");
+    if (!this.#u()) throw new Error("Change not available");
     let e = this.change, t = this.change;
     if (n !== null && (e = n, t = n), t <= 0) return !1;
     const s = this.#o(t);
@@ -752,10 +755,11 @@ class f extends u {
   async returnInsertedMoney() {
     return this.__money_session.inserted <= 0 ? !1 : await this.#c(this.__money_session.inserted);
   }
+  // @ts-expect-error override function in Core
   async serialCorruptMessage(n, e) {
     this.dispatch("corrupt:message", { data: n, message: e });
   }
 }
 export {
-  f as Boardroid
+  _ as Boardroid
 };

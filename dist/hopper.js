@@ -1,5 +1,5 @@
-import { u as _, a as p } from "./webserial-core-D3luFguv.js";
-class d extends _ {
+import { u as d, a } from "./webserial-core-CH2Xov2y.js";
+class f extends d {
   __hoppers__ = {
     levels: [
       { id: 1, currency: 10, key: "Hopper 1", name: "10 Pesos", amount: 0, capacity: 1e3 },
@@ -20,8 +20,8 @@ class d extends _ {
       bufferSize: 32768,
       flowControl: "none"
     },
-    no_device: n = 1,
-    socket: r = !1
+    no_device: r = 1,
+    socket: n = !1
   } = {
     filters: null,
     config_port: {
@@ -35,12 +35,12 @@ class d extends _ {
     no_device: 1,
     socket: !1
   }) {
-    if (super({ filters: e, config_port: t, no_device: n, socket: r }), this.__internal__.device.type = "hopper", p.getCustom(this.typeDevice, n))
-      throw new Error(`Device ${this.typeDevice} ${n} already exists`);
+    if (super({ filters: e, config_port: t, no_device: r, socket: n }), this.__internal__.device.type = "hopper", a.getCustom(this.typeDevice, r))
+      throw new Error(`Device ${this.typeDevice} ${r} already exists`);
     this.__internal__.time.response_connection = 7e3, this.__internal__.time.response_general = 7e3, this.__internal__.serial.delay_first_connection = 500, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
-`, p.add(this), this.#a();
+`, a.add(this), this.#s();
   }
-  #a() {
+  #s() {
     const e = ["levels", "hopper:updated", "dispense-change", "balance:updated", "validator:status", "change:1x1"];
     for (const t of e)
       this.serialRegisterAvailableListener(t);
@@ -54,20 +54,20 @@ class d extends _ {
   get levels() {
     return this.__hoppers__.levels;
   }
-  setMaxCapacity({ hopper: e = null, capacity: t = 1e3 } = { hopper: null, capacity: 1e3 }) {
+  setMaxCapacity({ hopper: e = 1, capacity: t = 1e3 } = { hopper: 1, capacity: 1e3 }) {
     return this.#r(e), this.__hoppers__.levels[e - 1].capacity = t, this;
   }
-  setHopperName({ hopper: e = null, name: t = "" } = { hopper: null, name: "" }) {
+  setHopperName({ hopper: e = 1, name: t = "" } = { hopper: 1, name: "" }) {
     if (this.#r(e), typeof t != "string" || t.length === 0)
       throw new TypeError("Name must be a non-empty string");
     return this.__hoppers__.levels[e - 1].name = t, this;
   }
-  setHopperKey({ hopper: e = null, key: t = "" } = { hopper: null, key: "" }) {
+  setHopperKey({ hopper: e = 1, key: t = "" } = { hopper: 1, key: "" }) {
     if (this.#r(e), typeof t != "string" || t.length === 0)
       throw new TypeError("Key must be a non-empty string");
     return this.__hoppers__.levels[e - 1].key = t, this;
   }
-  setHopperCurrency({ hopper: e = null, currency: t = 1 } = { hopper: null, currency: 1 }) {
+  setHopperCurrency({ hopper: e = 1, currency: t = 1 } = { hopper: 1, currency: 1 }) {
     if (this.#r(e), typeof t != "number" || t <= 0)
       throw new RangeError("Currency must be a positive number");
     return this.__hoppers__.levels[e - 1].currency = t, this;
@@ -80,30 +80,34 @@ class d extends _ {
       e.name = "STATUS", e.description = "Hoppers status", e.no_code = 1, this.__hoppers__.levels[0].amount = this.#t(e.code[9], e.code[10]), this.__hoppers__.levels[1].amount = this.#t(e.code[7], e.code[8]), this.__hoppers__.levels[2].amount = this.#t(e.code[5], e.code[6]), this.__hoppers__.levels[3].amount = this.#t(e.code[3], e.code[4]), e.data = this.__hoppers__.levels, this.dispatch("levels", e.data);
     else if (this.lastAction === "readHopper") {
       e.name = "READ_HOPPER", e.description = `Hopper ${this.__hoppers__.current} level`, e.no_code = 2;
-      const t = this.__hoppers__.current - 1;
+      const t = (this.__hoppers__.current || 1) - 1;
       this.__hoppers__.levels[t].amount = this.#t(e.code[9], e.code[10]), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current, this.dispatch("hopper:updated", this.__hoppers__.levels[t]);
     } else if (this.lastAction === "writeHopper") {
-      e.name = "WRITE_HOPPER", e.description = "Hopper " + this.__hoppers__.current + " write", e.no_code = 3, this.__hoppers__.levels[this.__hoppers__.current - 1].amount = this.#t(
+      e.name = "WRITE_HOPPER", e.description = "Hopper " + this.__hoppers__.current + " write", e.no_code = 3, this.__hoppers__.levels[(this.__hoppers__.current || 1) - 1].amount = this.#t(
+        // @ts-expect-error index position on uint8array is number
         e.code[9],
+        // @ts-expect-error index position on uint8array is number
         e.code[10]
       ), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current;
-      const t = this.__hoppers__.current - 1;
+      const t = (this.__hoppers__.current || 1) - 1;
       this.dispatch("hopper:updated", this.__hoppers__.levels[t]);
     } else if (this.lastAction === "dispenseHopper") {
-      e.name = "DISPENSEHOPPER", e.description = "Hopper " + this.__hoppers__.current + " dispense", e.no_code = 4, this.__hoppers__.levels[this.__hoppers__.current - 1].amount = this.#t(
+      e.name = "DISPENSEHOPPER", e.description = "Hopper " + this.__hoppers__.current + " dispense", e.no_code = 4, this.__hoppers__.levels[(this.__hoppers__.current || 1) - 1].amount = this.#t(
+        // @ts-expect-error index position on uint8array is number
         e.code[9],
+        // @ts-expect-error index position on uint8array is number
         e.code[10]
       ), e.data = this.__hoppers__.levels, e.hopperId = this.__hoppers__.current;
-      const t = this.__hoppers__.current - 1;
+      const t = (this.__hoppers__.current || 0) - 1;
       this.dispatch("hopper:updated", this.__hoppers__.levels[t]);
-    } else this.lastAction === "dispenseChange" ? (e.name = "DISPENSE_CHANGE", e.description = "Change dispensed", e.no_code = 5, e.data = this.#t(e.code[9], e.code[10]), this.dispatch("dispense-change", { amount: e.data })) : this.lastAction === "readBalance" ? (e.name = "READ_BALANCE", e.description = "Read Balance", e.no_code = 6, this.__hoppers__.balance = this.#t(e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "clearBalance" ? (e.name = "CLEAR_BALANCE", e.description = "Clared hoppers balance", e.no_code = 7, this.__hoppers__.balance = this.#t(e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "configValidator" ? (e.code[2] === 1 ? (e.name = "ENABLE_VALIDATOR", e.description = "Validator enabled", e.no_code = 8, this.dispatch("validator:status", { enabled: !0 })) : (e.name = "DISABLE_VALIDATOR", e.description = "Validator disabled", e.no_code = 9, this.dispatch("validator:status", { enabled: !1 })), e.no_code = 400, e.data = e.code[2] === 1 ? "enabled" : "disabled") : this.lastAction.includes("change1x1Hopper") && (e.code[2] === 1 ? (e.name = "CHANGE_1X1_HOPPER_1", e.description = "Change 1x1 Hopper 1", e.no_code = 10) : e.code[2] === 2 ? (e.name = "CHANGE_1X1_HOPPER_2", e.description = "Change 1x1 Hopper 2", e.no_code = 11) : e.code[2] === 3 ? (e.name = "CHANGE_1X1_HOPPER_3", e.description = "Change 1x1 Hopper 3", e.no_code = 12) : e.code[2] === 4 ? (e.name = "CHANGE_1X1_HOPPER_4", e.description = "Change 1x1 Hopper 4", e.no_code = 13) : (e.name = "CHANGE_1X1_HOPPER_UNKNOWN", e.description = "Change 1x1 Hopper Unknown", e.no_code = 14), this.dispatch("change:1x1", { hopperId: e.code[2] }));
+    } else this.lastAction === "dispenseChange" ? (e.name = "DISPENSE_CHANGE", e.description = "Change dispensed", e.no_code = 5, e.data = this.#t(e.code[9], e.code[10]), this.dispatch("dispense-change", { amount: e.data })) : this.lastAction === "readBalance" ? (e.name = "READ_BALANCE", e.description = "Read Balance", e.no_code = 6, this.__hoppers__.balance = this.#t(e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "clearBalance" ? (e.name = "CLEAR_BALANCE", e.description = "Clared hoppers balance", e.no_code = 7, this.__hoppers__.balance = this.#t(e.code[9], e.code[10]), e.data = this.__hoppers__.balance, this.dispatch("balance:updated", { balance: e.data })) : this.lastAction === "configValidator" ? (e.code[2] === 1 ? (e.name = "ENABLE_VALIDATOR", e.description = "Validator enabled", e.no_code = 8, this.dispatch("validator:status", { enabled: !0 })) : (e.name = "DISABLE_VALIDATOR", e.description = "Validator disabled", e.no_code = 9, this.dispatch("validator:status", { enabled: !1 })), e.no_code = 400, e.data = e.code[2] === 1 ? "enabled" : "disabled") : this.lastAction?.includes("change1x1Hopper") && (e.code[2] === 1 ? (e.name = "CHANGE_1X1_HOPPER_1", e.description = "Change 1x1 Hopper 1", e.no_code = 10) : e.code[2] === 2 ? (e.name = "CHANGE_1X1_HOPPER_2", e.description = "Change 1x1 Hopper 2", e.no_code = 11) : e.code[2] === 3 ? (e.name = "CHANGE_1X1_HOPPER_3", e.description = "Change 1x1 Hopper 3", e.no_code = 12) : e.code[2] === 4 ? (e.name = "CHANGE_1X1_HOPPER_4", e.description = "Change 1x1 Hopper 4", e.no_code = 13) : (e.name = "CHANGE_1X1_HOPPER_UNKNOWN", e.description = "Change 1x1 Hopper Unknown", e.no_code = 14), this.dispatch("change:1x1", { hopperId: e.code[2] }));
     this.dispatch("serial:message", e);
   }
   serialMessage(e) {
-    const t = this.parseUint8ArrayToString(e), r = {
+    const t = e, r = this.parseUint8ArrayToString(t), i = {
       //hex,
-      ascii: this.asciiToHex(t),
-      code: e,
+      ascii: this.asciiToHex(r),
+      code: t,
       name: "",
       description: "",
       request: this.lastAction,
@@ -111,19 +115,20 @@ class d extends _ {
       error: !1,
       data: null
     };
-    if (e.length === 3) {
-      this.#n(r);
+    if (t.length === 3) {
+      this.#n(i);
       return;
     }
-    if (e.length !== 13) {
-      const i = this.#s({ array: e, chunkSize: 13 });
-      for (const o of i) {
-        const a = this.parseUint8ArrayToString(new Uint8Array(o)), s = this.asciiToHex(a), c = this.stringToArrayHex(a);
-        r.code = o, r.hex = c, r.ascii = s, o.length !== 13 ? this.#n(r) : this.#i(r);
+    const p = Array.from(t);
+    if (t.length !== 13) {
+      const c = this.#p({ array: p, chunkSize: 13 });
+      for (const o of c) {
+        const s = this.parseUint8ArrayToString(new Uint8Array(o)), h = this.asciiToHex(s), _ = this.stringToArrayHex(s);
+        i.code = o, i.hex = _, i.ascii = h, o.length !== 13 ? this.#n(i) : this.#i(i);
       }
       return;
     }
-    this.#i(r);
+    this.#i(i);
   }
   #t(e, t) {
     return (e << 8 | t) << 16 >> 16;
@@ -140,29 +145,35 @@ class d extends _ {
     if (typeof e != "number" || !Number.isInteger(e))
       throw new TypeError("Quantity must be an integer");
   }
-  #p(e) {
+  #a(e) {
     this.#o(e);
-    const t = e & 65535, n = t >> 8 & 255, r = t & 255;
-    return [n, r];
+    const t = e & 65535, r = t >> 8 & 255, n = t & 255;
+    return [r, n];
   }
-  #s({ array: e, chunkSize: t = 13 } = {}) {
+  #p({
+    array: e,
+    chunkSize: t = 13
+  } = {
+    array: [],
+    chunkSize: 13
+  }) {
     if (!Array.isArray(e))
       throw new TypeError("Expected an array");
     if (typeof t != "number" || t <= 0)
       throw new RangeError("Chunk size must be a positive number");
-    const n = [];
-    for (let r = 0; r < e.length; r += t)
-      n.push(e.slice(r, r + t));
-    return n;
+    const r = [];
+    for (let n = 0; n < e.length; n += t)
+      r.push(e.slice(n, n + t));
+    return r;
   }
   #e(e) {
     e.length < 11 && (e = [...e, ...Array(11 - e.length).fill(0)]);
-    const n = e.slice(1, 11).reduce((r, i) => {
+    const r = e.slice(1, 11).reduce((n, i) => {
       if (typeof i != "number")
         throw new TypeError("Array must contain only numbers");
-      return r + i;
+      return n + i;
     }, 0) & 255;
-    return e[11] = n, e[12] = 15, e;
+    return e[11] = r, e[12] = 15, e;
   }
   serialSetConnectionConstant() {
     return [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15];
@@ -187,17 +198,17 @@ class d extends _ {
     const e = "0A000F00".match(/.{1,2}/g);
     return await this.appendToQueue(e, "ForceInvalid");
   }
-  async readHopper({ hopper: e = null } = { hopper: null }) {
+  async readHopper({ hopper: e = 1 } = { hopper: 1 }) {
     this.#r(e), this.__hoppers__.current = e;
     const t = this.#e([10, e, e]);
     return await this.appendToQueue(t, "readHopper");
   }
-  async writeHopper({ hopper: e = null, quantity: t = 0 } = { hopper: null, quantity: 0 }) {
+  async writeHopper({ hopper: e = 1, quantity: t = 0 } = { hopper: 1, quantity: 0 }) {
     this.#r(e), this.#o(t), this.__hoppers__.current = e;
-    const [n, r] = this.#p(t), i = this.#e([10, 240, e, 0, 0, 0, 0, 0, 0, n, r]);
+    const [r, n] = this.#a(t), i = this.#e([10, 240, e, 0, 0, 0, 0, 0, 0, r, n]);
     return await this.appendToQueue(i, "writeHopper");
   }
-  async dispenseHopper({ hopper: e = null } = { hopper: null }) {
+  async dispenseHopper({ hopper: e = 1 } = { hopper: 1 }) {
     this.#r(e), this.__hoppers__.current = e;
     const t = this.#e([10, 2, e]);
     return await this.appendToQueue(t, "dispenseHopper");
@@ -207,10 +218,12 @@ class d extends _ {
       throw new RangeError("Change must be a number between 0 and 32767");
     if (typeof e != "number" || !Number.isInteger(e))
       throw new TypeError("Change must be an integer");
-    const t = e & 255, n = e >> 8 & 255, r = this.#e([10, 204, 170, 0, 0, 0, 0, 0, 0, n, t]);
-    return await this.appendToQueue(r, "dispenseChange");
+    const t = e & 255, r = e >> 8 & 255, n = this.#e([10, 204, 170, 0, 0, 0, 0, 0, 0, r, t]);
+    return await this.appendToQueue(n, "dispenseChange");
   }
-  async configValidator({ enable: e = !1 } = { enable: !1 }) {
+  async configValidator({
+    enable: e = !1
+  } = { enable: !1 }) {
     if (typeof e != "boolean")
       throw new TypeError("Enable must be a boolean");
     const t = this.#e([10, 176, e ? 1 : 0]);
@@ -222,18 +235,20 @@ class d extends _ {
   async enableValidator() {
     return await this.configValidator({ enable: !0 });
   }
-  async change1x1({ hopper: e = null } = { hopper: null }) {
+  async change1x1({ hopper: e = 1 } = { hopper: 1 }) {
     this.#r(e), this.__hoppers__.current = e;
     const t = this.#e([10, 224, e]);
     return await this.appendToQueue(t, "change1x1Hopper-" + e);
   }
-  async sendCustomCode({ code: e = [] } = { code: [] }) {
-    if (!Array.isArray(e) || !e.every((n) => typeof n == "number" && n >= 0 && n <= 255))
+  async sendCustomCode({
+    code: e = []
+  } = { code: [] }) {
+    if (!Array.isArray(e) || !e.every((r) => typeof r == "number" && r >= 0 && r <= 255))
       throw new TypeError("Code must be an array of numbers between 0 and 255");
     const t = this.#e(e);
     await this.appendToQueue(t, "custom");
   }
 }
 export {
-  d as Hopper
+  f as Hopper
 };

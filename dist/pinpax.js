@@ -1,7 +1,6 @@
-import { K as h } from "./kernel-CXM5xoJD.js";
-import { s as a } from "./relay-DP8PLsDP.js";
-import { a as c } from "./webserial-core-D3luFguv.js";
-class m extends h {
+import { K as p, D as o } from "./kernel-DkC7Kj3m.js";
+import { s as t } from "./relay-DP8PLsDP.js";
+class l extends p {
   __pinpax__ = {
     server: "DEV",
     businessId: null,
@@ -26,7 +25,7 @@ class m extends h {
       bufferSize: 32768,
       flowControl: "none"
     },
-    no_device: t = 1,
+    no_device: a = 1,
     device_listen_on_channel: i = 1,
     socket: n = !1
   } = {
@@ -43,10 +42,10 @@ class m extends h {
     device_listen_on_channel: 1,
     socket: !1
   }) {
-    if (super({ filters: s, config_port: e, no_device: t, device_listen_on_channel: i, socket: n }), this.__internal__.device.type = "pinpax", c.getCustom(this.typeDevice, t))
-      throw new Error(`Device ${this.typeDevice} ${t} already exists`);
+    if (super({ filters: s, config_port: e, no_device: a, device_listen_on_channel: i, socket: n }), this.__internal__.device.type = "pinpax", o.getCustom(this.typeDevice, a))
+      throw new Error(`Device ${this.typeDevice} ${a} already exists`);
     this.__internal__.time.response_connection = 4e3, this.__internal__.time.response_general = 3e3, this.__internal__.serial.delay_first_connection = 1e3, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
-`, this.#t(), c.add(this), this.getResponseAsString();
+`, this.#t(), o.add(this), this.getResponseAsString();
   }
   #t() {
     const s = [
@@ -94,8 +93,8 @@ class m extends h {
     let e = null;
     try {
       e = JSON.parse(s), e.request || (e.request = this.lastAction), e.name || (e.name = this.lastAction);
-    } catch (t) {
-      console.error("Error parsing response", t, s), this.dispatch("serial:message", s);
+    } catch (a) {
+      console.error("Error parsing response", a, s), this.dispatch("serial:message", s);
       return;
     }
     switch (e.response) {
@@ -222,8 +221,8 @@ class m extends h {
     }
     this.dispatch("serial:message", e);
   }
-  serialSetConnectionConstant(s = 1) {
-    return a.connection(s);
+  serialSetConnectionConstant() {
+    return t.connection();
   }
   softReload() {
     super.softReload(), this.__pinpax__.waiting.sale = !1, this.__pinpax__.waiting.voucher = !1, this.__pinpax__.asyncResponses.sale = null, this.__pinpax__.asyncResponses.voucher = null;
@@ -233,32 +232,30 @@ class m extends h {
     if (s.constructor !== Object) throw new Error("Invalid object");
     if (Object.keys(s).length === 0) throw new Error("Empty object");
     if (s.action === void 0 || s.action === null) throw new Error("Invalid object add action");
-    const e = JSON.stringify(s), t = this.parseStringToBytes(e, `\r
+    const e = JSON.stringify(s), a = this.parseStringToBytes(e, `\r
 `);
-    await this.appendToQueue(this.stringArrayToUint8Array(t), "custom");
+    await this.appendToQueue(this.stringArrayToUint8Array(a), "custom");
   }
   async connectMessage() {
-    await this.appendToQueue(a.connect(), "connect:message");
+    await this.appendToQueue(t.connect(), "connect:message");
   }
   async #e() {
     if (this.isDisconnected) throw new Error("Device is disconnected");
-    if (this.queue.length === 0) return !0;
-    const s = this;
-    return new Promise((e) => {
-      let t = setInterval(() => {
-        s.queue.length === 0 && (clearInterval(t), e(!0));
+    return this.queue.length === 0 ? !0 : new Promise((s) => {
+      const e = setInterval(() => {
+        this.queue.length === 0 && (clearInterval(e), s(!0));
       }, 500);
     });
   }
   async #s({ type: s = "production" } = {}) {
-    const e = a.readQR({ type: s });
+    const e = t.readQR({ type: s });
     return await this.appendToQueue(e, "read-qr");
   }
   async #a() {
-    await this.appendToQueue(a.forceHide(), "force-hide");
+    await this.appendToQueue(t.forceHide(), "force-hide");
   }
   async #i() {
-    await this.appendToQueue(a.forceShow(), "force-show");
+    await this.appendToQueue(t.forceShow(), "force-show");
   }
   async #n() {
     await this.connectMessage();
@@ -269,17 +266,22 @@ class m extends h {
   #o(s) {
     this.dispatch("payment", s), this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = s);
   }
+  cancelSaleRequestInProcess() {
+    this.__pinpax__.waiting.sale && (this.__pinpax__.asyncResponses.sale = {
+      status: "error",
+      approved: !1,
+      response: {}
+    });
+  }
   async makeSale({ amount: s = 0, reference: e = null } = {}) {
     if (this.isDisconnected) throw new Error("Device is disconnected");
     if (this.__pinpax__.waiting.sale) throw new Error("Already waiting for sale response");
-    const t = a.makeSale({ amount: s, reference: e });
-    this.__pinpax__.waiting.sale = !0, this.__pinpax__.asyncResponses.sale = null, this.queue.length > 0 && await this.#e();
-    const i = this;
-    return await this.appendToQueue(t, "make-sale"), new Promise((n) => {
-      const r = setInterval(() => {
-        if (i.__pinpax__.asyncResponses.sale) {
-          const o = i.__pinpax__.asyncResponses.sale;
-          i.__pinpax__.asyncResponses.sale = null, i.__pinpax__.waiting.sale = !1, clearInterval(r), n(o.approved);
+    const a = t.makeSale({ amount: s, reference: e });
+    return this.__pinpax__.waiting.sale = !0, this.__pinpax__.asyncResponses.sale = null, this.queue.length > 0 && await this.#e(), await this.appendToQueue(a, "make-sale"), new Promise((i) => {
+      const n = setInterval(() => {
+        if (this.__pinpax__.asyncResponses.sale) {
+          const r = this.__pinpax__.asyncResponses.sale;
+          this.__pinpax__.asyncResponses.sale = null, this.__pinpax__.waiting.sale = !1, clearInterval(n), i(r.approved);
         }
       }, 100);
     });
@@ -289,47 +291,45 @@ class m extends h {
     if (this.__pinpax__.waiting.voucher) throw new Error("Already waiting for voucher");
     if (!s) throw new Error("Folio is required");
     this.__pinpax__.waiting.voucher = !0, this.__pinpax__.asyncResponses.voucher = null;
-    const e = a.getVoucher({ folio: s });
-    this.queue.length > 0 && await this.#e(), await this.appendToQueue(e, "get-voucher");
-    const t = this;
-    return new Promise((i, n) => {
-      const r = setTimeout(() => {
-        t.__pinpax__.waiting.voucher = !1, n("Timeout");
-      }, 1e4), o = setInterval(() => {
-        if (t.__pinpax__.asyncResponses.voucher) {
-          const p = t.__pinpax__.asyncResponses.voucher;
-          t.__pinpax__.asyncResponses.voucher = null, t.__pinpax__.waiting.voucher = !1, clearInterval(o), clearTimeout(r), i(p.voucher);
+    const e = t.getVoucher({ folio: s });
+    return this.queue.length > 0 && await this.#e(), await this.appendToQueue(e, "get-voucher"), new Promise((a, i) => {
+      const n = setTimeout(() => {
+        this.__pinpax__.waiting.voucher = !1, i("Timeout");
+      }, 1e4), r = setInterval(() => {
+        if (this.__pinpax__.asyncResponses.voucher) {
+          const c = this.__pinpax__.asyncResponses.voucher;
+          this.__pinpax__.asyncResponses.voucher = null, this.__pinpax__.waiting.voucher = !1, clearInterval(r), clearTimeout(n), a(c.voucher);
         }
       }, 100);
     });
   }
   async info() {
-    await this.appendToQueue(a.info(), "info");
+    await this.appendToQueue(t.info(), "info");
   }
   async keepAlive() {
-    await this.appendToQueue(a.keepAlive(), "keep-alive");
+    await this.appendToQueue(t.keepAlive(), "keep-alive");
   }
   async restartApp() {
-    await this.appendToQueue(a.restartApp(), "reset-app");
+    await this.appendToQueue(t.restartApp(), "reset-app");
   }
   async getConfig() {
-    return await this.appendToQueue(a.getConfig(), "get-config");
+    return await this.appendToQueue(t.getConfig(), "get-config");
   }
   async hideButtons() {
-    return await this.appendToQueue(a.hideButtons(), "hide-buttons"), await this.#a();
+    return await this.appendToQueue(t.hideButtons(), "hide-buttons"), await this.#a();
   }
   async showButtons() {
-    return await this.appendToQueue(a.showButtons(), "show-buttons"), await this.#i();
+    return await this.appendToQueue(t.showButtons(), "show-buttons"), await this.#i();
   }
   async demo() {
-    return console.warn("RUNNING DEMO APP, BE CAREFUL"), await this.appendToQueue(a.demo(), "demo");
+    return console.warn("RUNNING DEMO APP, BE CAREFUL"), await this.appendToQueue(t.demo(), "demo");
   }
-  async refund({ amount: s = 0, folio: e = null, auth: t = null } = {}) {
+  async refund({ amount: s = 0, folio: e = null, auth: a = null } = {}) {
     return await this.appendToQueue(
-      a.refund({
+      t.refund({
         amount: s,
         folio: e,
-        auth: t
+        auth: a
       }),
       "refund"
     );
@@ -341,10 +341,10 @@ class m extends h {
     return this.#s({ type: "QA" });
   }
   async exit() {
-    return await this.appendToQueue(a.exit(), "exit-app");
+    return await this.appendToQueue(t.exit(), "exit-app");
   }
   async init() {
-    await this.appendToQueue(a.init(), "init-app");
+    await this.appendToQueue(t.init(), "init-app");
   }
   async login() {
     if (!this.apiKey || !this.businessId || !this.encryptionKey || !this.server)
@@ -361,5 +361,5 @@ class m extends h {
   }
 }
 export {
-  m as PinPax
+  l as PinPax
 };

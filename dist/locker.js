@@ -1,16 +1,22 @@
-import { K as h, w as n } from "./kernel-CXM5xoJD.js";
-import { u as t } from "./relay-DP8PLsDP.js";
-import { a } from "./webserial-core-D3luFguv.js";
-class d extends h {
+import { K as r, D as n, w as a } from "./kernel-DkC7Kj3m.js";
+import { u as i } from "./relay-DP8PLsDP.js";
+class d extends r {
   #s = !1;
   #e = 0;
   #t = 0;
-  constructor({ filters: s = null, config_port: e = null, no_device: i = 1, device_listen_on_port: l = 3, socket: r = !1 } = {}) {
-    if (super({ filters: s, config_port: e, no_device: i, device_listen_on_port: l, socket: r }), this.__internal__.device.type = "locker", a.getCustom(this.typeDevice, i))
-      throw new Error(`Device ${this.typeDevice} ${i} already exists`);
-    this.__internal__.time.response_engines = 1e3, this.__internal__.device.milliseconds = 666, this.__internal__.dispense.limit_counter = 1, a.add(this), this.#r();
+  _default_fallback_listen_on_channel = 3;
+  constructor({
+    filters: s = null,
+    config_port: e,
+    no_device: t = 1,
+    device_listen_on_channel: l = 3,
+    socket: h = !1
+  } = {}) {
+    if (super({ filters: s, config_port: e, no_device: t, device_listen_on_channel: l, socket: h }), this.__internal__.device.type = "locker", n.getCustom(this.typeDevice, t))
+      throw new Error(`Device ${this.typeDevice} ${t} already exists`);
+    this.__internal__.time.response_engines = 1e3, this.__internal__.dispense.limit_counter = 1, n.add(this), this.#h();
   }
-  #r() {
+  #h() {
     const s = ["percentage:disable", "percentage:enable", "percentage:open"];
     for (const e of s)
       this.serialRegisterAvailableListener(e);
@@ -53,7 +59,7 @@ class d extends h {
     this.dispatch("serial:message", e);
   }
   serialSetConnectionConstant(s = 3) {
-    return t.connection({ channel: s });
+    return i.connection({ channel: s });
   }
   #i() {
     this.#s = !1, this.#e = 0, this.#t = 0;
@@ -69,15 +75,15 @@ class d extends h {
   }
   async dispense({ cell: s = 1, status: e = !0 } = {}) {
     return setTimeout(() => {
-      e === !0 ? this.#h() : this.#c();
+      e === !0 ? this.#r() : this.#c();
     }, this.__internal__.time.response_engines / 2), await this.internalDispense(
-      t.openCell({
+      i.openCell({
         cell: s,
-        channel: this.__internal__.device.listen_on_port
+        channel: this.__internal__.device.listen_on_port || this._default_fallback_listen_on_channel
       })
     );
   }
-  #h() {
+  #r() {
     this.__internal__.dispense.dispensing && (this.__internal__.dispense.status = !0);
   }
   #c() {
@@ -85,17 +91,17 @@ class d extends h {
   }
   async status({ cell: s = 1 } = {}) {
     return await this.appendToQueue(
-      t.statusCell({
+      i.statusCell({
         cell: s,
-        channel: this.__internal__.device.listen_on_port
+        channel: this.__internal__.device.listen_on_port || this._default_fallback_listen_on_channel
       }),
       "status"
     );
   }
   async lightScan({ since: s = 0, until: e = 10 } = {}) {
     return await this.appendToQueue(
-      t.lightScan({
-        channel: this.__internal__.device.listen_on_port,
+      i.lightScan({
+        channel: this.__internal__.device.listen_on_port || this._default_fallback_listen_on_channel,
         since: s,
         until: e
       }),
@@ -104,18 +110,18 @@ class d extends h {
   }
   async enable({ cell: s = 1 } = {}) {
     return await this.appendToQueue(
-      t.enableCell({
+      i.enableCell({
         cell: s,
-        channel: this.__internal__.device.listen_on_port
+        channel: this.__internal__.device.listen_on_port || this._default_fallback_listen_on_channel
       }),
       "activate"
     );
   }
   async disable({ cell: s = 1 } = {}) {
     await this.appendToQueue(
-      t.disableCell({
+      i.disableCell({
         cell: s,
-        channel: this.__internal__.device.listen_on_port
+        channel: this.__internal__.device.listen_on_port || this._default_fallback_listen_on_channel
       }),
       "disable"
     );
@@ -125,21 +131,21 @@ class d extends h {
     this.#i(), this.#s = !0, this.#n();
     const s = [];
     for (let e = 1; e <= 80; e++) {
-      const i = await this.dispense({ cell: e, status: !0 });
-      s.push(i), this.#e = e, this.#n();
+      const t = await this.dispense({ cell: e, status: !0 });
+      s.push(t), this.#e = e, this.#n();
     }
     this.#e = 80, this.#n(s), this.#i();
   }
   async enableAll() {
     this.#i(), this.#s = !0, this.#a();
     for (let s = 1; s <= 80; s++)
-      await this.enable({ cell: s }), await n(100), this.#e = s, this.#a();
+      await this.enable({ cell: s }), await a(100), this.#e = s, this.#a();
     this.#e = 80, this.#a(), this.#i();
   }
   async disableAll() {
     this.#i(), this.#s = !0, this.#l();
     for (let s = 1; s <= 80; s++)
-      await this.disable({ cell: s }), await n(100), this.#e = s, this.#l();
+      await this.disable({ cell: s }), await a(100), this.#e = s, this.#l();
     this.#e = 80, this.#l(), this.#i();
   }
 }
