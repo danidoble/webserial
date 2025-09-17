@@ -116,7 +116,7 @@ export declare class Boardroid extends Kernel {
     get change(): number;
     softReload(): void;
     serialMessage(code: string[] | Uint8Array<ArrayBufferLike> | string | ArrayBuffer): void;
-    serialSetConnectionConstant(listen_on_port?: number): string | Uint8Array<ArrayBufferLike> | string[];
+    serialSetConnectionConstant(listen_on_port?: number): string | string[] | Uint8Array<ArrayBufferLike>;
     coinPurseConfigure({ enable, high, low }?: {
         enable?: boolean | undefined;
         high?: number | undefined;

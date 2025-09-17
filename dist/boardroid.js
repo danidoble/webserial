@@ -1,4 +1,4 @@
-import { K as u, D as p } from "./kernel-DtXV8d8B.js";
+import { K as u, D as p } from "./kernel-BnWXOCde.js";
 import { l } from "./relay-DP8PLsDP.js";
 class _ extends u {
   __coin_purse = {

@@ -1,4 +1,4 @@
-import { u as d, a } from "./webserial-core-D3luFguv.js";
+import { v as d, s as p } from "./webserial-core-52yJu-0N.js";
 class f extends d {
   __hoppers__ = {
     levels: [
@@ -35,10 +35,10 @@ class f extends d {
     no_device: 1,
     socket: !1
   }) {
-    if (super({ filters: e, config_port: t, no_device: r, socket: n }), this.__internal__.device.type = "hopper", a.getCustom(this.typeDevice, r))
+    if (super({ filters: e, config_port: t, no_device: r, socket: n }), this.__internal__.device.type = "hopper", p.getCustom(this.typeDevice, r))
       throw new Error(`Device ${this.typeDevice} ${r} already exists`);
     this.__internal__.time.response_connection = 7e3, this.__internal__.time.response_general = 7e3, this.__internal__.serial.delay_first_connection = 500, this.__internal__.serial.response.replacer = "", this.__internal__.serial.response.limiter = `\r
-`, a.add(this), this.#s();
+`, p.add(this), this.#s();
   }
   #s() {
     const e = ["levels", "hopper:updated", "dispense-change", "balance:updated", "validator:status", "change:1x1"];
@@ -119,9 +119,9 @@ class f extends d {
       this.#n(i);
       return;
     }
-    const p = Array.from(t);
+    const a = Array.from(t);
     if (t.length !== 13) {
-      const c = this.#p({ array: p, chunkSize: 13 });
+      const c = this.#a({ array: a, chunkSize: 13 });
       for (const o of c) {
         const s = this.parseUint8ArrayToString(new Uint8Array(o)), h = this.asciiToHex(s), _ = this.stringToArrayHex(s);
         i.code = o, i.hex = _, i.ascii = h, o.length !== 13 ? this.#n(i) : this.#i(i);
@@ -145,12 +145,12 @@ class f extends d {
     if (typeof e != "number" || !Number.isInteger(e))
       throw new TypeError("Quantity must be an integer");
   }
-  #a(e) {
+  #p(e) {
     this.#o(e);
     const t = e & 65535, r = t >> 8 & 255, n = t & 255;
     return [r, n];
   }
-  #p({
+  #a({
     array: e,
     chunkSize: t = 13
   } = {
@@ -205,7 +205,7 @@ class f extends d {
   }
   async writeHopper({ hopper: e = 1, quantity: t = 0 } = { hopper: 1, quantity: 0 }) {
     this.#r(e), this.#o(t), this.__hoppers__.current = e;
-    const [r, n] = this.#a(t), i = this.#e([10, 240, e, 0, 0, 0, 0, 0, 0, r, n]);
+    const [r, n] = this.#p(t), i = this.#e([10, 240, e, 0, 0, 0, 0, 0, 0, r, n]);
     return await this.appendToQueue(i, "writeHopper");
   }
   async dispenseHopper({ hopper: e = 1 } = { hopper: 1 }) {

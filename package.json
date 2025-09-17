@@ -1,6 +1,6 @@
 {
     "name": "@danidoble/webserial",
-    "version": "4.4.0-beta.4",
+    "version": "4.4.0-beta.5",
     "author": "danidoble",
     "repository": {
         "type": "git",
@@ -8,7 +8,7 @@
     },
     "main": "./dist/webserial.cjs",
     "module": "./dist/webserial.js",
-    "types": "./dist/main.d.ts",
+    "types": "./dist/types/main.d.ts",
     "devDependencies": {
         "@danidoble/webserial-vending-commands": "^1.0.3",
         "@eslint/js": "^9.35.0",
@@ -24,48 +24,48 @@
         "typescript-eslint": "^8.44.0",
         "uuid": "^13.0.0",
         "vite": "^7.1.5",
-        "webserial-core": "^1.1.0"
+        "webserial-core": "^1.1.3"
     },
     "exports": {
         ".": {
+            "types": "./dist/types/main.d.ts",
             "import": "./dist/webserial.js",
-            "require": "./dist/webserial.cjs",
-            "types": "./dist/main.d.ts"
+            "require": "./dist/webserial.cjs"
         },
         "./kernel": {
+            "types": "./dist/types/kernel.d.ts",
             "import": "./dist/kernel.js",
-            "require": "./dist/kernel.cjs",
-            "types": "./dist/kernel.d.ts"
+            "require": "./dist/kernel.cjs"
         },
         "./boardroid": {
+            "types": "./dist/types/serial/boardroid.d.ts",
             "import": "./dist/boardroid.js",
-            "require": "./dist/boardroid.cjs",
-            "types": "./dist/serial/boardroid.d.ts"
+            "require": "./dist/boardroid.cjs"
         },
         "./jofemar": {
+            "types": "./dist/types/serial/jofemar.d.ts",
             "import": "./dist/jofemar.js",
-            "require": "./dist/jofemar.cjs",
-            "types": "./dist/serial/jofemar.d.ts"
+            "require": "./dist/jofemar.cjs"
         },
         "./locker": {
+            "types": "./dist/types/serial/locker.d.ts",
             "import": "./dist/locker.js",
-            "require": "./dist/locker.cjs",
-            "types": "./dist/serial/locker.d.ts"
+            "require": "./dist/locker.cjs"
         },
         "./pinpad": {
+            "types": "./dist/types/serial/pinpad.d.ts",
             "import": "./dist/pinpad.js",
-            "require": "./dist/pinpad.cjs",
-            "types": "./dist/serial/pinpad.d.ts"
+            "require": "./dist/pinpad.cjs"
         },
         "./pinpax": {
+            "types": "./dist/types/serial/pinpax.d.ts",
             "import": "./dist/pinpax.js",
-            "require": "./dist/pinpax.cjs",
-            "types": "./dist/serial/pinpax.d.ts"
+            "require": "./dist/pinpax.cjs"
         },
         "./relay": {
+            "types": "./dist/types/serial/relay.d.ts",
             "import": "./dist/relay.js",
-            "require": "./dist/relay.cjs",
-            "types": "./dist/serial/relay.d.ts"
+            "require": "./dist/relay.cjs"
         }
     },
     "bugs": {
@@ -87,7 +87,7 @@
     "scripts": {
         "format": "prettier --write ./lib/**/*.ts && prettier --write ./test/**/*.ts",
         "dev": "vite",
-        "build": "prettier --write ./lib/**/*.ts && prettier --write ./test/**/*.ts && tsc && vite build",
+        "build": "rm -rf dist && prettier --write ./lib/**/*.ts && prettier --write ./test/**/*.ts && tsc && vite build",
         "lint": "eslint .",
         "preview": "vite preview"
     },

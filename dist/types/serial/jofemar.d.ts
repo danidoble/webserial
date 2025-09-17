@@ -86,7 +86,7 @@ export declare class Jofemar extends Kernel {
     set listenOnPort(channel: number);
     set deviceType(type: TypeDevice);
     set supportCart(support_cart: boolean);
-    serialSetConnectionConstant(listen_on_port?: number): string | Uint8Array<ArrayBufferLike> | string[];
+    serialSetConnectionConstant(listen_on_port?: number): string | string[] | Uint8Array<ArrayBufferLike>;
     serialMessage(code: string[] | Uint8Array<ArrayBufferLike> | string | ArrayBuffer): void;
     productRemovedContinueDispensing(): void;
     dispense({ selection, cart }?: {

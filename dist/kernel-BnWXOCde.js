@@ -1,4 +1,4 @@
-import { a as p, u } from "./webserial-core-CH2Xov2y.js";
+import { s as p, v as u } from "./webserial-core-52yJu-0N.js";
 function b(o = 100) {
   return new Promise((n) => setTimeout(() => n(), o));
 }
@@ -11,10 +11,10 @@ function y() {
 function w() {
   return "crypto" in window;
 }
-function D(o = 1) {
+function M(o = 1) {
   return o * 1e3;
 }
-function M(o) {
+function D(o) {
   return o == null || o === "";
 }
 class e {
@@ -667,71 +667,61 @@ class e {
 }
 class r extends p {
   constructor() {
-    super();
-    const n = {
-      relay: [],
-      locker: [],
-      jofemar: [],
-      boardroid: [],
-      pinpad: [],
-      pinpax: [],
-      hopper: []
-    };
-    r.devices = { ...structuredClone(p.devices), ...n };
+    super(), r.registerType("boardroid"), r.registerType("hopper"), r.registerType("jofemar"), r.registerType("locker"), r.registerType("pinpad"), r.registerType("pinpax"), r.registerType("relay");
   }
-  addCustom(n, s) {
+  static addCustom(n, s) {
     r.registerType(n), r.add(s);
   }
   /**
    * @deprecated use get instead
    * */
-  getCustomByUuid(n, s) {
+  static getCustomByUuid(n, s) {
     return r.get(n, s);
   }
-  getJofemarByUuid(n) {
+  static getJofemarByUuid(n) {
     return r.get("jofemar", n);
   }
-  getLockerByUuid(n) {
+  static getLockerByUuid(n) {
     return r.get("locker", n);
   }
-  getRelayByUuid(n) {
+  static getRelayByUuid(n) {
     return r.get("relay", n);
   }
-  getBoardroidByUuid(n) {
+  static getBoardroidByUuid(n) {
     return r.get("boardroid", n);
   }
-  getPinPadByUuid(n) {
+  static getPinPadByUuid(n) {
     return r.get("pinpad", n);
   }
-  getPinPaxByUuid(n) {
+  static getPinPaxByUuid(n) {
     return r.get("pinpax", n);
   }
-  getHopperByUuid(n) {
+  static getHopperByUuid(n) {
     return r.get("hopper", n);
   }
-  getJofemar(n = 1) {
+  static getJofemar(n = 1) {
     return r.getByNumber("jofemar", n);
   }
-  getBoardroid(n = 1) {
+  static getBoardroid(n = 1) {
     return r.getByNumber("boardroid", n);
   }
-  getLocker(n = 1) {
+  static getLocker(n = 1) {
     return r.getByNumber("locker", n);
   }
-  getRelay(n = 1) {
+  static getRelay(n = 1) {
     return r.getByNumber("relay", n);
   }
-  getPinPad(n = 1) {
+  static getPinPad(n = 1) {
     return r.getByNumber("pinpad", n);
   }
-  getPinPax(n = 1) {
+  static getPinPax(n = 1) {
     return r.getByNumber("pinpax", n);
   }
-  getHopper(n = 1) {
+  static getHopper(n = 1) {
     return r.getByNumber("hopper", n);
   }
 }
-r.instance || (r.instance = new r());
+r.instance = new r();
 class S extends u {
   constructor(n = {}) {
     super(n), this.__internal__ = structuredClone(this.__internal__), this.getResponseAsArrayHex(), this.__internal__.device.door_open = !1, this.__internal__.time.response_engines = 2e3, this.__internal__.time.sense = 100, this.__internal__.interval.waiting_sense = 0, this.__internal__.dispense = {
@@ -834,8 +824,8 @@ export {
   S as K,
   w as a,
   y as b,
-  D as g,
-  M as i,
+  M as g,
+  D as i,
   k as s,
   b as w
 };
