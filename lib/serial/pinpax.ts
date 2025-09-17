@@ -383,7 +383,13 @@ export class PinPax extends Kernel {
     }
   }
 
-  async makeSale({ amount = 0, reference = null } = {}) {
+  async makeSale({ amount = 0, reference = null }:{
+    amount: number;
+    reference?: string | null;
+  } = {
+    amount: 0,
+    reference: null,
+  }) {
     if (this.isDisconnected) throw new Error('Device is disconnected');
     if (this.__pinpax__.waiting.sale) throw new Error('Already waiting for sale response');
     const bytes = PinPaxCommands.makeSale({ amount, reference });
