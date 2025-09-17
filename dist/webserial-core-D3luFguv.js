@@ -1,0 +1,3325 @@
+class Y extends CustomEvent {
+  constructor(e, t) {
+    super(e, t);
+  }
+}
+class te extends EventTarget {
+  __listeners__ = {
+    debug: !1
+  };
+  __debug__ = !1;
+  __listenersCallbacks__ = [];
+  dispatch(e, t = null) {
+    const n = new Y(e, { detail: t });
+    this.dispatchEvent(n), this.__debug__ && this.dispatchEvent(new Y("debug", { detail: { type: e, data: t } }));
+  }
+  dispatchAsync(e, t = null, n = 100) {
+    const r = this;
+    setTimeout(() => {
+      r.dispatch(e, t);
+    }, n);
+  }
+  on(e, t) {
+    typeof this.__listeners__[e] < "u" && !this.__listeners__[e] && (this.__listeners__[e] = !0), this.__listenersCallbacks__.push({ key: e, callback: t }), this.addEventListener(e, t);
+  }
+  off(e, t) {
+    this.__listenersCallbacks__ = this.__listenersCallbacks__.filter((n) => !(n.key === e && n.callback === t)), this.removeEventListener(e, t);
+  }
+  serialRegisterAvailableListener(e) {
+    this.__listeners__[e] || (this.__listeners__[e] = !1);
+  }
+  get availableListeners() {
+    return Object.keys(this.__listeners__).sort().map((e) => ({
+      type: e,
+      listening: this.__listeners__[e]
+    }));
+  }
+  removeAllListeners() {
+    for (const e of this.__listenersCallbacks__)
+      ["internal:queue"].includes(e.key) || (this.__listenersCallbacks__ = this.__listenersCallbacks__.filter((t) => !(t.key === e.key && t.callback === e.callback)), this.removeEventListener(e.key, e.callback));
+    for (const e of Object.keys(this.__listeners__))
+      this.__listeners__[e] = !1;
+  }
+}
+class a extends te {
+  static instance;
+  static devices = {};
+  constructor() {
+    super(), ["change"].forEach((e) => {
+      this.serialRegisterAvailableListener(e);
+    });
+  }
+  static $dispatchChange(e = null) {
+    e && e.$checkAndDispatchConnection(), a.instance.dispatch("change", { devices: a.devices, dispatcher: e });
+  }
+  static typeError(e) {
+    const t = new Error();
+    throw t.message = `Type ${e} is not supported`, t.name = "DeviceTypeError", t;
+  }
+  static registerType(e) {
+    typeof a.devices[e] > "u" && (a.devices = { ...a.devices, [e]: {} });
+  }
+  static add(e) {
+    const t = e.typeDevice;
+    typeof a.devices[t] > "u" && a.registerType(t);
+    const n = e.uuid;
+    if (typeof a.devices[t] > "u" && a.typeError(t), a.devices[t][n])
+      throw new Error(`Device with id ${n} already exists`);
+    return a.devices[t][n] = e, a.$dispatchChange(e), Object.keys(a.devices[t]).indexOf(n);
+  }
+  static get(e, t) {
+    return typeof a.devices[e] > "u" && a.registerType(e), typeof a.devices[e] > "u" && a.typeError(e), a.devices[e][t];
+  }
+  static getAll(e = null) {
+    return e === null ? a.devices : (typeof a.devices[e] > "u" && a.typeError(e), a.devices[e]);
+  }
+  static getList() {
+    return Object.values(a.devices).map((e) => Object.values(e)).flat();
+  }
+  static getByNumber(e, t) {
+    return typeof a.devices[e] > "u" && a.typeError(e), Object.values(a.devices[e]).find((n) => n.deviceNumber === t) ?? null;
+  }
+  static getCustom(e, t = 1) {
+    return typeof a.devices[e] > "u" && a.typeError(e), Object.values(a.devices[e]).find((n) => n.deviceNumber === t) ?? null;
+  }
+  static async connectToAll() {
+    const e = a.getList();
+    for (const t of e)
+      t.isConnected || await t.connect().catch(console.warn);
+    return Promise.resolve(a.areAllConnected());
+  }
+  static async disconnectAll() {
+    const e = a.getList();
+    for (const t of e)
+      t.isDisconnected || await t.disconnect().catch(console.warn);
+    return Promise.resolve(a.areAllDisconnected());
+  }
+  static async areAllConnected() {
+    const e = a.getList();
+    for (const t of e)
+      if (!t.isConnected) return Promise.resolve(!1);
+    return Promise.resolve(!0);
+  }
+  static async areAllDisconnected() {
+    const e = a.getList();
+    for (const t of e)
+      if (!t.isDisconnected) return Promise.resolve(!1);
+    return Promise.resolve(!0);
+  }
+  static async getAllConnected() {
+    const e = a.getList();
+    return Promise.resolve(e.filter((t) => t.isConnected));
+  }
+  static async getAllDisconnected() {
+    const e = a.getList();
+    return Promise.resolve(e.filter((t) => t.isDisconnected));
+  }
+}
+a.instance || (a.instance = new a());
+function J(s = 100) {
+  return new Promise(
+    (e) => setTimeout(() => e(), s)
+  );
+}
+const m = /* @__PURE__ */ Object.create(null);
+m.open = "0";
+m.close = "1";
+m.ping = "2";
+m.pong = "3";
+m.message = "4";
+m.upgrade = "5";
+m.noop = "6";
+const x = /* @__PURE__ */ Object.create(null);
+Object.keys(m).forEach((s) => {
+  x[m[s]] = s;
+});
+const D = { type: "error", data: "parser error" }, se = typeof Blob == "function" || typeof Blob < "u" && Object.prototype.toString.call(Blob) === "[object BlobConstructor]", ne = typeof ArrayBuffer == "function", re = (s) => typeof ArrayBuffer.isView == "function" ? ArrayBuffer.isView(s) : s && s.buffer instanceof ArrayBuffer, V = ({ type: s, data: e }, t, n) => se && e instanceof Blob ? t ? n(e) : Q(e, n) : ne && (e instanceof ArrayBuffer || re(e)) ? t ? n(e) : Q(new Blob([e]), n) : n(m[s] + (e || "")), Q = (s, e) => {
+  const t = new FileReader();
+  return t.onload = function() {
+    const n = t.result.split(",")[1];
+    e("b" + (n || ""));
+  }, t.readAsDataURL(s);
+};
+function X(s) {
+  return s instanceof Uint8Array ? s : s instanceof ArrayBuffer ? new Uint8Array(s) : new Uint8Array(s.buffer, s.byteOffset, s.byteLength);
+}
+let P;
+function fe(s, e) {
+  if (se && s.data instanceof Blob)
+    return s.data.arrayBuffer().then(X).then(e);
+  if (ne && (s.data instanceof ArrayBuffer || re(s.data)))
+    return e(X(s.data));
+  V(s, !1, (t) => {
+    P || (P = new TextEncoder()), e(P.encode(t));
+  });
+}
+const G = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", E = typeof Uint8Array > "u" ? [] : new Uint8Array(256);
+for (let s = 0; s < G.length; s++)
+  E[G.charCodeAt(s)] = s;
+const ye = (s) => {
+  let e = s.length * 0.75, t = s.length, n, r = 0, i, o, h, c;
+  s[s.length - 1] === "=" && (e--, s[s.length - 2] === "=" && e--);
+  const p = new ArrayBuffer(e), u = new Uint8Array(p);
+  for (n = 0; n < t; n += 4)
+    i = E[s.charCodeAt(n)], o = E[s.charCodeAt(n + 1)], h = E[s.charCodeAt(n + 2)], c = E[s.charCodeAt(n + 3)], u[r++] = i << 2 | o >> 4, u[r++] = (o & 15) << 4 | h >> 2, u[r++] = (h & 3) << 6 | c & 63;
+  return p;
+}, ge = typeof ArrayBuffer == "function", H = (s, e) => {
+  if (typeof s != "string")
+    return {
+      type: "message",
+      data: ie(s, e)
+    };
+  const t = s.charAt(0);
+  return t === "b" ? {
+    type: "message",
+    data: me(s.substring(1), e)
+  } : x[t] ? s.length > 1 ? {
+    type: x[t],
+    data: s.substring(1)
+  } : {
+    type: x[t]
+  } : D;
+}, me = (s, e) => {
+  if (ge) {
+    const t = ye(s);
+    return ie(t, e);
+  } else
+    return { base64: !0, data: s };
+}, ie = (s, e) => {
+  switch (e) {
+    case "blob":
+      return s instanceof Blob ? s : new Blob([s]);
+    case "arraybuffer":
+    default:
+      return s instanceof ArrayBuffer ? s : s.buffer;
+  }
+}, oe = "", be = (s, e) => {
+  const t = s.length, n = new Array(t);
+  let r = 0;
+  s.forEach((i, o) => {
+    V(i, !1, (h) => {
+      n[o] = h, ++r === t && e(n.join(oe));
+    });
+  });
+}, we = (s, e) => {
+  const t = s.split(oe), n = [];
+  for (let r = 0; r < t.length; r++) {
+    const i = H(t[r], e);
+    if (n.push(i), i.type === "error")
+      break;
+  }
+  return n;
+};
+function ve() {
+  return new TransformStream({
+    transform(s, e) {
+      fe(s, (t) => {
+        const n = t.length;
+        let r;
+        if (n < 126)
+          r = new Uint8Array(1), new DataView(r.buffer).setUint8(0, n);
+        else if (n < 65536) {
+          r = new Uint8Array(3);
+          const i = new DataView(r.buffer);
+          i.setUint8(0, 126), i.setUint16(1, n);
+        } else {
+          r = new Uint8Array(9);
+          const i = new DataView(r.buffer);
+          i.setUint8(0, 127), i.setBigUint64(1, BigInt(n));
+        }
+        s.data && typeof s.data != "string" && (r[0] |= 128), e.enqueue(r), e.enqueue(t);
+      });
+    }
+  });
+}
+let N;
+function C(s) {
+  return s.reduce((e, t) => e + t.length, 0);
+}
+function T(s, e) {
+  if (s[0].length === e)
+    return s.shift();
+  const t = new Uint8Array(e);
+  let n = 0;
+  for (let r = 0; r < e; r++)
+    t[r] = s[0][n++], n === s[0].length && (s.shift(), n = 0);
+  return s.length && n < s[0].length && (s[0] = s[0].slice(n)), t;
+}
+function ke(s, e) {
+  N || (N = new TextDecoder());
+  const t = [];
+  let n = 0, r = -1, i = !1;
+  return new TransformStream({
+    transform(o, h) {
+      for (t.push(o); ; ) {
+        if (n === 0) {
+          if (C(t) < 1)
+            break;
+          const c = T(t, 1);
+          i = (c[0] & 128) === 128, r = c[0] & 127, r < 126 ? n = 3 : r === 126 ? n = 1 : n = 2;
+        } else if (n === 1) {
+          if (C(t) < 2)
+            break;
+          const c = T(t, 2);
+          r = new DataView(c.buffer, c.byteOffset, c.length).getUint16(0), n = 3;
+        } else if (n === 2) {
+          if (C(t) < 8)
+            break;
+          const c = T(t, 8), p = new DataView(c.buffer, c.byteOffset, c.length), u = p.getUint32(0);
+          if (u > Math.pow(2, 21) - 1) {
+            h.enqueue(D);
+            break;
+          }
+          r = u * Math.pow(2, 32) + p.getUint32(4), n = 3;
+        } else {
+          if (C(t) < r)
+            break;
+          const c = T(t, r);
+          h.enqueue(H(i ? c : N.decode(c), e)), n = 0;
+        }
+        if (r === 0 || r > s) {
+          h.enqueue(D);
+          break;
+        }
+      }
+    }
+  });
+}
+const ae = 4;
+function _(s) {
+  if (s) return Ee(s);
+}
+function Ee(s) {
+  for (var e in _.prototype)
+    s[e] = _.prototype[e];
+  return s;
+}
+_.prototype.on = _.prototype.addEventListener = function(s, e) {
+  return this._callbacks = this._callbacks || {}, (this._callbacks["$" + s] = this._callbacks["$" + s] || []).push(e), this;
+};
+_.prototype.once = function(s, e) {
+  function t() {
+    this.off(s, t), e.apply(this, arguments);
+  }
+  return t.fn = e, this.on(s, t), this;
+};
+_.prototype.off = _.prototype.removeListener = _.prototype.removeAllListeners = _.prototype.removeEventListener = function(s, e) {
+  if (this._callbacks = this._callbacks || {}, arguments.length == 0)
+    return this._callbacks = {}, this;
+  var t = this._callbacks["$" + s];
+  if (!t) return this;
+  if (arguments.length == 1)
+    return delete this._callbacks["$" + s], this;
+  for (var n, r = 0; r < t.length; r++)
+    if (n = t[r], n === e || n.fn === e) {
+      t.splice(r, 1);
+      break;
+    }
+  return t.length === 0 && delete this._callbacks["$" + s], this;
+};
+_.prototype.emit = function(s) {
+  this._callbacks = this._callbacks || {};
+  for (var e = new Array(arguments.length - 1), t = this._callbacks["$" + s], n = 1; n < arguments.length; n++)
+    e[n - 1] = arguments[n];
+  if (t) {
+    t = t.slice(0);
+    for (var n = 0, r = t.length; n < r; ++n)
+      t[n].apply(this, e);
+  }
+  return this;
+};
+_.prototype.emitReserved = _.prototype.emit;
+_.prototype.listeners = function(s) {
+  return this._callbacks = this._callbacks || {}, this._callbacks["$" + s] || [];
+};
+_.prototype.hasListeners = function(s) {
+  return !!this.listeners(s).length;
+};
+const O = typeof Promise == "function" && typeof Promise.resolve == "function" ? (s) => Promise.resolve().then(s) : (s, e) => e(s, 0), d = typeof self < "u" ? self : typeof window < "u" ? window : Function("return this")(), Ce = "arraybuffer";
+function ce(s, ...e) {
+  return e.reduce((t, n) => (s.hasOwnProperty(n) && (t[n] = s[n]), t), {});
+}
+const Te = d.setTimeout, Ae = d.clearTimeout;
+function L(s, e) {
+  e.useNativeTimers ? (s.setTimeoutFn = Te.bind(d), s.clearTimeoutFn = Ae.bind(d)) : (s.setTimeoutFn = d.setTimeout.bind(d), s.clearTimeoutFn = d.clearTimeout.bind(d));
+}
+const xe = 1.33;
+function Se(s) {
+  return typeof s == "string" ? Re(s) : Math.ceil((s.byteLength || s.size) * xe);
+}
+function Re(s) {
+  let e = 0, t = 0;
+  for (let n = 0, r = s.length; n < r; n++)
+    e = s.charCodeAt(n), e < 128 ? t += 1 : e < 2048 ? t += 2 : e < 55296 || e >= 57344 ? t += 3 : (n++, t += 4);
+  return t;
+}
+function le() {
+  return Date.now().toString(36).substring(3) + Math.random().toString(36).substring(2, 5);
+}
+function Be(s) {
+  let e = "";
+  for (let t in s)
+    s.hasOwnProperty(t) && (e.length && (e += "&"), e += encodeURIComponent(t) + "=" + encodeURIComponent(s[t]));
+  return e;
+}
+function Oe(s) {
+  let e = {}, t = s.split("&");
+  for (let n = 0, r = t.length; n < r; n++) {
+    let i = t[n].split("=");
+    e[decodeURIComponent(i[0])] = decodeURIComponent(i[1]);
+  }
+  return e;
+}
+class Le extends Error {
+  constructor(e, t, n) {
+    super(e), this.description = t, this.context = n, this.type = "TransportError";
+  }
+}
+class W extends _ {
+  /**
+   * Transport abstract constructor.
+   *
+   * @param {Object} opts - options
+   * @protected
+   */
+  constructor(e) {
+    super(), this.writable = !1, L(this, e), this.opts = e, this.query = e.query, this.socket = e.socket, this.supportsBinary = !e.forceBase64;
+  }
+  /**
+   * Emits an error.
+   *
+   * @param {String} reason
+   * @param description
+   * @param context - the error context
+   * @return {Transport} for chaining
+   * @protected
+   */
+  onError(e, t, n) {
+    return super.emitReserved("error", new Le(e, t, n)), this;
+  }
+  /**
+   * Opens the transport.
+   */
+  open() {
+    return this.readyState = "opening", this.doOpen(), this;
+  }
+  /**
+   * Closes the transport.
+   */
+  close() {
+    return (this.readyState === "opening" || this.readyState === "open") && (this.doClose(), this.onClose()), this;
+  }
+  /**
+   * Sends multiple packets.
+   *
+   * @param {Array} packets
+   */
+  send(e) {
+    this.readyState === "open" && this.write(e);
+  }
+  /**
+   * Called upon open
+   *
+   * @protected
+   */
+  onOpen() {
+    this.readyState = "open", this.writable = !0, super.emitReserved("open");
+  }
+  /**
+   * Called with data.
+   *
+   * @param {String} data
+   * @protected
+   */
+  onData(e) {
+    const t = H(e, this.socket.binaryType);
+    this.onPacket(t);
+  }
+  /**
+   * Called with a decoded packet.
+   *
+   * @protected
+   */
+  onPacket(e) {
+    super.emitReserved("packet", e);
+  }
+  /**
+   * Called upon close.
+   *
+   * @protected
+   */
+  onClose(e) {
+    this.readyState = "closed", super.emitReserved("close", e);
+  }
+  /**
+   * Pauses the transport, in order not to lose packets during an upgrade.
+   *
+   * @param onPause
+   */
+  pause(e) {
+  }
+  createUri(e, t = {}) {
+    return e + "://" + this._hostname() + this._port() + this.opts.path + this._query(t);
+  }
+  _hostname() {
+    const e = this.opts.hostname;
+    return e.indexOf(":") === -1 ? e : "[" + e + "]";
+  }
+  _port() {
+    return this.opts.port && (this.opts.secure && +(this.opts.port !== 443) || !this.opts.secure && Number(this.opts.port) !== 80) ? ":" + this.opts.port : "";
+  }
+  _query(e) {
+    const t = Be(e);
+    return t.length ? "?" + t : "";
+  }
+}
+class Pe extends W {
+  constructor() {
+    super(...arguments), this._polling = !1;
+  }
+  get name() {
+    return "polling";
+  }
+  /**
+   * Opens the socket (triggers polling). We write a PING message to determine
+   * when the transport is open.
+   *
+   * @protected
+   */
+  doOpen() {
+    this._poll();
+  }
+  /**
+   * Pauses polling.
+   *
+   * @param {Function} onPause - callback upon buffers are flushed and transport is paused
+   * @package
+   */
+  pause(e) {
+    this.readyState = "pausing";
+    const t = () => {
+      this.readyState = "paused", e();
+    };
+    if (this._polling || !this.writable) {
+      let n = 0;
+      this._polling && (n++, this.once("pollComplete", function() {
+        --n || t();
+      })), this.writable || (n++, this.once("drain", function() {
+        --n || t();
+      }));
+    } else
+      t();
+  }
+  /**
+   * Starts polling cycle.
+   *
+   * @private
+   */
+  _poll() {
+    this._polling = !0, this.doPoll(), this.emitReserved("poll");
+  }
+  /**
+   * Overloads onData to detect payloads.
+   *
+   * @protected
+   */
+  onData(e) {
+    const t = (n) => {
+      if (this.readyState === "opening" && n.type === "open" && this.onOpen(), n.type === "close")
+        return this.onClose({ description: "transport closed by the server" }), !1;
+      this.onPacket(n);
+    };
+    we(e, this.socket.binaryType).forEach(t), this.readyState !== "closed" && (this._polling = !1, this.emitReserved("pollComplete"), this.readyState === "open" && this._poll());
+  }
+  /**
+   * For polling, send a close packet.
+   *
+   * @protected
+   */
+  doClose() {
+    const e = () => {
+      this.write([{ type: "close" }]);
+    };
+    this.readyState === "open" ? e() : this.once("open", e);
+  }
+  /**
+   * Writes a packets payload.
+   *
+   * @param {Array} packets - data packets
+   * @protected
+   */
+  write(e) {
+    this.writable = !1, be(e, (t) => {
+      this.doWrite(t, () => {
+        this.writable = !0, this.emitReserved("drain");
+      });
+    });
+  }
+  /**
+   * Generates uri for connection.
+   *
+   * @private
+   */
+  uri() {
+    const e = this.opts.secure ? "https" : "http", t = this.query || {};
+    return this.opts.timestampRequests !== !1 && (t[this.opts.timestampParam] = le()), !this.supportsBinary && !t.sid && (t.b64 = 1), this.createUri(e, t);
+  }
+}
+let he = !1;
+try {
+  he = typeof XMLHttpRequest < "u" && "withCredentials" in new XMLHttpRequest();
+} catch {
+}
+const Ne = he;
+function Ie() {
+}
+class qe extends Pe {
+  /**
+   * XHR Polling constructor.
+   *
+   * @param {Object} opts
+   * @package
+   */
+  constructor(e) {
+    if (super(e), typeof location < "u") {
+      const t = location.protocol === "https:";
+      let n = location.port;
+      n || (n = t ? "443" : "80"), this.xd = typeof location < "u" && e.hostname !== location.hostname || n !== e.port;
+    }
+  }
+  /**
+   * Sends data.
+   *
+   * @param {String} data to send.
+   * @param {Function} called upon flush.
+   * @private
+   */
+  doWrite(e, t) {
+    const n = this.request({
+      method: "POST",
+      data: e
+    });
+    n.on("success", t), n.on("error", (r, i) => {
+      this.onError("xhr post error", r, i);
+    });
+  }
+  /**
+   * Starts a poll cycle.
+   *
+   * @private
+   */
+  doPoll() {
+    const e = this.request();
+    e.on("data", this.onData.bind(this)), e.on("error", (t, n) => {
+      this.onError("xhr poll error", t, n);
+    }), this.pollXhr = e;
+  }
+}
+class g extends _ {
+  /**
+   * Request constructor
+   *
+   * @param {Object} options
+   * @package
+   */
+  constructor(e, t, n) {
+    super(), this.createRequest = e, L(this, n), this._opts = n, this._method = n.method || "GET", this._uri = t, this._data = n.data !== void 0 ? n.data : null, this._create();
+  }
+  /**
+   * Creates the XHR object and sends the request.
+   *
+   * @private
+   */
+  _create() {
+    var e;
+    const t = ce(this._opts, "agent", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "autoUnref");
+    t.xdomain = !!this._opts.xd;
+    const n = this._xhr = this.createRequest(t);
+    try {
+      n.open(this._method, this._uri, !0);
+      try {
+        if (this._opts.extraHeaders) {
+          n.setDisableHeaderCheck && n.setDisableHeaderCheck(!0);
+          for (let r in this._opts.extraHeaders)
+            this._opts.extraHeaders.hasOwnProperty(r) && n.setRequestHeader(r, this._opts.extraHeaders[r]);
+        }
+      } catch {
+      }
+      if (this._method === "POST")
+        try {
+          n.setRequestHeader("Content-type", "text/plain;charset=UTF-8");
+        } catch {
+        }
+      try {
+        n.setRequestHeader("Accept", "*/*");
+      } catch {
+      }
+      (e = this._opts.cookieJar) === null || e === void 0 || e.addCookies(n), "withCredentials" in n && (n.withCredentials = this._opts.withCredentials), this._opts.requestTimeout && (n.timeout = this._opts.requestTimeout), n.onreadystatechange = () => {
+        var r;
+        n.readyState === 3 && ((r = this._opts.cookieJar) === null || r === void 0 || r.parseCookies(
+          // @ts-ignore
+          n.getResponseHeader("set-cookie")
+        )), n.readyState === 4 && (n.status === 200 || n.status === 1223 ? this._onLoad() : this.setTimeoutFn(() => {
+          this._onError(typeof n.status == "number" ? n.status : 0);
+        }, 0));
+      }, n.send(this._data);
+    } catch (r) {
+      this.setTimeoutFn(() => {
+        this._onError(r);
+      }, 0);
+      return;
+    }
+    typeof document < "u" && (this._index = g.requestsCount++, g.requests[this._index] = this);
+  }
+  /**
+   * Called upon error.
+   *
+   * @private
+   */
+  _onError(e) {
+    this.emitReserved("error", e, this._xhr), this._cleanup(!0);
+  }
+  /**
+   * Cleans up house.
+   *
+   * @private
+   */
+  _cleanup(e) {
+    if (!(typeof this._xhr > "u" || this._xhr === null)) {
+      if (this._xhr.onreadystatechange = Ie, e)
+        try {
+          this._xhr.abort();
+        } catch {
+        }
+      typeof document < "u" && delete g.requests[this._index], this._xhr = null;
+    }
+  }
+  /**
+   * Called upon load.
+   *
+   * @private
+   */
+  _onLoad() {
+    const e = this._xhr.responseText;
+    e !== null && (this.emitReserved("data", e), this.emitReserved("success"), this._cleanup());
+  }
+  /**
+   * Aborts the request.
+   *
+   * @package
+   */
+  abort() {
+    this._cleanup();
+  }
+}
+g.requestsCount = 0;
+g.requests = {};
+if (typeof document < "u") {
+  if (typeof attachEvent == "function")
+    attachEvent("onunload", Z);
+  else if (typeof addEventListener == "function") {
+    const s = "onpagehide" in d ? "pagehide" : "unload";
+    addEventListener(s, Z, !1);
+  }
+}
+function Z() {
+  for (let s in g.requests)
+    g.requests.hasOwnProperty(s) && g.requests[s].abort();
+}
+const De = (function() {
+  const s = ue({
+    xdomain: !1
+  });
+  return s && s.responseType !== null;
+})();
+class Ue extends qe {
+  constructor(e) {
+    super(e);
+    const t = e && e.forceBase64;
+    this.supportsBinary = De && !t;
+  }
+  request(e = {}) {
+    return Object.assign(e, { xd: this.xd }, this.opts), new g(ue, this.uri(), e);
+  }
+}
+function ue(s) {
+  const e = s.xdomain;
+  try {
+    if (typeof XMLHttpRequest < "u" && (!e || Ne))
+      return new XMLHttpRequest();
+  } catch {
+  }
+  if (!e)
+    try {
+      return new d[["Active"].concat("Object").join("X")]("Microsoft.XMLHTTP");
+    } catch {
+    }
+}
+const _e = typeof navigator < "u" && typeof navigator.product == "string" && navigator.product.toLowerCase() === "reactnative";
+class je extends W {
+  get name() {
+    return "websocket";
+  }
+  doOpen() {
+    const e = this.uri(), t = this.opts.protocols, n = _e ? {} : ce(this.opts, "agent", "perMessageDeflate", "pfx", "key", "passphrase", "cert", "ca", "ciphers", "rejectUnauthorized", "localAddress", "protocolVersion", "origin", "maxPayload", "family", "checkServerIdentity");
+    this.opts.extraHeaders && (n.headers = this.opts.extraHeaders);
+    try {
+      this.ws = this.createSocket(e, t, n);
+    } catch (r) {
+      return this.emitReserved("error", r);
+    }
+    this.ws.binaryType = this.socket.binaryType, this.addEventListeners();
+  }
+  /**
+   * Adds event listeners to the socket
+   *
+   * @private
+   */
+  addEventListeners() {
+    this.ws.onopen = () => {
+      this.opts.autoUnref && this.ws._socket.unref(), this.onOpen();
+    }, this.ws.onclose = (e) => this.onClose({
+      description: "websocket connection closed",
+      context: e
+    }), this.ws.onmessage = (e) => this.onData(e.data), this.ws.onerror = (e) => this.onError("websocket error", e);
+  }
+  write(e) {
+    this.writable = !1;
+    for (let t = 0; t < e.length; t++) {
+      const n = e[t], r = t === e.length - 1;
+      V(n, this.supportsBinary, (i) => {
+        try {
+          this.doWrite(n, i);
+        } catch {
+        }
+        r && O(() => {
+          this.writable = !0, this.emitReserved("drain");
+        }, this.setTimeoutFn);
+      });
+    }
+  }
+  doClose() {
+    typeof this.ws < "u" && (this.ws.onerror = () => {
+    }, this.ws.close(), this.ws = null);
+  }
+  /**
+   * Generates uri for connection.
+   *
+   * @private
+   */
+  uri() {
+    const e = this.opts.secure ? "wss" : "ws", t = this.query || {};
+    return this.opts.timestampRequests && (t[this.opts.timestampParam] = le()), this.supportsBinary || (t.b64 = 1), this.createUri(e, t);
+  }
+}
+const I = d.WebSocket || d.MozWebSocket;
+class Me extends je {
+  createSocket(e, t, n) {
+    return _e ? new I(e, t, n) : t ? new I(e, t) : new I(e);
+  }
+  doWrite(e, t) {
+    this.ws.send(t);
+  }
+}
+class Fe extends W {
+  get name() {
+    return "webtransport";
+  }
+  doOpen() {
+    try {
+      this._transport = new WebTransport(this.createUri("https"), this.opts.transportOptions[this.name]);
+    } catch (e) {
+      return this.emitReserved("error", e);
+    }
+    this._transport.closed.then(() => {
+      this.onClose();
+    }).catch((e) => {
+      this.onError("webtransport error", e);
+    }), this._transport.ready.then(() => {
+      this._transport.createBidirectionalStream().then((e) => {
+        const t = ke(Number.MAX_SAFE_INTEGER, this.socket.binaryType), n = e.readable.pipeThrough(t).getReader(), r = ve();
+        r.readable.pipeTo(e.writable), this._writer = r.writable.getWriter();
+        const i = () => {
+          n.read().then(({ done: h, value: c }) => {
+            h || (this.onPacket(c), i());
+          }).catch((h) => {
+          });
+        };
+        i();
+        const o = { type: "open" };
+        this.query.sid && (o.data = `{"sid":"${this.query.sid}"}`), this._writer.write(o).then(() => this.onOpen());
+      });
+    });
+  }
+  write(e) {
+    this.writable = !1;
+    for (let t = 0; t < e.length; t++) {
+      const n = e[t], r = t === e.length - 1;
+      this._writer.write(n).then(() => {
+        r && O(() => {
+          this.writable = !0, this.emitReserved("drain");
+        }, this.setTimeoutFn);
+      });
+    }
+  }
+  doClose() {
+    var e;
+    (e = this._transport) === null || e === void 0 || e.close();
+  }
+}
+const $e = {
+  websocket: Me,
+  webtransport: Fe,
+  polling: Ue
+}, Ve = /^(?:(?![^:@\/?#]+:[^:@\/]*@)(http|https|ws|wss):\/\/)?((?:(([^:@\/?#]*)(?::([^:@\/?#]*))?)?@)?((?:[a-f0-9]{0,4}:){2,7}[a-f0-9]{0,4}|[^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/, He = [
+  "source",
+  "protocol",
+  "authority",
+  "userInfo",
+  "user",
+  "password",
+  "host",
+  "port",
+  "relative",
+  "path",
+  "directory",
+  "file",
+  "query",
+  "anchor"
+];
+function U(s) {
+  if (s.length > 8e3)
+    throw "URI too long";
+  const e = s, t = s.indexOf("["), n = s.indexOf("]");
+  t != -1 && n != -1 && (s = s.substring(0, t) + s.substring(t, n).replace(/:/g, ";") + s.substring(n, s.length));
+  let r = Ve.exec(s || ""), i = {}, o = 14;
+  for (; o--; )
+    i[He[o]] = r[o] || "";
+  return t != -1 && n != -1 && (i.source = e, i.host = i.host.substring(1, i.host.length - 1).replace(/;/g, ":"), i.authority = i.authority.replace("[", "").replace("]", "").replace(/;/g, ":"), i.ipv6uri = !0), i.pathNames = We(i, i.path), i.queryKey = ze(i, i.query), i;
+}
+function We(s, e) {
+  const t = /\/{2,9}/g, n = e.replace(t, "/").split("/");
+  return (e.slice(0, 1) == "/" || e.length === 0) && n.splice(0, 1), e.slice(-1) == "/" && n.splice(n.length - 1, 1), n;
+}
+function ze(s, e) {
+  const t = {};
+  return e.replace(/(?:^|&)([^&=]*)=?([^&]*)/g, function(n, r, i) {
+    r && (t[r] = i);
+  }), t;
+}
+const j = typeof addEventListener == "function" && typeof removeEventListener == "function", S = [];
+j && addEventListener("offline", () => {
+  S.forEach((s) => s());
+}, !1);
+class b extends _ {
+  /**
+   * Socket constructor.
+   *
+   * @param {String|Object} uri - uri or options
+   * @param {Object} opts - options
+   */
+  constructor(e, t) {
+    if (super(), this.binaryType = Ce, this.writeBuffer = [], this._prevBufferLen = 0, this._pingInterval = -1, this._pingTimeout = -1, this._maxPayload = -1, this._pingTimeoutTime = 1 / 0, e && typeof e == "object" && (t = e, e = null), e) {
+      const n = U(e);
+      t.hostname = n.host, t.secure = n.protocol === "https" || n.protocol === "wss", t.port = n.port, n.query && (t.query = n.query);
+    } else t.host && (t.hostname = U(t.host).host);
+    L(this, t), this.secure = t.secure != null ? t.secure : typeof location < "u" && location.protocol === "https:", t.hostname && !t.port && (t.port = this.secure ? "443" : "80"), this.hostname = t.hostname || (typeof location < "u" ? location.hostname : "localhost"), this.port = t.port || (typeof location < "u" && location.port ? location.port : this.secure ? "443" : "80"), this.transports = [], this._transportsByName = {}, t.transports.forEach((n) => {
+      const r = n.prototype.name;
+      this.transports.push(r), this._transportsByName[r] = n;
+    }), this.opts = Object.assign({
+      path: "/engine.io",
+      agent: !1,
+      withCredentials: !1,
+      upgrade: !0,
+      timestampParam: "t",
+      rememberUpgrade: !1,
+      addTrailingSlash: !0,
+      rejectUnauthorized: !0,
+      perMessageDeflate: {
+        threshold: 1024
+      },
+      transportOptions: {},
+      closeOnBeforeunload: !1
+    }, t), this.opts.path = this.opts.path.replace(/\/$/, "") + (this.opts.addTrailingSlash ? "/" : ""), typeof this.opts.query == "string" && (this.opts.query = Oe(this.opts.query)), j && (this.opts.closeOnBeforeunload && (this._beforeunloadEventListener = () => {
+      this.transport && (this.transport.removeAllListeners(), this.transport.close());
+    }, addEventListener("beforeunload", this._beforeunloadEventListener, !1)), this.hostname !== "localhost" && (this._offlineEventListener = () => {
+      this._onClose("transport close", {
+        description: "network connection lost"
+      });
+    }, S.push(this._offlineEventListener))), this.opts.withCredentials && (this._cookieJar = void 0), this._open();
+  }
+  /**
+   * Creates transport of the given type.
+   *
+   * @param {String} name - transport name
+   * @return {Transport}
+   * @private
+   */
+  createTransport(e) {
+    const t = Object.assign({}, this.opts.query);
+    t.EIO = ae, t.transport = e, this.id && (t.sid = this.id);
+    const n = Object.assign({}, this.opts, {
+      query: t,
+      socket: this,
+      hostname: this.hostname,
+      secure: this.secure,
+      port: this.port
+    }, this.opts.transportOptions[e]);
+    return new this._transportsByName[e](n);
+  }
+  /**
+   * Initializes transport to use and starts probe.
+   *
+   * @private
+   */
+  _open() {
+    if (this.transports.length === 0) {
+      this.setTimeoutFn(() => {
+        this.emitReserved("error", "No transports available");
+      }, 0);
+      return;
+    }
+    const e = this.opts.rememberUpgrade && b.priorWebsocketSuccess && this.transports.indexOf("websocket") !== -1 ? "websocket" : this.transports[0];
+    this.readyState = "opening";
+    const t = this.createTransport(e);
+    t.open(), this.setTransport(t);
+  }
+  /**
+   * Sets the current transport. Disables the existing one (if any).
+   *
+   * @private
+   */
+  setTransport(e) {
+    this.transport && this.transport.removeAllListeners(), this.transport = e, e.on("drain", this._onDrain.bind(this)).on("packet", this._onPacket.bind(this)).on("error", this._onError.bind(this)).on("close", (t) => this._onClose("transport close", t));
+  }
+  /**
+   * Called when connection is deemed open.
+   *
+   * @private
+   */
+  onOpen() {
+    this.readyState = "open", b.priorWebsocketSuccess = this.transport.name === "websocket", this.emitReserved("open"), this.flush();
+  }
+  /**
+   * Handles a packet.
+   *
+   * @private
+   */
+  _onPacket(e) {
+    if (this.readyState === "opening" || this.readyState === "open" || this.readyState === "closing")
+      switch (this.emitReserved("packet", e), this.emitReserved("heartbeat"), e.type) {
+        case "open":
+          this.onHandshake(JSON.parse(e.data));
+          break;
+        case "ping":
+          this._sendPacket("pong"), this.emitReserved("ping"), this.emitReserved("pong"), this._resetPingTimeout();
+          break;
+        case "error":
+          const t = new Error("server error");
+          t.code = e.data, this._onError(t);
+          break;
+        case "message":
+          this.emitReserved("data", e.data), this.emitReserved("message", e.data);
+          break;
+      }
+  }
+  /**
+   * Called upon handshake completion.
+   *
+   * @param {Object} data - handshake obj
+   * @private
+   */
+  onHandshake(e) {
+    this.emitReserved("handshake", e), this.id = e.sid, this.transport.query.sid = e.sid, this._pingInterval = e.pingInterval, this._pingTimeout = e.pingTimeout, this._maxPayload = e.maxPayload, this.onOpen(), this.readyState !== "closed" && this._resetPingTimeout();
+  }
+  /**
+   * Sets and resets ping timeout timer based on server pings.
+   *
+   * @private
+   */
+  _resetPingTimeout() {
+    this.clearTimeoutFn(this._pingTimeoutTimer);
+    const e = this._pingInterval + this._pingTimeout;
+    this._pingTimeoutTime = Date.now() + e, this._pingTimeoutTimer = this.setTimeoutFn(() => {
+      this._onClose("ping timeout");
+    }, e), this.opts.autoUnref && this._pingTimeoutTimer.unref();
+  }
+  /**
+   * Called on `drain` event
+   *
+   * @private
+   */
+  _onDrain() {
+    this.writeBuffer.splice(0, this._prevBufferLen), this._prevBufferLen = 0, this.writeBuffer.length === 0 ? this.emitReserved("drain") : this.flush();
+  }
+  /**
+   * Flush write buffers.
+   *
+   * @private
+   */
+  flush() {
+    if (this.readyState !== "closed" && this.transport.writable && !this.upgrading && this.writeBuffer.length) {
+      const e = this._getWritablePackets();
+      this.transport.send(e), this._prevBufferLen = e.length, this.emitReserved("flush");
+    }
+  }
+  /**
+   * Ensure the encoded size of the writeBuffer is below the maxPayload value sent by the server (only for HTTP
+   * long-polling)
+   *
+   * @private
+   */
+  _getWritablePackets() {
+    if (!(this._maxPayload && this.transport.name === "polling" && this.writeBuffer.length > 1))
+      return this.writeBuffer;
+    let e = 1;
+    for (let t = 0; t < this.writeBuffer.length; t++) {
+      const n = this.writeBuffer[t].data;
+      if (n && (e += Se(n)), t > 0 && e > this._maxPayload)
+        return this.writeBuffer.slice(0, t);
+      e += 2;
+    }
+    return this.writeBuffer;
+  }
+  /**
+   * Checks whether the heartbeat timer has expired but the socket has not yet been notified.
+   *
+   * Note: this method is private for now because it does not really fit the WebSocket API, but if we put it in the
+   * `write()` method then the message would not be buffered by the Socket.IO client.
+   *
+   * @return {boolean}
+   * @private
+   */
+  /* private */
+  _hasPingExpired() {
+    if (!this._pingTimeoutTime)
+      return !0;
+    const e = Date.now() > this._pingTimeoutTime;
+    return e && (this._pingTimeoutTime = 0, O(() => {
+      this._onClose("ping timeout");
+    }, this.setTimeoutFn)), e;
+  }
+  /**
+   * Sends a message.
+   *
+   * @param {String} msg - message.
+   * @param {Object} options.
+   * @param {Function} fn - callback function.
+   * @return {Socket} for chaining.
+   */
+  write(e, t, n) {
+    return this._sendPacket("message", e, t, n), this;
+  }
+  /**
+   * Sends a message. Alias of {@link Socket#write}.
+   *
+   * @param {String} msg - message.
+   * @param {Object} options.
+   * @param {Function} fn - callback function.
+   * @return {Socket} for chaining.
+   */
+  send(e, t, n) {
+    return this._sendPacket("message", e, t, n), this;
+  }
+  /**
+   * Sends a packet.
+   *
+   * @param {String} type: packet type.
+   * @param {String} data.
+   * @param {Object} options.
+   * @param {Function} fn - callback function.
+   * @private
+   */
+  _sendPacket(e, t, n, r) {
+    if (typeof t == "function" && (r = t, t = void 0), typeof n == "function" && (r = n, n = null), this.readyState === "closing" || this.readyState === "closed")
+      return;
+    n = n || {}, n.compress = n.compress !== !1;
+    const i = {
+      type: e,
+      data: t,
+      options: n
+    };
+    this.emitReserved("packetCreate", i), this.writeBuffer.push(i), r && this.once("flush", r), this.flush();
+  }
+  /**
+   * Closes the connection.
+   */
+  close() {
+    const e = () => {
+      this._onClose("forced close"), this.transport.close();
+    }, t = () => {
+      this.off("upgrade", t), this.off("upgradeError", t), e();
+    }, n = () => {
+      this.once("upgrade", t), this.once("upgradeError", t);
+    };
+    return (this.readyState === "opening" || this.readyState === "open") && (this.readyState = "closing", this.writeBuffer.length ? this.once("drain", () => {
+      this.upgrading ? n() : e();
+    }) : this.upgrading ? n() : e()), this;
+  }
+  /**
+   * Called upon transport error
+   *
+   * @private
+   */
+  _onError(e) {
+    if (b.priorWebsocketSuccess = !1, this.opts.tryAllTransports && this.transports.length > 1 && this.readyState === "opening")
+      return this.transports.shift(), this._open();
+    this.emitReserved("error", e), this._onClose("transport error", e);
+  }
+  /**
+   * Called upon transport close.
+   *
+   * @private
+   */
+  _onClose(e, t) {
+    if (this.readyState === "opening" || this.readyState === "open" || this.readyState === "closing") {
+      if (this.clearTimeoutFn(this._pingTimeoutTimer), this.transport.removeAllListeners("close"), this.transport.close(), this.transport.removeAllListeners(), j && (this._beforeunloadEventListener && removeEventListener("beforeunload", this._beforeunloadEventListener, !1), this._offlineEventListener)) {
+        const n = S.indexOf(this._offlineEventListener);
+        n !== -1 && S.splice(n, 1);
+      }
+      this.readyState = "closed", this.id = null, this.emitReserved("close", e, t), this.writeBuffer = [], this._prevBufferLen = 0;
+    }
+  }
+}
+b.protocol = ae;
+class Ke extends b {
+  constructor() {
+    super(...arguments), this._upgrades = [];
+  }
+  onOpen() {
+    if (super.onOpen(), this.readyState === "open" && this.opts.upgrade)
+      for (let e = 0; e < this._upgrades.length; e++)
+        this._probe(this._upgrades[e]);
+  }
+  /**
+   * Probes a transport.
+   *
+   * @param {String} name - transport name
+   * @private
+   */
+  _probe(e) {
+    let t = this.createTransport(e), n = !1;
+    b.priorWebsocketSuccess = !1;
+    const r = () => {
+      n || (t.send([{ type: "ping", data: "probe" }]), t.once("packet", (y) => {
+        if (!n)
+          if (y.type === "pong" && y.data === "probe") {
+            if (this.upgrading = !0, this.emitReserved("upgrading", t), !t)
+              return;
+            b.priorWebsocketSuccess = t.name === "websocket", this.transport.pause(() => {
+              n || this.readyState !== "closed" && (u(), this.setTransport(t), t.send([{ type: "upgrade" }]), this.emitReserved("upgrade", t), t = null, this.upgrading = !1, this.flush());
+            });
+          } else {
+            const v = new Error("probe error");
+            v.transport = t.name, this.emitReserved("upgradeError", v);
+          }
+      }));
+    };
+    function i() {
+      n || (n = !0, u(), t.close(), t = null);
+    }
+    const o = (y) => {
+      const v = new Error("probe error: " + y);
+      v.transport = t.name, i(), this.emitReserved("upgradeError", v);
+    };
+    function h() {
+      o("transport closed");
+    }
+    function c() {
+      o("socket closed");
+    }
+    function p(y) {
+      t && y.name !== t.name && i();
+    }
+    const u = () => {
+      t.removeListener("open", r), t.removeListener("error", o), t.removeListener("close", h), this.off("close", c), this.off("upgrading", p);
+    };
+    t.once("open", r), t.once("error", o), t.once("close", h), this.once("close", c), this.once("upgrading", p), this._upgrades.indexOf("webtransport") !== -1 && e !== "webtransport" ? this.setTimeoutFn(() => {
+      n || t.open();
+    }, 200) : t.open();
+  }
+  onHandshake(e) {
+    this._upgrades = this._filterUpgrades(e.upgrades), super.onHandshake(e);
+  }
+  /**
+   * Filters upgrades, returning only those matching client transports.
+   *
+   * @param {Array} upgrades - server upgrades
+   * @private
+   */
+  _filterUpgrades(e) {
+    const t = [];
+    for (let n = 0; n < e.length; n++)
+      ~this.transports.indexOf(e[n]) && t.push(e[n]);
+    return t;
+  }
+}
+let Ye = class extends Ke {
+  constructor(s, e = {}) {
+    const t = typeof s == "object" ? s : e;
+    (!t.transports || t.transports && typeof t.transports[0] == "string") && (t.transports = (t.transports || ["polling", "websocket", "webtransport"]).map((n) => $e[n]).filter((n) => !!n)), super(s, t);
+  }
+};
+function Je(s, e = "", t) {
+  let n = s;
+  t = t || typeof location < "u" && location, s == null && (s = t.protocol + "//" + t.host), typeof s == "string" && (s.charAt(0) === "/" && (s.charAt(1) === "/" ? s = t.protocol + s : s = t.host + s), /^(https?|wss?):\/\//.test(s) || (typeof t < "u" ? s = t.protocol + "//" + s : s = "https://" + s), n = U(s)), n.port || (/^(http|ws)$/.test(n.protocol) ? n.port = "80" : /^(http|ws)s$/.test(n.protocol) && (n.port = "443")), n.path = n.path || "/";
+  const r = n.host.indexOf(":") !== -1 ? "[" + n.host + "]" : n.host;
+  return n.id = n.protocol + "://" + r + ":" + n.port + e, n.href = n.protocol + "://" + r + (t && t.port === n.port ? "" : ":" + n.port), n;
+}
+const Qe = typeof ArrayBuffer == "function", Xe = (s) => typeof ArrayBuffer.isView == "function" ? ArrayBuffer.isView(s) : s.buffer instanceof ArrayBuffer, pe = Object.prototype.toString, Ge = typeof Blob == "function" || typeof Blob < "u" && pe.call(Blob) === "[object BlobConstructor]", Ze = typeof File == "function" || typeof File < "u" && pe.call(File) === "[object FileConstructor]";
+function z(s) {
+  return Qe && (s instanceof ArrayBuffer || Xe(s)) || Ge && s instanceof Blob || Ze && s instanceof File;
+}
+function R(s, e) {
+  if (!s || typeof s != "object")
+    return !1;
+  if (Array.isArray(s)) {
+    for (let t = 0, n = s.length; t < n; t++)
+      if (R(s[t]))
+        return !0;
+    return !1;
+  }
+  if (z(s))
+    return !0;
+  if (s.toJSON && typeof s.toJSON == "function" && arguments.length === 1)
+    return R(s.toJSON(), !0);
+  for (const t in s)
+    if (Object.prototype.hasOwnProperty.call(s, t) && R(s[t]))
+      return !0;
+  return !1;
+}
+function et(s) {
+  const e = [], t = s.data, n = s;
+  return n.data = M(t, e), n.attachments = e.length, { packet: n, buffers: e };
+}
+function M(s, e) {
+  if (!s)
+    return s;
+  if (z(s)) {
+    const t = { _placeholder: !0, num: e.length };
+    return e.push(s), t;
+  } else if (Array.isArray(s)) {
+    const t = new Array(s.length);
+    for (let n = 0; n < s.length; n++)
+      t[n] = M(s[n], e);
+    return t;
+  } else if (typeof s == "object" && !(s instanceof Date)) {
+    const t = {};
+    for (const n in s)
+      Object.prototype.hasOwnProperty.call(s, n) && (t[n] = M(s[n], e));
+    return t;
+  }
+  return s;
+}
+function tt(s, e) {
+  return s.data = F(s.data, e), delete s.attachments, s;
+}
+function F(s, e) {
+  if (!s)
+    return s;
+  if (s && s._placeholder === !0) {
+    if (typeof s.num == "number" && s.num >= 0 && s.num < e.length)
+      return e[s.num];
+    throw new Error("illegal attachments");
+  } else if (Array.isArray(s))
+    for (let t = 0; t < s.length; t++)
+      s[t] = F(s[t], e);
+  else if (typeof s == "object")
+    for (const t in s)
+      Object.prototype.hasOwnProperty.call(s, t) && (s[t] = F(s[t], e));
+  return s;
+}
+const st = [
+  "connect",
+  "connect_error",
+  "disconnect",
+  "disconnecting",
+  "newListener",
+  "removeListener"
+  // used by the Node.js EventEmitter
+], nt = 5;
+var l;
+(function(s) {
+  s[s.CONNECT = 0] = "CONNECT", s[s.DISCONNECT = 1] = "DISCONNECT", s[s.EVENT = 2] = "EVENT", s[s.ACK = 3] = "ACK", s[s.CONNECT_ERROR = 4] = "CONNECT_ERROR", s[s.BINARY_EVENT = 5] = "BINARY_EVENT", s[s.BINARY_ACK = 6] = "BINARY_ACK";
+})(l || (l = {}));
+class rt {
+  /**
+   * Encoder constructor
+   *
+   * @param {function} replacer - custom replacer to pass down to JSON.parse
+   */
+  constructor(e) {
+    this.replacer = e;
+  }
+  /**
+   * Encode a packet as a single string if non-binary, or as a
+   * buffer sequence, depending on packet type.
+   *
+   * @param {Object} obj - packet object
+   */
+  encode(e) {
+    return (e.type === l.EVENT || e.type === l.ACK) && R(e) ? this.encodeAsBinary({
+      type: e.type === l.EVENT ? l.BINARY_EVENT : l.BINARY_ACK,
+      nsp: e.nsp,
+      data: e.data,
+      id: e.id
+    }) : [this.encodeAsString(e)];
+  }
+  /**
+   * Encode packet as string.
+   */
+  encodeAsString(e) {
+    let t = "" + e.type;
+    return (e.type === l.BINARY_EVENT || e.type === l.BINARY_ACK) && (t += e.attachments + "-"), e.nsp && e.nsp !== "/" && (t += e.nsp + ","), e.id != null && (t += e.id), e.data != null && (t += JSON.stringify(e.data, this.replacer)), t;
+  }
+  /**
+   * Encode packet as 'buffer sequence' by removing blobs, and
+   * deconstructing packet into object with placeholders and
+   * a list of buffers.
+   */
+  encodeAsBinary(e) {
+    const t = et(e), n = this.encodeAsString(t.packet), r = t.buffers;
+    return r.unshift(n), r;
+  }
+}
+function ee(s) {
+  return Object.prototype.toString.call(s) === "[object Object]";
+}
+class K extends _ {
+  /**
+   * Decoder constructor
+   *
+   * @param {function} reviver - custom reviver to pass down to JSON.stringify
+   */
+  constructor(e) {
+    super(), this.reviver = e;
+  }
+  /**
+   * Decodes an encoded packet string into packet JSON.
+   *
+   * @param {String} obj - encoded packet
+   */
+  add(e) {
+    let t;
+    if (typeof e == "string") {
+      if (this.reconstructor)
+        throw new Error("got plaintext data when reconstructing a packet");
+      t = this.decodeString(e);
+      const n = t.type === l.BINARY_EVENT;
+      n || t.type === l.BINARY_ACK ? (t.type = n ? l.EVENT : l.ACK, this.reconstructor = new it(t), t.attachments === 0 && super.emitReserved("decoded", t)) : super.emitReserved("decoded", t);
+    } else if (z(e) || e.base64)
+      if (this.reconstructor)
+        t = this.reconstructor.takeBinaryData(e), t && (this.reconstructor = null, super.emitReserved("decoded", t));
+      else
+        throw new Error("got binary data when not reconstructing a packet");
+    else
+      throw new Error("Unknown type: " + e);
+  }
+  /**
+   * Decode a packet String (JSON data)
+   *
+   * @param {String} str
+   * @return {Object} packet
+   */
+  decodeString(e) {
+    let t = 0;
+    const n = {
+      type: Number(e.charAt(0))
+    };
+    if (l[n.type] === void 0)
+      throw new Error("unknown packet type " + n.type);
+    if (n.type === l.BINARY_EVENT || n.type === l.BINARY_ACK) {
+      const i = t + 1;
+      for (; e.charAt(++t) !== "-" && t != e.length; )
+        ;
+      const o = e.substring(i, t);
+      if (o != Number(o) || e.charAt(t) !== "-")
+        throw new Error("Illegal attachments");
+      n.attachments = Number(o);
+    }
+    if (e.charAt(t + 1) === "/") {
+      const i = t + 1;
+      for (; ++t && !(e.charAt(t) === "," || t === e.length); )
+        ;
+      n.nsp = e.substring(i, t);
+    } else
+      n.nsp = "/";
+    const r = e.charAt(t + 1);
+    if (r !== "" && Number(r) == r) {
+      const i = t + 1;
+      for (; ++t; ) {
+        const o = e.charAt(t);
+        if (o == null || Number(o) != o) {
+          --t;
+          break;
+        }
+        if (t === e.length)
+          break;
+      }
+      n.id = Number(e.substring(i, t + 1));
+    }
+    if (e.charAt(++t)) {
+      const i = this.tryParse(e.substr(t));
+      if (K.isPayloadValid(n.type, i))
+        n.data = i;
+      else
+        throw new Error("invalid payload");
+    }
+    return n;
+  }
+  tryParse(e) {
+    try {
+      return JSON.parse(e, this.reviver);
+    } catch {
+      return !1;
+    }
+  }
+  static isPayloadValid(e, t) {
+    switch (e) {
+      case l.CONNECT:
+        return ee(t);
+      case l.DISCONNECT:
+        return t === void 0;
+      case l.CONNECT_ERROR:
+        return typeof t == "string" || ee(t);
+      case l.EVENT:
+      case l.BINARY_EVENT:
+        return Array.isArray(t) && (typeof t[0] == "number" || typeof t[0] == "string" && st.indexOf(t[0]) === -1);
+      case l.ACK:
+      case l.BINARY_ACK:
+        return Array.isArray(t);
+    }
+  }
+  /**
+   * Deallocates a parser's resources
+   */
+  destroy() {
+    this.reconstructor && (this.reconstructor.finishedReconstruction(), this.reconstructor = null);
+  }
+}
+class it {
+  constructor(e) {
+    this.packet = e, this.buffers = [], this.reconPack = e;
+  }
+  /**
+   * Method to be called when binary data received from connection
+   * after a BINARY_EVENT packet.
+   *
+   * @param {Buffer | ArrayBuffer} binData - the raw binary data received
+   * @return {null | Object} returns null if more binary data is expected or
+   *   a reconstructed packet object if all buffers have been received.
+   */
+  takeBinaryData(e) {
+    if (this.buffers.push(e), this.buffers.length === this.reconPack.attachments) {
+      const t = tt(this.reconPack, this.buffers);
+      return this.finishedReconstruction(), t;
+    }
+    return null;
+  }
+  /**
+   * Cleans up binary packet reconstruction variables.
+   */
+  finishedReconstruction() {
+    this.reconPack = null, this.buffers = [];
+  }
+}
+const ot = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  Decoder: K,
+  Encoder: rt,
+  get PacketType() {
+    return l;
+  },
+  protocol: nt
+}, Symbol.toStringTag, { value: "Module" }));
+function f(s, e, t) {
+  return s.on(e, t), function() {
+    s.off(e, t);
+  };
+}
+const at = Object.freeze({
+  connect: 1,
+  connect_error: 1,
+  disconnect: 1,
+  disconnecting: 1,
+  // EventEmitter reserved events: https://nodejs.org/api/events.html#events_event_newlistener
+  newListener: 1,
+  removeListener: 1
+});
+let de = class extends _ {
+  /**
+   * `Socket` constructor.
+   */
+  constructor(s, e, t) {
+    super(), this.connected = !1, this.recovered = !1, this.receiveBuffer = [], this.sendBuffer = [], this._queue = [], this._queueSeq = 0, this.ids = 0, this.acks = {}, this.flags = {}, this.io = s, this.nsp = e, t && t.auth && (this.auth = t.auth), this._opts = Object.assign({}, t), this.io._autoConnect && this.open();
+  }
+  /**
+   * Whether the socket is currently disconnected
+   *
+   * @example
+   * const socket = io();
+   *
+   * socket.on("connect", () => {
+   *   console.log(socket.disconnected); // false
+   * });
+   *
+   * socket.on("disconnect", () => {
+   *   console.log(socket.disconnected); // true
+   * });
+   */
+  get disconnected() {
+    return !this.connected;
+  }
+  /**
+   * Subscribe to open, close and packet events
+   *
+   * @private
+   */
+  subEvents() {
+    if (this.subs)
+      return;
+    const s = this.io;
+    this.subs = [
+      f(s, "open", this.onopen.bind(this)),
+      f(s, "packet", this.onpacket.bind(this)),
+      f(s, "error", this.onerror.bind(this)),
+      f(s, "close", this.onclose.bind(this))
+    ];
+  }
+  /**
+   * Whether the Socket will try to reconnect when its Manager connects or reconnects.
+   *
+   * @example
+   * const socket = io();
+   *
+   * console.log(socket.active); // true
+   *
+   * socket.on("disconnect", (reason) => {
+   *   if (reason === "io server disconnect") {
+   *     // the disconnection was initiated by the server, you need to manually reconnect
+   *     console.log(socket.active); // false
+   *   }
+   *   // else the socket will automatically try to reconnect
+   *   console.log(socket.active); // true
+   * });
+   */
+  get active() {
+    return !!this.subs;
+  }
+  /**
+   * "Opens" the socket.
+   *
+   * @example
+   * const socket = io({
+   *   autoConnect: false
+   * });
+   *
+   * socket.connect();
+   */
+  connect() {
+    return this.connected ? this : (this.subEvents(), this.io._reconnecting || this.io.open(), this.io._readyState === "open" && this.onopen(), this);
+  }
+  /**
+   * Alias for {@link connect()}.
+   */
+  open() {
+    return this.connect();
+  }
+  /**
+   * Sends a `message` event.
+   *
+   * This method mimics the WebSocket.send() method.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/send
+   *
+   * @example
+   * socket.send("hello");
+   *
+   * // this is equivalent to
+   * socket.emit("message", "hello");
+   *
+   * @return self
+   */
+  send(...s) {
+    return s.unshift("message"), this.emit.apply(this, s), this;
+  }
+  /**
+   * Override `emit`.
+   * If the event is in `events`, it's emitted normally.
+   *
+   * @example
+   * socket.emit("hello", "world");
+   *
+   * // all serializable datastructures are supported (no need to call JSON.stringify)
+   * socket.emit("hello", 1, "2", { 3: ["4"], 5: Uint8Array.from([6]) });
+   *
+   * // with an acknowledgement from the server
+   * socket.emit("hello", "world", (val) => {
+   *   // ...
+   * });
+   *
+   * @return self
+   */
+  emit(s, ...e) {
+    var t, n, r;
+    if (at.hasOwnProperty(s))
+      throw new Error('"' + s.toString() + '" is a reserved event name');
+    if (e.unshift(s), this._opts.retries && !this.flags.fromQueue && !this.flags.volatile)
+      return this._addToQueue(e), this;
+    const i = {
+      type: l.EVENT,
+      data: e
+    };
+    if (i.options = {}, i.options.compress = this.flags.compress !== !1, typeof e[e.length - 1] == "function") {
+      const c = this.ids++, p = e.pop();
+      this._registerAckCallback(c, p), i.id = c;
+    }
+    const o = (n = (t = this.io.engine) === null || t === void 0 ? void 0 : t.transport) === null || n === void 0 ? void 0 : n.writable, h = this.connected && !(!((r = this.io.engine) === null || r === void 0) && r._hasPingExpired());
+    return this.flags.volatile && !o || (h ? (this.notifyOutgoingListeners(i), this.packet(i)) : this.sendBuffer.push(i)), this.flags = {}, this;
+  }
+  /**
+   * @private
+   */
+  _registerAckCallback(s, e) {
+    var t;
+    const n = (t = this.flags.timeout) !== null && t !== void 0 ? t : this._opts.ackTimeout;
+    if (n === void 0) {
+      this.acks[s] = e;
+      return;
+    }
+    const r = this.io.setTimeoutFn(() => {
+      delete this.acks[s];
+      for (let o = 0; o < this.sendBuffer.length; o++)
+        this.sendBuffer[o].id === s && this.sendBuffer.splice(o, 1);
+      e.call(this, new Error("operation has timed out"));
+    }, n), i = (...o) => {
+      this.io.clearTimeoutFn(r), e.apply(this, o);
+    };
+    i.withError = !0, this.acks[s] = i;
+  }
+  /**
+   * Emits an event and waits for an acknowledgement
+   *
+   * @example
+   * // without timeout
+   * const response = await socket.emitWithAck("hello", "world");
+   *
+   * // with a specific timeout
+   * try {
+   *   const response = await socket.timeout(1000).emitWithAck("hello", "world");
+   * } catch (err) {
+   *   // the server did not acknowledge the event in the given delay
+   * }
+   *
+   * @return a Promise that will be fulfilled when the server acknowledges the event
+   */
+  emitWithAck(s, ...e) {
+    return new Promise((t, n) => {
+      const r = (i, o) => i ? n(i) : t(o);
+      r.withError = !0, e.push(r), this.emit(s, ...e);
+    });
+  }
+  /**
+   * Add the packet to the queue.
+   * @param args
+   * @private
+   */
+  _addToQueue(s) {
+    let e;
+    typeof s[s.length - 1] == "function" && (e = s.pop());
+    const t = {
+      id: this._queueSeq++,
+      tryCount: 0,
+      pending: !1,
+      args: s,
+      flags: Object.assign({ fromQueue: !0 }, this.flags)
+    };
+    s.push((n, ...r) => t !== this._queue[0] ? void 0 : (n !== null ? t.tryCount > this._opts.retries && (this._queue.shift(), e && e(n)) : (this._queue.shift(), e && e(null, ...r)), t.pending = !1, this._drainQueue())), this._queue.push(t), this._drainQueue();
+  }
+  /**
+   * Send the first packet of the queue, and wait for an acknowledgement from the server.
+   * @param force - whether to resend a packet that has not been acknowledged yet
+   *
+   * @private
+   */
+  _drainQueue(s = !1) {
+    if (!this.connected || this._queue.length === 0)
+      return;
+    const e = this._queue[0];
+    e.pending && !s || (e.pending = !0, e.tryCount++, this.flags = e.flags, this.emit.apply(this, e.args));
+  }
+  /**
+   * Sends a packet.
+   *
+   * @param packet
+   * @private
+   */
+  packet(s) {
+    s.nsp = this.nsp, this.io._packet(s);
+  }
+  /**
+   * Called upon engine `open`.
+   *
+   * @private
+   */
+  onopen() {
+    typeof this.auth == "function" ? this.auth((s) => {
+      this._sendConnectPacket(s);
+    }) : this._sendConnectPacket(this.auth);
+  }
+  /**
+   * Sends a CONNECT packet to initiate the Socket.IO session.
+   *
+   * @param data
+   * @private
+   */
+  _sendConnectPacket(s) {
+    this.packet({
+      type: l.CONNECT,
+      data: this._pid ? Object.assign({ pid: this._pid, offset: this._lastOffset }, s) : s
+    });
+  }
+  /**
+   * Called upon engine or manager `error`.
+   *
+   * @param err
+   * @private
+   */
+  onerror(s) {
+    this.connected || this.emitReserved("connect_error", s);
+  }
+  /**
+   * Called upon engine `close`.
+   *
+   * @param reason
+   * @param description
+   * @private
+   */
+  onclose(s, e) {
+    this.connected = !1, delete this.id, this.emitReserved("disconnect", s, e), this._clearAcks();
+  }
+  /**
+   * Clears the acknowledgement handlers upon disconnection, since the client will never receive an acknowledgement from
+   * the server.
+   *
+   * @private
+   */
+  _clearAcks() {
+    Object.keys(this.acks).forEach((s) => {
+      if (!this.sendBuffer.some((e) => String(e.id) === s)) {
+        const e = this.acks[s];
+        delete this.acks[s], e.withError && e.call(this, new Error("socket has been disconnected"));
+      }
+    });
+  }
+  /**
+   * Called with socket packet.
+   *
+   * @param packet
+   * @private
+   */
+  onpacket(s) {
+    if (s.nsp === this.nsp)
+      switch (s.type) {
+        case l.CONNECT:
+          s.data && s.data.sid ? this.onconnect(s.data.sid, s.data.pid) : this.emitReserved("connect_error", new Error("It seems you are trying to reach a Socket.IO server in v2.x with a v3.x client, but they are not compatible (more information here: https://socket.io/docs/v3/migrating-from-2-x-to-3-0/)"));
+          break;
+        case l.EVENT:
+        case l.BINARY_EVENT:
+          this.onevent(s);
+          break;
+        case l.ACK:
+        case l.BINARY_ACK:
+          this.onack(s);
+          break;
+        case l.DISCONNECT:
+          this.ondisconnect();
+          break;
+        case l.CONNECT_ERROR:
+          this.destroy();
+          const e = new Error(s.data.message);
+          e.data = s.data.data, this.emitReserved("connect_error", e);
+          break;
+      }
+  }
+  /**
+   * Called upon a server event.
+   *
+   * @param packet
+   * @private
+   */
+  onevent(s) {
+    const e = s.data || [];
+    s.id != null && e.push(this.ack(s.id)), this.connected ? this.emitEvent(e) : this.receiveBuffer.push(Object.freeze(e));
+  }
+  emitEvent(s) {
+    if (this._anyListeners && this._anyListeners.length) {
+      const e = this._anyListeners.slice();
+      for (const t of e)
+        t.apply(this, s);
+    }
+    super.emit.apply(this, s), this._pid && s.length && typeof s[s.length - 1] == "string" && (this._lastOffset = s[s.length - 1]);
+  }
+  /**
+   * Produces an ack callback to emit with an event.
+   *
+   * @private
+   */
+  ack(s) {
+    const e = this;
+    let t = !1;
+    return function(...n) {
+      t || (t = !0, e.packet({
+        type: l.ACK,
+        id: s,
+        data: n
+      }));
+    };
+  }
+  /**
+   * Called upon a server acknowledgement.
+   *
+   * @param packet
+   * @private
+   */
+  onack(s) {
+    const e = this.acks[s.id];
+    typeof e == "function" && (delete this.acks[s.id], e.withError && s.data.unshift(null), e.apply(this, s.data));
+  }
+  /**
+   * Called upon server connect.
+   *
+   * @private
+   */
+  onconnect(s, e) {
+    this.id = s, this.recovered = e && this._pid === e, this._pid = e, this.connected = !0, this.emitBuffered(), this.emitReserved("connect"), this._drainQueue(!0);
+  }
+  /**
+   * Emit buffered events (received and emitted).
+   *
+   * @private
+   */
+  emitBuffered() {
+    this.receiveBuffer.forEach((s) => this.emitEvent(s)), this.receiveBuffer = [], this.sendBuffer.forEach((s) => {
+      this.notifyOutgoingListeners(s), this.packet(s);
+    }), this.sendBuffer = [];
+  }
+  /**
+   * Called upon server disconnect.
+   *
+   * @private
+   */
+  ondisconnect() {
+    this.destroy(), this.onclose("io server disconnect");
+  }
+  /**
+   * Called upon forced client/server side disconnections,
+   * this method ensures the manager stops tracking us and
+   * that reconnections don't get triggered for this.
+   *
+   * @private
+   */
+  destroy() {
+    this.subs && (this.subs.forEach((s) => s()), this.subs = void 0), this.io._destroy(this);
+  }
+  /**
+   * Disconnects the socket manually. In that case, the socket will not try to reconnect.
+   *
+   * If this is the last active Socket instance of the {@link Manager}, the low-level connection will be closed.
+   *
+   * @example
+   * const socket = io();
+   *
+   * socket.on("disconnect", (reason) => {
+   *   // console.log(reason); prints "io client disconnect"
+   * });
+   *
+   * socket.disconnect();
+   *
+   * @return self
+   */
+  disconnect() {
+    return this.connected && this.packet({ type: l.DISCONNECT }), this.destroy(), this.connected && this.onclose("io client disconnect"), this;
+  }
+  /**
+   * Alias for {@link disconnect()}.
+   *
+   * @return self
+   */
+  close() {
+    return this.disconnect();
+  }
+  /**
+   * Sets the compress flag.
+   *
+   * @example
+   * socket.compress(false).emit("hello");
+   *
+   * @param compress - if `true`, compresses the sending data
+   * @return self
+   */
+  compress(s) {
+    return this.flags.compress = s, this;
+  }
+  /**
+   * Sets a modifier for a subsequent event emission that the event message will be dropped when this socket is not
+   * ready to send messages.
+   *
+   * @example
+   * socket.volatile.emit("hello"); // the server may or may not receive it
+   *
+   * @returns self
+   */
+  get volatile() {
+    return this.flags.volatile = !0, this;
+  }
+  /**
+   * Sets a modifier for a subsequent event emission that the callback will be called with an error when the
+   * given number of milliseconds have elapsed without an acknowledgement from the server:
+   *
+   * @example
+   * socket.timeout(5000).emit("my-event", (err) => {
+   *   if (err) {
+   *     // the server did not acknowledge the event in the given delay
+   *   }
+   * });
+   *
+   * @returns self
+   */
+  timeout(s) {
+    return this.flags.timeout = s, this;
+  }
+  /**
+   * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+   * callback.
+   *
+   * @example
+   * socket.onAny((event, ...args) => {
+   *   console.log(`got ${event}`);
+   * });
+   *
+   * @param listener
+   */
+  onAny(s) {
+    return this._anyListeners = this._anyListeners || [], this._anyListeners.push(s), this;
+  }
+  /**
+   * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+   * callback. The listener is added to the beginning of the listeners array.
+   *
+   * @example
+   * socket.prependAny((event, ...args) => {
+   *   console.log(`got event ${event}`);
+   * });
+   *
+   * @param listener
+   */
+  prependAny(s) {
+    return this._anyListeners = this._anyListeners || [], this._anyListeners.unshift(s), this;
+  }
+  /**
+   * Removes the listener that will be fired when any event is emitted.
+   *
+   * @example
+   * const catchAllListener = (event, ...args) => {
+   *   console.log(`got event ${event}`);
+   * }
+   *
+   * socket.onAny(catchAllListener);
+   *
+   * // remove a specific listener
+   * socket.offAny(catchAllListener);
+   *
+   * // or remove all listeners
+   * socket.offAny();
+   *
+   * @param listener
+   */
+  offAny(s) {
+    if (!this._anyListeners)
+      return this;
+    if (s) {
+      const e = this._anyListeners;
+      for (let t = 0; t < e.length; t++)
+        if (s === e[t])
+          return e.splice(t, 1), this;
+    } else
+      this._anyListeners = [];
+    return this;
+  }
+  /**
+   * Returns an array of listeners that are listening for any event that is specified. This array can be manipulated,
+   * e.g. to remove listeners.
+   */
+  listenersAny() {
+    return this._anyListeners || [];
+  }
+  /**
+   * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+   * callback.
+   *
+   * Note: acknowledgements sent to the server are not included.
+   *
+   * @example
+   * socket.onAnyOutgoing((event, ...args) => {
+   *   console.log(`sent event ${event}`);
+   * });
+   *
+   * @param listener
+   */
+  onAnyOutgoing(s) {
+    return this._anyOutgoingListeners = this._anyOutgoingListeners || [], this._anyOutgoingListeners.push(s), this;
+  }
+  /**
+   * Adds a listener that will be fired when any event is emitted. The event name is passed as the first argument to the
+   * callback. The listener is added to the beginning of the listeners array.
+   *
+   * Note: acknowledgements sent to the server are not included.
+   *
+   * @example
+   * socket.prependAnyOutgoing((event, ...args) => {
+   *   console.log(`sent event ${event}`);
+   * });
+   *
+   * @param listener
+   */
+  prependAnyOutgoing(s) {
+    return this._anyOutgoingListeners = this._anyOutgoingListeners || [], this._anyOutgoingListeners.unshift(s), this;
+  }
+  /**
+   * Removes the listener that will be fired when any event is emitted.
+   *
+   * @example
+   * const catchAllListener = (event, ...args) => {
+   *   console.log(`sent event ${event}`);
+   * }
+   *
+   * socket.onAnyOutgoing(catchAllListener);
+   *
+   * // remove a specific listener
+   * socket.offAnyOutgoing(catchAllListener);
+   *
+   * // or remove all listeners
+   * socket.offAnyOutgoing();
+   *
+   * @param [listener] - the catch-all listener (optional)
+   */
+  offAnyOutgoing(s) {
+    if (!this._anyOutgoingListeners)
+      return this;
+    if (s) {
+      const e = this._anyOutgoingListeners;
+      for (let t = 0; t < e.length; t++)
+        if (s === e[t])
+          return e.splice(t, 1), this;
+    } else
+      this._anyOutgoingListeners = [];
+    return this;
+  }
+  /**
+   * Returns an array of listeners that are listening for any event that is specified. This array can be manipulated,
+   * e.g. to remove listeners.
+   */
+  listenersAnyOutgoing() {
+    return this._anyOutgoingListeners || [];
+  }
+  /**
+   * Notify the listeners for each packet sent
+   *
+   * @param packet
+   *
+   * @private
+   */
+  notifyOutgoingListeners(s) {
+    if (this._anyOutgoingListeners && this._anyOutgoingListeners.length) {
+      const e = this._anyOutgoingListeners.slice();
+      for (const t of e)
+        t.apply(this, s.data);
+    }
+  }
+};
+function w(s) {
+  s = s || {}, this.ms = s.min || 100, this.max = s.max || 1e4, this.factor = s.factor || 2, this.jitter = s.jitter > 0 && s.jitter <= 1 ? s.jitter : 0, this.attempts = 0;
+}
+w.prototype.duration = function() {
+  var s = this.ms * Math.pow(this.factor, this.attempts++);
+  if (this.jitter) {
+    var e = Math.random(), t = Math.floor(e * this.jitter * s);
+    s = (Math.floor(e * 10) & 1) == 0 ? s - t : s + t;
+  }
+  return Math.min(s, this.max) | 0;
+};
+w.prototype.reset = function() {
+  this.attempts = 0;
+};
+w.prototype.setMin = function(s) {
+  this.ms = s;
+};
+w.prototype.setMax = function(s) {
+  this.max = s;
+};
+w.prototype.setJitter = function(s) {
+  this.jitter = s;
+};
+class $ extends _ {
+  constructor(e, t) {
+    var n;
+    super(), this.nsps = {}, this.subs = [], e && typeof e == "object" && (t = e, e = void 0), t = t || {}, t.path = t.path || "/socket.io", this.opts = t, L(this, t), this.reconnection(t.reconnection !== !1), this.reconnectionAttempts(t.reconnectionAttempts || 1 / 0), this.reconnectionDelay(t.reconnectionDelay || 1e3), this.reconnectionDelayMax(t.reconnectionDelayMax || 5e3), this.randomizationFactor((n = t.randomizationFactor) !== null && n !== void 0 ? n : 0.5), this.backoff = new w({
+      min: this.reconnectionDelay(),
+      max: this.reconnectionDelayMax(),
+      jitter: this.randomizationFactor()
+    }), this.timeout(t.timeout == null ? 2e4 : t.timeout), this._readyState = "closed", this.uri = e;
+    const r = t.parser || ot;
+    this.encoder = new r.Encoder(), this.decoder = new r.Decoder(), this._autoConnect = t.autoConnect !== !1, this._autoConnect && this.open();
+  }
+  reconnection(e) {
+    return arguments.length ? (this._reconnection = !!e, e || (this.skipReconnect = !0), this) : this._reconnection;
+  }
+  reconnectionAttempts(e) {
+    return e === void 0 ? this._reconnectionAttempts : (this._reconnectionAttempts = e, this);
+  }
+  reconnectionDelay(e) {
+    var t;
+    return e === void 0 ? this._reconnectionDelay : (this._reconnectionDelay = e, (t = this.backoff) === null || t === void 0 || t.setMin(e), this);
+  }
+  randomizationFactor(e) {
+    var t;
+    return e === void 0 ? this._randomizationFactor : (this._randomizationFactor = e, (t = this.backoff) === null || t === void 0 || t.setJitter(e), this);
+  }
+  reconnectionDelayMax(e) {
+    var t;
+    return e === void 0 ? this._reconnectionDelayMax : (this._reconnectionDelayMax = e, (t = this.backoff) === null || t === void 0 || t.setMax(e), this);
+  }
+  timeout(e) {
+    return arguments.length ? (this._timeout = e, this) : this._timeout;
+  }
+  /**
+   * Starts trying to reconnect if reconnection is enabled and we have not
+   * started reconnecting yet
+   *
+   * @private
+   */
+  maybeReconnectOnOpen() {
+    !this._reconnecting && this._reconnection && this.backoff.attempts === 0 && this.reconnect();
+  }
+  /**
+   * Sets the current transport `socket`.
+   *
+   * @param {Function} fn - optional, callback
+   * @return self
+   * @public
+   */
+  open(e) {
+    if (~this._readyState.indexOf("open"))
+      return this;
+    this.engine = new Ye(this.uri, this.opts);
+    const t = this.engine, n = this;
+    this._readyState = "opening", this.skipReconnect = !1;
+    const r = f(t, "open", function() {
+      n.onopen(), e && e();
+    }), i = (h) => {
+      this.cleanup(), this._readyState = "closed", this.emitReserved("error", h), e ? e(h) : this.maybeReconnectOnOpen();
+    }, o = f(t, "error", i);
+    if (this._timeout !== !1) {
+      const h = this._timeout, c = this.setTimeoutFn(() => {
+        r(), i(new Error("timeout")), t.close();
+      }, h);
+      this.opts.autoUnref && c.unref(), this.subs.push(() => {
+        this.clearTimeoutFn(c);
+      });
+    }
+    return this.subs.push(r), this.subs.push(o), this;
+  }
+  /**
+   * Alias for open()
+   *
+   * @return self
+   * @public
+   */
+  connect(e) {
+    return this.open(e);
+  }
+  /**
+   * Called upon transport open.
+   *
+   * @private
+   */
+  onopen() {
+    this.cleanup(), this._readyState = "open", this.emitReserved("open");
+    const e = this.engine;
+    this.subs.push(
+      f(e, "ping", this.onping.bind(this)),
+      f(e, "data", this.ondata.bind(this)),
+      f(e, "error", this.onerror.bind(this)),
+      f(e, "close", this.onclose.bind(this)),
+      // @ts-ignore
+      f(this.decoder, "decoded", this.ondecoded.bind(this))
+    );
+  }
+  /**
+   * Called upon a ping.
+   *
+   * @private
+   */
+  onping() {
+    this.emitReserved("ping");
+  }
+  /**
+   * Called with data.
+   *
+   * @private
+   */
+  ondata(e) {
+    try {
+      this.decoder.add(e);
+    } catch (t) {
+      this.onclose("parse error", t);
+    }
+  }
+  /**
+   * Called when parser fully decodes a packet.
+   *
+   * @private
+   */
+  ondecoded(e) {
+    O(() => {
+      this.emitReserved("packet", e);
+    }, this.setTimeoutFn);
+  }
+  /**
+   * Called upon socket error.
+   *
+   * @private
+   */
+  onerror(e) {
+    this.emitReserved("error", e);
+  }
+  /**
+   * Creates a new socket for the given `nsp`.
+   *
+   * @return {Socket}
+   * @public
+   */
+  socket(e, t) {
+    let n = this.nsps[e];
+    return n ? this._autoConnect && !n.active && n.connect() : (n = new de(this, e, t), this.nsps[e] = n), n;
+  }
+  /**
+   * Called upon a socket close.
+   *
+   * @param socket
+   * @private
+   */
+  _destroy(e) {
+    const t = Object.keys(this.nsps);
+    for (const n of t)
+      if (this.nsps[n].active)
+        return;
+    this._close();
+  }
+  /**
+   * Writes a packet.
+   *
+   * @param packet
+   * @private
+   */
+  _packet(e) {
+    const t = this.encoder.encode(e);
+    for (let n = 0; n < t.length; n++)
+      this.engine.write(t[n], e.options);
+  }
+  /**
+   * Clean up transport subscriptions and packet buffer.
+   *
+   * @private
+   */
+  cleanup() {
+    this.subs.forEach((e) => e()), this.subs.length = 0, this.decoder.destroy();
+  }
+  /**
+   * Close the current socket.
+   *
+   * @private
+   */
+  _close() {
+    this.skipReconnect = !0, this._reconnecting = !1, this.onclose("forced close");
+  }
+  /**
+   * Alias for close()
+   *
+   * @private
+   */
+  disconnect() {
+    return this._close();
+  }
+  /**
+   * Called when:
+   *
+   * - the low-level engine is closed
+   * - the parser encountered a badly formatted packet
+   * - all sockets are disconnected
+   *
+   * @private
+   */
+  onclose(e, t) {
+    var n;
+    this.cleanup(), (n = this.engine) === null || n === void 0 || n.close(), this.backoff.reset(), this._readyState = "closed", this.emitReserved("close", e, t), this._reconnection && !this.skipReconnect && this.reconnect();
+  }
+  /**
+   * Attempt a reconnection.
+   *
+   * @private
+   */
+  reconnect() {
+    if (this._reconnecting || this.skipReconnect)
+      return this;
+    const e = this;
+    if (this.backoff.attempts >= this._reconnectionAttempts)
+      this.backoff.reset(), this.emitReserved("reconnect_failed"), this._reconnecting = !1;
+    else {
+      const t = this.backoff.duration();
+      this._reconnecting = !0;
+      const n = this.setTimeoutFn(() => {
+        e.skipReconnect || (this.emitReserved("reconnect_attempt", e.backoff.attempts), !e.skipReconnect && e.open((r) => {
+          r ? (e._reconnecting = !1, e.reconnect(), this.emitReserved("reconnect_error", r)) : e.onreconnect();
+        }));
+      }, t);
+      this.opts.autoUnref && n.unref(), this.subs.push(() => {
+        this.clearTimeoutFn(n);
+      });
+    }
+  }
+  /**
+   * Called upon successful reconnect.
+   *
+   * @private
+   */
+  onreconnect() {
+    const e = this.backoff.attempts;
+    this._reconnecting = !1, this.backoff.reset(), this.emitReserved("reconnect", e);
+  }
+}
+const k = {};
+function B(s, e) {
+  typeof s == "object" && (e = s, s = void 0), e = e || {};
+  const t = Je(s, e.path || "/socket.io"), n = t.source, r = t.id, i = t.path, o = k[r] && i in k[r].nsps, h = e.forceNew || e["force new connection"] || e.multiplex === !1 || o;
+  let c;
+  return h ? c = new $(n, e) : (k[r] || (k[r] = new $(n, e)), c = k[r]), t.query && !e.query && (e.query = t.queryKey), c.socket(t.path, e);
+}
+Object.assign(B, {
+  Manager: $,
+  Socket: de,
+  io: B,
+  connect: B
+});
+class ct {
+  #t = "http://localhost:3000";
+  #s = {
+    transports: ["websocket"]
+  };
+  #e;
+  #i = !1;
+  #o = {};
+  set uri(e) {
+    const t = new URL(e);
+    if (!["http:", "https:", "ws:", "wss:"].includes(t.protocol))
+      throw new Error("URI must start with http://, https://, ws://, or wss://");
+    this.#t = e;
+  }
+  get uri() {
+    return this.#t;
+  }
+  set options(e) {
+    if (typeof e != "object")
+      throw new Error("Options must be an object");
+    this.#s = e;
+  }
+  get options() {
+    return this.#s;
+  }
+  constructor() {
+    this.#o.onResponse = this.onResponse.bind(this);
+  }
+  disconnect() {
+    this.#e && (this.#e.off("response", this.#o.onResponse), this.#e.disconnect(), this.#e = null), this.#i = !1;
+  }
+  prepare() {
+    this.#i || (this.#e = B(this.#t, this.#s), this.#i = !0, this.#e.on("response", this.#o.onResponse));
+  }
+  connectDevice(e) {
+    this.#e.emit("connectDevice", { config: e });
+  }
+  disconnectDevice(e) {
+    this.#e.emit("disconnectDevice", { config: e });
+  }
+  disconnectAllDevices() {
+    this.#e.emit("disconnectAll");
+  }
+  write(e) {
+    this.#e.emit("cmd", e);
+  }
+  onResponse(e) {
+    let t = a.get(e.name, e.uuid);
+    t || (t = a.getByNumber(e.name, e.deviceNumber)), t && t.socketResponse(e);
+  }
+}
+const A = new ct(), q = {
+  baudRate: 9600,
+  dataBits: 8,
+  stopBits: 1,
+  parity: "none",
+  bufferSize: 32768,
+  flowControl: "none"
+};
+class lt extends te {
+  __internal__ = {
+    bypassSerialBytesConnection: !1,
+    auto_response: !1,
+    device_number: 1,
+    aux_port_connector: 0,
+    last_error: {
+      message: null,
+      action: null,
+      code: null,
+      no_code: 0
+    },
+    serial: {
+      socket: !1,
+      portInfo: {
+        path: null,
+        vendorId: null,
+        productId: null,
+        parser: {
+          name: "inter-byte-timeout",
+          interval: 50
+        }
+      },
+      aux_connecting: "idle",
+      connecting: !1,
+      connected: !1,
+      port: null,
+      last_action: null,
+      response: {
+        length: null,
+        buffer: new Uint8Array([]),
+        as: "uint8",
+        replacer: /[\n\r]+/g,
+        limiter: null,
+        prefixLimiter: !1,
+        sufixLimiter: !0,
+        delimited: !1
+      },
+      reader: null,
+      input_done: null,
+      output_done: null,
+      input_stream: null,
+      output_stream: null,
+      keep_reading: !0,
+      time_until_send_bytes: void 0,
+      delay_first_connection: 200,
+      bytes_connection: null,
+      filters: [],
+      config_port: q,
+      queue: [],
+      running_queue: !1,
+      auto_response: null,
+      free_timeout_ms: 50,
+      // In previous versions 400 was used
+      useRTSCTS: !1
+      // Use RTS/CTS flow control
+    },
+    device: {
+      type: "unknown",
+      id: window.crypto.randomUUID(),
+      listen_on_port: null
+    },
+    time: {
+      response_connection: 500,
+      response_engines: 2e3,
+      response_general: 2e3
+    },
+    timeout: {
+      until_response: 0
+    },
+    interval: {
+      reconnection: 0
+    }
+  };
+  #t = null;
+  constructor({
+    filters: e = null,
+    config_port: t = q,
+    no_device: n = 1,
+    device_listen_on_channel: r = 1,
+    bypassSerialBytesConnection: i = !1,
+    socket: o = !1
+  } = {
+    filters: null,
+    config_port: q,
+    no_device: 1,
+    device_listen_on_channel: 1,
+    bypassSerialBytesConnection: !1,
+    socket: !1
+  }) {
+    if (super(), !("serial" in navigator))
+      throw new Error("Web Serial not supported");
+    e && (this.serialFilters = e), t && (this.serialConfigPort = t), i && (this.__internal__.bypassSerialBytesConnection = i), n && this.#w(n), r && ["number", "string"].includes(typeof r) && (this.listenOnChannel = r), this.__internal__.serial.socket = o, this.#y(), this.#g();
+  }
+  set listenOnChannel(e) {
+    if (typeof e == "string" && (e = parseInt(e)), isNaN(e) || e < 1 || e > 255)
+      throw new Error("Invalid port number");
+    this.__internal__.device.listen_on_port = e, !this.__internal__.bypassSerialBytesConnection && (this.__internal__.serial.bytes_connection = this.serialSetConnectionConstant(e));
+  }
+  get lastAction() {
+    return this.__internal__.serial.last_action;
+  }
+  get listenOnChannel() {
+    return this.__internal__.device.listen_on_port ?? 1;
+  }
+  set serialFilters(e) {
+    if (this.isConnected) throw new Error("Cannot change serial filters while connected");
+    this.__internal__.serial.filters = e;
+  }
+  get serialFilters() {
+    return this.__internal__.serial.filters;
+  }
+  set serialConfigPort(e) {
+    if (this.isConnected) throw new Error("Cannot change serial filters while connected");
+    this.__internal__.serial.config_port = e;
+  }
+  get serialConfigPort() {
+    return this.__internal__.serial.config_port;
+  }
+  get useRTSCTS() {
+    return this.__internal__.serial.useRTSCTS;
+  }
+  set useRTSCTS(e) {
+    this.__internal__.serial.useRTSCTS = e;
+  }
+  get isConnected() {
+    const e = this.__internal__.serial.connected, t = this.#s(this.__internal__.serial.port);
+    return e && !t && this.#e({ error: "Port is closed, not readable or writable." }), this.__internal__.serial.connected = t, this.__internal__.serial.connected;
+  }
+  get isConnecting() {
+    return this.__internal__.serial.connecting;
+  }
+  get isDisconnected() {
+    const e = this.__internal__.serial.connected, t = this.#s(this.__internal__.serial.port);
+    return !e && t && (this.dispatch("serial:connected"), this.#r(!1), a.$dispatchChange(this)), this.__internal__.serial.connected = t, !this.__internal__.serial.connected;
+  }
+  get deviceNumber() {
+    return this.__internal__.device_number;
+  }
+  get uuid() {
+    return this.__internal__.device.id;
+  }
+  get typeDevice() {
+    return this.__internal__.device.type;
+  }
+  get queue() {
+    return this.__internal__.serial.queue;
+  }
+  get responseDelimited() {
+    return this.__internal__.serial.response.delimited;
+  }
+  set responseDelimited(e) {
+    if (typeof e != "boolean")
+      throw new Error("responseDelimited must be a boolean");
+    this.__internal__.serial.response.delimited = e;
+  }
+  get responsePrefixLimited() {
+    return this.__internal__.serial.response.prefixLimiter;
+  }
+  set responsePrefixLimited(e) {
+    if (typeof e != "boolean")
+      throw new Error("responsePrefixLimited must be a boolean");
+    this.__internal__.serial.response.prefixLimiter = e;
+  }
+  get responseSufixLimited() {
+    return this.__internal__.serial.response.sufixLimiter;
+  }
+  set responseSufixLimited(e) {
+    if (typeof e != "boolean")
+      throw new Error("responseSufixLimited must be a boolean");
+    this.__internal__.serial.response.sufixLimiter = e;
+  }
+  get responseLimiter() {
+    return this.__internal__.serial.response.limiter;
+  }
+  set responseLimiter(e) {
+    if (typeof e != "string" && !(e instanceof RegExp))
+      throw new Error("responseLimiter must be a string or a RegExp");
+    this.__internal__.serial.response.limiter = e;
+  }
+  get fixedBytesMessage() {
+    return this.__internal__.serial.response.length;
+  }
+  set fixedBytesMessage(e) {
+    if (e !== null && (typeof e != "number" || e < 1))
+      throw new Error("Invalid length for fixed bytes message");
+    this.__internal__.serial.response.length = e;
+  }
+  get timeoutBeforeResponseBytes() {
+    return this.__internal__.serial.free_timeout_ms || 50;
+  }
+  set timeoutBeforeResponseBytes(e) {
+    if (e !== void 0 && (typeof e != "number" || e < 1))
+      throw new Error("Invalid timeout for response bytes");
+    this.__internal__.serial.free_timeout_ms = e ?? 50;
+  }
+  get bypassSerialBytesConnection() {
+    return this.__internal__.bypassSerialBytesConnection;
+  }
+  set bypassSerialBytesConnection(e) {
+    if (typeof e != "boolean")
+      throw new Error("bypassSerialBytesConnection must be a boolean");
+    this.__internal__.bypassSerialBytesConnection = e;
+  }
+  get useSocket() {
+    return this.__internal__.serial.socket;
+  }
+  get connectionBytes() {
+    const e = this.__internal__.serial.bytes_connection;
+    return e instanceof Uint8Array ? e : typeof e == "string" ? this.stringArrayToUint8Array(this.parseStringToBytes(e, "")) : Array.isArray(e) && typeof e[0] == "string" ? this.stringArrayToUint8Array(e) : Array.isArray(e) && typeof e[0] == "number" ? new Uint8Array(e) : new Uint8Array([]);
+  }
+  set portPath(e) {
+    if (this.isConnected) throw new Error("Cannot change port path while connected");
+    if (typeof e != "string" && e !== null)
+      throw new TypeError("vendorId must be string or null");
+    this.__internal__.serial.portInfo.path = e;
+  }
+  get portPath() {
+    return this.__internal__.serial.portInfo.path;
+  }
+  set portVendorId(e) {
+    if (this.isConnected) throw new Error("Cannot change port vendorId while connected");
+    if (typeof e == "number" && typeof e != "string" && e !== null)
+      throw new TypeError("vendorId must be a number, string or null");
+    this.__internal__.serial.portInfo.vendorId = e;
+  }
+  get portVendorId() {
+    return this.__internal__.serial.portInfo.vendorId;
+  }
+  set portProductId(e) {
+    if (this.isConnected) throw new Error("Cannot change port productId while connected");
+    if (typeof e == "number" && typeof e != "string" && e !== null)
+      throw new TypeError("productId must be a number, string or null");
+    this.__internal__.serial.portInfo.productId = e;
+  }
+  get portProductId() {
+    return this.__internal__.serial.portInfo.productId;
+  }
+  set socketPortParser(e) {
+    if (["byte-length", "inter-byte-timeout"].includes(e))
+      throw new TypeError("socketPortParser must be a string, either 'byte-length' or 'inter-byte-timeout'");
+    this.__internal__.serial.portInfo.parser.name = e;
+  }
+  get socketPortParser() {
+    return this.__internal__.serial.portInfo.parser.name;
+  }
+  set socketPortParserInterval(e) {
+    if (typeof e != "number" || e < 1)
+      throw new TypeError("Interval must be a positive number");
+    this.__internal__.serial.portInfo.parser.interval = e;
+  }
+  get socketPortParserInterval() {
+    return this.__internal__.serial.portInfo.parser.interval || 50;
+  }
+  set socketPortParserLength(e) {
+    if (typeof e != "number" || e < 1)
+      throw new TypeError("Length must be a positive number or null");
+    this.__internal__.serial.portInfo.parser.length = e;
+  }
+  get socketPortParserLength() {
+    return this.__internal__.serial.portInfo.parser.length || 14;
+  }
+  get parserForSocket() {
+    return this.socketPortParser === "byte-length" ? {
+      name: this.socketPortParser,
+      length: this.socketPortParserLength
+    } : {
+      name: this.socketPortParser,
+      interval: this.socketPortParserInterval
+    };
+  }
+  get configDeviceSocket() {
+    return {
+      uuid: this.uuid,
+      name: this.typeDevice,
+      deviceNumber: this.deviceNumber,
+      connectionBytes: Array.from(this.connectionBytes),
+      config: {
+        baudRate: this.__internal__.serial.config_port.baudRate,
+        dataBits: this.__internal__.serial.config_port.dataBits,
+        stopBits: this.__internal__.serial.config_port.stopBits,
+        parity: this.__internal__.serial.config_port.parity,
+        bufferSize: this.__internal__.serial.config_port.bufferSize,
+        flowControl: this.__internal__.serial.config_port.flowControl
+      },
+      info: {
+        vendorId: this.portVendorId,
+        // vendor ID or null for auto-detect
+        productId: this.portProductId,
+        // product ID or null for auto-detect
+        portName: this.portPath
+        // COM3, /dev/ttyUSB0, etc. null for auto-detect
+      },
+      response: {
+        automatic: this.__internal__.auto_response,
+        // true to auto-respond to commands this only for devices that doesn't respond nothing
+        autoResponse: this.__internal__.serial.auto_response,
+        // null or data to respond automatically, ie. [0x02, 0x06, 0xdd, 0xdd, 0xf0, 0xcf, 0x03] for relay
+        parser: this.parserForSocket,
+        timeout: {
+          general: this.__internal__.time.response_general,
+          engines: this.__internal__.time.response_engines,
+          connection: this.__internal__.time.response_connection
+        }
+      }
+    };
+  }
+  #s(e) {
+    return this.useSocket ? this.__internal__.serial.connected : !!(e && e.readable && e.writable);
+  }
+  async timeout(e, t) {
+    this.__internal__.last_error.message = "Operation response timed out.", this.__internal__.last_error.action = t, this.__internal__.last_error.code = e, this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0), t === "connect" ? (this.__internal__.serial.connected = !1, this.dispatch("serial:reconnect", {}), a.$dispatchChange(this)) : t === "connection:start" && (await this.serialDisconnect(), this.__internal__.serial.connected = !1, this.__internal__.aux_port_connector += 1, a.$dispatchChange(this), await this.serialConnect()), this.__internal__.serial.queue.length > 0 && this.dispatch("internal:queue", {}), this.dispatch("serial:timeout", {
+      ...this.__internal__.last_error,
+      bytes: e,
+      action: t
+    });
+  }
+  async disconnect(e = null) {
+    await this.serialDisconnect(), this.#e(e);
+  }
+  #e(e = null) {
+    this.__internal__.serial.connected = !1, this.__internal__.aux_port_connector = 0, this.dispatch("serial:disconnected", e), a.$dispatchChange(this);
+  }
+  #i(e) {
+    this.__internal__.serial.aux_connecting = e.detail.active ? "connecting" : "finished";
+  }
+  socketResponse(e) {
+    const t = this.__internal__.serial.connected;
+    if (e.type === "disconnect" || e.type === "error" && e.data === "DISCONNECTED" ? this.__internal__.serial.connected = !1 : e.type === "success" && (this.__internal__.serial.connected = !0), a.$dispatchChange(this), !t && this.__internal__.serial.connected && (this.dispatch("serial:connected"), this.#r(!1)), e.type === "success")
+      this.#n(new Uint8Array(e.data));
+    else if (e.type === "error") {
+      const n = new Error("The port is closed or is not readable/writable");
+      this.serialErrors(n);
+    } else e.type === "timeout" && this.timeout(e.data.bytes ?? [], this.lastAction || "unknown");
+    this.__internal__.serial.last_action = null;
+  }
+  async connect() {
+    return this.isConnected ? !0 : (this.__internal__.serial.aux_connecting = "idle", new Promise((e, t) => {
+      this.#t || (this.#t = this.#i.bind(this)), this.on("internal:connecting", this.#t);
+      const n = setInterval(() => {
+        this.__internal__.serial.aux_connecting === "finished" ? (clearInterval(n), this.__internal__.serial.aux_connecting = "idle", this.#t !== null && this.off("internal:connecting", this.#t), this.isConnected ? e(!0) : t(`${this.typeDevice} device ${this.deviceNumber} not connected`)) : this.__internal__.serial.aux_connecting === "connecting" && (this.__internal__.serial.aux_connecting = "idle", this.dispatch("internal:connecting", { active: !0 }), this.dispatch("serial:connecting", { active: !0 }));
+      }, 100);
+      this.serialConnect();
+    }));
+  }
+  async serialDisconnect() {
+    try {
+      if (this.useSocket)
+        A.disconnectDevice(this.configDeviceSocket);
+      else {
+        const e = this.__internal__.serial.reader, t = this.__internal__.serial.output_stream;
+        e && (await e.cancel().catch((n) => this.serialErrors(n)), await this.__internal__.serial.input_done), t && (await t.getWriter().close(), await this.__internal__.serial.output_done), this.__internal__.serial.connected && this.__internal__.serial && this.__internal__.serial.port && await this.__internal__.serial.port.close();
+      }
+    } catch (e) {
+      this.serialErrors(e);
+    } finally {
+      this.__internal__.serial.reader = null, this.__internal__.serial.input_done = null, this.__internal__.serial.output_stream = null, this.__internal__.serial.output_done = null, this.__internal__.serial.connected = !1, this.__internal__.serial.port = null, a.$dispatchChange(this);
+    }
+  }
+  async #o(e) {
+    if (this.isDisconnected)
+      throw this.#e({ error: "Port is closed, not readable or writable." }), new Error("The port is closed or is not readable/writable");
+    const t = this.validateBytes(e);
+    A.write({ config: this.configDeviceSocket, bytes: Array.from(t) });
+  }
+  async #a(e) {
+    if (this.useSocket) {
+      await this.#o(e);
+      return;
+    }
+    const t = this.__internal__.serial.port;
+    if (!t || t && (!t.readable || !t.writable))
+      throw this.#e({ error: "Port is closed, not readable or writable." }), new Error("The port is closed or is not readable/writable");
+    const n = this.validateBytes(e);
+    if (this.useRTSCTS && await this.#c(t, 5e3), t.writable === null) return;
+    const r = t.writable.getWriter();
+    await r.write(n), r.releaseLock();
+  }
+  async #c(e, t = 5e3) {
+    const n = Date.now();
+    for (; ; ) {
+      if (Date.now() - n > t)
+        throw new Error("Timeout waiting for clearToSend signal");
+      const { clearToSend: r } = await e.getSignals();
+      if (r) return;
+      await J(100);
+    }
+  }
+  #n(e = new Uint8Array([]), t = !1) {
+    if (e && e.length > 0) {
+      const n = this.__internal__.serial.connected;
+      if (this.__internal__.serial.connected = this.#s(this.__internal__.serial.port), a.$dispatchChange(this), !n && this.__internal__.serial.connected && (this.dispatch("serial:connected"), this.#r(!1)), this.__internal__.interval.reconnection && (clearInterval(this.__internal__.interval.reconnection), this.__internal__.interval.reconnection = 0), this.__internal__.timeout.until_response && (clearTimeout(this.__internal__.timeout.until_response), this.__internal__.timeout.until_response = 0), this.__internal__.serial.response.as === "hex")
+        t ? this.serialCorruptMessage(this.parseUint8ToHex(e)) : this.serialMessage(this.parseUint8ToHex(e));
+      else if (this.__internal__.serial.response.as === "uint8")
+        t ? this.serialCorruptMessage(e) : this.serialMessage(e);
+      else if (this.__internal__.serial.response.as === "string") {
+        const r = this.parseUint8ArrayToString(e);
+        if (this.__internal__.serial.response.limiter !== null) {
+          const i = r.split(this.__internal__.serial.response.limiter);
+          for (const o in i)
+            i[o] && (t ? this.serialCorruptMessage(i[o]) : this.serialMessage(i[o]));
+        } else
+          t ? this.serialCorruptMessage(r) : this.serialMessage(r);
+      } else {
+        const r = this.stringToArrayBuffer(this.parseUint8ArrayToString(e));
+        t ? this.serialCorruptMessage(r) : this.serialMessage(r);
+      }
+    }
+    if (this.__internal__.serial.queue.length === 0) {
+      this.__internal__.serial.running_queue = !1;
+      return;
+    }
+    this.dispatch("internal:queue", {});
+  }
+  getResponseAsArrayBuffer() {
+    this.__internal__.serial.response.as = "arraybuffer";
+  }
+  getResponseAsArrayHex() {
+    this.__internal__.serial.response.as = "hex";
+  }
+  getResponseAsUint8Array() {
+    this.__internal__.serial.response.as = "uint8";
+  }
+  getResponseAsString() {
+    this.__internal__.serial.response.as = "string";
+  }
+  async #l() {
+    const e = this.serialFilters, t = await navigator.serial.getPorts({ filters: e });
+    return e.length === 0 ? t : t.filter((n) => {
+      const r = n.getInfo();
+      return e.some((i) => r.usbProductId === i.usbProductId && r.usbVendorId === i.usbVendorId);
+    }).filter((n) => !this.#s(n));
+  }
+  async serialPortsSaved(e) {
+    const t = this.serialFilters;
+    if (this.__internal__.aux_port_connector < e.length) {
+      const n = this.__internal__.aux_port_connector;
+      this.__internal__.serial.port = e[n];
+    } else
+      this.__internal__.aux_port_connector = 0, this.__internal__.serial.port = await navigator.serial.requestPort({
+        filters: t
+      });
+    if (!this.__internal__.serial.port)
+      throw new Error("Select another port please");
+  }
+  serialErrors(e) {
+    const t = e.toString().toLowerCase();
+    switch (!0) {
+      case t.includes("must be handling a user gesture to show a permission request"):
+      case t.includes("the port is closed."):
+      case t.includes("the port is closed or is not writable"):
+      case t.includes("the port is closed or is not readable"):
+      case t.includes("the port is closed or is not readable/writable"):
+      case t.includes("select another port please"):
+      case t.includes("no port selected by the user"):
+      case t.includes(
+        "this readable stream reader has been released and cannot be used to cancel its previous owner stream"
+      ):
+        this.dispatch("serial:need-permission", {}), a.$dispatchChange(this);
+        break;
+      case t.includes("the port is already open."):
+      case t.includes("failed to open serial port"):
+        this.serialDisconnect().then(async () => {
+          this.__internal__.aux_port_connector += 1, await this.serialConnect();
+        });
+        break;
+      case t.includes("cannot read properties of undefined (reading 'writable')"):
+      case t.includes("cannot read properties of null (reading 'writable')"):
+      case t.includes("cannot read property 'writable' of null"):
+      case t.includes("cannot read property 'writable' of undefined"):
+        this.serialDisconnect().then(async () => {
+          await this.serialConnect();
+        });
+        break;
+      case t.includes("'close' on 'serialport': a call to close() is already in progress."):
+        break;
+      case t.includes("failed to execute 'open' on 'serialport': a call to open() is already in progress."):
+        break;
+      case t.includes("the port is already closed."):
+        break;
+      case t.includes("the device has been lost"):
+        this.dispatch("serial:lost", {}), a.$dispatchChange(this);
+        break;
+      case t.includes("navigator.serial is undefined"):
+        this.dispatch("serial:unsupported", {});
+        break;
+      default:
+        console.error(e);
+        break;
+    }
+    this.dispatch("serial:error", e);
+  }
+  #h(e) {
+    if (e) {
+      const t = this.__internal__.serial.response.buffer, n = new Uint8Array(t.length + e.byteLength);
+      n.set(t, 0), n.set(new Uint8Array(e), t.length), this.__internal__.serial.response.buffer = n;
+    }
+  }
+  async #u() {
+    this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
+      this.__internal__.serial.response.buffer && this.#n(this.__internal__.serial.response.buffer), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    }, this.__internal__.serial.free_timeout_ms || 50);
+  }
+  async #_() {
+    const e = this.__internal__.serial.response.length;
+    let t = this.__internal__.serial.response.buffer;
+    if (this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0), !(e === null || !t || t.length === 0)) {
+      for (; t.length >= e; ) {
+        const n = t.slice(0, e);
+        this.#n(n), t = t.slice(e);
+      }
+      this.__internal__.serial.response.buffer = t, t.length > 0 && (this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
+        this.#n(this.__internal__.serial.response.buffer, !0);
+      }, this.__internal__.serial.free_timeout_ms || 50));
+    }
+  }
+  async #p() {
+    const {
+      limiter: e,
+      prefixLimiter: t = !1,
+      sufixLimiter: n = !0
+    } = this.__internal__.serial.response;
+    if (!e)
+      throw new Error("No limiter defined for delimited serial response");
+    const r = this.__internal__.serial.response.buffer;
+    if (!e || !r || r.length === 0) return;
+    this.__internal__.serial.time_until_send_bytes && (clearTimeout(this.__internal__.serial.time_until_send_bytes), this.__internal__.serial.time_until_send_bytes = 0);
+    let i = new TextDecoder().decode(r);
+    const o = [];
+    if (typeof e == "string") {
+      let c;
+      if (t && n)
+        c = new RegExp(`${e}([^${e}]+)${e}`, "g");
+      else if (t)
+        c = new RegExp(`${e}([^${e}]*)`, "g");
+      else if (n)
+        c = new RegExp(`([^${e}]+)${e}`, "g");
+      else
+        return;
+      let p, u = 0;
+      for (; (p = c.exec(i)) !== null; )
+        o.push(new TextEncoder().encode(p[1])), u = c.lastIndex;
+      i = i.slice(u);
+    } else if (e instanceof RegExp) {
+      let c, p = 0;
+      if (t && n) {
+        const u = new RegExp(`${e.source}(.*?)${e.source}`, "g");
+        for (; (c = u.exec(i)) !== null; )
+          o.push(new TextEncoder().encode(c[1])), p = u.lastIndex;
+      } else if (n)
+        for (; (c = e.exec(i)) !== null; ) {
+          const u = c.index, y = i.slice(p, u);
+          o.push(new TextEncoder().encode(y)), p = e.lastIndex;
+        }
+      else if (t) {
+        const u = i.split(e);
+        u.shift();
+        for (const y of u)
+          o.push(new TextEncoder().encode(y));
+        i = "";
+      }
+      i = i.slice(p);
+    }
+    for (const c of o)
+      this.#n(c);
+    const h = new TextEncoder().encode(i);
+    this.__internal__.serial.response.buffer = h, h.length > 0 && (this.__internal__.serial.time_until_send_bytes = setTimeout(() => {
+      this.#n(this.__internal__.serial.response.buffer, !0), this.__internal__.serial.response.buffer = new Uint8Array(0);
+    }, this.__internal__.serial.free_timeout_ms ?? 50));
+  }
+  async #d() {
+    const e = this.__internal__.serial.port;
+    if (!e || !e.readable) throw new Error("Port is not readable");
+    const t = e.readable.getReader();
+    this.__internal__.serial.reader = t;
+    try {
+      for (; this.__internal__.serial.keep_reading; ) {
+        const { value: n, done: r } = await t.read();
+        if (r) break;
+        this.#h(n), this.__internal__.serial.response.delimited ? await this.#p() : this.__internal__.serial.response.length === null ? await this.#u() : await this.#_();
+      }
+    } catch (n) {
+      this.serialErrors(n);
+    } finally {
+      t.releaseLock(), this.__internal__.serial.keep_reading = !0, this.__internal__.serial.port && await this.__internal__.serial.port.close();
+    }
+  }
+  #r(e) {
+    e !== this.__internal__.serial.connecting && (this.__internal__.serial.connecting = e, this.dispatch("serial:connecting", { active: e }), this.dispatch("internal:connecting", { active: e }));
+  }
+  async serialConnect() {
+    try {
+      if (this.#r(!0), this.useSocket)
+        A.prepare(), this.__internal__.serial.last_action = "connect", this.__internal__.timeout.until_response = setTimeout(async () => {
+          await this.timeout(this.__internal__.serial.bytes_connection ?? [], "connection:start");
+        }, this.__internal__.time.response_connection), A.connectDevice(this.configDeviceSocket), this.dispatch("serial:sent", {
+          action: "connect",
+          bytes: this.__internal__.serial.bytes_connection
+        });
+      else {
+        const e = await this.#l();
+        if (e.length > 0)
+          await this.serialPortsSaved(e);
+        else {
+          const r = this.serialFilters;
+          this.__internal__.serial.port = await navigator.serial.requestPort({
+            filters: r
+          });
+        }
+        const t = this.__internal__.serial.port;
+        if (!t)
+          throw new Error("No port selected by the user");
+        await t.open(this.serialConfigPort);
+        const n = this;
+        t.onconnect = (r) => {
+          n.dispatch("serial:connected", r), n.#r(!1), a.$dispatchChange(this), n.__internal__.serial.queue.length > 0 ? n.dispatch("internal:queue", {}) : n.__internal__.serial.running_queue = !1;
+        }, t.ondisconnect = async () => {
+          await n.disconnect();
+        }, await J(this.__internal__.serial.delay_first_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
+          await n.timeout(n.__internal__.serial.bytes_connection ?? [], "connection:start");
+        }, this.__internal__.time.response_connection), this.__internal__.serial.last_action = "connect", await this.#a(this.__internal__.serial.bytes_connection ?? []), this.dispatch("serial:sent", {
+          action: "connect",
+          bytes: this.__internal__.serial.bytes_connection
+        }), this.__internal__.auto_response && this.#n(this.__internal__.serial.auto_response), await this.#d();
+      }
+    } catch (e) {
+      this.#r(!1), this.serialErrors(e);
+    }
+  }
+  async #f() {
+    return typeof window > "u" ? !1 : "serial" in navigator && "forget" in SerialPort.prototype && this.__internal__.serial.port ? (await this.__internal__.serial.port.forget(), !0) : !1;
+  }
+  async serialForget() {
+    return await this.#f();
+  }
+  decToHex(e) {
+    return typeof e == "string" && (e = parseInt(e, 10)), e.toString(16);
+  }
+  hexToDec(e) {
+    return parseInt(e, 16);
+  }
+  hexMaker(e = "00", t = 2) {
+    return e.toString().padStart(t, "0").toLowerCase();
+  }
+  add0x(e) {
+    const t = [];
+    return e.forEach((n, r) => {
+      t[r] = "0x" + n;
+    }), t;
+  }
+  bytesToHex(e) {
+    return this.add0x(Array.from(e, (t) => this.hexMaker(t)));
+  }
+  #y() {
+    [
+      "serial:connected",
+      "serial:connecting",
+      "serial:reconnect",
+      "serial:timeout",
+      "serial:disconnected",
+      "serial:sent",
+      "serial:soft-reload",
+      "serial:message",
+      "serial:corrupt-message",
+      "unknown",
+      "serial:need-permission",
+      "serial:lost",
+      "serial:unsupported",
+      "serial:error",
+      "debug"
+    ].forEach((e) => {
+      this.serialRegisterAvailableListener(e);
+    });
+  }
+  #g() {
+    const e = this;
+    this.on("internal:queue", async () => {
+      await e.#b();
+    }), this.#m();
+  }
+  #m() {
+    const e = this;
+    navigator.serial.addEventListener("connect", async () => {
+      e.isDisconnected && await e.serialConnect().catch(() => {
+      });
+    });
+  }
+  async #b() {
+    if (!this.#s(this.__internal__.serial.port)) {
+      this.#e({ error: "Port is closed, not readable or writable." }), await this.serialConnect();
+      return;
+    }
+    if (this.__internal__.timeout.until_response) return;
+    if (this.__internal__.serial.queue.length === 0) {
+      this.__internal__.serial.running_queue = !1;
+      return;
+    }
+    this.__internal__.serial.running_queue = !0;
+    const e = this.__internal__.serial.queue[0];
+    let t = this.__internal__.time.response_general;
+    if (e.action === "connect" && (t = this.__internal__.time.response_connection), this.__internal__.timeout.until_response = setTimeout(async () => {
+      await this.timeout(e.bytes, e.action);
+    }, t), this.__internal__.serial.last_action = e.action ?? "unknown", await this.#a(e.bytes), this.dispatch("serial:sent", {
+      action: e.action,
+      bytes: e.bytes
+    }), this.__internal__.auto_response) {
+      let r = new Uint8Array(0);
+      try {
+        r = this.validateBytes(this.__internal__.serial.auto_response);
+      } catch (i) {
+        this.serialErrors(i);
+      }
+      this.#n(r);
+    }
+    const n = [...this.__internal__.serial.queue];
+    this.__internal__.serial.queue = n.splice(1), this.__internal__.serial.queue.length > 0 && (this.__internal__.serial.running_queue = !0);
+  }
+  validateBytes(e) {
+    let t = new Uint8Array(0);
+    if (e instanceof Uint8Array)
+      t = e;
+    else if (typeof e == "string")
+      t = this.parseStringToTextEncoder(e);
+    else if (Array.isArray(e) && typeof e[0] == "string")
+      t = this.stringArrayToUint8Array(e);
+    else if (Array.isArray(e) && typeof e[0] == "number")
+      t = new Uint8Array(e);
+    else
+      throw new Error("Invalid data type");
+    return t;
+  }
+  async appendToQueue(e, t) {
+    const n = this.validateBytes(e);
+    if (["connect", "connection:start"].includes(t)) {
+      if (this.__internal__.serial.connected) return;
+      await this.serialConnect();
+      return;
+    }
+    this.__internal__.serial.queue.push({ bytes: n, action: t }), this.dispatch("internal:queue", {});
+  }
+  #w(e = 1) {
+    this.__internal__.device_number = e, !this.__internal__.bypassSerialBytesConnection && (this.__internal__.serial.bytes_connection = this.serialSetConnectionConstant(e));
+  }
+  serialSetConnectionConstant(e = 1) {
+    if (this.__internal__.bypassSerialBytesConnection) return this.__internal__.serial.bytes_connection;
+    throw new Error(`Method not implemented 'serialSetConnectionConstant' to listen on channel ${e}`);
+  }
+  serialMessage(e) {
+    throw console.log(e), this.dispatch("serial:message", { code: e }), new Error("Method not implemented 'serialMessage'");
+  }
+  serialCorruptMessage(e) {
+    throw console.log(e), this.dispatch("serial:corrupt-message", { code: e }), new Error("Method not implemented 'serialCorruptMessage'");
+  }
+  #v() {
+    this.__internal__.last_error = {
+      message: null,
+      action: null,
+      code: null,
+      no_code: 0
+    };
+  }
+  clearSerialQueue() {
+    this.__internal__.serial.queue = [];
+  }
+  sumHex(e) {
+    let t = 0;
+    return e.forEach((n) => {
+      t += parseInt(n, 16);
+    }), t.toString(16);
+  }
+  toString() {
+    return JSON.stringify({
+      __class: this.typeDevice,
+      device_number: this.deviceNumber,
+      uuid: this.uuid,
+      connected: this.isConnected,
+      connection: this.__internal__.serial.bytes_connection
+    });
+  }
+  softReload() {
+    this.#v(), this.dispatch("serial:soft-reload", {});
+  }
+  async sendConnect() {
+    if (!this.__internal__.serial.bytes_connection)
+      throw new Error("No connection bytes defined");
+    await this.appendToQueue(this.__internal__.serial.bytes_connection, "connect");
+  }
+  async sendCustomCode({ code: e = [] } = { code: [] }) {
+    if (!e)
+      throw new Error("No data to send");
+    this.__internal__.bypassSerialBytesConnection && (this.__internal__.serial.bytes_connection = this.validateBytes(e)), await this.appendToQueue(e, "custom");
+  }
+  stringToArrayHex(e) {
+    return Array.from(e).map((t) => t.charCodeAt(0).toString(16));
+  }
+  stringToArrayBuffer(e, t = `
+`) {
+    return this.parseStringToTextEncoder(e, t).buffer;
+  }
+  parseStringToTextEncoder(e = "", t = `
+`) {
+    const n = new TextEncoder();
+    return e += t, n.encode(e);
+  }
+  parseStringToBytes(e = "", t = `
+`) {
+    const n = this.parseStringToTextEncoder(e, t);
+    return Array.from(n).map((r) => r.toString(16));
+  }
+  parseUint8ToHex(e) {
+    return Array.from(e).map((t) => t.toString(16).padStart(2, "0").toLowerCase());
+  }
+  parseHexToUint8(e) {
+    return new Uint8Array(e.map((t) => parseInt(t, 16)));
+  }
+  stringArrayToUint8Array(e) {
+    const t = [];
+    return typeof e == "string" ? this.parseStringToTextEncoder(e).buffer : (e.forEach((n) => {
+      const r = n.replace("0x", "");
+      t.push(parseInt(r, 16));
+    }), new Uint8Array(t));
+  }
+  parseUint8ArrayToString(e) {
+    let t = new Uint8Array(0);
+    e instanceof Uint8Array ? t = e : t = this.stringArrayToUint8Array(e), e = this.parseUint8ToHex(t);
+    const n = e.map((r) => parseInt(r, 16));
+    return this.__internal__.serial.response.replacer ? String.fromCharCode(...n).replace(this.__internal__.serial.response.replacer, "") : String.fromCharCode(...n);
+  }
+  hexToAscii(e) {
+    const t = e.toString();
+    let n = "";
+    for (let r = 0; r < t.length; r += 2)
+      n += String.fromCharCode(parseInt(t.substring(r, 2), 16));
+    return n;
+  }
+  asciiToHex(e) {
+    const t = [];
+    for (let n = 0, r = e.length; n < r; n++) {
+      const i = Number(e.charCodeAt(n)).toString(16);
+      t.push(i);
+    }
+    return t.join("");
+  }
+  $checkAndDispatchConnection() {
+    return this.isConnected;
+  }
+}
+export {
+  A,
+  a,
+  lt as u
+};

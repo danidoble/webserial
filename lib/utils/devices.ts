@@ -1,33 +1,20 @@
-import { Devices as DevicesCore, Core } from 'webserial-core';
+import { Devices as DevicesCore } from 'webserial-core';
 import { Kernel } from '../serial/kernel';
-
-interface IDevice {
-  [key: string]: Core | Kernel;
-}
-
-interface IDevices {
-  [key: string]: IDevice[];
-}
 
 class Devices extends DevicesCore {
   constructor() {
     super();
 
-    const customDevices: IDevices = {
-      relay: [],
-      locker: [],
-      jofemar: [],
-      boardroid: [],
-      pinpad: [],
-      pinpax: [],
-      hopper: [],
-    };
-
-    // @ts-expect-error merging devices
-    Devices.devices = { ...structuredClone(DevicesCore.devices), ...customDevices };
+    Devices.registerType('boardroid');
+    Devices.registerType('hopper');
+    Devices.registerType('jofemar');
+    Devices.registerType('locker');
+    Devices.registerType('pinpad');
+    Devices.registerType('pinpax');
+    Devices.registerType('relay');
   }
 
-  addCustom(type: string, device: Kernel) {
+  public static addCustom(type: string, device: Kernel) {
     Devices.registerType(type);
     Devices.add(device);
   }
@@ -35,69 +22,68 @@ class Devices extends DevicesCore {
   /**
    * @deprecated use get instead
    * */
-  getCustomByUuid(type: string, deviceId: string) {
+  public static getCustomByUuid(type: string, deviceId: string) {
     return Devices.get(type, deviceId);
   }
 
-  getJofemarByUuid(id: string) {
+  public static getJofemarByUuid(id: string) {
     return Devices.get('jofemar', id);
   }
 
-  getLockerByUuid(id: string) {
+  public static getLockerByUuid(id: string) {
     return Devices.get('locker', id);
   }
 
-  getRelayByUuid(id: string) {
+  public static getRelayByUuid(id: string) {
     return Devices.get('relay', id);
   }
 
-  getBoardroidByUuid(id: string) {
+  public static getBoardroidByUuid(id: string) {
     return Devices.get('boardroid', id);
   }
 
-  getPinPadByUuid(id: string) {
+  public static getPinPadByUuid(id: string) {
     return Devices.get('pinpad', id);
   }
 
-  getPinPaxByUuid(id: string) {
+  public static getPinPaxByUuid(id: string) {
     return Devices.get('pinpax', id);
   }
 
-  getHopperByUuid(id: string) {
+  public static getHopperByUuid(id: string) {
     return Devices.get('hopper', id);
   }
 
-  getJofemar(device_number: number = 1) {
+  public static getJofemar(device_number: number = 1) {
     return Devices.getByNumber('jofemar', device_number);
   }
 
-  getBoardroid(device_number: number = 1) {
+  public static getBoardroid(device_number: number = 1) {
     return Devices.getByNumber('boardroid', device_number);
   }
 
-  getLocker(device_number: number = 1) {
+  public static getLocker(device_number: number = 1) {
     return Devices.getByNumber('locker', device_number);
   }
 
-  getRelay(device_number: number = 1) {
+  public static getRelay(device_number: number = 1) {
     return Devices.getByNumber('relay', device_number);
   }
 
-  getPinPad(device_number: number = 1) {
+  public static getPinPad(device_number: number = 1) {
     return Devices.getByNumber('pinpad', device_number);
   }
 
-  getPinPax(device_number: number = 1) {
+  public static getPinPax(device_number: number = 1) {
     return Devices.getByNumber('pinpax', device_number);
   }
 
-  getHopper(device_number: number = 1) {
+  public static getHopper(device_number: number = 1) {
     return Devices.getByNumber('hopper', device_number);
   }
 }
 
-if (!Devices.instance) {
-  Devices.instance = new Devices();
-}
+// Overide singleton instance
+Devices.instance = new Devices();
 
 export { Devices };

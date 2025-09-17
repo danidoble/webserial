@@ -1,4 +1,4 @@
-import { K as mi, a as yi, D as le, i as z, b as fe, w as pe } from "./kernel-DkC7Kj3m.js";
+import { K as mi, a as yi, D as le, i as z, b as fe, w as pe } from "./kernel-DtXV8d8B.js";
 var bi = "0123456789abcdefghijklmnopqrstuvwxyz";
 function G(n) {
   return bi.charAt(n);
@@ -119,7 +119,7 @@ var ct, wi = {
   }
 }, ut = 1e13, mt = (
   /** @class */
-  function() {
+  (function() {
     function n(t) {
       this.buf = [+t || 0];
     }
@@ -148,14 +148,14 @@ var ct, wi = {
       var t = this.buf;
       return t.length == 1 ? t[0] : this;
     }, n;
-  }()
+  })()
 ), Ke = "…", Si = /^(\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/, Ti = /^(\d\d\d\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])([01]\d|2[0-3])(?:([0-5]\d)(?:([0-5]\d)(?:[.,](\d{1,3}))?)?)?(Z|[-+](?:[0]\d|1[0-2])([0-5]\d)?)?$/;
 function lt(n, t) {
   return n.length > t && (n = n.substring(0, t) + Ke), n;
 }
 var Ht = (
   /** @class */
-  function() {
+  (function() {
     function n(t, e) {
       this.hexDigits = "0123456789ABCDEF", t instanceof n ? (this.enc = t.enc, this.pos = t.pos) : (this.enc = t, this.pos = e);
     }
@@ -257,10 +257,10 @@ var Ht = (
       }
       return a > 0 && (r += ".incomplete"), r;
     }, n;
-  }()
+  })()
 ), Ai = (
   /** @class */
-  function() {
+  (function() {
     function n(t, e, i, r, s) {
       if (!(r instanceof me))
         throw new Error("Invalid tag value.");
@@ -468,10 +468,10 @@ var Ht = (
       }
       return new n(i, o, s, r, c);
     }, n;
-  }()
+  })()
 ), me = (
   /** @class */
-  function() {
+  (function() {
     function n(t) {
       var e = t.get();
       if (this.tagClass = e >> 6, this.tagConstructed = (e & 32) !== 0, this.tagNumber = e & 31, this.tagNumber == 31) {
@@ -487,10 +487,10 @@ var Ht = (
     }, n.prototype.isEOC = function() {
       return this.tagClass === 0 && this.tagNumber === 0;
     }, n;
-  }()
+  })()
 ), Y, Ci = 244837814094590, ye = (Ci & 16777215) == 15715070, N = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997], Ri = (1 << 26) / N[N.length - 1], P = (
   /** @class */
-  function() {
+  (function() {
     function n(t, e, i) {
       t != null && (typeof t == "number" ? this.fromNumber(t, e, i) : e == null && typeof t != "string" ? this.fromString(t, 256) : this.fromString(t, e));
     }
@@ -1007,10 +1007,10 @@ var Ht = (
         o.length = (t >> 3) + 1, e.nextBytes(o), c > 0 ? o[0] &= (1 << c) - 1 : o[0] = 0, this.fromString(o, 256);
       }
     }, n;
-  }()
+  })()
 ), Oi = (
   /** @class */
-  function() {
+  (function() {
     function n() {
     }
     return n.prototype.convert = function(t) {
@@ -1022,10 +1022,10 @@ var Ht = (
     }, n.prototype.sqrTo = function(t, e) {
       t.squareTo(e);
     }, n;
-  }()
+  })()
 ), be = (
   /** @class */
-  function() {
+  (function() {
     function n(t) {
       this.m = t;
     }
@@ -1040,10 +1040,10 @@ var Ht = (
     }, n.prototype.sqrTo = function(t, e) {
       t.squareTo(e), this.reduce(e);
     }, n;
-  }()
+  })()
 ), Pe = (
   /** @class */
-  function() {
+  (function() {
     function n(t) {
       this.m = t, this.mp = t.invDigit(), this.mpl = this.mp & 32767, this.mph = this.mp >> 15, this.um = (1 << t.DB - 15) - 1, this.mt2 = 2 * t.t;
     }
@@ -1067,10 +1067,10 @@ var Ht = (
     }, n.prototype.sqrTo = function(t, e) {
       t.squareTo(e), this.reduce(e);
     }, n;
-  }()
+  })()
 ), Di = (
   /** @class */
-  function() {
+  (function() {
     function n(t) {
       this.m = t, this.r2 = E(), this.q3 = E(), P.ONE.dlShiftTo(2 * t.t, this.r2), this.mu = this.r2.divide(t);
     }
@@ -1093,7 +1093,7 @@ var Ht = (
     }, n.prototype.sqrTo = function(t, e) {
       t.squareTo(e), this.reduce(e);
     }, n;
-  }()
+  })()
 );
 function E() {
   return new P(null);
@@ -1154,7 +1154,7 @@ P.ZERO = Q(0);
 P.ONE = Q(1);
 var Ii = (
   /** @class */
-  function() {
+  (function() {
     function n() {
       this.i = 0, this.j = 0, this.S = [];
     }
@@ -1169,7 +1169,7 @@ var Ii = (
       var t;
       return this.i = this.i + 1 & 255, this.j = this.j + this.S[this.i] & 255, t = this.S[this.i], this.S[this.i] = this.S[this.j], this.S[this.j] = t, this.S[t + this.S[this.i] & 255];
     }, n;
-  }()
+  })()
 );
 function Bi() {
   return new Ii();
@@ -1210,14 +1210,14 @@ function Ni() {
 }
 var Vt = (
   /** @class */
-  function() {
+  (function() {
     function n() {
     }
     return n.prototype.nextBytes = function(t) {
       for (var e = 0; e < t.length; ++e)
         t[e] = Ni();
     }, n;
-  }()
+  })()
 );
 function Qt(n) {
   return Vi(Ki(xi(n), n.length * 8));
@@ -1332,7 +1332,7 @@ function zi(n, t) {
 }
 var Gi = (
   /** @class */
-  function() {
+  (function() {
     function n() {
       this.n = null, this.e = 0, this.d = null, this.p = null, this.q = null, this.dmp1 = null, this.dmq1 = null, this.coeff = null;
     }
@@ -1428,7 +1428,7 @@ var Gi = (
       var a = s.toString(16).replace(/^1f+00/, ""), o = Qi(a);
       return o == i(t).toString();
     }, n;
-  }()
+  })()
 );
 function $i(n, t) {
   for (var e = n.toByteArray(), i = 0; i < e.length && e[i] == 0; )
@@ -1859,7 +1859,7 @@ p.asn1.DERTaggedObject = function(n) {
   }, typeof n < "u" && (typeof n.tag < "u" && (this.hT = n.tag), typeof n.explicit < "u" && (this.isExplicit = n.explicit), typeof n.obj < "u" && (this.asn1Object = n.obj, this.setASN1Object(this.isExplicit, this.hT, this.asn1Object)));
 };
 R(p.asn1.DERTaggedObject, p.asn1.ASN1Object);
-var Zi = /* @__PURE__ */ function() {
+var Zi = /* @__PURE__ */ (function() {
   var n = function(t, e) {
     return n = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(i, r) {
       i.__proto__ = r;
@@ -1876,9 +1876,9 @@ var Zi = /* @__PURE__ */ function() {
     }
     t.prototype = e === null ? Object.create(e) : (i.prototype = e.prototype, new i());
   };
-}(), Te = (
+})(), Te = (
   /** @class */
-  function(n) {
+  (function(n) {
     Zi(t, n);
     function t(e) {
       var i = n.call(this) || this;
@@ -1974,10 +1974,10 @@ var Zi = /* @__PURE__ */ function() {
     }, t.prototype.parsePropertiesFrom = function(e) {
       this.n = e.n, this.e = e.e, e.hasOwnProperty("d") && (this.d = e.d, this.p = e.p, this.q = e.q, this.dmp1 = e.dmp1, this.dmq1 = e.dmq1, this.coeff = e.coeff);
     }, t;
-  }(Gi)
+  })(Gi)
 ), Xt, Yi = typeof process < "u" ? (Xt = process.env) === null || Xt === void 0 ? void 0 : Xt.npm_package_version : void 0, tn = (
   /** @class */
-  function() {
+  (function() {
     function n(t) {
       t === void 0 && (t = {}), this.default_key_size = t.default_key_size ? parseInt(t.default_key_size, 10) : 1024, this.default_public_exponent = t.default_public_exponent || "010001", this.log = t.log || !1, this.key = t.key || null;
     }
@@ -2049,7 +2049,7 @@ var Zi = /* @__PURE__ */ function() {
     }, n.prototype.getPublicKeyB64 = function() {
       return this.getKey().getPublicBaseKeyB64();
     }, n.version = Yi, n;
-  }()
+  })()
 );
 function Xe(n, t) {
   return function() {
@@ -4223,9 +4223,8 @@ class $r extends mi {
     this.dispatch("serial:message", e);
   }
   serialSetConnectionConstant() {
-    const t = "", e = "";
     let i = "C56AABOUT";
-    i = t + i.length.toString().padStart(3, "0") + i + e;
+    i = "" + i.length.toString().padStart(3, "0") + i + "";
     let r = 0;
     for (let a = 0; a < i.length; a++)
       r ^= i.charCodeAt(a);

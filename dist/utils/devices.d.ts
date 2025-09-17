@@ -1,26 +1,26 @@
-import { Devices as DevicesCore, Core } from 'webserial-core';
+import { Devices as DevicesCore } from 'webserial-core';
 import { Kernel } from '../serial/kernel';
 declare class Devices extends DevicesCore {
     constructor();
-    addCustom(type: string, device: Kernel): void;
+    static addCustom(type: string, device: Kernel): void;
     /**
      * @deprecated use get instead
      * */
-    getCustomByUuid(type: string, deviceId: string): Core;
-    getJofemarByUuid(id: string): Core;
-    getLockerByUuid(id: string): Core;
-    getRelayByUuid(id: string): Core;
-    getBoardroidByUuid(id: string): Core;
-    getPinPadByUuid(id: string): Core;
-    getPinPaxByUuid(id: string): Core;
-    getHopperByUuid(id: string): Core;
-    getJofemar(device_number?: number): Core | null;
-    getBoardroid(device_number?: number): Core | null;
-    getLocker(device_number?: number): Core | null;
-    getRelay(device_number?: number): Core | null;
-    getPinPad(device_number?: number): Core | null;
-    getPinPax(device_number?: number): Core | null;
-    getHopper(device_number?: number): Core | null;
+    static getCustomByUuid(type: string, deviceId: string): import("webserial-core").Core;
+    static getJofemarByUuid(id: string): import("webserial-core").Core;
+    static getLockerByUuid(id: string): import("webserial-core").Core;
+    static getRelayByUuid(id: string): import("webserial-core").Core;
+    static getBoardroidByUuid(id: string): import("webserial-core").Core;
+    static getPinPadByUuid(id: string): import("webserial-core").Core;
+    static getPinPaxByUuid(id: string): import("webserial-core").Core;
+    static getHopperByUuid(id: string): import("webserial-core").Core;
+    static getJofemar(device_number?: number): import("webserial-core").Core | null;
+    static getBoardroid(device_number?: number): import("webserial-core").Core | null;
+    static getLocker(device_number?: number): import("webserial-core").Core | null;
+    static getRelay(device_number?: number): import("webserial-core").Core | null;
+    static getPinPad(device_number?: number): import("webserial-core").Core | null;
+    static getPinPax(device_number?: number): import("webserial-core").Core | null;
+    static getHopper(device_number?: number): import("webserial-core").Core | null;
 }
 export { Devices };
 //# sourceMappingURL=devices.d.ts.map
