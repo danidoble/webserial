@@ -5,7 +5,7 @@ import { Devices } from '../utils/devices';
 import { PinPax as PinPaxCommands } from '@danidoble/webserial-vending-commands';
 
 interface PinPaxInternal {
-  server: 'DEV' | 'PROD' | 'TEST';
+  server: 'DEV' | 'PROD' | 'QA';
   businessId: string | null;
   encryptionKey: string | null;
   apiKey: string | null;
