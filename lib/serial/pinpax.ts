@@ -16,6 +16,8 @@ interface PinPaxInternal {
   waiting: {
     voucher: boolean;
     sale: boolean;
+    sale_init: 'idle' | 'waiting' | 'received' | 'timeout';
+    sale_login: 'idle' | 'waiting' | 'received' | 'timeout';
   };
 }
 
@@ -33,6 +35,8 @@ export class PinPax extends Kernel {
     waiting: {
       voucher: false,
       sale: false,
+      sale_init: 'idle',
+      sale_login: 'idle',
     },
   };
   constructor(
@@ -143,9 +147,19 @@ export class PinPax extends Kernel {
     }
 
     switch (response.response) {
+      case 'INIT':
+        this.dispatch('init', { name: 'INIT', request: this.lastAction, status: 'ok' });
+        if (this.__pinpax__.waiting.sale_init === 'waiting') {
+          this.__pinpax__.waiting.sale_init = 'received';
+        }
+        break;
       case 'INITAPP':
         this.dispatch('init-app', { name: 'INITAPP', request: this.lastAction, status: 'started' });
-        this.#afterInitApp().then(() => {});
+        if (this.__pinpax__.waiting.sale_init === 'waiting') {
+          this.__pinpax__.waiting.sale_init = 'received';
+        } else {
+          this.#afterInitApp().then(() => {});
+        }
         break;
       case 'CONNECT':
         this.dispatch('connectMessage', { name: 'CONNECT', request: this.lastAction, status: 'connected' });
@@ -154,6 +168,9 @@ export class PinPax extends Kernel {
       case 'LOGIN':
         if (!response.name) {
           response.name = 'LOGIN';
+        }
+        if (this.__pinpax__.waiting.sale_login === 'waiting') {
+          this.__pinpax__.waiting.sale_login = 'received';
         }
         this.dispatch('login', response);
         break;
@@ -383,13 +400,56 @@ export class PinPax extends Kernel {
     }
   }
 
-  async makeSale({ amount = 0, reference = null }:{
-    amount: number;
-    reference?: string | null;
-  } = {
-    amount: 0,
-    reference: null,
-  }) {
+  async #waitingLoginForSale() {
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        if (this.__pinpax__.waiting.sale_login === 'waiting') {
+          this.__pinpax__.waiting.sale_login = 'timeout';
+          reject(new Error('Login timeout'));
+        }
+      }, 10_000);
+
+      const interval = setInterval(() => {
+        if (this.__pinpax__.waiting.sale_login === 'received') {
+          clearTimeout(timeout);
+          clearInterval(interval);
+          resolve(true);
+        }
+      }, 100);
+    });
+  }
+
+  async #waitingInitForSale() {
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        if (this.__pinpax__.waiting.sale_init === 'waiting') {
+          this.__pinpax__.waiting.sale_init = 'timeout';
+          reject(new Error('Init timeout'));
+        }
+      }, 10_000);
+
+      const interval = setInterval(() => {
+        if (this.__pinpax__.waiting.sale_init === 'received') {
+          clearTimeout(timeout);
+          clearInterval(interval);
+          resolve(true);
+        }
+      }, 100);
+    });
+  }
+
+  async makeSale(
+    {
+      amount = 0,
+      reference = null,
+    }: {
+      amount: number;
+      reference?: string | null;
+    } = {
+      amount: 0,
+      reference: null,
+    }
+  ) {
     if (this.isDisconnected) throw new Error('Device is disconnected');
     if (this.__pinpax__.waiting.sale) throw new Error('Already waiting for sale response');
     const bytes = PinPaxCommands.makeSale({ amount, reference });
@@ -399,6 +459,33 @@ export class PinPax extends Kernel {
 
     if (this.queue.length > 0) {
       await this.#waitUntilQueueIsEmpty();
+    }
+
+    let has_error = false;
+    try {
+      this.__pinpax__.waiting.sale_login = 'waiting';
+      await this.login();
+      await this.#waitingLoginForSale();
+      this.__pinpax__.waiting.sale_login = 'idle';
+      this.__pinpax__.waiting.sale_init = 'waiting';
+      await this.init();
+      await this.#waitingInitForSale();
+      this.__pinpax__.waiting.sale_init = 'idle';
+    } catch (e) {
+      has_error = true;
+      this.__pinpax__.waiting.sale_login = 'idle';
+      this.__pinpax__.waiting.sale_init = 'idle';
+      this.__pinpax__.waiting.sale = false;
+      this.dispatch('error', {
+        name: 'ERROR',
+        request: this.lastAction,
+        status: 'error',
+        response: 'Error during login/init before sale',
+        error: e,
+      });
+    }
+    if (has_error) {
+      return false;
     }
 
     await this.appendToQueue(bytes, 'make-sale');

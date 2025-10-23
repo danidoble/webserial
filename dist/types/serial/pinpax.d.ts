@@ -1,6 +1,6 @@
 import { ConstructorParams, Kernel } from './kernel';
 interface PinPaxInternal {
-    server: 'DEV' | 'PROD' | 'TEST';
+    server: 'DEV' | 'PROD' | 'QA';
     businessId: string | null;
     encryptionKey: string | null;
     apiKey: string | null;
@@ -11,6 +11,8 @@ interface PinPaxInternal {
     waiting: {
         voucher: boolean;
         sale: boolean;
+        sale_init: 'idle' | 'waiting' | 'received' | 'timeout';
+        sale_login: 'idle' | 'waiting' | 'received' | 'timeout';
     };
 }
 export declare class PinPax extends Kernel {
@@ -23,17 +25,17 @@ export declare class PinPax extends Kernel {
     get encryptionKey(): string | null;
     set apiKey(apiKey: string | null);
     get apiKey(): string | null;
-    set server(server: "DEV" | "PROD" | "TEST");
-    get server(): "DEV" | "PROD" | "TEST";
+    set server(server: "DEV" | "PROD" | "QA");
+    get server(): "DEV" | "PROD" | "QA";
     serialMessage(codex: string[] | Uint8Array<ArrayBufferLike> | string | ArrayBuffer): void;
     serialSetConnectionConstant(): Uint8Array<ArrayBufferLike>;
     softReload(): void;
     sendCustomCode(code?: any): Promise<void>;
     connectMessage(): Promise<void>;
     cancelSaleRequestInProcess(): void;
-    makeSale({ amount, reference }?: {
-        amount?: number | undefined;
-        reference?: null | undefined;
+    makeSale({ amount, reference, }?: {
+        amount: number;
+        reference?: string | null;
     }): Promise<unknown>;
     getVoucher({ folio }?: {
         folio?: null | undefined;
