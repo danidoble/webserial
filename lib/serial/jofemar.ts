@@ -1963,6 +1963,19 @@ export class Jofemar extends Kernel {
           this.dispatch('channels', { channels: this.__device.channels.verification.channels });
           this.__device.channels.verification.clear();
           resolve(true);
+        } else {
+          // dispatch progress
+          this.dispatch('channels:progress', {
+            current: this.__device.channels.verification.current,
+            start: this.__device.channels.verification.start,
+            end: this.__device.channels.verification.end,
+            total: end - start + 1,
+            verified: this.__device.channels.verification.channels.length,
+            percentage: Math.min(
+              100,
+              Math.round((this.__device.channels.verification.channels.length / (end - start + 1)) * 100)
+            ),
+          });
         }
       }, 500);
     });

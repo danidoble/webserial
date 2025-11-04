@@ -603,12 +603,12 @@ function j() {
   for (let n in g.requests)
     g.requests.hasOwnProperty(n) && g.requests[n].abort();
 }
-const De = function() {
+const De = (function() {
   const n = he({
     xdomain: !1
   });
   return n && n.responseType !== null;
-}();
+})();
 class Ue extends qe {
   constructor(e) {
     super(e);

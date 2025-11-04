@@ -1,4 +1,4 @@
-import { K as C, D as f, w as u, g as y } from "./kernel-BnWXOCde.js";
+import { K as C, D as f, w as u, g as y } from "./kernel-xjzKtp5x.js";
 import { o as i } from "./relay-DP8PLsDP.js";
 class w extends C {
   __device = {
@@ -1172,7 +1172,17 @@ class w extends C {
       this.__device.channels.verification.current = n, await this.getChannelPresence({ selection: n });
     return new Promise((n) => {
       const r = setInterval(() => {
-        this.__device.channels.verification.channels.length === e - t + 1 && (clearInterval(r), this.dispatch("channels", { channels: this.__device.channels.verification.channels }), this.__device.channels.verification.clear(), n(!0));
+        this.__device.channels.verification.channels.length === e - t + 1 ? (clearInterval(r), this.dispatch("channels", { channels: this.__device.channels.verification.channels }), this.__device.channels.verification.clear(), n(!0)) : this.dispatch("channels:progress", {
+          current: this.__device.channels.verification.current,
+          start: this.__device.channels.verification.start,
+          end: this.__device.channels.verification.end,
+          total: e - t + 1,
+          verified: this.__device.channels.verification.channels.length,
+          percentage: Math.min(
+            100,
+            Math.round(this.__device.channels.verification.channels.length / (e - t + 1) * 100)
+          )
+        });
       }, 500);
     });
   }

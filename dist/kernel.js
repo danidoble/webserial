@@ -1,4 +1,4 @@
-import { D as s, K as n } from "./kernel-BnWXOCde.js";
+import { D as s, K as n } from "./kernel-xjzKtp5x.js";
 /**
  * @license Webserial
  * webserial
