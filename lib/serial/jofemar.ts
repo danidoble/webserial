@@ -271,6 +271,7 @@ export class Jofemar extends Kernel {
       'serial:message',
       'reset:errors',
       'channels',
+      'channels:progress',
       'channel:status',
       'machine:status',
     ];
