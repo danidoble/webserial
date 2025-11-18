@@ -1,6 +1,16 @@
 # Webserial API (Wrapper)
 
+An easy way to connect to a serial port from a web page.
+
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/danidoble/webserial)
+[![npm version](https://badge.fury.io/js/webserial.svg)](https://www.npmjs.com/package/@danidoble/webserial)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Opensource wrapper to simplify connect to serial devices over [Webserial API](https://wicg.github.io/serial/)
+
+>  Also checkout the [Webserial-core](https://github.com/danidoble/webserial-core) package if you want to integrate webserial into other projects.
+
+Checkout the [Docs](https://webserial-docs.danidoble.com) for more information.
 
 # Install
 

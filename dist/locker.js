@@ -1,4 +1,4 @@
-import { K as r, D as n, w as a } from "./kernel-xjzKtp5x.js";
+import { K as r, D as n, w as a } from "./kernel-BZzs36vi.js";
 import { u as i } from "./relay-DP8PLsDP.js";
 class d extends r {
   #s = !1;

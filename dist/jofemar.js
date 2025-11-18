@@ -1,4 +1,4 @@
-import { K as C, D as f, w as u, g as y } from "./kernel-xjzKtp5x.js";
+import { K as C, D as f, w as u, g as y } from "./kernel-BZzs36vi.js";
 import { o as i } from "./relay-DP8PLsDP.js";
 class w extends C {
   __device = {
@@ -105,6 +105,7 @@ class w extends C {
       "serial:message",
       "reset:errors",
       "channels",
+      "channels:progress",
       "channel:status",
       "machine:status"
     ];

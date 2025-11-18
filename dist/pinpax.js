@@ -1,4 +1,4 @@
-import { K as p, D as c } from "./kernel-xjzKtp5x.js";
+import { K as p, D as c } from "./kernel-BZzs36vi.js";
 import { s } from "./relay-DP8PLsDP.js";
 class l extends p {
   __pinpax__ = {

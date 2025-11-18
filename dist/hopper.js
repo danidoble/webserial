@@ -1,4 +1,4 @@
-import { v as d, s as p } from "./webserial-core-DpPvIATQ.js";
+import { S as d, s as p } from "./webserial-core-Zwd9L-Y9.js";
 class f extends d {
   __hoppers__ = {
     levels: [
