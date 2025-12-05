@@ -394,6 +394,8 @@ export class Jofemar extends Kernel {
     }
     if (!machine) return message;
 
+    console.log(machine);
+
     if (machine === 'FD') {
       // disconnected
       message.no_code = 4;
