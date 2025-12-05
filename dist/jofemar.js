@@ -166,7 +166,7 @@ class w extends C {
     e.no_code = 404;
     let n = t[5] ?? null;
     if (n && this.listenOnChannel > 1 && (n = this.hexToDec(n) - this.listenOnChannel + 1, n = this.decToHex(n)), !n) return e;
-    if (console.log(n), n === "FD" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : n === "FC" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running) {
+    if (n === "fd" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : n === "fc" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running) {
       const r = this.__device.channels.verification.channels.length + this.__device.channels.verification.start;
       this.__device.channels.verification.channels.push({
         selection: r,
@@ -246,7 +246,7 @@ class w extends C {
   }
   #C(t, e) {
     e.no_code = 41, e.name = "Machine activity", e.description = "Events from read machine activity";
-    const n = String.fromCharCode(this.hexToDec(t[4]));
+    const n = String.fromCharCode(this.hexToDec(t[4])).toUpperCase();
     if (n !== "0") {
       const r = t.slice(5, -3);
       if (n === "T" && r.length === 4) {

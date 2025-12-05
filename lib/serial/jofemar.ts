@@ -394,15 +394,13 @@ export class Jofemar extends Kernel {
     }
     if (!machine) return message;
 
-    console.log(machine);
-
-    if (machine === 'FD') {
+    if (machine === 'fd') {
       // disconnected
       message.no_code = 4;
       message.name = `channel disconnected`;
       message.description = `The channel is disconnected`;
       message.additional = { active: false };
-    } else if (machine === 'FC') {
+    } else if (machine === 'fc') {
       // connected
       message.no_code = 5;
       message.name = `channel connected`;
@@ -536,7 +534,7 @@ export class Jofemar extends Kernel {
     message.no_code = 41;
     message.name = `Machine activity`;
     message.description = `Events from read machine activity`;
-    const ascii = String.fromCharCode(this.hexToDec(code[4]));
+    const ascii = String.fromCharCode(this.hexToDec(code[4])).toUpperCase();
     if (ascii !== '0') {
       const bytes = code.slice(5, -3);
       if (ascii === 'T' && bytes.length === 4) {
