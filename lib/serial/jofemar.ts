@@ -415,11 +415,12 @@ export class Jofemar extends Kernel {
     }
 
     if (this.__device.channels.verification.running) {
+      const selection = this.__device.channels.verification.channels.length + this.__device.channels.verification.start;
       this.__device.channels.verification.channels.push({
-        selection: this.__device.channels.verification.current,
+        selection: selection,
         active: message.additional.active as boolean,
       });
-      message.additional.selection = this.__device.channels.verification.current;
+      message.additional.selection = selection;
     }
 
     this.dispatch('channel:status', message.additional);
@@ -1453,8 +1454,9 @@ export class Jofemar extends Kernel {
 
   #dispatchResettingErrors() {
     const duration = this.__device.type === 'iceplus' ? getSeconds(40) : getSeconds(25);
-    const started_at = new Date();
-    const _time = 1000 * duration + started_at.getTime();
+    const now = new Date().getTime();
+    const started_at = new Date(now);
+    const _time = 1000 * duration + now;
     const finished_at = new Date(_time);
 
     this.dispatch('reset:errors', {
@@ -1967,7 +1969,8 @@ export class Jofemar extends Kernel {
         } else {
           // dispatch progress
           this.dispatch('channels:progress', {
-            current: this.__device.channels.verification.current,
+            current:
+              this.__device.channels.verification.channels.length + this.__device.channels.verification.start - 1,
             start: this.__device.channels.verification.start,
             end: this.__device.channels.verification.end,
             total: end - start + 1,

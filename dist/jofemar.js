@@ -1,4 +1,4 @@
-import { K as C, D as f, w as u, g as y } from "./kernel-BZzs36vi.js";
+import { K as C, D as f, w as u, g as v } from "./kernel-BZzs36vi.js";
 import { o as i } from "./relay-DP8PLsDP.js";
 class w extends C {
   __device = {
@@ -165,17 +165,22 @@ class w extends C {
   #_(t, e) {
     e.no_code = 404;
     let n = t[5] ?? null;
-    return n && this.listenOnChannel > 1 && (n = this.hexToDec(n) - this.listenOnChannel + 1, n = this.decToHex(n)), n && (n === "FD" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : n === "FC" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running && (this.__device.channels.verification.channels.push({
-      selection: this.__device.channels.verification.current,
-      active: e.additional.active
-    }), e.additional.selection = this.__device.channels.verification.current), this.dispatch("channel:status", e.additional)), e;
+    if (n && this.listenOnChannel > 1 && (n = this.hexToDec(n) - this.listenOnChannel + 1, n = this.decToHex(n)), !n) return e;
+    if (n === "FD" ? (e.no_code = 4, e.name = "channel disconnected", e.description = "The channel is disconnected", e.additional = { active: !1 }) : n === "FC" ? (e.no_code = 5, e.name = "channel connected", e.description = "The channel is connected", e.additional = { active: !0 }) : (e.no_code = 6, e.name = "channel sold out", e.description = "The channel is empty", e.additional = { active: !0 }), this.__device.channels.verification.running) {
+      const r = this.__device.channels.verification.channels.length + this.__device.channels.verification.start;
+      this.__device.channels.verification.channels.push({
+        selection: r,
+        active: e.additional.active
+      }), e.additional.selection = r;
+    }
+    return this.dispatch("channel:status", e.additional), e;
   }
   #f(t, e) {
     e.no_code = 39, e.name = "Program version";
     const n = t.slice(4, 12), r = n.map((a) => String.fromCharCode(this.hexToDec(a))).join("");
     return e.additional = { version: r, hex: n }, e.description = `The program version is ${r}`, this.dispatch("program:version", e.additional), e;
   }
-  #y(t, e) {
+  #v(t, e) {
     e.no_code = 39, e.name = "Machine faults", e.description = "No faults detected", e.additional = { no_faults: 0, faults: [] };
     const n = t.slice(4, -3);
     if (n.length > 1 && n[0] !== "30") {
@@ -219,7 +224,7 @@ class w extends C {
     }
     return this.dispatch("machine:faults", e.additional), e;
   }
-  #v(t, e) {
+  #y(t, e) {
     e.no_code = 40, e.name = "Clock registers", e.description = "Clock registers";
     const n = t.slice(4, -3), r = n.map((_) => String.fromCharCode(this.hexToDec(_))).join(""), [a, o] = r.split(" "), [c, h] = a.split(":"), [l, s, d] = o.split("-"), p = new Date(
       2e3 + parseInt(d),
@@ -274,7 +279,7 @@ class w extends C {
           meaning: l[n] || "Unknown"
         };
       } else if (r.length === 13) {
-        const a = r.map((v) => String.fromCharCode(this.hexToDec(v))).join(""), o = parseInt(a.slice(0, 2)), c = parseInt(a.slice(2, 4)), h = parseInt(a.slice(4, 6)), l = parseInt(a.slice(7, 9)), s = parseInt(a.slice(9, 11)) - 1, d = 2e3 + parseInt(a.slice(11, 13)), p = new Date(d, s, l, o, c, h), _ = {
+        const a = r.map((y) => String.fromCharCode(this.hexToDec(y))).join(""), o = parseInt(a.slice(0, 2)), c = parseInt(a.slice(2, 4)), h = parseInt(a.slice(4, 6)), l = parseInt(a.slice(7, 9)), s = parseInt(a.slice(9, 11)) - 1, d = 2e3 + parseInt(a.slice(11, 13)), p = new Date(d, s, l, o, c, h), _ = {
           A: "Attempt to close product exit door",
           C: "Closing of exterior door",
           H: "Error on opening of product exit door",
@@ -457,13 +462,13 @@ class w extends C {
               e = this.#f(t, e);
               break;
             case "53":
-              e = this.#y(t, e);
+              e = this.#v(t, e);
               break;
             case "54":
               e.request = "working-temperature", e = this.#g(t[4], e);
               break;
             case "72":
-              e = this.#v(t, e);
+              e = this.#y(t, e);
               break;
             case "74":
               e.request = "current-temperature", e = this.#A(t, e);
@@ -743,12 +748,12 @@ class w extends C {
     });
   }
   #o() {
-    const t = this.__device.type === "iceplus" ? y(40) : y(25), e = /* @__PURE__ */ new Date(), n = 1e3 * t + e.getTime(), r = new Date(n);
+    const t = this.__device.type === "iceplus" ? v(40) : v(25), e = (/* @__PURE__ */ new Date()).getTime(), n = new Date(e), r = 1e3 * t + e, a = new Date(r);
     this.dispatch("reset:errors", {
       description: "Resetting machine errors",
       duration: t,
-      started_at: e,
-      finished_at: r
+      started_at: n,
+      finished_at: a
     });
   }
   async resetAllErrors() {
@@ -1174,7 +1179,7 @@ class w extends C {
     return new Promise((n) => {
       const r = setInterval(() => {
         this.__device.channels.verification.channels.length === e - t + 1 ? (clearInterval(r), this.dispatch("channels", { channels: this.__device.channels.verification.channels }), this.__device.channels.verification.clear(), n(!0)) : this.dispatch("channels:progress", {
-          current: this.__device.channels.verification.current,
+          current: this.__device.channels.verification.channels.length + this.__device.channels.verification.start - 1,
           start: this.__device.channels.verification.start,
           end: this.__device.channels.verification.end,
           total: e - t + 1,
